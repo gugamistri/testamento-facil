@@ -28,7 +28,7 @@ ENV PRISMA_SKIP_POSTINSTALL_GENERATE=true
 RUN pnpm install --frozen-lockfile
 
 # Generate Prisma client
-RUN DATABASE_URL="postgresql://localhost:5432/dummy" npx prisma generate --schema=./prisma/schema.prisma
+RUN DATABASE_URL="postgresql://localhost:5432/dummy" pnpm exec prisma generate --schema=./prisma/schema.prisma
 
 # ============================================
 # Builder stage
