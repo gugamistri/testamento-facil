@@ -1,0 +1,200 @@
+# ============================================
+# Docker Compose para Produção - Testamento Fácil
+# Otimizado para deploy no Coolify
+# ============================================
+#
+# Uso no Coolify:
+#   1. Configure as variáveis de ambiente no Coolify
+#   2. Use o docker-compose.prod.yml para produção
+#   3. O Coolify gerenciará certificados SSL automaticamente
+#
+# Variáveis obrigatórias:
+#   - DATABASE_URL
+#   - REDIS_URL  
+#   - CLERK_SECRET_KEY
+#   - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+#
+# ============================================
+
+name: testamento-facil
+
+services:
+  # ==========================================
+  # PostgreSQL Database
+  # ==========================================
+  postgres:
+    image: postgres:16-alpine
+    container_name: testamento-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-testamento}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      POSTGRES_DB: ${POSTGRES_DB:-testamento_prod}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - testamento-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-testamento} -d ${POSTGRES_DB:-testamento_prod}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+
+  # ==========================================
+  # Redis Cache
+  # ==========================================
+  redis:
+    image: redis:7-alpine
+    container_name: testamento-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-redis_prod_password}
+    volumes:
+      - redis_data:/data
+    networks:
+      - testamento-network
+    healthcheck:
+      test: [ "CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-redis_prod_password}", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+
+  # ==========================================
+  # Backend API (Hono)
+  # ==========================================
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    container_name: testamento-api
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      DATABASE_URL: postgresql://${POSTGRES_USER:-testamento}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-testamento_prod}
+      REDIS_URL: redis://:${REDIS_PASSWORD:-redis_prod_password}@redis:6379
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY:?CLERK_SECRET_KEY is required}
+      CLERK_WEBHOOK_SECRET: ${CLERK_WEBHOOK_SECRET}
+    ports:
+      - "${API_PORT:-3001}:3001"
+    networks:
+      - testamento-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+    labels:
+      - "coolify.managed=true"
+      - "coolify.type=api"
+
+  # ==========================================
+  # Frontend Web (Next.js)
+  # ==========================================
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:?NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY is required}
+        - NEXT_PUBLIC_CLERK_SIGN_IN_URL=${NEXT_PUBLIC_CLERK_SIGN_IN_URL:-/sign-in}
+        - NEXT_PUBLIC_CLERK_SIGN_UP_URL=${NEXT_PUBLIC_CLERK_SIGN_UP_URL:-/sign-up}
+        - NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=${NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL:-/dashboard}
+        - NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=${NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL:-/dashboard}
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://api:3001}
+    container_name: testamento-web
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOSTNAME: "0.0.0.0"
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY:?CLERK_SECRET_KEY is required}
+      # Runtime env vars (server-side)
+      API_URL: http://api:3001
+    ports:
+      - "${WEB_PORT:-3000}:3000"
+    networks:
+      - testamento-network
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+    labels:
+      - "coolify.managed=true"
+      - "coolify.type=web"
+      - "coolify.exposedPort=3000"
+
+  # ==========================================
+  # Database Migrations (One-shot job)
+  # ==========================================
+  migrations:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+      target: builder
+    container_name: testamento-migrations
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-testamento}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-testamento_prod}
+    command: [ "npx", "prisma", "migrate", "deploy" ]
+    networks:
+      - testamento-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+    deploy:
+      restart_policy:
+        condition: none
+
+# ==========================================
+# Volumes
+# ==========================================
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+# ==========================================
+# Networks
+# ==========================================
+networks:
+  testamento-network:
+    driver: bridge
+    name: testamento-network
