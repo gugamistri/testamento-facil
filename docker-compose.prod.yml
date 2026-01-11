@@ -169,32 +169,16 @@ services:
       - "traefik.http.routers.testamento-web.entrypoints=websecure"
       - "traefik.http.routers.testamento-web.tls.certresolver=letsencrypt"
       - "traefik.http.services.testamento-web.loadbalancer.server.port=3000"
+  # ==========================================
+  # NOTE: Migrations should be run manually via Coolify terminal
+  # or by adding a startup script to the API container:
+  # docker exec testamento-api npx prisma migrate deploy
+  # ==========================================
+
 
   # ==========================================
-  # Database Migrations (One-shot job)
+  # Volumes
   # ==========================================
-  migrations:
-    build:
-      context: .
-      dockerfile: apps/api/Dockerfile
-      target: builder
-    container_name: testamento-migrations
-    environment:
-      DATABASE_URL: postgresql://${POSTGRES_USER:-testamento}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-testamento_prod}
-    command: [ "npx", "prisma", "migrate", "deploy" ]
-    networks:
-      - testamento-network
-    depends_on:
-      postgres:
-        condition: service_healthy
-    restart: "no"
-    deploy:
-      restart_policy:
-        condition: none
-
-# ==========================================
-# Volumes
-# ==========================================
 volumes:
   postgres_data:
     driver: local
