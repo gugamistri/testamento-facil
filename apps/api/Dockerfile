@@ -30,7 +30,7 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 
 # Generate Prisma client (schema is at root level, not in apps/api)
-RUN DATABASE_URL="postgresql://localhost:5432/dummy" npx prisma generate --schema=prisma/schema.prisma
+RUN DATABASE_URL="postgresql://localhost:5432/dummy" pnpm exec prisma generate --schema=prisma/schema.prisma
 
 # Build the API
 WORKDIR /app/apps/api
