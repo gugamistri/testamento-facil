@@ -5,8 +5,9 @@
 
 FROM node:20-alpine AS base
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@9.15.0 --activate
+# Install pnpm and system dependencies
+RUN corepack enable && corepack prepare pnpm@9.15.0 --activate && \
+    apk add --no-cache openssl libc6-compat
 
 # ============================================
 # Dependencies stage
@@ -23,10 +24,11 @@ COPY prisma ./prisma/
 COPY pnpm-workspace.yaml ./
 
 # Install dependencies
+ENV PRISMA_SKIP_POSTINSTALL_GENERATE=true
 RUN pnpm install --frozen-lockfile
 
 # Generate Prisma client
-RUN npx prisma generate
+RUN DATABASE_URL="postgresql://localhost:5432/dummy" npx prisma generate --schema=./prisma/schema.prisma
 
 # ============================================
 # Builder stage
