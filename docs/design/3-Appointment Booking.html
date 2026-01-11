@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-deep': '#1A237E',
+                        'primary-gold': '#C9A054',
+                        'secondary-blue': '#3949AB',
+                        'secondary-pale': '#E8EAF6',
+                        'secondary-gold-light': '#E4D4B4',
+                        'accent-emerald': '#00695C',
+                        'accent-amber': '#FF8F00',
+                        'accent-purple': '#6A1B9A',
+                        'success-green': '#2E7D32',
+                        'error-red': '#C62828',
+                        'warning-orange': '#EF6C00',
+                        'info-blue': '#1565C0',
+                        'neutral-dark': '#37474F',
+                        'neutral-medium': '#78909C',
+                        'neutral-light': '#CFD8DC',
+                        'bg-subtle': '#F5F7FA',
+                        'bg-section': '#ECEFF1',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'crimson': ['Crimson Pro', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Crimson+Pro:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+</head>
+<body class="font-inter bg-bg-subtle">
+
+<header id="header" class="bg-white border-b border-neutral-light sticky top-0 z-50">
+    <div class="max-w-[1440px] mx-auto px-8 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-12">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary-deep rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-gold text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-primary-deep">LegacyGuard</span>
+                </div>
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#servicos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Serviços</a>
+                    <a href="#como-funciona" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Como Funciona</a>
+                    <a href="#tecnologia" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Tecnologia</a>
+                    <a href="#precos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Preços</a>
+                    <a href="#recursos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Recursos</a>
+                    <a href="#blog" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Blog</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="px-6 py-2.5 text-primary-deep font-semibold hover:bg-secondary-pale rounded-lg transition-colors">
+                    Login
+                </button>
+                <button class="px-6 py-2.5 bg-primary-deep text-white font-semibold hover:bg-secondary-blue rounded-lg transition-colors flex items-center space-x-2">
+                    <span>Agendar Consulta</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="booking-hero" class="bg-white py-12">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="flex items-center justify-between">
+            <div>
+                <div class="flex items-center space-x-3 mb-2">
+                    <i class="fa-solid fa-calendar-check text-primary-deep text-3xl"></i>
+                    <h1 class="text-4xl font-bold text-neutral-dark">Agendamento de Consultas</h1>
+                </div>
+                <p class="text-lg text-neutral-medium">Agende sua consulta gratuita com nossos especialistas em planejamento sucessório</p>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="px-6 py-3 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-primary-deep transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-history"></i>
+                    <span>Minhas Consultas</span>
+                </button>
+                <button class="px-6 py-3 bg-primary-gold text-primary-deep font-bold rounded-lg hover:bg-secondary-gold-light transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Nova Consulta</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="booking-stats" class="bg-bg-subtle py-8 border-y border-neutral-light">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="grid grid-cols-4 gap-8">
+            <div class="bg-white rounded-xl p-6 border border-neutral-light">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="w-12 h-12 bg-success-green/10 rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-check-circle text-success-green text-2xl"></i>
+                    </div>
+                    <span class="text-xs font-semibold text-success-green uppercase px-2 py-1 bg-success-green/10 rounded-full">Ativo</span>
+                </div>
+                <div class="text-3xl font-bold text-neutral-dark mb-1">847</div>
+                <div class="text-sm text-neutral-medium">Consultas Agendadas Hoje</div>
+            </div>
+            <div class="bg-white rounded-xl p-6 border border-neutral-light">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="w-12 h-12 bg-info-blue/10 rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-users text-info-blue text-2xl"></i>
+                    </div>
+                    <span class="text-xs font-semibold text-info-blue uppercase px-2 py-1 bg-info-blue/10 rounded-full">Online</span>
+                </div>
+                <div class="text-3xl font-bold text-neutral-dark mb-1">23</div>
+                <div class="text-sm text-neutral-medium">Consultores Disponíveis</div>
+            </div>
+            <div class="bg-white rounded-xl p-6 border border-neutral-light">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="w-12 h-12 bg-primary-gold/10 rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-clock text-primary-gold text-2xl"></i>
+                    </div>
+                    <span class="text-xs font-semibold text-warning-orange uppercase px-2 py-1 bg-warning-orange/10 rounded-full">Média</span>
+                </div>
+                <div class="text-3xl font-bold text-neutral-dark mb-1">28 min</div>
+                <div class="text-sm text-neutral-medium">Tempo Médio de Consulta</div>
+            </div>
+            <div class="bg-white rounded-xl p-6 border border-neutral-light">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="w-12 h-12 bg-accent-purple/10 rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-star text-accent-purple text-2xl"></i>
+                    </div>
+                    <span class="text-xs font-semibold text-accent-purple uppercase px-2 py-1 bg-accent-purple/10 rounded-full">Excelente</span>
+                </div>
+                <div class="text-3xl font-bold text-neutral-dark mb-1">4.9/5.0</div>
+                <div class="text-sm text-neutral-medium">Avaliação dos Clientes</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="booking-filters" class="bg-white py-6">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <i class="fa-solid fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-neutral-medium"></i>
+                    <input type="text" placeholder="Buscar por nome, especialidade ou horário..." class="pl-12 pr-4 py-3 w-96 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none text-neutral-dark"/>
+                </div>
+                <select class="px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none text-neutral-dark font-medium">
+                    <option>Todas as Especialidades</option>
+                    <option>Planejamento Patrimonial</option>
+                    <option>Criptomoedas & NFTs</option>
+                    <option>Sucessão Empresarial</option>
+                    <option>Ativos Internacionais</option>
+                </select>
+                <select class="px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none text-neutral-dark font-medium">
+                    <option>Próximos 7 Dias</option>
+                    <option>Hoje</option>
+                    <option>Amanhã</option>
+                    <option>Esta Semana</option>
+                    <option>Próximo Mês</option>
+                </select>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button class="px-4 py-3 bg-white border-2 border-neutral-light text-neutral-dark rounded-lg hover:border-primary-deep transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-filter"></i>
+                    <span class="font-semibold">Filtros Avançados</span>
+                </button>
+                <button class="px-4 py-3 bg-secondary-pale text-primary-deep rounded-lg hover:bg-primary-deep hover:text-white transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-calendar-alt"></i>
+                    <span class="font-semibold">Visualizar Calendário</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="booking-types" class="bg-bg-subtle py-12">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-neutral-dark mb-2">Tipos de Consulta Disponíveis</h2>
+            <p class="text-neutral-medium">Escolha o formato que melhor se adequa às suas necessidades</p>
+        </div>
+        <div class="grid grid-cols-3 gap-6">
+            <div id="booking-type-initial" class="bg-white rounded-xl p-8 border-2 border-neutral-light hover:border-primary-deep transition-all cursor-pointer group">
+                <div class="flex items-start justify-between mb-6">
+                    <div class="w-16 h-16 bg-primary-deep/10 rounded-xl flex items-center justify-center group-hover:bg-primary-deep transition-colors">
+                        <i class="fa-solid fa-handshake text-primary-deep text-3xl group-hover:text-white transition-colors"></i>
+                    </div>
+                    <span class="px-3 py-1 bg-success-green/10 text-success-green rounded-full text-xs font-bold uppercase">Gratuita</span>
+                </div>
+                <h3 class="text-2xl font-bold text-neutral-dark mb-3">Consulta Inicial</h3>
+                <p class="text-neutral-medium mb-6 leading-relaxed">Primeira conversa para entender suas necessidades e apresentar nossas soluções de planejamento sucessório.</p>
+                <div class="space-y-3 mb-6">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-clock text-primary-deep"></i>
+                        <span class="text-neutral-dark font-medium">30 minutos</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-video text-primary-deep"></i>
+                        <span class="text-neutral-dark font-medium">Google Meet / Zoom</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-user text-primary-deep"></i>
+                        <span class="text-neutral-dark font-medium">Consultor especializado</span>
+                    </div>
+                </div>
+                <button class="w-full py-3 bg-primary-deep text-white font-bold rounded-lg hover:bg-secondary-blue transition-colors">
+                    Agendar Agora
+                </button>
+            </div>
+
+            <div id="booking-type-detailed" class="bg-white rounded-xl p-8 border-2 border-primary-gold relative">
+                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary-gold text-primary-deep px-4 py-1 rounded-full text-xs font-bold uppercase">
+                    Recomendado
+                </div>
+                <div class="flex items-start justify-between mb-6">
+                    <div class="w-16 h-16 bg-primary-gold/10 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-clipboard-list text-primary-gold text-3xl"></i>
+                    </div>
+                    <span class="px-3 py-1 bg-info-blue/10 text-info-blue rounded-full text-xs font-bold uppercase">R$ 350</span>
+                </div>
+                <h3 class="text-2xl font-bold text-neutral-dark mb-3">Análise Detalhada</h3>
+                <p class="text-neutral-medium mb-6 leading-relaxed">Análise profunda do seu patrimônio com recomendações personalizadas e plano de ação estruturado.</p>
+                <div class="space-y-3 mb-6">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-clock text-primary-gold"></i>
+                        <span class="text-neutral-dark font-medium">60 minutos</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-video text-primary-gold"></i>
+                        <span class="text-neutral-dark font-medium">Google Meet / Zoom</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-file-pdf text-primary-gold"></i>
+                        <span class="text-neutral-dark font-medium">Relatório em PDF</span>
+                    </div>
+                </div>
+                <button class="w-full py-3 bg-primary-gold text-primary-deep font-bold rounded-lg hover:bg-secondary-gold-light transition-colors">
+                    Agendar Análise
+                </button>
+            </div>
+
+            <div id="booking-type-validation" class="bg-white rounded-xl p-8 border-2 border-neutral-light hover:border-accent-emerald transition-all cursor-pointer group">
+                <div class="flex items-start justify-between mb-6">
+                    <div class="w-16 h-16 bg-accent-emerald/10 rounded-xl flex items-center justify-center group-hover:bg-accent-emerald transition-colors">
+                        <i class="fa-solid fa-video text-accent-emerald text-3xl group-hover:text-white transition-colors"></i>
+                    </div>
+                    <span class="px-3 py-1 bg-accent-purple/10 text-accent-purple rounded-full text-xs font-bold uppercase">Incluso</span>
+                </div>
+                <h3 class="text-2xl font-bold text-neutral-dark mb-3">Validação Forense</h3>
+                <p class="text-neutral-medium mb-6 leading-relaxed">Sessão oficial de validação do testamento com advogado certificado, gravada e registrada em blockchain.</p>
+                <div class="space-y-3 mb-6">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-clock text-accent-emerald"></i>
+                        <span class="text-neutral-dark font-medium">45 minutos</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-shield-halved text-accent-emerald"></i>
+                        <span class="text-neutral-dark font-medium">Gravação criptografada</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-brands fa-ethereum text-accent-emerald"></i>
+                        <span class="text-neutral-dark font-medium">Registro blockchain</span>
+                    </div>
+                </div>
+                <button class="w-full py-3 bg-accent-emerald text-white font-bold rounded-lg hover:bg-success-green transition-colors">
+                    Agendar Validação
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="available-consultants" class="bg-white py-12">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-neutral-dark mb-2">Consultores Disponíveis</h2>
+            <p class="text-neutral-medium">Selecione um especialista e escolha o melhor horário para sua consulta</p>
+        </div>
+
+        <div class="space-y-6">
+            <div id="consultant-1" class="bg-bg-subtle rounded-xl p-6 border border-neutral-light hover:border-primary-deep transition-all">
+                <div class="flex items-start justify-between">
+                    <div class="flex items-start space-x-6 flex-1">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Dr. Carlos Silva" class="w-24 h-24 rounded-xl object-cover border-2 border-primary-deep"/>
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <h3 class="text-2xl font-bold text-neutral-dark">Dr. Carlos Silva</h3>
+                                <span class="w-3 h-3 bg-success-green rounded-full"></span>
+                                <span class="text-sm font-semibold text-success-green">Disponível</span>
+                            </div>
+                            <div class="flex items-center space-x-4 mb-3">
+                                <span class="px-3 py-1 bg-primary-deep/10 text-primary-deep rounded-full text-xs font-semibold">Planejamento Patrimonial</span>
+                                <span class="px-3 py-1 bg-accent-purple/10 text-accent-purple rounded-full text-xs font-semibold">Criptomoedas</span>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <span class="text-sm font-semibold text-neutral-dark ml-2">5.0 (284 avaliações)</span>
+                                </div>
+                            </div>
+                            <p class="text-neutral-medium leading-relaxed mb-4">
+                                Especialista em planejamento sucessório com 15 anos de experiência. Certificado ICP-Brasil e expertise em ativos digitais e criptomoedas. Já auxiliou mais de 500 famílias na proteção do seu legado.
+                            </p>
+                            <div class="flex items-center space-x-6 text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-briefcase text-primary-deep"></i>
+                                    <span class="text-neutral-dark font-medium">15 anos de experiência</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-users text-primary-deep"></i>
+                                    <span class="text-neutral-dark font-medium">500+ clientes atendidos</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-language text-primary-deep"></i>
+                                    <span class="text-neutral-dark font-medium">Português, Inglês</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ml-6">
+                        <button class="px-6 py-3 bg-primary-deep text-white font-bold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2 mb-3">
+                            <i class="fa-solid fa-calendar-plus"></i>
+                            <span>Ver Horários</span>
+                        </button>
+                        <button class="px-6 py-3 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-primary-deep transition-colors flex items-center space-x-2">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Ver Perfil</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="consultant-2" class="bg-bg-subtle rounded-xl p-6 border border-neutral-light hover:border-primary-deep transition-all">
+                <div class="flex items-start justify-between">
+                    <div class="flex items-start space-x-6 flex-1">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Dra. Marina Costa" class="w-24 h-24 rounded-xl object-cover border-2 border-primary-deep"/>
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <h3 class="text-2xl font-bold text-neutral-dark">Dra. Marina Costa</h3>
+                                <span class="w-3 h-3 bg-success-green rounded-full"></span>
+                                <span class="text-sm font-semibold text-success-green">Disponível</span>
+                            </div>
+                            <div class="flex items-center space-x-4 mb-3">
+                                <span class="px-3 py-1 bg-accent-emerald/10 text-accent-emerald rounded-full text-xs font-semibold">Sucessão Empresarial</span>
+                                <span class="px-3 py-1 bg-info-blue/10 text-info-blue rounded-full text-xs font-semibold">Ativos Internacionais</span>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <span class="text-sm font-semibold text-neutral-dark ml-2">4.9 (197 avaliações)</span>
+                                </div>
+                            </div>
+                            <p class="text-neutral-medium leading-relaxed mb-4">
+                                Advogada especializada em sucessão empresarial e ativos internacionais. Mestre em Direito Tributário pela USP. Experiência com holdings familiares e estruturas offshore para proteção patrimonial.
+                            </p>
+                            <div class="flex items-center space-x-6 text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-briefcase text-primary-deep"></i>
+                                    <span class="text-neutral-dark font-medium">12 anos de experiência</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-users text-primary-deep"></i>
+                                    <span class="text-neutral-dark font-medium">350+ clientes atendidos</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-language text-primary-deep"></i>
+                                    <span class="text-neutral-dark font-medium">Português, Inglês, Espanhol</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ml-6">
+                        <button class="px-6 py-3 bg-primary-deep text-white font-bold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2 mb-3">
+                            <i class="fa-solid fa-calendar-plus"></i>
+                            <span>Ver Horários</span>
+                        </button>
+                        <button class="px-6 py-3 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-primary-deep transition-colors flex items-center space-x-2">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Ver Perfil</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="consultant-3" class="bg-bg-subtle rounded-xl p-6 border border-neutral-light hover:border-primary-deep transition-all">
+                <div class="flex items-start justify-between">
+                    <div class="flex items-start space-x-6 flex-1">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Dr. Roberto Mendes" class="w-24 h-24 rounded-xl object-cover border-2 border-neutral-light"/>
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <h3 class="text-2xl font-bold text-neutral-dark">Dr. Roberto Mendes</h3>
+                                <span class="w-3 h-3 bg-warning-orange rounded-full"></span>
+                                <span class="text-sm font-semibold text-warning-orange">Em consulta</span>
+                            </div>
+                            <div class="flex items-center space-x-4 mb-3">
+                                <span class="px-3 py-1 bg-primary-deep/10 text-primary-deep rounded-full text-xs font-semibold">Validação Forense</span>
+                                <span class="px-3 py-1 bg-accent-emerald/10 text-accent-emerald rounded-full text-xs font-semibold">ICP-Brasil</span>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <span class="text-sm font-semibold text-neutral-dark ml-2">5.0 (412 avaliações)</span>
+                                </div>
+                            </div>
+                            <p class="text-neutral-medium leading-relaxed mb-4">
+                                Advogado certificado para validação forense de testamentos. Especialista em assinatura digital ICP-Brasil e processos de autenticação. Responsável por mais de 1.200 validações em vídeo.
+                            </p>
+                            <div class="flex items-center space-x-6 text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-briefcase text-primary-deep"></i>
+                                    <span class="text-neutral-dark font-medium">18 anos de experiência</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-video text-primary-deep"></i>
+                                    <span class="text-neutral-dark font-medium">1.200+ validações</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-language text-primary-deep"></i>
+                                    <span class="text-neutral-dark font-medium">Português</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ml-6">
+                        <button class="px-6 py-3 bg-neutral-light text-neutral-medium font-bold rounded-lg cursor-not-allowed flex items-center space-x-2 mb-3">
+                            <i class="fa-solid fa-clock"></i>
+                            <span>Indisponível</span>
+                        </button>
+                        <button class="px-6 py-3 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-primary-deep transition-colors flex items-center space-x-2">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Ver Perfil</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="consultant-4" class="bg-bg-subtle rounded-xl p-6 border border-neutral-light hover:border-primary-deep transition-all">
+                <div class="flex items-start justify-between">
+                    <div class="flex items-start space-x-6 flex-1">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" alt="Dra. Fernanda Oliveira" class="w-24 h-24 rounded-xl object-cover border-2 border-primary-deep"/>
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <h3 class="text-2xl font-bold text-neutral-dark">Dra. Fernanda Oliveira</h3>
+                                <span class="w-3 h-3 bg-success-green rounded-full"></span>
+                                <span class="text-sm font-semibold text-success-green">Disponível</span>
+                            </div>
+                            <div class="flex items-center space-x-4 mb-3">
+                                <span class="px-3 py-1 bg-accent-purple/10 text-accent-purple rounded-full text-xs font-semibold">NFTs & Blockchain</span>
+                                <span class="px-3 py-1 bg-primary-deep/10 text-primary-deep rounded-full text-xs font-semibold">Ativos Digitais</span>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                    <span class="text-sm font-semibold text-neutral-dark ml-2">4.8 (156 avaliações)</span>
+                                </div>
+                            </div>
+                            <p class="text-neutral-medium leading-relaxed mb-4">
+                                Especialista em ativos digitais e criptomoedas. Certificada em blockchain pela MIT. Pioneira em planejamento sucessório para NFTs e wallets de criptomoedas no Brasil.
+                            </p>
+                            <div class="flex items-center space-x-6 text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-briefcase text-primary-deep"></i>
+                                    <span class="text-neutral-dark font-medium">8 anos de experiência</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-users text-primary-deep"></i>
+                                    <span class="text-neutral-dark font-medium">220+ clientes atendidos</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-language text-primary-deep"></i>
+                                    <span class="text-neutral-dark font-medium">Português, Inglês</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ml-6">
+                        <button class="px-6 py-3 bg-primary-deep text-white font-bold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2 mb-3">
+                            <i class="fa-solid fa-calendar-plus"></i>
+                            <span>Ver Horários</span>
+                        </button>
+                        <button class="px-6 py-3 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-primary-deep transition-colors flex items-center space-x-2">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Ver Perfil</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 text-center">
+            <button class="px-8 py-3 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-primary-deep transition-colors">
+                Carregar Mais Consultores
+            </button>
+        </div>
+    </div>
+</section>
+
+<section id="calendar-integration" class="bg-bg-subtle py-12">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="bg-white rounded-2xl p-12 border border-neutral-light">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-primary-deep/10 rounded-2xl mb-6">
+                    <i class="fa-solid fa-calendar-days text-primary-deep text-4xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-neutral-dark mb-4">Integração com Seu Calendário</h2>
+                <p class="text-lg text-neutral-medium max-w-2xl mx-auto">
+                    Conecte seu Google Calendar, Outlook ou Apple Calendar para sincronização automática de consultas agendadas
+                </p>
+            </div>
+
+            <div class="grid grid-cols-3 gap-6 mb-8">
+                <div class="bg-bg-subtle rounded-xl p-6 border-2 border-neutral-light hover:border-primary-deep transition-all cursor-pointer group text-center">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-xl mb-4 group-hover:bg-primary-deep transition-colors">
+                        <i class="fa-brands fa-google text-error-red text-3xl group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-neutral-dark mb-2">Google Calendar</h3>
+                    <p class="text-sm text-neutral-medium mb-4">Sincronização bidirecional em tempo real</p>
+                    <button class="px-6 py-2 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-error-red hover:text-error-red transition-colors">
+                        Conectar
+                    </button>
+                </div>
+
+                <div class="bg-bg-subtle rounded-xl p-6 border-2 border-neutral-light hover:border-primary-deep transition-all cursor-pointer group text-center">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-xl mb-4 group-hover:bg-primary-deep transition-colors">
+                        <i class="fa-brands fa-microsoft text-info-blue text-3xl group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-neutral-dark mb-2">Outlook</h3>
+                    <p class="text-sm text-neutral-medium mb-4">Integração com Microsoft 365</p>
+                    <button class="px-6 py-2 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-info-blue hover:text-info-blue transition-colors">
+                        Conectar
+                    </button>
+                </div>
+
+                <div class="bg-bg-subtle rounded-xl p-6 border-2 border-neutral-light hover:border-primary-deep transition-all cursor-pointer group text-center">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-xl mb-4 group-hover:bg-primary-deep transition-colors">
+                        <i class="fa-brands fa-apple text-neutral-dark text-3xl group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-neutral-dark mb-2">Apple Calendar</h3>
+                    <p class="text-sm text-neutral-medium mb-4">Sincronização via iCloud</p>
+                    <button class="px-6 py-2 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-neutral-dark transition-colors">
+                        Conectar
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-secondary-pale rounded-xl p-6">
+                <div class="flex items-start space-x-4">
+                    <div class="w-12 h-12 bg-info-blue/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-info-circle text-info-blue text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold text-neutral-dark mb-2">Benefícios da Integração</h4>
+                        <ul class="space-y-2 text-neutral-medium">
+                            <li class="flex items-start space-x-2">
+                                <i class="fa-solid fa-check text-success-green mt-1"></i>
+                                <span>Receba lembretes automáticos 24h, 1h e 15min antes da consulta</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fa-solid fa-check text-success-green mt-1"></i>
+                                <span>Link da videochamada adicionado automaticamente ao evento</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fa-solid fa-check text-success-green mt-1"></i>
+                                <span>Reagendamento e cancelamento sincronizados em tempo real</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fa-solid fa-check text-success-green mt-1"></i>
+                                <span>Documentos e materiais anexados ao convite do calendário</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="upcoming-consultations" class="bg-white py-12">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h2 class="text-2xl font-bold text-neutral-dark mb-2">Suas Próximas Consultas</h2>
+                <p class="text-neutral-medium">Gerencie suas consultas agendadas e acesse links de videochamada</p>
+            </div>
+            <button class="px-6 py-3 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2">
+                <i class="fa-solid fa-download"></i>
+                <span>Exportar Agenda</span>
+            </button>
+        </div>
+
+        <div class="space-y-4">
+            <div id="consultation-upcoming-1" class="bg-success-green/5 rounded-xl p-6 border-2 border-success-green/20">
+                <div class="flex items-start justify-between">
+                    <div class="flex items-start space-x-6 flex-1">
+                        <div class="bg-success-green/10 rounded-xl p-4 text-center min-w-[100px]">
+                            <div class="text-xs font-semibold text-success-green uppercase mb-1">Hoje</div>
+                            <div class="text-3xl font-bold text-success-green mb-1">16</div>
+                            <div class="text-sm font-medium text-success-green">Jan 2026</div>
+                            <div class="text-lg font-bold text-success-green mt-2">14:30</div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <h3 class="text-xl font-bold text-neutral-dark">Consulta Inicial - Planejamento Patrimonial</h3>
+                                <span class="px-3 py-1 bg-success-green text-white rounded-full text-xs font-bold uppercase">Confirmada</span>
+                            </div>
+                            <div class="flex items-center space-x-6 mb-4 text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Dr. Carlos Silva" class="w-8 h-8 rounded-full"/>
+                                    <span class="font-medium text-neutral-dark">Dr. Carlos Silva</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-clock text-primary-deep"></i>
+                                    <span class="text-neutral-dark">30 minutos</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-video text-primary-deep"></i>
+                                    <span class="text-neutral-dark">Google Meet</span>
+                                </div>
+                            </div>
+                            <p class="text-neutral-medium mb-4">
+                                Primeira conversa para entender suas necessidades de planejamento sucessório e apresentar as soluções da LegacyGuard.
+                            </p>
+                            <div class="flex items-center space-x-3">
+                                <button class="px-6 py-2 bg-success-green text-white font-bold rounded-lg hover:bg-success-green/90 transition-colors flex items-center space-x-2">
+                                    <i class="fa-solid fa-video"></i>
+                                    <span>Entrar na Chamada</span>
+                                </button>
+                                <button class="px-6 py-2 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-primary-deep transition-colors flex items-center space-x-2">
+                                    <i class="fa-solid fa-calendar-alt"></i>
+                                    <span>Reagendar</span>
+                                </button>
+                                <button class="px-6 py-2 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-error-red hover:text-error-red transition-colors flex items-center space-x-2">
+                                    <i class="fa-solid fa-times"></i>
+                                    <span>Cancelar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="consultation-upcoming-2" class="bg-bg-subtle rounded-xl p-6 border border-neutral-light">
+                <div class="flex items-start justify-between">
+                    <div class="flex items-start space-x-6 flex-1">
+                        <div class="bg-white rounded-xl p-4 text-center min-w-[100px] border border-neutral-light">
+                            <div class="text-xs font-semibold text-neutral-medium uppercase mb-1">Amanhã</div>
+                            <div class="text-3xl font-bold text-neutral-dark mb-1">17</div>
+                            <div class="text-sm font-medium text-neutral-medium">Jan 2026</div>
+                            <div class="text-lg font-bold text-neutral-dark mt-2">10:00</div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <h3 class="text-xl font-bold text-neutral-dark">Análise Detalhada de Patrimônio</h3>
+                                <span class="px-3 py-1 bg-info-blue/10 text-info-blue rounded-full text-xs font-bold uppercase">Agendada</span>
+                            </div>
+                            <div class="flex items-center space-x-6 mb-4 text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Dra. Marina Costa" class="w-8 h-8 rounded-full"/>
+                                    <span class="font-medium text-neutral-dark">Dra. Marina Costa</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-clock text-primary-deep"></i>
+                                    <span class="text-neutral-dark">60 minutos</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-video text-primary-deep"></i>
+                                    <span class="text-neutral-dark">Zoom</span>
+                                </div>
+                            </div>
+                            <p class="text-neutral-medium mb-4">
+                                Análise profunda dos seus ativos internacionais e estruturação de holding familiar para otimização tributária.
+                            </p>
+                            <div class="flex items-center space-x-3">
+                                <button class="px-6 py-2 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-primary-deep transition-colors flex items-center space-x-2">
+                                    <i class="fa-solid fa-bell"></i>
+                                    <span>Lembrete Ativo</span>
+                                </button>
+                                <button class="px-6 py-2 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-primary-deep transition-colors flex items-center space-x-2">
+                                    <i class="fa-solid fa-calendar-alt"></i>
+                                    <span>Reagendar</span>
+                                </button>
+                                <button class="px-6 py-2 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-error-red hover:text-error-red transition-colors flex items-center space-x-2">
+                                    <i class="fa-solid fa-times"></i>
+                                    <span>Cancelar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="consultation-upcoming-3" class="bg-bg-subtle rounded-xl p-6 border border-neutral-light">
+                <div class="flex items-start justify-between">
+                    <div class="flex items-start space-x-6 flex-1">
+                        <div class="bg-white rounded-xl p-4 text-center min-w-[100px] border border-neutral-light">
+                            <div class="text-xs font-semibold text-neutral-medium uppercase mb-1">Próxima Semana</div>
+                            <div class="text-3xl font-bold text-neutral-dark mb-1">22</div>
+                            <div class="text-sm font-medium text-neutral-medium">Jan 2026</div>
+                            <div class="text-lg font-bold text-neutral-dark mt-2">15:30</div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <h3 class="text-xl font-bold text-neutral-dark">Validação Forense em Vídeo</h3>
+                                <span class="px-3 py-1 bg-accent-purple/10 text-accent-purple rounded-full text-xs font-bold uppercase">Pendente Preparação</span>
+                            </div>
+                            <div class="flex items-center space-x-6 mb-4 text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Dr. Roberto Mendes" class="w-8 h-8 rounded-full"/>
+                                    <span class="font-medium text-neutral-dark">Dr. Roberto Mendes</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-clock text-primary-deep"></i>
+                                    <span class="text-neutral-dark">45 minutos</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-shield-halved text-accent-emerald"></i>
+                                    <span class="text-neutral-dark">Sessão Certificada</span>
+                                </div>
+                            </div>
+                            <p class="text-neutral-medium mb-4">
+                                Sessão oficial de validação do seu testamento com gravação criptografada e registro em blockchain. Traga documento de identidade.
+                            </p>
+                            <div class="flex items-center space-x-3">
+                                <button class="px-6 py-2 bg-accent-purple text-white font-bold rounded-lg hover:bg-accent-purple/90 transition-colors flex items-center space-x-2">
+                                    <i class="fa-solid fa-file-alt"></i>
+                                    <span>Preparar Documentos</span>
+                                </button>
+                                <button class="px-6 py-2 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-primary-deep transition-colors flex items-center space-x-2">
+                                    <i class="fa-solid fa-calendar-alt"></i>
+                                    <span>Reagendar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="consultation-history" class="bg-bg-subtle py-12">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h2 class="text-2xl font-bold text-neutral-dark mb-2">Histórico de Consultas</h2>
+                <p class="text-neutral-medium">Revise consultas anteriores e acesse gravações e documentos compartilhados</p>
+            </div>
+            <div class="flex items-center space-x-3">
+                <select class="px-4 py-2 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none text-neutral-dark font-medium">
+                    <option>Últimos 3 meses</option>
+                    <option>Últimos 6 meses</option>
+                    <option>Último ano</option>
+                    <option>Todos</option>
+                </select>
+                <button class="px-4 py-2 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-primary-deep transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-filter"></i>
+                    <span>Filtrar</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl border border-neutral-light overflow-hidden">
+            <table class="w-full">
+                <thead class="bg-bg-subtle border-b border-neutral-light">
+                    <tr>
+                        <th class="px-6 py-4 text-left text-xs font-bold text-neutral-dark uppercase tracking-wider">Data & Hora</th>
+                        <th class="px-6 py-4 text-left text-xs font-bold text-neutral-dark uppercase tracking-wider">Consultor</th>
+                        <th class="px-6 py-4 text-left text-xs font-bold text-neutral-dark uppercase tracking-wider">Tipo de Consulta</th>
+                        <th class="px-6 py-4 text-left text-xs font-bold text-neutral-dark uppercase tracking-wider">Duração</th>
+                        <th class="px-6 py-4 text-left text-xs font-bold text-neutral-dark uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-4 text-left text-xs font-bold text-neutral-dark uppercase tracking-wider">Ações</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-neutral-light">
+                    <tr class="hover:bg-bg-subtle transition-colors">
+                        <td class="px-6 py-4">
+                            <div class="font-semibold text-neutral-dark">12 Jan 2026</div>
+                            <div class="text-sm text-neutral-medium">14:00 - 14:32</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Dr. Carlos Silva" class="w-10 h-10 rounded-full"/>
+                                <div>
+                                    <div class="font-semibold text-neutral-dark">Dr. Carlos Silva</div>
+                                    <div class="text-xs text-neutral-medium">Planejamento Patrimonial</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-3 py-1 bg-primary-deep/10 text-primary-deep rounded-full text-xs font-semibold">Consulta Inicial</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="text-neutral-dark font-medium">32 min</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-3 py-1 bg-success-green/10 text-success-green rounded-full text-xs font-bold">Concluída</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center space-x-2">
+                                <button class="p-2 hover:bg-bg-subtle rounded-lg transition-colors" title="Ver Gravação">
+                                    <i class="fa-solid fa-play text-primary-deep"></i>
+                                </button>
+                                <button class="p-2 hover:bg-bg-subtle rounded-lg transition-colors" title="Baixar Documentos">
+                                    <i class="fa-solid fa-download text-primary-deep"></i>
+                                </button>
+                                <button class="p-2 hover:bg-bg-subtle rounded-lg transition-colors" title="Avaliar">
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-bg-subtle transition-colors">
+                        <td class="px-6 py-4">
+                            <div class="font-semibold text-neutral-dark">08 Jan 2026</div>
+                            <div class="text-sm text-neutral-medium">10:00 - 11:05</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" alt="Dra. Fernanda Oliveira" class="w-10 h-10 rounded-full"/>
+                                <div>
+                                    <div class="font-semibold text-neutral-dark">Dra. Fernanda Oliveira</div>
+                                    <div class="text-xs text-neutral-medium">NFTs & Blockchain</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-3 py-1 bg-accent-purple/10 text-accent-purple rounded-full text-xs font-semibold">Ativos Digitais</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="text-neutral-dark font-medium">65 min</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-3 py-1 bg-success-green/10 text-success-green rounded-full text-xs font-bold">Concluída</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center space-x-2">
+                                <button class="p-2 hover:bg-bg-subtle rounded-lg transition-colors" title="Ver Gravação">
+                                    <i class="fa-solid fa-play text-primary-deep"></i>
+                                </button>
+                                <button class="p-2 hover:bg-bg-subtle rounded-lg transition-colors" title="Baixar Documentos">
+                                    <i class="fa-solid fa-download text-primary-deep"></i>
+                                </button>
+                                <button class="p-2 hover:bg-bg-subtle rounded-lg transition-colors" title="Avaliar">
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-bg-subtle transition-colors">
+                        <td class="px-6 py-4">
+                            <div class="font-semibold text-neutral-dark">03 Jan 2026</div>
+                            <div class="text-sm text-neutral-medium">15:30 - 15:45</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Dr. Carlos Silva" class="w-10 h-10 rounded-full"/>
+                                <div>
+                                    <div class="font-semibold text-neutral-dark">Dr. Carlos Silva</div>
+                                    <div class="text-xs text-neutral-medium">Planejamento Patrimonial</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-3 py-1 bg-info-blue/10 text-info-blue rounded-full text-xs font-semibold">Follow-up</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="text-neutral-dark font-medium">15 min</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-3 py-1 bg-error-red/10 text-error-red rounded-full text-xs font-bold">Não Compareceu</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center space-x-2">
+                                <button class="p-2 hover:bg-bg-subtle rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Sem Gravação">
+                                    <i class="fa-solid fa-play text-neutral-medium"></i>
+                                </button>
+                                <button class="p-2 hover:bg-bg-subtle rounded-lg transition-colors" title="Reagendar">
+                                    <i class="fa-solid fa-calendar-alt text-primary-deep"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-bg-subtle transition-colors">
+                        <td class="px-6 py-4">
+                            <div class="font-semibold text-neutral-dark">28 Dez 2025</div>
+                            <div class="text-sm text-neutral-medium">11:00 - 11:48</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Dr. Roberto Mendes" class="w-10 h-10 rounded-full"/>
+                                <div>
+                                    <div class="font-semibold text-neutral-dark">Dr. Roberto Mendes</div>
+                                    <div class="text-xs text-neutral-medium">Validação Forense</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-3 py-1 bg-accent-emerald/10 text-accent-emerald rounded-full text-xs font-semibold">Validação</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="text-neutral-dark font-medium">48 min</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-3 py-1 bg-success-green/10 text-success-green rounded-full text-xs font-bold">Concluída</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center space-x-2">
+                                <button class="p-2 hover:bg-bg-subtle rounded-lg transition-colors" title="Ver Gravação">
+                                    <i class="fa-solid fa-play text-primary-deep"></i>
+                                </button>
+                                <button class="p-2 hover:bg-bg-subtle rounded-lg transition-colors" title="Baixar Documentos">
+                                    <i class="fa-solid fa-download text-primary-deep"></i>
+                                </button>
+                                <button class="p-2 hover:bg-bg-subtle rounded-lg transition-colors" title="Avaliado">
+                                    <i class="fa-solid fa-star text-primary-gold"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-6 flex items-center justify-between">
+            <div class="text-sm text-neutral-medium">
+                Mostrando 4 de 12 consultas
+            </div>
+            <div class="flex items-center space-x-2">
+                <button class="px-4 py-2 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-primary-deep transition-colors">
+                    Anterior
+                </button>
+                <button class="px-4 py-2 bg-primary-deep text-white font-semibold rounded-lg">1</button>
+                <button class="px-4 py-2 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-primary-deep transition-colors">2</button>
+                <button class="px-4 py-2 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-primary-deep transition-colors">3</button>
+                <button class="px-4 py-2 bg-white border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:border-primary-deep transition-colors">
+                    Próximo
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="booking-faq" class="bg-white py-12">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-neutral-dark mb-3">Perguntas Frequentes sobre Agendamento</h2>
+            <p class="text-lg text-neutral-medium">Tire suas dúvidas sobre o processo de consulta</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6">
+            <div class="bg-bg-subtle rounded-xl p-6 border border-neutral-light">
+                <div class="flex items-start space-x-4">
+                    <div class="w-12 h-12 bg-primary-deep/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-question text-primary-deep text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-neutral-dark mb-2">A consulta inicial é realmente gratuita?</h3>
+                        <p class="text-neutral-medium leading-relaxed">
+                            Sim, a primeira consulta de 30 minutos é totalmente gratuita e sem compromisso. É uma oportunidade para você conhecer nossos serviços e tirar dúvidas iniciais.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-bg-subtle rounded-xl p-6 border border-neutral-light">
+                <div class="flex items-start space-x-4">
+                    <div class="w-12 h-12 bg-primary-deep/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-question text-primary-deep text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-neutral-dark mb-2">Posso reagendar ou cancelar minha consulta?</h3>
+                        <p class="text-neutral-medium leading-relaxed">
+                            Sim, você pode reagendar ou cancelar até 24 horas antes do horário marcado sem qualquer custo. Cancelamentos com menos de 24h podem estar sujeitos a taxa.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-bg-subtle rounded-xl p-6 border border-neutral-light">
+                <div class="flex items-start space-x-4">
+                    <div class="w-12 h-12 bg-primary-deep/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-question text-primary-deep text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-neutral-dark mb-2">Preciso ter documentos preparados?</h3>
+                        <p class="text-neutral-medium leading-relaxed">
+                            Para a consulta inicial, não é necessário. Para sessões de análise detalhada ou validação, enviaremos uma lista específica de documentos por email.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-bg-subtle rounded-xl p-6 border border-neutral-light">
+                <div class="flex items-start space-x-4">
+                    <div class="w-12 h-12 bg-primary-deep/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-question text-primary-deep text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-neutral-dark mb-2">As consultas são gravadas?</h3>
+                        <p class="text-neutral-medium leading-relaxed">
+                            Apenas as sessões de validação forense são gravadas (com seu consentimento) para fins legais. Consultas iniciais e de análise não são gravadas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-bg-subtle rounded-xl p-6 border border-neutral-light">
+                <div class="flex items-start space-x-4">
+                    <div class="w-12 h-12 bg-primary-deep/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-question text-primary-deep text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-neutral-dark mb-2">Posso escolher o consultor?</h3>
+                        <p class="text-neutral-medium leading-relaxed">
+                            Sim, você pode escolher qualquer consultor disponível de acordo com a especialidade que precisa. Veja o perfil completo de cada um antes de agendar.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-bg-subtle rounded-xl p-6 border border-neutral-light">
+                <div class="flex items-start space-x-4">
+                    <div class="w-12 h-12 bg-primary-deep/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-question text-primary-deep text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-neutral-dark mb-2">E se eu perder a consulta?</h3>
+                        <p class="text-neutral-medium leading-relaxed">
+                            Você receberá lembretes automáticos. Se perder, pode reagendar gratuitamente na primeira vez. Ausências recorrentes podem resultar em bloqueio temporário.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="booking-support" class="bg-primary-deep text-white py-16">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="grid grid-cols-2 gap-16 items-center">
+            <div>
+                <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
+                    <i class="fa-solid fa-headset text-primary-gold"></i>
+                    <span class="text-sm font-semibold text-primary-gold uppercase tracking-wider">Suporte 24/7</span>
+                </div>
+                <h2 class="text-4xl font-bold mb-6">Precisa de Ajuda com Agendamento?</h2>
+                <p class="text-xl text-white/90 mb-8 leading-relaxed">
+                    Nossa equipe de suporte está disponível 24 horas por dia, 7 dias por semana para ajudar você a agendar sua consulta ou resolver qualquer problema técnico.
+                </p>
+                <div class="space-y-4 mb-8">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
+                            <i class="fa-solid fa-phone text-primary-gold text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold mb-1">Telefone</div>
+                            <div class="text-white/80">0800 123 4567</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
+                            <i class="fa-solid fa-envelope text-primary-gold text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold mb-1">Email</div>
+                            <div class="text-white/80">agendamento@legacyguard.com.br</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
+                            <i class="fa-brands fa-whatsapp text-primary-gold text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold mb-1">WhatsApp</div>
+                            <div class="text-white/80">(11) 98765-4321</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="px-8 py-4 bg-primary-gold text-primary-deep font-bold rounded-lg hover:bg-secondary-gold-light transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-comments"></i>
+                    <span>Iniciar Chat ao Vivo</span>
+                </button>
+            </div>
+            <div class="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20">
+                <h3 class="text-2xl font-bold mb-6">Envie uma Mensagem</h3>
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Nome Completo</label>
+                        <input type="text" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:border-primary-gold focus:outline-none text-white placeholder-white/50" placeholder="Seu nome"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Email</label>
+                        <input type="email" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:border-primary-gold focus:outline-none text-white placeholder-white/50" placeholder="seu@email.com"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Telefone</label>
+                        <input type="tel" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:border-primary-gold focus:outline-none text-white placeholder-white/50" placeholder="(11) 98765-4321"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Mensagem</label>
+                        <textarea rows="4" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:border-primary-gold focus:outline-none text-white placeholder-white/50 resize-none" placeholder="Como podemos ajudar?"></textarea>
+                    </div>
+                    <button type="submit" class="w-full px-6 py-4 bg-primary-gold text-primary-deep font-bold rounded-lg hover:bg-secondary-gold-light transition-colors">
+                        Enviar Mensagem
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer id="footer" class="bg-neutral-dark text-white py-16">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="grid grid-cols-5 gap-12 mb-12">
+            <div class="col-span-2">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-12 h-12 bg-primary-gold rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-deep text-2xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold">LegacyGuard</span>
+                </div>
+                <p class="text-white/70 leading-relaxed mb-6">
+                    Planejamento sucessório digital com tecnologia blockchain e criptografia de nível militar. Proteja seu legado com segurança e transparência.
+                </p>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary-gold hover:text-primary-deep transition-colors">
+                        <i class="fa-brands fa-linkedin text-lg"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary-gold hover:text-primary-deep transition-colors">
+                        <i class="fa-brands fa-twitter text-lg"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary-gold hover:text-primary-deep transition-colors">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary-gold hover:text-primary-deep transition-colors">
+                        <i class="fa-brands fa-youtube text-lg"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-4">Serviços</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Testamento Digital</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Validação Forense</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Assinatura ICP-Brasil</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Custódia Criptográfica</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Monitoramento de Óbito</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-4">Empresa</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Sobre Nós</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Como Funciona</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Tecnologia</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Blog</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Carreiras</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-4">Suporte</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Central de Ajuda</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">FAQ</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Contato</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Política de Privacidade</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Termos de Uso</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-white/10 pt-8 flex items-center justify-between">
+            <div class="text-white/50 text-sm">
+                © 2026 LegacyGuard. Todos os direitos reservados.
+            </div>
+            <div class="flex items-center space-x-6 text-sm text-white/50">
+                <span>ICP-Brasil Certified</span>
+                <span>•</span>
+                <span>LGPD Compliant</span>
+                <span>•</span>
+                <span>Polygon Network</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-deep': '#1A237E',
+                        'primary-gold': '#C9A054',
+                        'secondary-blue': '#3949AB',
+                        'secondary-pale': '#E8EAF6',
+                        'secondary-gold-light': '#E4D4B4',
+                        'accent-emerald': '#00695C',
+                        'accent-amber': '#FF8F00',
+                        'accent-purple': '#6A1B9A',
+                        'success-green': '#2E7D32',
+                        'error-red': '#C62828',
+                        'warning-orange': '#EF6C00',
+                        'info-blue': '#1565C0',
+                        'neutral-dark': '#37474F',
+                        'neutral-medium': '#78909C',
+                        'neutral-light': '#CFD8DC',
+                        'bg-subtle': '#F5F7FA',
+                        'bg-section': '#ECEFF1',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'crimson': ['Crimson Pro', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Crimson+Pro:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+</head>
+<body class="font-inter bg-bg-subtle">
+
+<header id="header" class="bg-white border-b border-neutral-light sticky top-0 z-50">
+    <div class="max-w-[1440px] mx-auto px-8 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-12">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary-deep rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-gold text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-primary-deep">LegacyGuard</span>
+                </div>
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#servicos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Serviços</a>
+                    <a href="#como-funciona" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Como Funciona</a>
+                    <a href="#tecnologia" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Tecnologia</a>
+                    <a href="#precos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Preços</a>
+                    <a href="#recursos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Recursos</a>
+                    <a href="#blog" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Blog</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="px-6 py-2.5 text-primary-deep font-semibold hover:bg-secondary-pale rounded-lg transition-colors">
+                    Login
+                </button>
+                <button class="px-6 py-2.5 bg-primary-deep text-white font-semibold hover:bg-secondary-blue rounded-lg transition-colors flex items-center space-x-2">
+                    <span>Agendar Consulta</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="consultation-hero" class="bg-gradient-to-br from-primary-deep via-secondary-blue to-primary-deep text-white py-16">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="flex items-center justify-between">
+            <div class="max-w-2xl">
+                <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
+                    <i class="fa-solid fa-calendar-check text-primary-gold"></i>
+                    <span class="text-sm font-medium">Consulta Gratuita</span>
+                </div>
+                <h1 class="text-4xl font-bold mb-4">Questionário de Qualificação</h1>
+                <p class="text-xl text-white/90 leading-relaxed">
+                    Para personalizar sua consulta e garantir o melhor atendimento, precisamos conhecer um pouco sobre sua situação patrimonial. Todas as informações são confidenciais e protegidas por criptografia.
+                </p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="w-16 h-16 bg-primary-gold rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-user-tie text-primary-deep text-2xl"></i>
+                    </div>
+                    <div>
+                        <div class="text-lg font-bold">Especialista Disponível</div>
+                        <div class="text-white/70 text-sm">Dr. Carlos Silva, OAB/SP 123.456</div>
+                    </div>
+                </div>
+                <div class="space-y-3 text-sm">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-clock text-primary-gold"></i>
+                        <span>Duração: 30 minutos</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-video text-primary-gold"></i>
+                        <span>Via Google Meet</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-shield-check text-primary-gold"></i>
+                        <span>100% Confidencial</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="progress-tracker" class="bg-white border-b border-neutral-light sticky top-[73px] z-40">
+    <div class="max-w-[1440px] mx-auto px-8 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-8">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary-deep rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold">1</span>
+                    </div>
+                    <span class="font-semibold text-primary-deep">Informações Pessoais</span>
+                </div>
+                <div class="w-16 h-0.5 bg-neutral-light"></div>
+                <div class="flex items-center space-x-3 opacity-50">
+                    <div class="w-10 h-10 bg-neutral-light rounded-full flex items-center justify-center">
+                        <span class="text-neutral-medium font-bold">2</span>
+                    </div>
+                    <span class="font-medium text-neutral-medium">Patrimônio</span>
+                </div>
+                <div class="w-16 h-0.5 bg-neutral-light"></div>
+                <div class="flex items-center space-x-3 opacity-50">
+                    <div class="w-10 h-10 bg-neutral-light rounded-full flex items-center justify-center">
+                        <span class="text-neutral-medium font-bold">3</span>
+                    </div>
+                    <span class="font-medium text-neutral-medium">Herdeiros</span>
+                </div>
+                <div class="w-16 h-0.5 bg-neutral-light"></div>
+                <div class="flex items-center space-x-3 opacity-50">
+                    <div class="w-10 h-10 bg-neutral-light rounded-full flex items-center justify-center">
+                        <span class="text-neutral-medium font-bold">4</span>
+                    </div>
+                    <span class="font-medium text-neutral-medium">Objetivos</span>
+                </div>
+                <div class="w-16 h-0.5 bg-neutral-light"></div>
+                <div class="flex items-center space-x-3 opacity-50">
+                    <div class="w-10 h-10 bg-neutral-light rounded-full flex items-center justify-center">
+                        <span class="text-neutral-medium font-bold">5</span>
+                    </div>
+                    <span class="font-medium text-neutral-medium">Agendamento</span>
+                </div>
+            </div>
+            <div class="text-sm text-neutral-medium">
+                <span class="font-semibold text-primary-deep">20%</span> concluído
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="questionnaire-form" class="py-12">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="grid grid-cols-12 gap-8">
+            <div class="col-span-8">
+                <div id="step-1-personal-info" class="bg-white rounded-2xl p-10 shadow-lg border border-neutral-light mb-8">
+                    <div class="flex items-start justify-between mb-8">
+                        <div>
+                            <h2 class="text-3xl font-bold text-neutral-dark mb-2">Informações Pessoais</h2>
+                            <p class="text-neutral-medium">Precisamos de alguns dados básicos para iniciar seu atendimento</p>
+                        </div>
+                        <div class="px-4 py-2 bg-secondary-pale rounded-lg">
+                            <span class="text-sm font-semibold text-primary-deep">Etapa 1 de 5</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-neutral-dark mb-2">Nome Completo *</label>
+                                <input type="text" placeholder="Ex: João da Silva Santos" class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-neutral-dark mb-2">CPF *</label>
+                                <input type="text" placeholder="000.000.000-00" class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors" />
+                                <p class="text-xs text-neutral-medium mt-1">Será validado automaticamente</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-neutral-dark mb-2">Data de Nascimento *</label>
+                                <input type="date" class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-neutral-dark mb-2">Estado Civil *</label>
+                                <select class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors">
+                                    <option>Selecione...</option>
+                                    <option>Solteiro(a)</option>
+                                    <option>Casado(a)</option>
+                                    <option>União Estável</option>
+                                    <option>Divorciado(a)</option>
+                                    <option>Viúvo(a)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="marital-regime" class="bg-info-blue/5 border border-info-blue/20 rounded-lg p-4">
+                            <div class="flex items-start space-x-3">
+                                <i class="fa-solid fa-info-circle text-info-blue text-xl mt-0.5"></i>
+                                <div class="flex-1">
+                                    <label class="block text-sm font-semibold text-neutral-dark mb-2">Regime de Casamento</label>
+                                    <select class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors bg-white">
+                                        <option>Selecione...</option>
+                                        <option>Comunhão Total de Bens</option>
+                                        <option>Comunhão Parcial de Bens</option>
+                                        <option>Separação Total de Bens</option>
+                                        <option>Participação Final nos Aquestos</option>
+                                    </select>
+                                    <p class="text-xs text-neutral-medium mt-2">Esta informação é crucial para calcular a legítima dos herdeiros</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-neutral-dark mb-2">Email *</label>
+                                <input type="email" placeholder="seu@email.com" class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-neutral-dark mb-2">Telefone/WhatsApp *</label>
+                                <input type="tel" placeholder="(11) 99999-9999" class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors" />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-neutral-dark mb-2">Profissão/Ocupação</label>
+                            <input type="text" placeholder="Ex: Empresário, Médico, Aposentado..." class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-neutral-dark mb-2">Endereço Completo *</label>
+                            <input type="text" placeholder="Rua, número, complemento" class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors mb-3" />
+                            <div class="grid grid-cols-3 gap-3">
+                                <input type="text" placeholder="Cidade" class="px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors" />
+                                <input type="text" placeholder="Estado" class="px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors" />
+                                <input type="text" placeholder="CEP" class="px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="step-2-assets" class="bg-white rounded-2xl p-10 shadow-lg border border-neutral-light mb-8">
+                    <div class="flex items-start justify-between mb-8">
+                        <div>
+                            <h2 class="text-3xl font-bold text-neutral-dark mb-2">Patrimônio Estimado</h2>
+                            <p class="text-neutral-medium">Nos ajude a entender a complexidade do seu planejamento sucessório</p>
+                        </div>
+                        <div class="px-4 py-2 bg-secondary-pale rounded-lg">
+                            <span class="text-sm font-semibold text-primary-deep">Etapa 2 de 5</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-neutral-dark mb-3">Valor Total Estimado do Patrimônio *</label>
+                            <div class="grid grid-cols-3 gap-4">
+                                <button class="px-6 py-4 border-2 border-neutral-light rounded-lg hover:border-primary-deep hover:bg-secondary-pale transition-all text-left">
+                                    <div class="font-semibold text-neutral-dark mb-1">Até R$ 500 mil</div>
+                                    <div class="text-xs text-neutral-medium">Patrimônio inicial</div>
+                                </button>
+                                <button class="px-6 py-4 border-2 border-primary-deep bg-secondary-pale rounded-lg transition-all text-left">
+                                    <div class="font-semibold text-primary-deep mb-1">R$ 500 mil - R$ 2 milhões</div>
+                                    <div class="text-xs text-neutral-medium">Patrimônio médio</div>
+                                </button>
+                                <button class="px-6 py-4 border-2 border-neutral-light rounded-lg hover:border-primary-deep hover:bg-secondary-pale transition-all text-left">
+                                    <div class="font-semibold text-neutral-dark mb-1">Acima de R$ 2 milhões</div>
+                                    <div class="text-xs text-neutral-medium">Patrimônio alto</div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-bg-subtle rounded-xl p-6">
+                            <h3 class="text-lg font-bold text-neutral-dark mb-4">Tipos de Ativos (marque todos que possui)</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="checkbox" checked class="w-5 h-5 text-primary-deep border-2 border-neutral-light rounded focus:ring-2 focus:ring-primary-deep" />
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-home text-primary-deep"></i>
+                                        <span class="font-medium text-neutral-dark">Imóveis</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="checkbox" class="w-5 h-5 text-primary-deep border-2 border-neutral-light rounded focus:ring-2 focus:ring-primary-deep" />
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-car text-primary-deep"></i>
+                                        <span class="font-medium text-neutral-dark">Veículos</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="checkbox" checked class="w-5 h-5 text-primary-deep border-2 border-neutral-light rounded focus:ring-2 focus:ring-primary-deep" />
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-building-columns text-primary-deep"></i>
+                                        <span class="font-medium text-neutral-dark">Contas Bancárias</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="checkbox" checked class="w-5 h-5 text-primary-deep border-2 border-neutral-light rounded focus:ring-2 focus:ring-primary-deep" />
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-chart-line text-primary-deep"></i>
+                                        <span class="font-medium text-neutral-dark">Investimentos</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="checkbox" class="w-5 h-5 text-primary-deep border-2 border-neutral-light rounded focus:ring-2 focus:ring-primary-deep" />
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-building text-primary-deep"></i>
+                                        <span class="font-medium text-neutral-dark">Empresas/Participações</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="checkbox" class="w-5 h-5 text-primary-deep border-2 border-neutral-light rounded focus:ring-2 focus:ring-primary-deep" />
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fa-brands fa-bitcoin text-accent-purple"></i>
+                                        <span class="font-medium text-neutral-dark">Criptomoedas</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="checkbox" class="w-5 h-5 text-primary-deep border-2 border-neutral-light rounded focus:ring-2 focus:ring-primary-deep" />
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-image text-accent-purple"></i>
+                                        <span class="font-medium text-neutral-dark">NFTs</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="checkbox" class="w-5 h-5 text-primary-deep border-2 border-neutral-light rounded focus:ring-2 focus:ring-primary-deep" />
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-laptop text-primary-deep"></i>
+                                        <span class="font-medium text-neutral-dark">Ativos Digitais</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-neutral-dark mb-2">Número Aproximado de Imóveis</label>
+                            <input type="number" placeholder="Ex: 2" class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-neutral-dark mb-2">Possui Dívidas ou Financiamentos? *</label>
+                            <div class="grid grid-cols-2 gap-4">
+                                <button class="px-6 py-3 border-2 border-neutral-light rounded-lg hover:border-primary-deep hover:bg-secondary-pale transition-all text-center font-semibold">
+                                    Não
+                                </button>
+                                <button class="px-6 py-3 border-2 border-primary-deep bg-secondary-pale rounded-lg transition-all text-center font-semibold text-primary-deep">
+                                    Sim
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="debts-details" class="bg-warning-orange/5 border border-warning-orange/20 rounded-lg p-4">
+                            <label class="block text-sm font-semibold text-neutral-dark mb-2">Valor Total Estimado das Dívidas</label>
+                            <input type="text" placeholder="R$ 0,00" class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors" />
+                            <p class="text-xs text-neutral-medium mt-2">Importante para calcular o patrimônio líquido a ser distribuído</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="step-3-heirs" class="bg-white rounded-2xl p-10 shadow-lg border border-neutral-light mb-8">
+                    <div class="flex items-start justify-between mb-8">
+                        <div>
+                            <h2 class="text-3xl font-bold text-neutral-dark mb-2">Herdeiros e Beneficiários</h2>
+                            <p class="text-neutral-medium">Informações sobre as pessoas que você deseja incluir no testamento</p>
+                        </div>
+                        <div class="px-4 py-2 bg-secondary-pale rounded-lg">
+                            <span class="text-sm font-semibold text-primary-deep">Etapa 3 de 5</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-neutral-dark mb-3">Possui Filhos? *</label>
+                            <div class="grid grid-cols-2 gap-4">
+                                <button class="px-6 py-3 border-2 border-neutral-light rounded-lg hover:border-primary-deep hover:bg-secondary-pale transition-all text-center font-semibold">
+                                    Não
+                                </button>
+                                <button class="px-6 py-3 border-2 border-primary-deep bg-secondary-pale rounded-lg transition-all text-center font-semibold text-primary-deep">
+                                    Sim
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="children-details">
+                            <label class="block text-sm font-semibold text-neutral-dark mb-2">Quantos filhos?</label>
+                            <input type="number" placeholder="Ex: 2" class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors mb-4" />
+                            
+                            <div class="bg-bg-subtle rounded-xl p-6 space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <h4 class="font-semibold text-neutral-dark">Filho 1</h4>
+                                    <button class="text-error-red hover:text-error-red/80">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <input type="text" placeholder="Nome completo" class="px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors bg-white" />
+                                    <input type="text" placeholder="CPF" class="px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors bg-white" />
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <input type="date" placeholder="Data de nascimento" class="px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors bg-white" />
+                                    <select class="px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors bg-white">
+                                        <option>Filiação</option>
+                                        <option>Biológico</option>
+                                        <option>Adotivo</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="bg-bg-subtle rounded-xl p-6 space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <h4 class="font-semibold text-neutral-dark">Filho 2</h4>
+                                    <button class="text-error-red hover:text-error-red/80">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <input type="text" placeholder="Nome completo" class="px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors bg-white" />
+                                    <input type="text" placeholder="CPF" class="px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors bg-white" />
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <input type="date" placeholder="Data de nascimento" class="px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors bg-white" />
+                                    <select class="px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors bg-white">
+                                        <option>Filiação</option>
+                                        <option>Biológico</option>
+                                        <option>Adotivo</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button class="w-full py-3 border-2 border-dashed border-primary-deep text-primary-deep font-semibold rounded-lg hover:bg-secondary-pale transition-colors flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-plus"></i>
+                                <span>Adicionar Outro Filho</span>
+                            </button>
+                        </div>
+
+                        <div class="border-t border-neutral-light pt-6">
+                            <label class="block text-sm font-semibold text-neutral-dark mb-3">Possui Pais Vivos? *</label>
+                            <div class="grid grid-cols-2 gap-4">
+                                <button class="px-6 py-3 border-2 border-primary-deep bg-secondary-pale rounded-lg transition-all text-center font-semibold text-primary-deep">
+                                    Sim
+                                </button>
+                                <button class="px-6 py-3 border-2 border-neutral-light rounded-lg hover:border-primary-deep hover:bg-secondary-pale transition-all text-center font-semibold">
+                                    Não
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-info-blue/5 border border-info-blue/20 rounded-lg p-6">
+                            <div class="flex items-start space-x-3">
+                                <i class="fa-solid fa-info-circle text-info-blue text-xl mt-0.5"></i>
+                                <div>
+                                    <h4 class="font-semibold text-neutral-dark mb-2">Sobre Herdeiros Legítimos</h4>
+                                    <p class="text-sm text-neutral-medium leading-relaxed">
+                                        De acordo com o Código Civil Brasileiro (Art. 1.846), 50% do seu patrimônio (a "legítima") deve ser destinado aos herdeiros necessários (filhos, cônjuge, pais). Os outros 50% podem ser distribuídos livremente.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-neutral-dark mb-3">Deseja Incluir Outros Beneficiários? (opcional)</label>
+                            <p class="text-sm text-neutral-medium mb-4">Amigos, instituições de caridade, organizações, etc.</p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <button class="px-6 py-3 border-2 border-neutral-light rounded-lg hover:border-primary-deep hover:bg-secondary-pale transition-all text-center font-semibold">
+                                    Não
+                                </button>
+                                <button class="px-6 py-3 border-2 border-primary-deep bg-secondary-pale rounded-lg transition-all text-center font-semibold text-primary-deep">
+                                    Sim
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="additional-beneficiaries" class="bg-bg-subtle rounded-xl p-6 space-y-4">
+                            <h4 class="font-semibold text-neutral-dark">Beneficiário Adicional 1</h4>
+                            <div class="space-y-3">
+                                <input type="text" placeholder="Nome completo ou razão social" class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors bg-white" />
+                                <div class="grid grid-cols-2 gap-3">
+                                    <input type="text" placeholder="CPF ou CNPJ" class="px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors bg-white" />
+                                    <select class="px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors bg-white">
+                                        <option>Tipo de beneficiário</option>
+                                        <option>Pessoa Física</option>
+                                        <option>Instituição de Caridade</option>
+                                        <option>Organização</option>
+                                    </select>
+                                </div>
+                                <input type="text" placeholder="Relação (ex: amigo próximo, ONG que apoio)" class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors bg-white" />
+                            </div>
+                            <button class="w-full py-3 border-2 border-dashed border-primary-deep text-primary-deep font-semibold rounded-lg hover:bg-white transition-colors flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-plus"></i>
+                                <span>Adicionar Outro Beneficiário</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="step-4-objectives" class="bg-white rounded-2xl p-10 shadow-lg border border-neutral-light mb-8">
+                    <div class="flex items-start justify-between mb-8">
+                        <div>
+                            <h2 class="text-3xl font-bold text-neutral-dark mb-2">Objetivos e Preocupações</h2>
+                            <p class="text-neutral-medium">Ajude-nos a entender suas prioridades para o planejamento sucessório</p>
+                        </div>
+                        <div class="px-4 py-2 bg-secondary-pale rounded-lg">
+                            <span class="text-sm font-semibold text-primary-deep">Etapa 4 de 5</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-neutral-dark mb-3">Qual seu principal objetivo com o testamento? *</label>
+                            <div class="space-y-3">
+                                <label class="flex items-start space-x-3 p-4 border-2 border-neutral-light rounded-lg hover:border-primary-deep cursor-pointer transition-all">
+                                    <input type="radio" name="objective" class="mt-1 w-5 h-5 text-primary-deep border-2 border-neutral-light focus:ring-2 focus:ring-primary-deep" />
+                                    <div>
+                                        <div class="font-semibold text-neutral-dark">Evitar conflitos familiares</div>
+                                        <div class="text-sm text-neutral-medium">Garantir divisão clara e justa para prevenir disputas</div>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 p-4 border-2 border-primary-deep bg-secondary-pale rounded-lg cursor-pointer transition-all">
+                                    <input type="radio" name="objective" checked class="mt-1 w-5 h-5 text-primary-deep border-2 border-neutral-light focus:ring-2 focus:ring-primary-deep" />
+                                    <div>
+                                        <div class="font-semibold text-primary-deep">Proteger herdeiros menores</div>
+                                        <div class="text-sm text-neutral-medium">Criar estrutura legal para filhos menores de idade</div>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 p-4 border-2 border-neutral-light rounded-lg hover:border-primary-deep cursor-pointer transition-all">
+                                    <input type="radio" name="objective" class="mt-1 w-5 h-5 text-primary-deep border-2 border-neutral-light focus:ring-2 focus:ring-primary-deep" />
+                                    <div>
+                                        <div class="font-semibold text-neutral-dark">Reduzir custos e tempo de inventário</div>
+                                        <div class="text-sm text-neutral-medium">Agilizar processo e minimizar despesas para os herdeiros</div>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 p-4 border-2 border-neutral-light rounded-lg hover:border-primary-deep cursor-pointer transition-all">
+                                    <input type="radio" name="objective" class="mt-1 w-5 h-5 text-primary-deep border-2 border-neutral-light focus:ring-2 focus:ring-primary-deep" />
+                                    <div>
+                                        <div class="font-semibold text-neutral-dark">Proteger ativos digitais e criptomoedas</div>
+                                        <div class="text-sm text-neutral-medium">Garantir transferência segura de ativos virtuais</div>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 p-4 border-2 border-neutral-light rounded-lg hover:border-primary-deep cursor-pointer transition-all">
+                                    <input type="radio" name="objective" class="mt-1 w-5 h-5 text-primary-deep border-2 border-neutral-light focus:ring-2 focus:ring-primary-deep" />
+                                    <div>
+                                        <div class="font-semibold text-neutral-dark">Preservar empresa familiar</div>
+                                        <div class="text-sm text-neutral-medium">Planejamento para continuidade do negócio</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-neutral-dark mb-3">Possui alguma preocupação específica? (marque todas que se aplicam)</label>
+                            <div class="space-y-3">
+                                <label class="flex items-center space-x-3 p-4 border-2 border-neutral-light rounded-lg hover:border-primary-deep cursor-pointer transition-all">
+                                    <input type="checkbox" class="w-5 h-5 text-primary-deep border-2 border-neutral-light rounded focus:ring-2 focus:ring-primary-deep" />
+                                    <span class="font-medium text-neutral-dark">Herdeiros com relacionamento difícil entre si</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-4 border-2 border-neutral-light rounded-lg hover:border-primary-deep cursor-pointer transition-all">
+                                    <input type="checkbox" checked class="w-5 h-5 text-primary-deep border-2 border-neutral-light rounded focus:ring-2 focus:ring-primary-deep" />
+                                    <span class="font-medium text-neutral-dark">Filhos menores de idade</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-4 border-2 border-neutral-light rounded-lg hover:border-primary-deep cursor-pointer transition-all">
+                                    <input type="checkbox" class="w-5 h-5 text-primary-deep border-2 border-neutral-light rounded focus:ring-2 focus:ring-primary-deep" />
+                                    <span class="font-medium text-neutral-dark">Herdeiros com necessidades especiais</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-4 border-2 border-neutral-light rounded-lg hover:border-primary-deep cursor-pointer transition-all">
+                                    <input type="checkbox" class="w-5 h-5 text-primary-deep border-2 border-neutral-light rounded focus:ring-2 focus:ring-primary-deep" />
+                                    <span class="font-medium text-neutral-dark">Patrimônio em múltiplos países</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-4 border-2 border-neutral-light rounded-lg hover:border-primary-deep cursor-pointer transition-all">
+                                    <input type="checkbox" checked class="w-5 h-5 text-primary-deep border-2 border-neutral-light rounded focus:ring-2 focus:ring-primary-deep" />
+                                    <span class="font-medium text-neutral-dark">Ativos digitais complexos (crypto, NFTs)</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-4 border-2 border-neutral-light rounded-lg hover:border-primary-deep cursor-pointer transition-all">
+                                    <input type="checkbox" class="w-5 h-5 text-primary-deep border-2 border-neutral-light rounded focus:ring-2 focus:ring-primary-deep" />
+                                    <span class="font-medium text-neutral-dark">Sucessão de empresa/negócio</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-neutral-dark mb-2">Observações Adicionais (opcional)</label>
+                            <textarea rows="5" placeholder="Descreva qualquer situação específica que gostaria de discutir durante a consulta..." class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg focus:border-primary-deep focus:outline-none transition-colors resize-none"></textarea>
+                            <p class="text-xs text-neutral-medium mt-2">Máximo 500 caracteres</p>
+                        </div>
+
+                        <div class="bg-accent-emerald/5 border border-accent-emerald/20 rounded-lg p-6">
+                            <div class="flex items-start space-x-3">
+                                <i class="fa-solid fa-shield-check text-accent-emerald text-xl mt-0.5"></i>
+                                <div>
+                                    <h4 class="font-semibold text-neutral-dark mb-2">Confidencialidade Garantida</h4>
+                                    <p class="text-sm text-neutral-medium leading-relaxed">
+                                        Todas as informações fornecidas são protegidas por sigilo profissional e criptografadas com AES-256. Apenas você e o advogado designado terão acesso aos dados durante a consulta.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="step-5-scheduling" class="bg-white rounded-2xl p-10 shadow-lg border border-neutral-light mb-8">
+                    <div class="flex items-start justify-between mb-8">
+                        <div>
+                            <h2 class="text-3xl font-bold text-neutral-dark mb-2">Agendamento da Consulta</h2>
+                            <p class="text-neutral-medium">Escolha o melhor horário para sua consulta gratuita de 30 minutos</p>
+                        </div>
+                        <div class="px-4 py-2 bg-secondary-pale rounded-lg">
+                            <span class="text-sm font-semibold text-primary-deep">Etapa 5 de 5</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-2 gap-8">
+                            <div>
+                                <label class="block text-sm font-semibold text-neutral-dark mb-3">Selecione uma Data *</label>
+                                <div class="bg-bg-subtle rounded-xl p-6">
+                                    <div class="text-center mb-4">
+                                        <div class="text-lg font-bold text-neutral-dark">Janeiro 2026</div>
+                                        <div class="flex items-center justify-between mt-2">
+                                            <button class="w-8 h-8 rounded-lg hover:bg-white flex items-center justify-center">
+                                                <i class="fa-solid fa-chevron-left text-neutral-medium"></i>
+                                            </button>
+                                            <button class="w-8 h-8 rounded-lg hover:bg-white flex items-center justify-center">
+                                                <i class="fa-solid fa-chevron-right text-neutral-medium"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-7 gap-2 text-center text-sm mb-2">
+                                        <div class="font-semibold text-neutral-medium">Dom</div>
+                                        <div class="font-semibold text-neutral-medium">Seg</div>
+                                        <div class="font-semibold text-neutral-medium">Ter</div>
+                                        <div class="font-semibold text-neutral-medium">Qua</div>
+                                        <div class="font-semibold text-neutral-medium">Qui</div>
+                                        <div class="font-semibold text-neutral-medium">Sex</div>
+                                        <div class="font-semibold text-neutral-medium">Sáb</div>
+                                    </div>
+                                    <div class="grid grid-cols-7 gap-2 text-center text-sm">
+                                        <div class="py-2 text-neutral-light">29</div>
+                                        <div class="py-2 text-neutral-light">30</div>
+                                        <div class="py-2 text-neutral-light">31</div>
+                                        <div class="py-2 hover:bg-white rounded-lg cursor-pointer">1</div>
+                                        <div class="py-2 hover:bg-white rounded-lg cursor-pointer">2</div>
+                                        <div class="py-2 hover:bg-white rounded-lg cursor-pointer">3</div>
+                                        <div class="py-2 text-neutral-light">4</div>
+                                        <div class="py-2 text-neutral-light">5</div>
+                                        <div class="py-2 hover:bg-white rounded-lg cursor-pointer">6</div>
+                                        <div class="py-2 hover:bg-white rounded-lg cursor-pointer">7</div>
+                                        <div class="py-2 hover:bg-white rounded-lg cursor-pointer">8</div>
+                                        <div class="py-2 hover:bg-white rounded-lg cursor-pointer">9</div>
+                                        <div class="py-2 bg-primary-deep text-white rounded-lg font-semibold cursor-pointer">10</div>
+                                        <div class="py-2 text-neutral-light">11</div>
+                                        <div class="py-2 text-neutral-light">12</div>
+                                        <div class="py-2 hover:bg-white rounded-lg cursor-pointer">13</div>
+                                        <div class="py-2 hover:bg-white rounded-lg cursor-pointer">14</div>
+                                        <div class="py-2 hover:bg-white rounded-lg cursor-pointer">15</div>
+                                        <div class="py-2 hover:bg-white rounded-lg cursor-pointer">16</div>
+                                        <div class="py-2 hover:bg-white rounded-lg cursor-pointer">17</div>
+                                        <div class="py-2 text-neutral-light">18</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-neutral-dark mb-3">Horários Disponíveis *</label>
+                                <div class="space-y-2 max-h-[380px] overflow-y-auto pr-2">
+                                    <button class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg hover:border-primary-deep hover:bg-secondary-pale transition-all text-left flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <i class="fa-solid fa-clock text-neutral-medium"></i>
+                                            <span class="font-medium">09:00 - 09:30</span>
+                                        </div>
+                                        <span class="text-xs text-success-green">Disponível</span>
+                                    </button>
+                                    <button class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg hover:border-primary-deep hover:bg-secondary-pale transition-all text-left flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <i class="fa-solid fa-clock text-neutral-medium"></i>
+                                            <span class="font-medium">10:00 - 10:30</span>
+                                        </div>
+                                        <span class="text-xs text-success-green">Disponível</span>
+                                    </button>
+                                    <button class="w-full px-4 py-3 border-2 border-primary-deep bg-secondary-pale rounded-lg transition-all text-left flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <i class="fa-solid fa-clock text-primary-deep"></i>
+                                            <span class="font-semibold text-primary-deep">11:00 - 11:30</span>
+                                        </div>
+                                        <i class="fa-solid fa-check text-primary-deep"></i>
+                                    </button>
+                                    <button class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg hover:border-primary-deep hover:bg-secondary-pale transition-all text-left flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <i class="fa-solid fa-clock text-neutral-medium"></i>
+                                            <span class="font-medium">14:00 - 14:30</span>
+                                        </div>
+                                        <span class="text-xs text-success-green">Disponível</span>
+                                    </button>
+                                    <button class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg hover:border-primary-deep hover:bg-secondary-pale transition-all text-left flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <i class="fa-solid fa-clock text-neutral-medium"></i>
+                                            <span class="font-medium">15:00 - 15:30</span>
+                                        </div>
+                                        <span class="text-xs text-success-green">Disponível</span>
+                                    </button>
+                                    <button class="w-full px-4 py-3 bg-neutral-light/50 rounded-lg cursor-not-allowed text-left flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <i class="fa-solid fa-clock text-neutral-light"></i>
+                                            <span class="font-medium text-neutral-medium">16:00 - 16:30</span>
+                                        </div>
+                                        <span class="text-xs text-error-red">Ocupado</span>
+                                    </button>
+                                    <button class="w-full px-4 py-3 border-2 border-neutral-light rounded-lg hover:border-primary-deep hover:bg-secondary-pale transition-all text-left flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <i class="fa-solid fa-clock text-neutral-medium"></i>
+                                            <span class="font-medium">17:00 - 17:30</span>
+                                        </div>
+                                        <span class="text-xs text-success-green">Disponível</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-neutral-dark mb-3">Preferência de Comunicação *</label>
+                            <div class="grid grid-cols-3 gap-4">
+                                <button class="px-6 py-4 border-2 border-primary-deep bg-secondary-pale rounded-lg transition-all text-center">
+                                    <i class="fa-solid fa-video text-primary-deep text-2xl mb-2"></i>
+                                    <div class="font-semibold text-primary-deep">Google Meet</div>
+                                    <div class="text-xs text-neutral-medium mt-1">Recomendado</div>
+                                </button>
+                                <button class="px-6 py-4 border-2 border-neutral-light rounded-lg hover:border-primary-deep hover:bg-secondary-pale transition-all text-center">
+                                    <i class="fa-solid fa-phone text-neutral-medium text-2xl mb-2"></i>
+                                    <div class="font-semibold text-neutral-dark">Telefone</div>
+                                    <div class="text-xs text-neutral-medium mt-1">Ligação</div>
+                                </button>
+                                <button class="px-6 py-4 border-2 border-neutral-light rounded-lg hover:border-primary-deep hover:bg-secondary-pale transition-all text-center">
+                                    <i class="fa-brands fa-whatsapp text-neutral-medium text-2xl mb-2"></i>
+                                    <div class="font-semibold text-neutral-dark">WhatsApp</div>
+                                    <div class="text-xs text-neutral-medium mt-1">Videochamada</div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-primary-gold/10 border border-primary-gold/30 rounded-xl p-6">
+                            <div class="flex items-start space-x-4">
+                                <i class="fa-solid fa-calendar-check text-primary-gold text-3xl mt-1"></i>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-neutral-dark mb-3">Resumo do Agendamento</h4>
+                                    <div class="space-y-2 text-sm">
+                                        <div class="flex justify-between">
+                                            <span class="text-neutral-medium">Data:</span>
+                                            <span class="font-semibold text-neutral-dark">10 de Janeiro de 2026</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-neutral-medium">Horário:</span>
+                                            <span class="font-semibold text-neutral-dark">11:00 - 11:30 (30 min)</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-neutral-medium">Especialista:</span>
+                                            <span class="font-semibold text-neutral-dark">Dr. Carlos Silva</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-neutral-medium">Plataforma:</span>
+                                            <span class="font-semibold text-neutral-dark">Google Meet</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-info-blue/5 border border-info-blue/20 rounded-lg p-4">
+                            <div class="flex items-start space-x-3">
+                                <i class="fa-solid fa-bell text-info-blue text-lg mt-0.5"></i>
+                                <div class="text-sm text-neutral-medium">
+                                    Você receberá um email de confirmação com o link da videochamada 24 horas antes do horário agendado. Também enviaremos um lembrete 1 hora antes.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="consent-section" class="bg-white rounded-2xl p-10 shadow-lg border border-neutral-light mb-8">
+                    <h3 class="text-2xl font-bold text-neutral-dark mb-6">Consentimento e Termos</h3>
+                    <div class="space-y-4">
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" checked class="mt-1 w-5 h-5 text-primary-deep border-2 border-neutral-light rounded focus:ring-2 focus:ring-primary-deep" />
+                            <span class="text-sm text-neutral-dark leading-relaxed">
+                                Autorizo o armazenamento e processamento dos meus dados pessoais de acordo com a <a href="#" class="text-primary-deep font-semibold hover:underline">Lei Geral de Proteção de Dados (LGPD)</a>
+                            </span>
+                        </label>
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" checked class="mt-1 w-5 h-5 text-primary-deep border-2 border-neutral-light rounded focus:ring-2 focus:ring-primary-deep" />
+                            <span class="text-sm text-neutral-dark leading-relaxed">
+                                Li e concordo com os <a href="#" class="text-primary-deep font-semibold hover:underline">Termos de Uso</a> e <a href="#" class="text-primary-deep font-semibold hover:underline">Política de Privacidade</a>
+                            </span>
+                        </label>
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" class="mt-1 w-5 h-5 text-primary-deep border-2 border-neutral-light rounded focus:ring-2 focus:ring-primary-deep" />
+                            <span class="text-sm text-neutral-dark leading-relaxed">
+                                Desejo receber emails com conteúdo educativo sobre planejamento sucessório (opcional)
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <button class="px-8 py-4 border-2 border-neutral-light text-neutral-dark font-semibold rounded-lg hover:bg-bg-subtle transition-colors flex items-center space-x-2">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Voltar</span>
+                    </button>
+                    <button class="px-12 py-4 bg-primary-deep text-white font-bold rounded-lg hover:bg-secondary-blue transition-all transform hover:scale-105 flex items-center space-x-3 shadow-lg">
+                        <span>Confirmar Agendamento</span>
+                        <i class="fa-solid fa-check-circle text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-span-4">
+                <div id="sidebar-help" class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-light sticky top-[145px]">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-info-blue/10 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-lightbulb text-info-blue text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-neutral-dark">Dicas & Ajuda</h3>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-neutral-dark mb-2 flex items-center space-x-2">
+                                <i class="fa-solid fa-shield-check text-success-green"></i>
+                                <span>Segurança dos Dados</span>
+                            </h4>
+                            <p class="text-sm text-neutral-medium leading-relaxed">
+                                Todos os dados são criptografados com AES-256 e armazenados em servidores com certificação ISO 27001. Apenas você e o advogado designado terão acesso.
+                            </p>
+                        </div>
+
+                        <div class="border-t border-neutral-light pt-4">
+                            <h4 class="font-semibold text-neutral-dark mb-2 flex items-center space-x-2">
+                                <i class="fa-solid fa-clock text-primary-gold"></i>
+                                <span>Tempo Estimado</span>
+                            </h4>
+                            <p class="text-sm text-neutral-medium leading-relaxed mb-3">
+                                Este questionário leva aproximadamente 10-15 minutos para ser concluído. Seus dados são salvos automaticamente.
+                            </p>
+                            <div class="bg-bg-subtle rounded-lg p-3">
+                                <div class="flex items-center justify-between text-sm mb-1">
+                                    <span class="text-neutral-medium">Progresso</span>
+                                    <span class="font-semibold text-primary-deep">20%</span>
+                                </div>
+                                <div class="w-full h-2 bg-neutral-light rounded-full overflow-hidden">
+                                    <div class="h-full bg-primary-deep rounded-full" style="width: 20%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-neutral-light pt-4">
+                            <h4 class="font-semibold text-neutral-dark mb-3 flex items-center space-x-2">
+                                <i class="fa-solid fa-question-circle text-info-blue"></i>
+                                <span>Perguntas Frequentes</span>
+                            </h4>
+                            <div class="space-y-3">
+                                <details class="group">
+                                    <summary class="cursor-pointer text-sm font-medium text-neutral-dark hover:text-primary-deep transition-colors flex items-center justify-between">
+                                        <span>Preciso ter todos os documentos agora?</span>
+                                        <i class="fa-solid fa-chevron-down group-open:rotate-180 transition-transform text-neutral-medium"></i>
+                                    </summary>
+                                    <p class="text-xs text-neutral-medium mt-2 leading-relaxed">
+                                        Não. Este questionário é apenas para qualificação inicial. Os documentos serão solicitados posteriormente durante o processo de criação do testamento.
+                                    </p>
+                                </details>
+                                <details class="group">
+                                    <summary class="cursor-pointer text-sm font-medium text-neutral-dark hover:text-primary-deep transition-colors flex items-center justify-between">
+                                        <span>A consulta é realmente gratuita?</span>
+                                        <i class="fa-solid fa-chevron-down group-open:rotate-180 transition-transform text-neutral-medium"></i>
+                                    </summary>
+                                    <p class="text-xs text-neutral-medium mt-2 leading-relaxed">
+                                        Sim, a primeira consulta de 30 minutos é 100% gratuita e sem compromisso. Você só paga se decidir prosseguir com a criação do testamento.
+                                    </p>
+                                </details>
+                                <details class="group">
+                                    <summary class="cursor-pointer text-sm font-medium text-neutral-dark hover:text-primary-deep transition-colors flex items-center justify-between">
+                                        <span>Posso remarcar a consulta?</span>
+                                        <i class="fa-solid fa-chevron-down group-open:rotate-180 transition-transform text-neutral-medium"></i>
+                                    </summary>
+                                    <p class="text-xs text-neutral-medium mt-2 leading-relaxed">
+                                        Sim, você pode remarcar até 24 horas antes do horário agendado sem nenhum custo. Basta acessar o link enviado no email de confirmação.
+                                    </p>
+                                </details>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-neutral-light pt-4">
+                            <h4 class="font-semibold text-neutral-dark mb-3">Precisa de Ajuda?</h4>
+                            <div class="space-y-3">
+                                <a href="#" class="flex items-center space-x-3 p-3 bg-bg-subtle rounded-lg hover:bg-secondary-pale transition-colors">
+                                    <i class="fa-solid fa-headset text-primary-deep text-xl"></i>
+                                    <div class="text-sm">
+                                        <div class="font-semibold text-neutral-dark">Chat ao Vivo</div>
+                                        <div class="text-neutral-medium text-xs">Resposta em 2 minutos</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="flex items-center space-x-3 p-3 bg-bg-subtle rounded-lg hover:bg-secondary-pale transition-colors">
+                                    <i class="fa-brands fa-whatsapp text-success-green text-xl"></i>
+                                    <div class="text-sm">
+                                        <div class="font-semibold text-neutral-dark">WhatsApp</div>
+                                        <div class="text-neutral-medium text-xs">(11) 99999-9999</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="flex items-center space-x-3 p-3 bg-bg-subtle rounded-lg hover:bg-secondary-pale transition-colors">
+                                    <i class="fa-solid fa-envelope text-info-blue text-xl"></i>
+                                    <div class="text-sm">
+                                        <div class="font-semibold text-neutral-dark">Email</div>
+                                        <div class="text-neutral-medium text-xs">contato@legacyguard.com.br</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="bg-accent-emerald/5 border border-accent-emerald/20 rounded-lg p-4">
+                            <div class="flex items-start space-x-3">
+                                <i class="fa-solid fa-star text-accent-emerald text-lg"></i>
+                                <div>
+                                    <div class="text-sm font-semibold text-neutral-dark mb-1">Avaliação 4.9/5</div>
+                                    <div class="text-xs text-neutral-medium leading-relaxed">
+                                        Baseado em 2.847 consultas realizadas
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="testimonials-preview" class="bg-white py-16 border-t border-neutral-light">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-neutral-dark mb-2">O Que Nossos Clientes Dizem</h2>
+            <p class="text-neutral-medium">Depoimentos reais de pessoas que protegeram seu legado</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-8">
+            <div class="bg-bg-subtle rounded-xl p-6">
+                <div class="flex items-center space-x-1 mb-4">
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                </div>
+                <p class="text-neutral-dark mb-4 leading-relaxed">
+                    "O processo foi surpreendentemente simples. Em 48 horas meu testamento estava pronto e registrado em blockchain. A equipe foi extremamente profissional."
+                </p>
+                <div class="flex items-center space-x-3">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Client" class="w-12 h-12 rounded-full" />
+                    <div>
+                        <div class="font-semibold text-neutral-dark">Roberto Mendes</div>
+                        <div class="text-sm text-neutral-medium">Empresário, São Paulo</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-bg-subtle rounded-xl p-6">
+                <div class="flex items-center space-x-1 mb-4">
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                </div>
+                <p class="text-neutral-dark mb-4 leading-relaxed">
+                    "Finalmente consegui incluir minhas criptomoedas no testamento de forma legal. O suporte para ativos digitais é excepcional."
+                </p>
+                <div class="flex items-center space-x-3">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Client" class="w-12 h-12 rounded-full" />
+                    <div>
+                        <div class="font-semibold text-neutral-dark">Marina Costa</div>
+                        <div class="text-sm text-neutral-medium">Investidora, Rio de Janeiro</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-bg-subtle rounded-xl p-6">
+                <div class="flex items-center space-x-1 mb-4">
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                </div>
+                <p class="text-neutral-dark mb-4 leading-relaxed">
+                    "A segurança é impressionante. Saber que meu testamento está protegido por blockchain me dá total tranquilidade."
+                </p>
+                <div class="flex items-center space-x-3">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="Client" class="w-12 h-12 rounded-full" />
+                    <div>
+                        <div class="font-semibold text-neutral-dark">Carlos Ferreira</div>
+                        <div class="text-sm text-neutral-medium">Médico, Brasília</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="cta-bottom" class="bg-gradient-to-br from-primary-deep via-secondary-blue to-primary-deep text-white py-16">
+    <div class="max-w-[1440px] mx-auto px-8 text-center">
+        <h2 class="text-4xl font-bold mb-4">Pronto para Proteger Seu Legado?</h2>
+        <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            Complete o questionário agora e agende sua consulta gratuita com um especialista
+        </p>
+        <div class="flex items-center justify-center space-x-4">
+            <button class="px-10 py-4 bg-primary-gold text-primary-deep font-bold rounded-lg hover:bg-secondary-gold-light transition-all transform hover:scale-105 flex items-center space-x-3">
+                <span>Continuar Questionário</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <button class="px-10 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-lg hover:bg-white/20 transition-colors flex items-center space-x-2">
+                <i class="fa-solid fa-phone"></i>
+                <span>Falar com Especialista</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<footer id="footer" class="bg-neutral-dark text-white py-12 border-t border-neutral-medium">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="grid grid-cols-5 gap-8 mb-8">
+            <div class="col-span-2">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-10 h-10 bg-primary-gold rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-deep text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold">LegacyGuard</span>
+                </div>
+                <p class="text-white/70 leading-relaxed mb-4">
+                    Planejamento sucessório digital com tecnologia blockchain e criptografia de nível militar.
+                </p>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Serviços</h4>
+                <ul class="space-y-2 text-sm text-white/70">
+                    <li><a href="#" class="hover:text-white transition-colors">Testamento Digital</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Validação em Vídeo</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Assinatura ICP-Brasil</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Custódia Criptográfica</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Empresa</h4>
+                <ul class="space-y-2 text-sm text-white/70">
+                    <li><a href="#" class="hover:text-white transition-colors">Sobre Nós</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Carreiras</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Contato</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Legal</h4>
+                <ul class="space-y-2 text-sm text-white/70">
+                    <li><a href="#" class="hover:text-white transition-colors">Termos de Uso</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Política de Privacidade</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">LGPD</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-white/10 pt-8 flex items-center justify-between text-sm text-white/70">
+            <div>© 2026 LegacyGuard. Todos os direitos reservados.</div>
+            <div class="flex items-center space-x-4">
+                <span>Certificado ICP-Brasil</span>
+                <span>•</span>
+                <span>LGPD Compliant</span>
+                <span>•</span>
+                <span>ISO 27001</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

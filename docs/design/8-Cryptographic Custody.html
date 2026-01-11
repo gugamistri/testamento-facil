@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custódia Criptográfica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-deep': '#1A237E',
+                        'primary-gold': '#C9A054',
+                        'secondary-blue': '#3949AB',
+                        'secondary-pale': '#E8EAF6',
+                        'secondary-gold-light': '#E4D4B4',
+                        'accent-emerald': '#00695C',
+                        'accent-amber': '#FF8F00',
+                        'accent-purple': '#6A1B9A',
+                        'success-green': '#2E7D32',
+                        'error-red': '#C62828',
+                        'warning-orange': '#EF6C00',
+                        'info-blue': '#1565C0',
+                        'neutral-dark': '#37474F',
+                        'neutral-medium': '#78909C',
+                        'neutral-light': '#CFD8DC',
+                        'bg-subtle': '#F5F7FA',
+                        'bg-section': '#ECEFF1',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'crimson': ['Crimson Pro', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Crimson+Pro:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+</head>
+<body class="font-inter bg-bg-subtle">
+
+<header id="header" class="bg-white border-b border-neutral-light sticky top-0 z-50">
+    <div class="max-w-[1440px] mx-auto px-8 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-12">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary-deep rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-gold text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-primary-deep">LegacyGuard</span>
+                </div>
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Dashboard</a>
+                    <a href="#" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Meu Testamento</a>
+                    <a href="#" class="text-primary-deep font-semibold border-b-2 border-primary-deep pb-1">Custódia</a>
+                    <a href="#" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Documentos</a>
+                    <a href="#" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Suporte</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="p-2 hover:bg-secondary-pale rounded-lg transition-colors">
+                    <i class="fa-regular fa-bell text-neutral-dark"></i>
+                </button>
+                <div class="flex items-center space-x-3 px-4 py-2 bg-bg-subtle rounded-lg">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User" class="w-8 h-8 rounded-full"/>
+                    <span class="font-medium text-neutral-dark">Carlos Silva</span>
+                    <i class="fa-solid fa-chevron-down text-neutral-medium text-sm"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="hero-custody" class="bg-gradient-to-br from-accent-purple via-primary-deep to-accent-emerald text-white py-16">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="grid grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
+                    <i class="fa-solid fa-key text-primary-gold"></i>
+                    <span class="text-sm font-semibold uppercase tracking-wider">Custódia Criptográfica Shamir</span>
+                </div>
+                <h1 class="text-4xl font-bold mb-4 leading-tight">
+                    Configuração de Criptografia<br/>com <span class="text-primary-gold">Shamir Secret Sharing</span>
+                </h1>
+                <p class="text-xl text-white/90 mb-6 leading-relaxed">
+                    Seu testamento será protegido por criptografia AES-256-GCM com a chave mestra dividida em 3 partes. Requer 2 de 3 fragmentos para descriptografar, garantindo segurança máxima e recuperação controlada.
+                </p>
+                <div class="flex items-center space-x-6">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-shield-check text-success-green text-2xl"></i>
+                        <div>
+                            <div class="font-bold">Threshold 2-of-3</div>
+                            <div class="text-sm text-white/70">Segurança Distribuída</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-lock text-primary-gold text-2xl"></i>
+                        <div>
+                            <div class="font-bold">AES-256-GCM</div>
+                            <div class="text-sm text-white/70">Criptografia Militar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20">
+                    <div class="text-center mb-6">
+                        <div class="inline-flex items-center justify-center w-20 h-20 bg-primary-gold/20 rounded-full mb-4">
+                            <i class="fa-solid fa-puzzle-piece text-primary-gold text-4xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Distribuição de Fragmentos</h3>
+                        <p class="text-white/80">3 partes independentes, 2 necessárias</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-white/5 rounded-xl p-4 flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-warning-orange/20 rounded-lg flex items-center justify-center">
+                                <i class="fa-brands fa-aws text-warning-orange text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-semibold">Fragmento #1</div>
+                                <div class="text-sm text-white/70">AWS KMS HSM</div>
+                            </div>
+                            <i class="fa-solid fa-check-circle text-success-green text-xl"></i>
+                        </div>
+                        <div class="bg-white/5 rounded-xl p-4 flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-info-blue/20 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-user-tie text-info-blue text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-semibold">Fragmento #2</div>
+                                <div class="text-sm text-white/70">Portal do Advogado</div>
+                            </div>
+                            <i class="fa-solid fa-clock text-warning-orange text-xl"></i>
+                        </div>
+                        <div class="bg-white/5 rounded-xl p-4 flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-error-red/20 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-heartbeat text-error-red text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-semibold">Fragmento #3</div>
+                                <div class="text-sm text-white/70">Trigger de Óbito</div>
+                            </div>
+                            <i class="fa-solid fa-lock text-neutral-light text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="setup-progress" class="bg-white py-8 border-b border-neutral-light">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="w-10 h-10 bg-success-green rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-check text-white"></i>
+                </div>
+                <div>
+                    <div class="text-sm text-neutral-medium">Etapa 1 de 4</div>
+                    <div class="font-bold text-neutral-dark">Geração da Chave Mestra</div>
+                </div>
+            </div>
+            <div class="flex-1 mx-12">
+                <div class="h-2 bg-neutral-light rounded-full overflow-hidden">
+                    <div class="h-full bg-primary-deep rounded-full" style="width: 25%"></div>
+                </div>
+            </div>
+            <div class="text-sm font-medium text-neutral-medium">25% Completo</div>
+        </div>
+    </div>
+</section>
+
+<section id="main-content" class="py-12">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="grid grid-cols-3 gap-8">
+            <div class="col-span-2 space-y-8">
+                <div id="key-generation-card" class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-light">
+                    <div class="flex items-start justify-between mb-6">
+                        <div>
+                            <h2 class="text-2xl font-bold text-neutral-dark mb-2">Geração da Chave Mestra</h2>
+                            <p class="text-neutral-medium">Chave aleatória de 256 bits usando gerador criptográfico seguro</p>
+                        </div>
+                        <div class="px-4 py-2 bg-success-green/10 text-success-green rounded-lg font-semibold flex items-center space-x-2">
+                            <i class="fa-solid fa-check-circle"></i>
+                            <span>Concluído</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-bg-subtle rounded-xl p-6 mb-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-sm font-semibold text-neutral-dark uppercase tracking-wider">Chave Mestra Gerada</span>
+                            <button class="text-primary-deep hover:text-secondary-blue text-sm font-medium flex items-center space-x-1">
+                                <i class="fa-solid fa-copy"></i>
+                                <span>Copiar</span>
+                            </button>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 font-mono text-sm text-neutral-dark break-all border border-neutral-light">
+                            a7f3c8e2b9d4f1a6c3e8b2d7f4a9c6e1b8d3f7a2c9e4b1d6f3a8c5e2b7d4f9a6
+                        </div>
+                        <div class="flex items-center space-x-4 mt-4 text-sm">
+                            <div class="flex items-center space-x-2">
+                                <i class="fa-solid fa-key text-accent-emerald"></i>
+                                <span class="text-neutral-medium">256 bits (32 bytes)</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fa-solid fa-shield-halved text-accent-emerald"></i>
+                                <span class="text-neutral-medium">SHA-256 Hash</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fa-solid fa-clock text-neutral-medium"></i>
+                                <span class="text-neutral-medium">Gerado em: 10/01/2026 14:32:18</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-info-blue/5 border border-info-blue/20 rounded-xl p-6">
+                        <div class="flex items-start space-x-4">
+                            <i class="fa-solid fa-info-circle text-info-blue text-2xl mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-neutral-dark mb-2">Como Funciona a Geração</h4>
+                                <p class="text-neutral-medium text-sm leading-relaxed mb-3">
+                                    Utilizamos o módulo <code class="px-2 py-1 bg-white rounded text-accent-purple font-mono text-xs">crypto.randomBytes(32)</code> do Node.js, que acessa o gerador de números aleatórios criptograficamente seguro do sistema operacional (urandom no Linux, CryptGenRandom no Windows).
+                                </p>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-start space-x-2">
+                                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                                        <span class="text-neutral-medium">Entropia coletada de fontes físicas do hardware</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                                        <span class="text-neutral-medium">Impossível de prever ou reproduzir</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                                        <span class="text-neutral-medium">Conformidade com NIST SP 800-90A</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="shamir-split-card" class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-light">
+                    <div class="flex items-start justify-between mb-6">
+                        <div>
+                            <h2 class="text-2xl font-bold text-neutral-dark mb-2">Divisão Shamir (2-of-3)</h2>
+                            <p class="text-neutral-medium">Fragmentação da chave em 3 partes independentes usando algoritmo de Shamir</p>
+                        </div>
+                        <div class="px-4 py-2 bg-warning-orange/10 text-warning-orange rounded-lg font-semibold flex items-center space-x-2">
+                            <i class="fa-solid fa-spinner fa-spin"></i>
+                            <span>Em Progresso</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-6 mb-6">
+                        <div class="bg-gradient-to-br from-warning-orange/10 to-warning-orange/5 rounded-xl p-6 border border-warning-orange/20">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 bg-warning-orange/20 rounded-lg flex items-center justify-center">
+                                    <i class="fa-brands fa-aws text-warning-orange text-xl"></i>
+                                </div>
+                                <span class="px-3 py-1 bg-success-green text-white rounded-full text-xs font-bold">ATIVO</span>
+                            </div>
+                            <h3 class="font-bold text-neutral-dark mb-1">Share #1</h3>
+                            <p class="text-sm text-neutral-medium mb-4">AWS KMS HSM</p>
+                            <div class="bg-white rounded-lg p-3 font-mono text-xs text-neutral-dark break-all mb-3">
+                                801a3f...c9e2d7
+                            </div>
+                            <div class="flex items-center space-x-2 text-xs text-neutral-medium">
+                                <i class="fa-solid fa-map-marker-alt"></i>
+                                <span>us-east-1 + ap-southeast-1</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-info-blue/10 to-info-blue/5 rounded-xl p-6 border border-info-blue/20">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 bg-info-blue/20 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-user-tie text-info-blue text-xl"></i>
+                                </div>
+                                <span class="px-3 py-1 bg-warning-orange text-white rounded-full text-xs font-bold">PENDENTE</span>
+                            </div>
+                            <h3 class="font-bold text-neutral-dark mb-1">Share #2</h3>
+                            <p class="text-sm text-neutral-medium mb-4">Portal Advogado</p>
+                            <div class="bg-white rounded-lg p-3 font-mono text-xs text-neutral-dark break-all mb-3">
+                                802b4e...d1f3a8
+                            </div>
+                            <div class="flex items-center space-x-2 text-xs text-neutral-medium">
+                                <i class="fa-solid fa-database"></i>
+                                <span>PostgreSQL Encrypted</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-error-red/10 to-error-red/5 rounded-xl p-6 border border-error-red/20">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 bg-error-red/20 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-heartbeat text-error-red text-xl"></i>
+                                </div>
+                                <span class="px-3 py-1 bg-neutral-light text-neutral-dark rounded-full text-xs font-bold">INATIVO</span>
+                            </div>
+                            <h3 class="font-bold text-neutral-dark mb-1">Share #3</h3>
+                            <p class="text-sm text-neutral-medium mb-4">Trigger Óbito</p>
+                            <div class="bg-white rounded-lg p-3 font-mono text-xs text-neutral-dark break-all mb-3">
+                                803c5f...e2a4b9
+                            </div>
+                            <div class="flex items-center space-x-2 text-xs text-neutral-medium">
+                                <i class="fa-solid fa-server"></i>
+                                <span>Redis Cache</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-accent-purple/5 border border-accent-purple/20 rounded-xl p-6">
+                        <div class="flex items-start space-x-4">
+                            <i class="fa-solid fa-puzzle-piece text-accent-purple text-2xl mt-1"></i>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-neutral-dark mb-2">Algoritmo de Shamir Secret Sharing</h4>
+                                <p class="text-neutral-medium text-sm leading-relaxed mb-4">
+                                    O algoritmo divide a chave usando interpolação polinomial. Qualquer combinação de 2 fragmentos pode reconstruir a chave original, mas 1 fragmento sozinho não revela nenhuma informação.
+                                </p>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="bg-white rounded-lg p-4">
+                                        <div class="text-xs text-neutral-medium mb-1">THRESHOLD</div>
+                                        <div class="text-2xl font-bold text-accent-purple">2</div>
+                                        <div class="text-xs text-neutral-medium mt-1">Fragmentos necessários</div>
+                                    </div>
+                                    <div class="bg-white rounded-lg p-4">
+                                        <div class="text-xs text-neutral-medium mb-1">TOTAL SHARES</div>
+                                        <div class="text-2xl font-bold text-accent-purple">3</div>
+                                        <div class="text-xs text-neutral-medium mt-1">Fragmentos gerados</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="encryption-card" class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-light">
+                    <div class="flex items-start justify-between mb-6">
+                        <div>
+                            <h2 class="text-2xl font-bold text-neutral-dark mb-2">Criptografia do Testamento</h2>
+                            <p class="text-neutral-medium">Cifragem AES-256-GCM do documento PDF antes do armazenamento</p>
+                        </div>
+                        <div class="px-4 py-2 bg-neutral-light text-neutral-medium rounded-lg font-semibold flex items-center space-x-2">
+                            <i class="fa-solid fa-clock"></i>
+                            <span>Aguardando</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="bg-bg-subtle rounded-xl p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="font-semibold text-neutral-dark">Documento a Ser Criptografado</h4>
+                                <span class="text-sm text-neutral-medium">Testamento_CarlosSilva_2026.pdf</span>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="flex-1 bg-white rounded-lg p-4 flex items-center space-x-4">
+                                    <i class="fa-solid fa-file-pdf text-error-red text-3xl"></i>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-neutral-dark">Testamento_CarlosSilva_2026.pdf</div>
+                                        <div class="text-sm text-neutral-medium">2.4 MB • Assinado ICP-Brasil</div>
+                                    </div>
+                                    <i class="fa-solid fa-check-circle text-success-green text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="bg-gradient-to-br from-accent-emerald/10 to-accent-emerald/5 rounded-xl p-6 border border-accent-emerald/20">
+                                <div class="flex items-center space-x-3 mb-4">
+                                    <div class="w-10 h-10 bg-accent-emerald/20 rounded-lg flex items-center justify-center">
+                                        <i class="fa-solid fa-lock text-accent-emerald"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-neutral-dark">Algoritmo</div>
+                                        <div class="text-sm text-neutral-medium">AES-256-GCM</div>
+                                    </div>
+                                </div>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-check text-success-green"></i>
+                                        <span class="text-neutral-dark">Authenticated Encryption</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-check text-success-green"></i>
+                                        <span class="text-neutral-dark">Proteção contra adulteração</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-check text-success-green"></i>
+                                        <span class="text-neutral-dark">NIST-approved</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-gradient-to-br from-info-blue/10 to-info-blue/5 rounded-xl p-6 border border-info-blue/20">
+                                <div class="flex items-center space-x-3 mb-4">
+                                    <div class="w-10 h-10 bg-info-blue/20 rounded-lg flex items-center justify-center">
+                                        <i class="fa-solid fa-database text-info-blue"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-neutral-dark">Armazenamento</div>
+                                        <div class="text-sm text-neutral-medium">MinIO S3-Compatible</div>
+                                    </div>
+                                </div>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-check text-success-green"></i>
+                                        <span class="text-neutral-dark">Ciphertext armazenado</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-check text-success-green"></i>
+                                        <span class="text-neutral-dark">Backup em S3 Glacier</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-check text-success-green"></i>
+                                        <span class="text-neutral-dark">Região São Paulo</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-warning-orange/5 border border-warning-orange/20 rounded-xl p-6">
+                            <div class="flex items-start space-x-4">
+                                <i class="fa-solid fa-exclamation-triangle text-warning-orange text-2xl mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-neutral-dark mb-2">Processo de Criptografia</h4>
+                                    <p class="text-neutral-medium text-sm leading-relaxed mb-3">
+                                        O documento será criptografado usando a chave mestra gerada. Apenas após a divisão Shamir estar completa, o arquivo original será permanentemente deletado e apenas o ciphertext será mantido.
+                                    </p>
+                                    <div class="flex items-center space-x-6 text-sm">
+                                        <div class="flex items-center space-x-2">
+                                            <i class="fa-solid fa-file-pdf text-error-red"></i>
+                                            <span class="text-neutral-dark">PDF Original</span>
+                                        </div>
+                                        <i class="fa-solid fa-arrow-right text-neutral-medium"></i>
+                                        <div class="flex items-center space-x-2">
+                                            <i class="fa-solid fa-lock text-accent-emerald"></i>
+                                            <span class="text-neutral-dark">Encrypt AES-256</span>
+                                        </div>
+                                        <i class="fa-solid fa-arrow-right text-neutral-medium"></i>
+                                        <div class="flex items-center space-x-2">
+                                            <i class="fa-solid fa-file-code text-accent-purple"></i>
+                                            <span class="text-neutral-dark">Ciphertext Storage</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="blockchain-registry-card" class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-light">
+                    <div class="flex items-start justify-between mb-6">
+                        <div>
+                            <h2 class="text-2xl font-bold text-neutral-dark mb-2">Registro em Blockchain</h2>
+                            <p class="text-neutral-medium">Hash SHA-256 do ciphertext registrado na rede Polygon</p>
+                        </div>
+                        <div class="px-4 py-2 bg-neutral-light text-neutral-medium rounded-lg font-semibold flex items-center space-x-2">
+                            <i class="fa-solid fa-clock"></i>
+                            <span>Aguardando</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-br from-accent-purple/10 to-accent-purple/5 rounded-xl p-6 border border-accent-purple/20">
+                            <div class="flex items-center space-x-4 mb-4">
+                                <div class="w-12 h-12 bg-accent-purple/20 rounded-lg flex items-center justify-center">
+                                    <i class="fa-brands fa-ethereum text-accent-purple text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-neutral-dark">Polygon Network</h4>
+                                    <p class="text-sm text-neutral-medium">Smart Contract: registerTestament()</p>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg p-4 space-y-3">
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-neutral-medium">Network</span>
+                                    <span class="font-mono text-neutral-dark">Polygon Mainnet</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-neutral-medium">Contract Address</span>
+                                    <span class="font-mono text-neutral-dark">0x7a8f...3d2c</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-neutral-medium">Gas Price</span>
+                                    <span class="font-mono text-neutral-dark">~$0.01</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-neutral-medium">Confirmations</span>
+                                    <span class="font-mono text-neutral-dark">Pending</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-bg-subtle rounded-xl p-6">
+                            <h4 class="font-semibold text-neutral-dark mb-4">Dados a Serem Registrados</h4>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="text-xs text-neutral-medium mb-1 uppercase tracking-wider">SHA-256 Hash do Ciphertext</div>
+                                    <div class="bg-white rounded-lg p-3 font-mono text-sm text-neutral-dark break-all border border-neutral-light">
+                                        e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-neutral-medium mb-1 uppercase tracking-wider">Timestamp</div>
+                                    <div class="bg-white rounded-lg p-3 font-mono text-sm text-neutral-dark border border-neutral-light">
+                                        1736515938 (10/01/2026 14:32:18 UTC)
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-neutral-medium mb-1 uppercase tracking-wider">Metadata</div>
+                                    <div class="bg-white rounded-lg p-3 font-mono text-xs text-neutral-dark border border-neutral-light">
+                                        {"{"}owner: "0xabc...def", type: "testament", version: "1.0"{"}"}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4">
+                            <button disabled class="flex-1 py-3 bg-neutral-light text-neutral-medium rounded-lg font-semibold cursor-not-allowed flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-lock"></i>
+                                <span>Registrar na Blockchain</span>
+                            </button>
+                            <button class="px-6 py-3 bg-white border-2 border-neutral-light text-neutral-dark rounded-lg font-semibold hover:bg-bg-subtle transition-colors flex items-center space-x-2">
+                                <i class="fa-solid fa-question-circle"></i>
+                                <span>Ver Documentação</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <div id="status-summary" class="bg-white rounded-2xl p-6 shadow-lg border border-neutral-light sticky top-24">
+                    <h3 class="text-xl font-bold text-neutral-dark mb-6">Status da Configuração</h3>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-success-green rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-check text-white"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-semibold text-neutral-dark">Chave Gerada</div>
+                                <div class="text-sm text-neutral-medium">256-bit master key</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-warning-orange rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-spinner fa-spin text-white"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-semibold text-neutral-dark">Divisão Shamir</div>
+                                <div class="text-sm text-neutral-medium">2-of-3 threshold</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-neutral-light rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-lock text-neutral-medium"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-semibold text-neutral-medium">Criptografia</div>
+                                <div class="text-sm text-neutral-medium">AES-256-GCM</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-neutral-light rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-cubes text-neutral-medium"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-semibold text-neutral-medium">Blockchain</div>
+                                <div class="text-sm text-neutral-medium">Polygon registry</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-bg-subtle rounded-xl p-4 mb-6">
+                        <div class="text-sm text-neutral-medium mb-2">Tempo Estimado Restante</div>
+                        <div class="text-3xl font-bold text-neutral-dark mb-1">8 min</div>
+                        <div class="flex items-center space-x-2 text-xs text-neutral-medium">
+                            <i class="fa-solid fa-clock"></i>
+                            <span>Conclusão prevista: 14:40</span>
+                        </div>
+                    </div>
+
+                    <button disabled class="w-full py-3 bg-neutral-light text-neutral-medium rounded-lg font-semibold cursor-not-allowed flex items-center justify-center space-x-2 mb-3">
+                        <i class="fa-solid fa-lock"></i>
+                        <span>Finalizar Configuração</span>
+                    </button>
+
+                    <button class="w-full py-3 bg-white border-2 border-primary-deep text-primary-deep rounded-lg font-semibold hover:bg-primary-deep hover:text-white transition-colors flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Baixar Relatório Técnico</span>
+                    </button>
+                </div>
+
+                <div id="security-info" class="bg-gradient-to-br from-accent-emerald to-success-green text-white rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <i class="fa-solid fa-shield-check text-3xl"></i>
+                        <h3 class="text-xl font-bold">Segurança Garantida</h3>
+                    </div>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-check mt-1"></i>
+                            <span>Nenhum fragmento sozinho revela a chave</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-check mt-1"></i>
+                            <span>AWS KMS usa Hardware Security Module</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-check mt-1"></i>
+                            <span>Backup geográfico em 2 regiões</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-check mt-1"></i>
+                            <span>Log de auditoria imutável</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-check mt-1"></i>
+                            <span>Conformidade LGPD e NIST</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="help-card" class="bg-white rounded-2xl p-6 shadow-lg border border-neutral-light">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <i class="fa-solid fa-headset text-primary-deep text-2xl"></i>
+                        <h3 class="text-lg font-bold text-neutral-dark">Precisa de Ajuda?</h3>
+                    </div>
+                    <p class="text-sm text-neutral-medium mb-4">
+                        Nossa equipe técnica está disponível 24/7 para esclarecer dúvidas sobre o processo de custódia criptográfica.
+                    </p>
+                    <button class="w-full py-2.5 bg-primary-deep text-white rounded-lg font-semibold hover:bg-secondary-blue transition-colors flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-comments"></i>
+                        <span>Chat ao Vivo</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="technical-details" class="bg-white py-16 border-t border-neutral-light">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-neutral-dark mb-3">Detalhes Técnicos da Implementação</h2>
+            <p class="text-neutral-medium">Transparência total sobre a arquitetura de segurança</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8">
+            <div id="tech-shamir" class="bg-bg-subtle rounded-2xl p-8">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-12 h-12 bg-accent-purple/20 rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-code text-accent-purple text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-neutral-dark">Biblioteca Shamir</h3>
+                </div>
+                <div class="bg-white rounded-xl p-4 mb-4 font-mono text-sm text-neutral-dark border border-neutral-light">
+                    npm install secrets.js-grempe
+                </div>
+                <p class="text-neutral-medium text-sm leading-relaxed mb-4">
+                    Utilizamos a biblioteca <code class="px-2 py-1 bg-white rounded text-accent-purple">secrets.js-grempe</code>, implementação JavaScript do algoritmo de Shamir baseada em aritmética de Galois Field (GF(2^8)).
+                </p>
+                <ul class="space-y-2 text-sm">
+                    <li class="flex items-start space-x-2">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Interpolação polinomial de Lagrange</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Threshold configurável (2-of-3)</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Compartilhamentos independentes</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="tech-encryption" class="bg-bg-subtle rounded-2xl p-8">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-12 h-12 bg-accent-emerald/20 rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-lock text-accent-emerald text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-neutral-dark">OpenSSL Cipher</h3>
+                </div>
+                <div class="bg-white rounded-xl p-4 mb-4 font-mono text-sm text-neutral-dark border border-neutral-light">
+                    crypto.createCipheriv('aes-256-gcm', key, iv)
+                </div>
+                <p class="text-neutral-medium text-sm leading-relaxed mb-4">
+                    AES-256-GCM (Galois/Counter Mode) fornece criptografia autenticada, garantindo confidencialidade e integridade do documento.
+                </p>
+                <ul class="space-y-2 text-sm">
+                    <li class="flex items-start space-x-2">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Authentication tag de 128 bits</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">IV aleatório único por documento</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Proteção contra bit-flipping</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="tech-storage" class="bg-bg-subtle rounded-2xl p-8">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-12 h-12 bg-info-blue/20 rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-database text-info-blue text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-neutral-dark">Armazenamento Distribuído</h3>
+                </div>
+                <div class="space-y-3">
+                    <div class="bg-white rounded-lg p-4 border border-neutral-light">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-semibold text-neutral-dark">MinIO Primary</span>
+                            <span class="px-2 py-1 bg-success-green/10 text-success-green rounded text-xs font-bold">ATIVO</span>
+                        </div>
+                        <div class="text-sm text-neutral-medium">São Paulo • Ciphertext storage</div>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 border border-neutral-light">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-semibold text-neutral-dark">S3 Glacier Backup</span>
+                            <span class="px-2 py-1 bg-success-green/10 text-success-green rounded text-xs font-bold">ATIVO</span>
+                        </div>
+                        <div class="text-sm text-neutral-medium">São Paulo • Cold storage</div>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 border border-neutral-light">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-semibold text-neutral-dark">AWS KMS Replica</span>
+                            <span class="px-2 py-1 bg-success-green/10 text-success-green rounded text-xs font-bold">ATIVO</span>
+                        </div>
+                        <div class="text-sm text-neutral-medium">us-east-1 + ap-southeast-1</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tech-blockchain" class="bg-bg-subtle rounded-2xl p-8">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-12 h-12 bg-accent-purple/20 rounded-lg flex items-center justify-center">
+                        <i class="fa-brands fa-ethereum text-accent-purple text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-neutral-dark">Smart Contract</h3>
+                </div>
+                <div class="bg-white rounded-xl p-4 mb-4 font-mono text-xs text-neutral-dark border border-neutral-light">
+                    function registerTestament(<br/>
+                    &nbsp;&nbsp;bytes32 hash,<br/>
+                    &nbsp;&nbsp;uint256 timestamp<br/>
+                    ) external
+                </div>
+                <p class="text-neutral-medium text-sm leading-relaxed mb-4">
+                    Contrato Solidity simples que emite evento <code class="px-2 py-1 bg-white rounded text-accent-purple">TestamentRegistered</code> com hash e timestamp para auditoria pública.
+                </p>
+                <div class="flex items-center justify-between text-sm">
+                    <span class="text-neutral-medium">Gas Cost</span>
+                    <span class="font-mono text-neutral-dark">~21,000 gas (~$0.01)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="decryption-ceremony" class="bg-gradient-to-br from-primary-deep to-secondary-blue text-white py-16">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
+                <i class="fa-solid fa-unlock text-primary-gold"></i>
+                <span class="text-sm font-semibold uppercase tracking-wider">Cerimônia de Descriptografia</span>
+            </div>
+            <h2 class="text-4xl font-bold mb-3">Como o Testamento Será Aberto</h2>
+            <p class="text-xl text-white/80 max-w-3xl mx-auto">
+                Processo de recombinação dos fragmentos após validação de óbito
+            </p>
+        </div>
+
+        <div class="grid grid-cols-4 gap-6">
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div class="w-12 h-12 bg-primary-gold/20 rounded-full flex items-center justify-center mb-4">
+                    <span class="text-2xl font-bold text-primary-gold">1</span>
+                </div>
+                <h4 class="font-bold text-lg mb-2">Trigger de Óbito</h4>
+                <p class="text-white/80 text-sm leading-relaxed">
+                    API de registro detecta falecimento após validação em 4 camadas. Share #3 é ativado no Redis.
+                </p>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div class="w-12 h-12 bg-primary-gold/20 rounded-full flex items-center justify-center mb-4">
+                    <span class="text-2xl font-bold text-primary-gold">2</span>
+                </div>
+                <h4 class="font-bold text-lg mb-2">Aprovação do Advogado</h4>
+                <p class="text-white/80 text-sm leading-relaxed">
+                    Advogado acessa portal com 2FA, insere senha para desbloquear Share #2 criptografado com Argon2.
+                </p>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div class="w-12 h-12 bg-primary-gold/20 rounded-full flex items-center justify-center mb-4">
+                    <span class="text-2xl font-bold text-primary-gold">3</span>
+                </div>
+                <h4 class="font-bold text-lg mb-2">Recombinação Shamir</h4>
+                <p class="text-white/80 text-sm leading-relaxed">
+                    Sistema combina Share #2 + Share #3 usando interpolação de Lagrange para reconstruir chave mestra.
+                </p>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div class="w-12 h-12 bg-primary-gold/20 rounded-full flex items-center justify-center mb-4">
+                    <span class="text-2xl font-bold text-primary-gold">4</span>
+                </div>
+                <h4 class="font-bold text-lg mb-2">Descriptografia</h4>
+                <p class="text-white/80 text-sm leading-relaxed">
+                    Chave reconstruída descriptografa ciphertext. PDF é entregue aos herdeiros via portal seguro.
+                </p>
+            </div>
+        </div>
+
+        <div class="mt-12 bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+            <div class="flex items-start space-x-6">
+                <i class="fa-solid fa-shield-halved text-primary-gold text-4xl mt-2"></i>
+                <div class="flex-1">
+                    <h3 class="text-2xl font-bold mb-3">Garantias de Segurança</h3>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold mb-2 flex items-center space-x-2">
+                                <i class="fa-solid fa-check-circle text-success-green"></i>
+                                <span>Impossível Descriptografar Antes do Óbito</span>
+                            </h4>
+                            <p class="text-white/70 text-sm">
+                                Share #3 só é ativado após validação em múltiplas camadas (API + manual review + certidão de óbito).
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 flex items-center space-x-2">
+                                <i class="fa-solid fa-check-circle text-success-green"></i>
+                                <span>Proteção Contra Advogado Desonesto</span>
+                            </h4>
+                            <p class="text-white/70 text-sm">
+                                Share #2 sozinho não permite descriptografia. Requer combinação com Share #3 (trigger) ou Share #1 (AWS KMS).
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 flex items-center space-x-2">
+                                <i class="fa-solid fa-check-circle text-success-green"></i>
+                                <span>Auditoria Completa</span>
+                            </h4>
+                            <p class="text-white/70 text-sm">
+                                Toda tentativa de descriptografia (sucesso ou falha) é registrada com IP, timestamp e device fingerprint.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 flex items-center space-x-2">
+                                <i class="fa-solid fa-check-circle text-success-green"></i>
+                                <span>Backup Geográfico</span>
+                            </h4>
+                            <p class="text-white/70 text-sm">
+                                Ciphertext replicado em 2 regiões AWS. Se MinIO falhar, S3 Glacier serve como fallback.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="faq-custody" class="bg-bg-subtle py-16">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-neutral-dark mb-3">Perguntas Frequentes</h2>
+            <p class="text-neutral-medium">Dúvidas comuns sobre custódia criptográfica</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto space-y-4">
+            <details class="bg-white rounded-xl p-6 shadow-lg border border-neutral-light group">
+                <summary class="font-bold text-neutral-dark cursor-pointer flex items-center justify-between">
+                    <span>O que acontece se a AWS falir ou desativar minha conta?</span>
+                    <i class="fa-solid fa-chevron-down text-neutral-medium group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <p class="text-neutral-medium mt-4 leading-relaxed">
+                    Share #1 é replicado em 2 regiões AWS (us-east-1 e ap-southeast-1). Além disso, você pode descriptografar usando Share #2 (advogado) + Share #3 (trigger), sem necessidade do AWS KMS. O backup em S3 Glacier garante acesso ao ciphertext mesmo se MinIO falhar.
+                </p>
+            </details>
+
+            <details class="bg-white rounded-xl p-6 shadow-lg border border-neutral-light group">
+                <summary class="font-bold text-neutral-dark cursor-pointer flex items-center justify-between">
+                    <span>Posso trocar o advogado que detém o Share #2?</span>
+                    <i class="fa-solid fa-chevron-down text-neutral-medium group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <p class="text-neutral-medium mt-4 leading-relaxed">
+                    Sim. Você pode solicitar a transferência do Share #2 para outro advogado certificado pela plataforma. O processo envolve: (1) Validação de identidade do novo advogado, (2) Re-encriptação do Share #2 com nova senha Argon2, (3) Revogação do acesso do advogado anterior.
+                </p>
+            </details>
+
+            <details class="bg-white rounded-xl p-6 shadow-lg border border-neutral-light group">
+                <summary class="font-bold text-neutral-dark cursor-pointer flex items-center justify-between">
+                    <span>Como posso ter certeza que meu testamento não foi adulterado?</span>
+                    <i class="fa-solid fa-chevron-down text-neutral-medium group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <p class="text-neutral-medium mt-4 leading-relaxed">
+                    O hash SHA-256 do ciphertext é registrado publicamente na blockchain Polygon. Você pode verificar a integridade a qualquer momento comparando o hash do arquivo armazenado com o hash registrado no smart contract. Qualquer alteração de 1 bit mudaria completamente o hash.
+                </p>
+            </details>
+
+            <details class="bg-white rounded-xl p-6 shadow-lg border border-neutral-light group">
+                <summary class="font-bold text-neutral-dark cursor-pointer flex items-center justify-between">
+                    <span>Quanto tempo leva para descriptografar após o óbito?</span>
+                    <i class="fa-solid fa-chevron-down text-neutral-medium group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <p class="text-neutral-medium mt-4 leading-relaxed">
+                    O processo completo leva 5-7 dias: (1) Detecção automática via API (1 dia), (2) Validação em 4 camadas (2-3 dias), (3) Aprovação do advogado (1 dia), (4) Descriptografia e entrega aos herdeiros (1 dia). Em casos urgentes com certidão de óbito apresentada, o processo pode ser acelerado para 48 horas.
+                </p>
+            </details>
+
+            <details class="bg-white rounded-xl p-6 shadow-lg border border-neutral-light group">
+                <summary class="font-bold text-neutral-dark cursor-pointer flex items-center justify-between">
+                    <span>Posso atualizar meu testamento depois de criptografado?</span>
+                    <i class="fa-solid fa-chevron-down text-neutral-medium group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <p class="text-neutral-medium mt-4 leading-relaxed">
+                    Sim (plano Premium). Atualizações geram nova versão do testamento com nova chave mestra e nova divisão Shamir. A versão anterior é arquivada com timestamp blockchain para auditoria. O processo de atualização requer validação em vídeo + nova assinatura ICP-Brasil.
+                </p>
+            </details>
+
+            <details class="bg-white rounded-xl p-6 shadow-lg border border-neutral-light group">
+                <summary class="font-bold text-neutral-dark cursor-pointer flex items-center justify-between">
+                    <span>O que acontece se eu esquecer que tenho o testamento na plataforma?</span>
+                    <i class="fa-solid fa-chevron-down text-neutral-medium group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <p class="text-neutral-medium mt-4 leading-relaxed">
+                    O Dead Man's Switch envia lembretes semestrais via email/SMS. Se você não responder por 30 dias, iniciamos investigação manual antes de qualquer ação. Seus herdeiros também são notificados após 6 meses de inatividade, mas não recebem acesso ao conteúdo do testamento.
+                </p>
+            </details>
+        </div>
+    </div>
+</section>
+
+<footer id="footer" class="bg-primary-deep text-white py-12 border-t border-white/10">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="grid grid-cols-4 gap-12 mb-8">
+            <div>
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-10 h-10 bg-primary-gold rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-deep text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold">LegacyGuard</span>
+                </div>
+                <p class="text-white/70 text-sm leading-relaxed">
+                    Planejamento sucessório digital com tecnologia blockchain e criptografia de nível militar.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Produto</h4>
+                <ul class="space-y-2 text-sm text-white/70">
+                    <li><a href="#" class="hover:text-white transition-colors">Funcionalidades</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Preços</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Segurança</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Documentação</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Empresa</h4>
+                <ul class="space-y-2 text-sm text-white/70">
+                    <li><a href="#" class="hover:text-white transition-colors">Sobre Nós</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Carreiras</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Contato</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Legal</h4>
+                <ul class="space-y-2 text-sm text-white/70">
+                    <li><a href="#" class="hover:text-white transition-colors">Termos de Uso</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Política de Privacidade</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">LGPD</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Certificações</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-white/10 pt-8 flex items-center justify-between text-sm text-white/70">
+            <p>&copy; 2026 LegacyGuard. Todos os direitos reservados.</p>
+            <div class="flex items-center space-x-6">
+                <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-twitter text-xl"></i></a>
+                <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-instagram text-xl"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+window.addEventListener('load', function() {
+    const progressBar = document.querySelector('#setup-progress .h-full');
+    let progress = 25;
+    
+    const interval = setInterval(() => {
+        if (progress < 100) {
+            progress += 5;
+            progressBar.style.width = progress + '%';
+            document.querySelector('#setup-progress .text-sm.font-medium').textContent = progress + '% Completo';
+        } else {
+            clearInterval(interval);
+        }
+    }, 2000);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Signature Flow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-deep': '#1A237E',
+                        'primary-gold': '#C9A054',
+                        'secondary-blue': '#3949AB',
+                        'secondary-pale': '#E8EAF6',
+                        'secondary-gold-light': '#E4D4B4',
+                        'accent-emerald': '#00695C',
+                        'accent-amber': '#FF8F00',
+                        'accent-purple': '#6A1B9A',
+                        'success-green': '#2E7D32',
+                        'error-red': '#C62828',
+                        'warning-orange': '#EF6C00',
+                        'info-blue': '#1565C0',
+                        'neutral-dark': '#37474F',
+                        'neutral-medium': '#78909C',
+                        'neutral-light': '#CFD8DC',
+                        'bg-subtle': '#F5F7FA',
+                        'bg-section': '#ECEFF1',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'crimson': ['Crimson Pro', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Crimson+Pro:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+</head>
+<body class="font-inter bg-bg-subtle">
+
+<header id="header" class="bg-white border-b border-neutral-light sticky top-0 z-50">
+    <div class="max-w-[1440px] mx-auto px-8 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-12">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary-deep rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-gold text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-primary-deep">LegacyGuard</span>
+                </div>
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#dashboard" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Dashboard</a>
+                    <a href="#testamento" class="text-primary-deep font-semibold border-b-2 border-primary-deep">Testamento</a>
+                    <a href="#documentos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Documentos</a>
+                    <a href="#beneficiarios" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Beneficiários</a>
+                    <a href="#suporte" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Suporte</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="text-neutral-dark hover:text-primary-deep transition-colors">
+                    <i class="fa-regular fa-bell text-xl"></i>
+                </button>
+                <div class="flex items-center space-x-3 pl-4 border-l border-neutral-light">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User" class="w-10 h-10 rounded-full"/>
+                    <div>
+                        <div class="text-sm font-semibold text-neutral-dark">Carlos Silva</div>
+                        <div class="text-xs text-neutral-medium">Premium</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-neutral-medium text-sm"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="progress-tracker" class="bg-white border-b border-neutral-light">
+    <div class="max-w-[1440px] mx-auto px-8 py-6">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-success-green rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-check text-white"></i>
+                </div>
+                <div>
+                    <div class="text-xs text-neutral-medium uppercase tracking-wider">Etapa 1</div>
+                    <div class="text-sm font-semibold text-neutral-dark">Inventário</div>
+                </div>
+            </div>
+            <div class="flex-1 h-1 bg-success-green mx-4"></div>
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-success-green rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-check text-white"></i>
+                </div>
+                <div>
+                    <div class="text-xs text-neutral-medium uppercase tracking-wider">Etapa 2</div>
+                    <div class="text-sm font-semibold text-neutral-dark">Documentos</div>
+                </div>
+            </div>
+            <div class="flex-1 h-1 bg-success-green mx-4"></div>
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-success-green rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-check text-white"></i>
+                </div>
+                <div>
+                    <div class="text-xs text-neutral-medium uppercase tracking-wider">Etapa 3</div>
+                    <div class="text-sm font-semibold text-neutral-dark">Validação em Vídeo</div>
+                </div>
+            </div>
+            <div class="flex-1 h-1 bg-primary-gold mx-4"></div>
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-primary-gold rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-signature text-white"></i>
+                </div>
+                <div>
+                    <div class="text-xs text-primary-gold uppercase tracking-wider font-semibold">Etapa 4</div>
+                    <div class="text-sm font-bold text-primary-deep">Assinatura Digital</div>
+                </div>
+            </div>
+            <div class="flex-1 h-1 bg-neutral-light mx-4"></div>
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-neutral-light rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-key text-neutral-medium"></i>
+                </div>
+                <div>
+                    <div class="text-xs text-neutral-medium uppercase tracking-wider">Etapa 5</div>
+                    <div class="text-sm font-semibold text-neutral-medium">Custódia</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<main class="max-w-[1440px] mx-auto px-8 py-12">
+    <div class="grid grid-cols-3 gap-8">
+        <div class="col-span-2">
+            <div id="signature-main-content" class="space-y-8">
+                <div id="signature-header-section" class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-light">
+                    <div class="flex items-start justify-between mb-6">
+                        <div>
+                            <h1 class="text-3xl font-bold text-neutral-dark mb-2">Assinatura Digital ICP-Brasil</h1>
+                            <p class="text-neutral-medium leading-relaxed">
+                                Seu testamento está pronto para assinatura digital legalmente vinculante. Este processo utiliza certificação ICP-Brasil para garantir validade jurídica.
+                            </p>
+                        </div>
+                        <div class="flex items-center space-x-2 px-4 py-2 bg-warning-orange/10 rounded-lg">
+                            <i class="fa-solid fa-clock text-warning-orange"></i>
+                            <span class="text-sm font-semibold text-warning-orange">15 minutos restantes</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="bg-bg-subtle rounded-xl p-4">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <i class="fa-solid fa-file-pdf text-error-red text-2xl"></i>
+                                <span class="text-sm font-semibold text-neutral-dark">PDF Gerado</span>
+                            </div>
+                            <div class="text-xs text-neutral-medium">testamento_carlos_silva.pdf</div>
+                            <div class="text-xs text-neutral-medium">2.4 MB • 18 páginas</div>
+                        </div>
+                        <div class="bg-bg-subtle rounded-xl p-4">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <i class="fa-solid fa-fingerprint text-accent-emerald text-2xl"></i>
+                                <span class="text-sm font-semibold text-neutral-dark">Hash SHA-256</span>
+                            </div>
+                            <div class="text-xs text-neutral-medium font-mono break-all">7a8f3d2c...9e1b4f6a</div>
+                        </div>
+                        <div class="bg-bg-subtle rounded-xl p-4">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <i class="fa-solid fa-certificate text-primary-gold text-2xl"></i>
+                                <span class="text-sm font-semibold text-neutral-dark">Certificadora</span>
+                            </div>
+                            <div class="text-xs text-neutral-medium">Soluti / Valid / Serpro</div>
+                            <div class="text-xs text-success-green">Conectado</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="signature-flow-section" class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-light">
+                    <h2 class="text-2xl font-bold text-neutral-dark mb-6">Fluxo de Assinatura</h2>
+                    <div class="space-y-6">
+                        <div id="step-pdf-generation" class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-success-green rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-check text-white text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="text-lg font-bold text-neutral-dark">1. Geração do PDF Legal</h3>
+                                    <span class="text-sm text-success-green font-semibold">Concluído</span>
+                                </div>
+                                <p class="text-neutral-medium text-sm mb-3">
+                                    PDF do testamento formatado de acordo com Art. 1.876 do Código Civil brasileiro. Inclui todos os ativos, beneficiários e cláusulas legais.
+                                </p>
+                                <div class="bg-bg-subtle rounded-lg p-4">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="text-sm font-semibold text-neutral-dark">Prévia do Documento</span>
+                                        <button class="text-sm text-primary-deep font-semibold hover:text-secondary-blue transition-colors flex items-center space-x-1">
+                                            <i class="fa-solid fa-download"></i>
+                                            <span>Baixar PDF</span>
+                                        </button>
+                                    </div>
+                                    <div class="border-2 border-neutral-light rounded-lg overflow-hidden">
+                                        <div class="bg-white p-6 font-crimson text-sm leading-relaxed">
+                                            <div class="text-center mb-4">
+                                                <div class="font-bold text-lg">TESTAMENTO PÚBLICO DIGITAL</div>
+                                                <div class="text-xs text-neutral-medium mt-1">Conforme Art. 1.876 do Código Civil</div>
+                                            </div>
+                                            <p class="mb-2"><strong>Testador:</strong> Carlos Eduardo Silva</p>
+                                            <p class="mb-2"><strong>CPF:</strong> 123.456.789-00</p>
+                                            <p class="mb-2"><strong>Data de Nascimento:</strong> 15/03/1975</p>
+                                            <p class="mb-4"><strong>Endereço:</strong> Rua das Flores, 123 - São Paulo/SP</p>
+                                            <p class="mb-2">Declaro que, no pleno gozo de minhas faculdades mentais...</p>
+                                            <div class="text-center text-xs text-neutral-medium mt-4">
+                                                [Página 1 de 18]
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="step-hash-calculation" class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-success-green rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-check text-white text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="text-lg font-bold text-neutral-dark">2. Cálculo do Hash Criptográfico</h3>
+                                    <span class="text-sm text-success-green font-semibold">Concluído</span>
+                                </div>
+                                <p class="text-neutral-medium text-sm mb-3">
+                                    Hash SHA-256 calculado do documento para garantir integridade. Este hash será comparado após a assinatura para validar autenticidade.
+                                </p>
+                                <div class="bg-bg-subtle rounded-lg p-4">
+                                    <div class="flex items-center space-x-3 mb-2">
+                                        <i class="fa-solid fa-fingerprint text-accent-emerald text-xl"></i>
+                                        <span class="text-sm font-semibold text-neutral-dark">Hash SHA-256 Original</span>
+                                    </div>
+                                    <div class="bg-white rounded border border-neutral-light p-3 font-mono text-xs break-all text-neutral-dark">
+                                        7a8f3d2c9e1b4f6a5d8c2e7b3f9a1c4d6e8b2f5a7c9d1e3b4f6a8c2d5e7b9f1a3c
+                                    </div>
+                                    <div class="flex items-center space-x-2 mt-2 text-xs text-success-green">
+                                        <i class="fa-solid fa-shield-check"></i>
+                                        <span>Hash armazenado de forma segura para validação posterior</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="step-certificadora-redirect" class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-primary-gold rounded-full flex items-center justify-center flex-shrink-0 animate-pulse">
+                                <i class="fa-solid fa-spinner fa-spin text-white text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="text-lg font-bold text-neutral-dark">3. Redirecionamento para Certificadora</h3>
+                                    <span class="text-sm text-warning-orange font-semibold">Em Progresso</span>
+                                </div>
+                                <p class="text-neutral-medium text-sm mb-4">
+                                    Você será redirecionado para o portal da certificadora digital (Soluti, Valid ou Serpro) para realizar a assinatura com seu e-CPF A3.
+                                </p>
+                                <div class="bg-gradient-to-br from-primary-deep to-secondary-blue rounded-xl p-6 text-white">
+                                    <div class="flex items-start space-x-4 mb-6">
+                                        <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                            <i class="fa-solid fa-certificate text-primary-gold text-3xl"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="text-xl font-bold mb-2">Selecione sua Certificadora</h4>
+                                            <p class="text-white/80 text-sm">
+                                                Escolha a autoridade certificadora onde você possui seu e-CPF A3 registrado
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-3 gap-4">
+                                        <button class="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-xl p-4 transition-all">
+                                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mx-auto mb-3">
+                                                <i class="fa-solid fa-building text-primary-deep text-2xl"></i>
+                                            </div>
+                                            <div class="font-bold text-sm">Soluti</div>
+                                            <div class="text-xs text-white/60 mt-1">OAuth2 Ready</div>
+                                        </button>
+                                        <button class="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-xl p-4 transition-all">
+                                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mx-auto mb-3">
+                                                <i class="fa-solid fa-shield-halved text-primary-deep text-2xl"></i>
+                                            </div>
+                                            <div class="font-bold text-sm">Valid</div>
+                                            <div class="text-xs text-white/60 mt-1">REST API</div>
+                                        </button>
+                                        <button class="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-xl p-4 transition-all">
+                                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mx-auto mb-3">
+                                                <i class="fa-solid fa-landmark text-primary-deep text-2xl"></i>
+                                            </div>
+                                            <div class="font-bold text-sm">Serpro</div>
+                                            <div class="text-xs text-white/60 mt-1">Gov Platform</div>
+                                        </button>
+                                    </div>
+                                    <div class="mt-6 p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
+                                        <div class="flex items-start space-x-3">
+                                            <i class="fa-solid fa-info-circle text-info-blue mt-1"></i>
+                                            <div class="text-sm text-white/90">
+                                                <strong>Importante:</strong> Você será redirecionado para o site seguro da certificadora. Tenha seu e-CPF A3 (token ou certificado em nuvem) preparado.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="step-signature-process" class="flex items-start space-x-4 opacity-50">
+                            <div class="w-12 h-12 bg-neutral-light rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-pen-nib text-neutral-medium text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="text-lg font-bold text-neutral-dark">4. Processo de Assinatura</h3>
+                                    <span class="text-sm text-neutral-medium font-semibold">Aguardando</span>
+                                </div>
+                                <p class="text-neutral-medium text-sm mb-3">
+                                    No portal da certificadora, você inserirá seu PIN/senha do e-CPF A3 para assinar digitalmente o documento PDF.
+                                </p>
+                                <div class="bg-bg-subtle rounded-lg p-4">
+                                    <div class="space-y-2">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-6 h-6 border-2 border-neutral-light rounded-full"></div>
+                                            <span class="text-sm text-neutral-medium">Login no portal da certificadora</span>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-6 h-6 border-2 border-neutral-light rounded-full"></div>
+                                            <span class="text-sm text-neutral-medium">Inserção do PIN do e-CPF A3</span>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-6 h-6 border-2 border-neutral-light rounded-full"></div>
+                                            <span class="text-sm text-neutral-medium">Confirmação da assinatura</span>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-6 h-6 border-2 border-neutral-light rounded-full"></div>
+                                            <span class="text-sm text-neutral-medium">Download do PDF assinado</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="step-webhook-validation" class="flex items-start space-x-4 opacity-50">
+                            <div class="w-12 h-12 bg-neutral-light rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-check-double text-neutral-medium text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="text-lg font-bold text-neutral-dark">5. Validação via Webhook</h3>
+                                    <span class="text-sm text-neutral-medium font-semibold">Aguardando</span>
+                                </div>
+                                <p class="text-neutral-medium text-sm mb-3">
+                                    Após assinatura, receberemos webhook da certificadora com o PDF assinado. Validaremos a autenticidade e compararemos os hashes.
+                                </p>
+                                <div class="bg-bg-subtle rounded-lg p-4">
+                                    <div class="font-mono text-xs text-neutral-medium">
+                                        <div class="mb-2">POST /api/webhook/signature</div>
+                                        <div class="bg-white rounded p-2 border border-neutral-light">
+                                            <div>{"event": "signature.completed",</div>
+                                            <div>"document_id": "test_123456",</div>
+                                            <div>"signed_pdf_url": "https://...",</div>
+                                            <div>"signature_hash": "7a8f3d2c...",</div>
+                                            <div>"timestamp": "2026-01-10T06:52:46Z"}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="step-hash-comparison" class="flex items-start space-x-4 opacity-50">
+                            <div class="w-12 h-12 bg-neutral-light rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-equals text-neutral-medium text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="text-lg font-bold text-neutral-dark">6. Comparação de Hash</h3>
+                                    <span class="text-sm text-neutral-medium font-semibold">Aguardando</span>
+                                </div>
+                                <p class="text-neutral-medium text-sm mb-3">
+                                    Comparação automática entre hash(signed_pdf) e hash(blockchain_record) para garantir que o documento não foi alterado.
+                                </p>
+                                <div class="bg-bg-subtle rounded-lg p-4">
+                                    <div class="space-y-3">
+                                        <div>
+                                            <div class="text-xs text-neutral-medium mb-1">Hash Original (Blockchain):</div>
+                                            <div class="bg-white rounded p-2 border border-neutral-light font-mono text-xs break-all">
+                                                7a8f3d2c9e1b4f6a5d8c2e7b3f9a1c4d6e8b2f5a7c9d1e3b4f6a8c2d5e7b9f1a3c
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <i class="fa-solid fa-arrow-down text-neutral-light"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-xs text-neutral-medium mb-1">Hash do PDF Assinado:</div>
+                                            <div class="bg-white rounded p-2 border border-neutral-light font-mono text-xs text-neutral-light">
+                                                Aguardando assinatura...
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="step-delivery" class="flex items-start space-x-4 opacity-50">
+                            <div class="w-12 h-12 bg-neutral-light rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-paper-plane text-neutral-medium text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="text-lg font-bold text-neutral-dark">7. Entrega Segura</h3>
+                                    <span class="text-sm text-neutral-medium font-semibold">Aguardando</span>
+                                </div>
+                                <p class="text-neutral-medium text-sm mb-3">
+                                    PDF assinado será enviado para seu email em arquivo ZIP criptografado. Senha enviada via SMS para máxima segurança.
+                                </p>
+                                <div class="bg-bg-subtle rounded-lg p-4">
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <div class="flex items-center space-x-2 mb-2">
+                                                <i class="fa-solid fa-envelope text-info-blue"></i>
+                                                <span class="text-sm font-semibold text-neutral-dark">Email</span>
+                                            </div>
+                                            <div class="text-xs text-neutral-medium">carlos.silva@email.com</div>
+                                            <div class="text-xs text-neutral-medium">testamento_assinado.zip</div>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center space-x-2 mb-2">
+                                                <i class="fa-solid fa-mobile-screen-button text-success-green"></i>
+                                                <span class="text-sm font-semibold text-neutral-dark">SMS</span>
+                                            </div>
+                                            <div class="text-xs text-neutral-medium">(11) 98765-4321</div>
+                                            <div class="text-xs text-neutral-medium">Senha do ZIP</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="technical-details-section" class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-light">
+                    <h2 class="text-2xl font-bold text-neutral-dark mb-6">Detalhes Técnicos da Integração</h2>
+                    <div class="space-y-6">
+                        <div id="oauth-flow" class="bg-bg-subtle rounded-xl p-6">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <div class="w-10 h-10 bg-info-blue/20 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-key text-info-blue"></i>
+                                </div>
+                                <h3 class="text-lg font-bold text-neutral-dark">OAuth2 Authentication Flow</h3>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-6 h-6 bg-primary-deep text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold">1</div>
+                                    <div class="flex-1">
+                                        <div class="text-sm font-semibold text-neutral-dark">Authorization Request</div>
+                                        <div class="text-xs text-neutral-medium font-mono">GET /oauth/authorize?client_id=legacy_guard&redirect_uri=...</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-6 h-6 bg-primary-deep text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold">2</div>
+                                    <div class="flex-1">
+                                        <div class="text-sm font-semibold text-neutral-dark">User Authentication</div>
+                                        <div class="text-xs text-neutral-medium">Usuário faz login na certificadora com e-CPF A3</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-6 h-6 bg-primary-deep text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold">3</div>
+                                    <div class="flex-1">
+                                        <div class="text-sm font-semibold text-neutral-dark">Authorization Code</div>
+                                        <div class="text-xs text-neutral-medium font-mono">Redirect: callback?code=AUTH_CODE_123</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-6 h-6 bg-primary-deep text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold">4</div>
+                                    <div class="flex-1">
+                                        <div class="text-sm font-semibold text-neutral-dark">Token Exchange</div>
+                                        <div class="text-xs text-neutral-medium font-mono">POST /oauth/token - Recebe access_token</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-6 h-6 bg-primary-deep text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold">5</div>
+                                    <div class="flex-1">
+                                        <div class="text-sm font-semibold text-neutral-dark">Signature Request</div>
+                                        <div class="text-xs text-neutral-medium font-mono">POST /api/sign - Authorization: Bearer {token}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="rest-api-integration" class="bg-bg-subtle rounded-xl p-6">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <div class="w-10 h-10 bg-accent-emerald/20 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-code text-accent-emerald"></i>
+                                </div>
+                                <h3 class="text-lg font-bold text-neutral-dark">REST API Endpoints</h3>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="bg-white rounded-lg p-4 border border-neutral-light">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-sm font-semibold text-neutral-dark">Iniciar Assinatura</span>
+                                        <span class="px-2 py-1 bg-success-green/10 text-success-green rounded text-xs font-mono">POST</span>
+                                    </div>
+                                    <div class="text-xs text-neutral-medium font-mono">/api/v1/signature/initiate</div>
+                                    <div class="mt-2 text-xs text-neutral-medium">Payload: document_id, user_cpf, callback_url</div>
+                                </div>
+                                <div class="bg-white rounded-lg p-4 border border-neutral-light">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-sm font-semibold text-neutral-dark">Webhook Callback</span>
+                                        <span class="px-2 py-1 bg-success-green/10 text-success-green rounded text-xs font-mono">POST</span>
+                                    </div>
+                                    <div class="text-xs text-neutral-medium font-mono">/api/webhook/signature</div>
+                                    <div class="mt-2 text-xs text-neutral-medium">Recebe: signed_pdf_url, signature_hash, timestamp</div>
+                                </div>
+                                <div class="bg-white rounded-lg p-4 border border-neutral-light">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-sm font-semibold text-neutral-dark">Validar Assinatura</span>
+                                        <span class="px-2 py-1 bg-info-blue/10 text-info-blue rounded text-xs font-mono">GET</span>
+                                    </div>
+                                    <div class="text-xs text-neutral-medium font-mono">/api/v1/signature/validate/{id}</div>
+                                    <div class="mt-2 text-xs text-neutral-medium">Retorna: is_valid, certificate_chain, signer_info</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="security-measures" class="bg-bg-subtle rounded-xl p-6">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <div class="w-10 h-10 bg-error-red/20 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-shield-halved text-error-red"></i>
+                                </div>
+                                <h3 class="text-lg font-bold text-neutral-dark">Medidas de Segurança</h3>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-white rounded-lg p-4 border border-neutral-light">
+                                    <div class="flex items-center space-x-2 mb-2">
+                                        <i class="fa-solid fa-lock text-accent-emerald"></i>
+                                        <span class="text-sm font-semibold text-neutral-dark">HMAC Signature</span>
+                                    </div>
+                                    <p class="text-xs text-neutral-medium">Webhook payload assinado com HMAC-SHA256 para validar origem</p>
+                                </div>
+                                <div class="bg-white rounded-lg p-4 border border-neutral-light">
+                                    <div class="flex items-center space-x-2 mb-2">
+                                        <i class="fa-solid fa-clock text-warning-orange"></i>
+                                        <span class="text-sm font-semibold text-neutral-dark">Timestamp Validation</span>
+                                    </div>
+                                    <p class="text-xs text-neutral-medium">Rejeita webhooks com timestamp > 5 minutos de diferença</p>
+                                </div>
+                                <div class="bg-white rounded-lg p-4 border border-neutral-light">
+                                    <div class="flex items-center space-x-2 mb-2">
+                                        <i class="fa-solid fa-fingerprint text-accent-purple"></i>
+                                        <span class="text-sm font-semibold text-neutral-dark">Hash Comparison</span>
+                                    </div>
+                                    <p class="text-xs text-neutral-medium">Compara SHA-256 do PDF assinado com hash blockchain</p>
+                                </div>
+                                <div class="bg-white rounded-lg p-4 border border-neutral-light">
+                                    <div class="flex items-center space-x-2 mb-2">
+                                        <i class="fa-solid fa-certificate text-primary-gold"></i>
+                                        <span class="text-sm font-semibold text-neutral-dark">Certificate Chain</span>
+                                    </div>
+                                    <p class="text-xs text-neutral-medium">Valida cadeia de certificados ICP-Brasil completa</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="retry-mechanism-section" class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-light">
+                    <h2 class="text-2xl font-bold text-neutral-dark mb-6">Sistema de Retry e Fallback</h2>
+                    <div class="space-y-4">
+                        <div class="bg-gradient-to-r from-warning-orange/10 to-transparent rounded-xl p-6 border-l-4 border-warning-orange">
+                            <div class="flex items-start space-x-4">
+                                <i class="fa-solid fa-rotate text-warning-orange text-2xl mt-1"></i>
+                                <div>
+                                    <h3 class="text-lg font-bold text-neutral-dark mb-2">Tentativas Automáticas</h3>
+                                    <p class="text-neutral-medium text-sm mb-3">
+                                        Em caso de falha na assinatura (timeout, erro de rede, problema no certificado), o sistema permite até 3 tentativas de assinatura incluídas no plano.
+                                    </p>
+                                    <div class="grid grid-cols-3 gap-3">
+                                        <div class="bg-white rounded-lg p-3 border border-neutral-light">
+                                            <div class="text-2xl font-bold text-primary-deep mb-1">1ª</div>
+                                            <div class="text-xs text-neutral-medium">Tentativa imediata</div>
+                                        </div>
+                                        <div class="bg-white rounded-lg p-3 border border-neutral-light">
+                                            <div class="text-2xl font-bold text-primary-deep mb-1">2ª</div>
+                                            <div class="text-xs text-neutral-medium">Após 1 hora</div>
+                                        </div>
+                                        <div class="bg-white rounded-lg p-3 border border-neutral-light">
+                                            <div class="text-2xl font-bold text-primary-deep mb-1">3ª</div>
+                                            <div class="text-xs text-neutral-medium">Após 24 horas</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-bg-subtle rounded-xl p-6">
+                            <h3 class="text-lg font-bold text-neutral-dark mb-4">Cenários de Falha Comuns</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-start space-x-3">
+                                    <i class="fa-solid fa-triangle-exclamation text-error-red mt-1"></i>
+                                    <div class="flex-1">
+                                        <div class="text-sm font-semibold text-neutral-dark">Certificado Expirado</div>
+                                        <div class="text-xs text-neutral-medium">Sistema detecta e notifica usuário para renovar e-CPF A3</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <i class="fa-solid fa-triangle-exclamation text-error-red mt-1"></i>
+                                    <div class="flex-1">
+                                        <div class="text-sm font-semibold text-neutral-dark">Timeout da Sessão</div>
+                                        <div class="text-xs text-neutral-medium">Usuário tem 15 minutos para completar. Após isso, pode reiniciar</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <i class="fa-solid fa-triangle-exclamation text-error-red mt-1"></i>
+                                    <div class="flex-1">
+                                        <div class="text-sm font-semibold text-neutral-dark">PIN Incorreto</div>
+                                        <div class="text-xs text-neutral-medium">3 tentativas na certificadora. Bloqueio temporário após limite</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <i class="fa-solid fa-triangle-exclamation text-error-red mt-1"></i>
+                                    <div class="flex-1">
+                                        <div class="text-sm font-semibold text-neutral-dark">Erro de Rede</div>
+                                        <div class="text-xs text-neutral-medium">Retry automático com backoff exponencial (1s, 3s, 9s)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-span-1">
+            <div id="sidebar-content" class="space-y-6 sticky top-24">
+                <div id="status-card" class="bg-white rounded-2xl p-6 shadow-lg border border-neutral-light">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-12 h-12 bg-warning-orange/10 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-clock text-warning-orange text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm text-neutral-medium">Status Atual</div>
+                            <div class="text-lg font-bold text-neutral-dark">Aguardando Seleção</div>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between py-2 border-b border-neutral-light">
+                            <span class="text-sm text-neutral-medium">Documento</span>
+                            <span class="text-sm font-semibold text-success-green flex items-center space-x-1">
+                                <i class="fa-solid fa-check-circle"></i>
+                                <span>Pronto</span>
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between py-2 border-b border-neutral-light">
+                            <span class="text-sm text-neutral-medium">Hash SHA-256</span>
+                            <span class="text-sm font-semibold text-success-green flex items-center space-x-1">
+                                <i class="fa-solid fa-check-circle"></i>
+                                <span>Calculado</span>
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between py-2 border-b border-neutral-light">
+                            <span class="text-sm text-neutral-medium">Certificadora</span>
+                            <span class="text-sm font-semibold text-warning-orange flex items-center space-x-1">
+                                <i class="fa-solid fa-spinner fa-spin"></i>
+                                <span>Selecionando</span>
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between py-2">
+                            <span class="text-sm text-neutral-medium">Assinatura</span>
+                            <span class="text-sm font-semibold text-neutral-light flex items-center space-x-1">
+                                <i class="fa-regular fa-circle"></i>
+                                <span>Pendente</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="help-card" class="bg-gradient-to-br from-info-blue to-secondary-blue rounded-2xl p-6 text-white shadow-lg">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-question text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold">Precisa de Ajuda?</h3>
+                    </div>
+                    <p class="text-white/90 text-sm mb-4">
+                        Nossa equipe está disponível 24/7 para auxiliar no processo de assinatura digital.
+                    </p>
+                    <div class="space-y-2">
+                        <button class="w-full py-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg text-sm font-semibold transition-colors flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-phone"></i>
+                            <span>(11) 3000-0000</span>
+                        </button>
+                        <button class="w-full py-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg text-sm font-semibold transition-colors flex items-center justify-center space-x-2">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <span>WhatsApp Support</span>
+                        </button>
+                        <button class="w-full py-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg text-sm font-semibold transition-colors flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>suporte@legacyguard.com</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="security-badge-card" class="bg-white rounded-2xl p-6 shadow-lg border border-neutral-light">
+                    <h3 class="text-lg font-bold text-neutral-dark mb-4">Certificações de Segurança</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-primary-gold/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-certificate text-primary-gold"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm font-semibold text-neutral-dark">ICP-Brasil</div>
+                                <div class="text-xs text-neutral-medium">Certificação oficial</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-accent-emerald/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-lock text-accent-emerald"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm font-semibold text-neutral-dark">AES-256-GCM</div>
+                                <div class="text-xs text-neutral-medium">Criptografia militar</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-accent-purple/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-brands fa-ethereum text-accent-purple"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm font-semibold text-neutral-dark">Blockchain</div>
+                                <div class="text-xs text-neutral-medium">Registro imutável</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-info-blue/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-gavel text-info-blue"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm font-semibold text-neutral-dark">LGPD</div>
+                                <div class="text-xs text-neutral-medium">100% compliant</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="attempts-remaining-card" class="bg-bg-subtle rounded-2xl p-6 border border-neutral-light">
+                    <h3 class="text-lg font-bold text-neutral-dark mb-4">Tentativas Disponíveis</h3>
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="relative w-32 h-32">
+                            <svg class="transform -rotate-90 w-32 h-32">
+                                <circle cx="64" cy="64" r="56" stroke="#CFD8DC" stroke-width="8" fill="none"/>
+                                <circle cx="64" cy="64" r="56" stroke="#C9A054" stroke-width="8" fill="none" stroke-dasharray="351.86" stroke-dashoffset="0" stroke-linecap="round"/>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold text-primary-gold">3</div>
+                                    <div class="text-xs text-neutral-medium">de 3</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-neutral-medium text-center">
+                        Você tem 3 tentativas incluídas no plano. Tentativas adicionais: R$ 150 cada.
+                    </p>
+                </div>
+
+                <div id="faq-card" class="bg-white rounded-2xl p-6 shadow-lg border border-neutral-light">
+                    <h3 class="text-lg font-bold text-neutral-dark mb-4">Perguntas Frequentes</h3>
+                    <div class="space-y-3">
+                        <details class="group">
+                            <summary class="flex items-center justify-between cursor-pointer text-sm font-semibold text-neutral-dark">
+                                <span>O que é e-CPF A3?</span>
+                                <i class="fa-solid fa-chevron-down group-open:rotate-180 transition-transform text-neutral-medium"></i>
+                            </summary>
+                            <p class="mt-2 text-xs text-neutral-medium leading-relaxed">
+                                Certificado digital tipo A3 emitido por autoridades certificadoras ICP-Brasil, usado para assinatura digital legalmente vinculante.
+                            </p>
+                        </details>
+                        <details class="group">
+                            <summary class="flex items-center justify-between cursor-pointer text-sm font-semibold text-neutral-dark">
+                                <span>Quanto tempo demora?</span>
+                                <i class="fa-solid fa-chevron-down group-open:rotate-180 transition-transform text-neutral-medium"></i>
+                            </summary>
+                            <p class="mt-2 text-xs text-neutral-medium leading-relaxed">
+                                O processo completo leva de 5 a 15 minutos, dependendo da certificadora escolhida e da velocidade de autenticação.
+                            </p>
+                        </details>
+                        <details class="group">
+                            <summary class="flex items-center justify-between cursor-pointer text-sm font-semibold text-neutral-dark">
+                                <span>É seguro?</span>
+                                <i class="fa-solid fa-chevron-down group-open:rotate-180 transition-transform text-neutral-medium"></i>
+                            </summary>
+                            <p class="mt-2 text-xs text-neutral-medium leading-relaxed">
+                                Sim. Usamos criptografia AES-256, validação HMAC e registro em blockchain para máxima segurança.
+                            </p>
+                        </details>
+                        <details class="group">
+                            <summary class="flex items-center justify-between cursor-pointer text-sm font-semibold text-neutral-dark">
+                                <span>Posso assinar depois?</span>
+                                <i class="fa-solid fa-chevron-down group-open:rotate-180 transition-transform text-neutral-medium"></i>
+                            </summary>
+                            <p class="mt-2 text-xs text-neutral-medium leading-relaxed">
+                                Sim. O link de assinatura é válido por 7 dias. Você receberá lembretes por email.
+                            </p>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer id="footer" class="bg-neutral-dark text-white py-12 mt-24">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="grid grid-cols-4 gap-12 mb-8">
+            <div>
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-10 h-10 bg-primary-gold rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-deep text-xl"></i>
+                    </div>
+                    <span class="text-xl font-bold">LegacyGuard</span>
+                </div>
+                <p class="text-white/70 text-sm leading-relaxed">
+                    Proteção completa para seu legado com tecnologia blockchain e certificação ICP-Brasil.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Produto</h4>
+                <ul class="space-y-2 text-sm text-white/70">
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Dashboard</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Criar Testamento</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Documentos</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Beneficiários</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Recursos</h4>
+                <ul class="space-y-2 text-sm text-white/70">
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Blog</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Central de Ajuda</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">API Docs</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Status</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Contato</h4>
+                <ul class="space-y-2 text-sm text-white/70">
+                    <li class="flex items-center space-x-2">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>(11) 3000-0000</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>suporte@legacyguard.com</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span>(11) 98765-4321</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-white/10 pt-8 flex items-center justify-between">
+            <p class="text-sm text-white/50">© 2026 LegacyGuard. Todos os direitos reservados.</p>
+            <div class="flex items-center space-x-6 text-sm text-white/50">
+                <a href="#" class="hover:text-primary-gold transition-colors">Privacidade</a>
+                <a href="#" class="hover:text-primary-gold transition-colors">Termos</a>
+                <a href="#" class="hover:text-primary-gold transition-colors">LGPD</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #37474f;
+  }
+
+  .dark {
+    --background: #0f1419;
+    --foreground: #e8eaed;
+  }
+
+  body {
+    @apply bg-background-pure text-neutral-dark font-sans transition-colors duration-200 antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-sans font-bold tracking-tight text-neutral-dark;
+  }
+
+  /* Legal text display */
+  .legal-clause {
+    @apply font-serif text-[14px] leading-[24px] tracking-[0.05px] text-neutral-dark;
+  }
+
+  /* Technical/Blockchain text */
+  .tech-mono {
+    @apply font-mono text-[13px] leading-[20px] text-neutral-medium;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply h-[52px] px-xl py-lg rounded-button bg-brand-primary text-white font-semibold text-[16px] shadow-button hover:bg-brand-hover active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-xs;
+  }
+
+  .btn-premium {
+    @apply h-[52px] px-xl py-lg rounded-button bg-gold-gradient text-white font-semibold text-[16px] border border-brand-goldLight shadow-premium hover:brightness-110 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-xs;
+  }
+
+  .btn-secondary {
+    @apply h-[52px] px-[22px] py-lg rounded-button border-2 border-brand-primary text-brand-primary font-semibold text-[16px] bg-transparent hover:bg-brand-pale active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-xs;
+  }
+
+  .card-standard {
+    @apply bg-background-pure rounded-card p-xl shadow-card hover:shadow-elevation transition-all duration-300;
+  }
+}

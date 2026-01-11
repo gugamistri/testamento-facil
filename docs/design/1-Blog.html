@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-deep': '#1A237E',
+                        'primary-gold': '#C9A054',
+                        'secondary-blue': '#3949AB',
+                        'secondary-pale': '#E8EAF6',
+                        'secondary-gold-light': '#E4D4B4',
+                        'accent-emerald': '#00695C',
+                        'accent-amber': '#FF8F00',
+                        'accent-purple': '#6A1B9A',
+                        'success-green': '#2E7D32',
+                        'error-red': '#C62828',
+                        'warning-orange': '#EF6C00',
+                        'info-blue': '#1565C0',
+                        'neutral-dark': '#37474F',
+                        'neutral-medium': '#78909C',
+                        'neutral-light': '#CFD8DC',
+                        'bg-subtle': '#F5F7FA',
+                        'bg-section': '#ECEFF1',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'crimson': ['Crimson Pro', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Crimson+Pro:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+</head>
+<body class="font-inter bg-white">
+
+<header id="header" class="bg-white border-b border-neutral-light sticky top-0 z-50">
+    <div class="max-w-[1440px] mx-auto px-8 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-12">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary-deep rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-gold text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-primary-deep">LegacyGuard</span>
+                </div>
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#servicos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Serviços</a>
+                    <a href="#como-funciona" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Como Funciona</a>
+                    <a href="#tecnologia" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Tecnologia</a>
+                    <a href="#precos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Preços</a>
+                    <a href="#recursos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Recursos</a>
+                    <a href="#blog" class="text-primary-deep font-semibold border-b-2 border-primary-deep transition-colors">Blog</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="px-6 py-2.5 text-primary-deep font-semibold hover:bg-secondary-pale rounded-lg transition-colors">
+                    Login
+                </button>
+                <button class="px-6 py-2.5 bg-primary-deep text-white font-semibold hover:bg-secondary-blue rounded-lg transition-colors flex items-center space-x-2">
+                    <span>Agendar Consulta</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="blog-hero" class="bg-gradient-to-br from-primary-deep via-secondary-blue to-primary-deep text-white relative overflow-hidden h-[480px]">
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-20 left-20 w-96 h-96 bg-primary-gold rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-accent-emerald rounded-full blur-3xl"></div>
+    </div>
+    <div class="max-w-[1440px] mx-auto px-8 py-20 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
+                <i class="fa-solid fa-newspaper text-primary-gold"></i>
+                <span class="text-sm font-medium">Centro de Conhecimento</span>
+            </div>
+            <h1 class="text-5xl font-bold leading-tight mb-6">
+                Blog de Planejamento Sucessório
+            </h1>
+            <p class="text-xl text-white/90 leading-relaxed mb-8">
+                Artigos especializados, guias práticos e atualizações sobre legislação brasileira de herança e sucessão. Conteúdo criado por advogados especialistas para ajudá-lo a tomar decisões informadas sobre seu patrimônio.
+            </p>
+            <div class="flex items-center justify-center space-x-4">
+                <div class="relative flex-1 max-w-2xl">
+                    <input type="text" placeholder="Buscar artigos sobre testamento, herança, criptomoedas..." class="w-full px-6 py-4 rounded-lg text-neutral-dark font-medium focus:outline-none focus:ring-2 focus:ring-primary-gold pr-12"/>
+                    <button class="absolute right-3 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-primary-deep rounded-lg flex items-center justify-center hover:bg-secondary-blue transition-colors">
+                        <i class="fa-solid fa-search text-white"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="flex items-center justify-center space-x-6 mt-8">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-book-open text-primary-gold"></i>
+                    <span class="text-sm">127 Artigos Publicados</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-users text-primary-gold"></i>
+                    <span class="text-sm">15.000+ Leitores Mensais</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-clock text-primary-gold"></i>
+                    <span class="text-sm">Atualizado Semanalmente</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="blog-categories" class="bg-white py-12 border-b border-neutral-light">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <button class="px-6 py-3 bg-primary-deep text-white font-semibold rounded-lg">
+                    Todos os Artigos
+                </button>
+                <button class="px-6 py-3 bg-white text-neutral-dark font-semibold rounded-lg border border-neutral-light hover:bg-bg-subtle transition-colors">
+                    Legislação
+                </button>
+                <button class="px-6 py-3 bg-white text-neutral-dark font-semibold rounded-lg border border-neutral-light hover:bg-bg-subtle transition-colors">
+                    Criptomoedas
+                </button>
+                <button class="px-6 py-3 bg-white text-neutral-dark font-semibold rounded-lg border border-neutral-light hover:bg-bg-subtle transition-colors">
+                    Tecnologia
+                </button>
+                <button class="px-6 py-3 bg-white text-neutral-dark font-semibold rounded-lg border border-neutral-light hover:bg-bg-subtle transition-colors">
+                    Guias Práticos
+                </button>
+                <button class="px-6 py-3 bg-white text-neutral-dark font-semibold rounded-lg border border-neutral-light hover:bg-bg-subtle transition-colors">
+                    Casos de Uso
+                </button>
+            </div>
+            <div class="flex items-center space-x-3">
+                <span class="text-sm text-neutral-medium">Ordenar por:</span>
+                <select class="px-4 py-2 border border-neutral-light rounded-lg text-neutral-dark font-medium focus:outline-none focus:ring-2 focus:ring-primary-deep">
+                    <option>Mais Recentes</option>
+                    <option>Mais Populares</option>
+                    <option>Mais Lidos</option>
+                    <option>Alfabético</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="featured-article" class="bg-bg-subtle py-16">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="bg-white rounded-3xl overflow-hidden shadow-xl">
+            <div class="grid grid-cols-2 gap-0">
+                <div class="h-[480px] overflow-hidden">
+                    <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/da31167063-73900274c9131c40c2df.png" alt="modern law office with Brazilian flag and digital technology elements, professional photography"/>
+                </div>
+                <div class="p-12 flex flex-col justify-center">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <span class="px-4 py-2 bg-accent-amber/10 text-accent-amber rounded-full text-sm font-bold uppercase tracking-wider">
+                            <i class="fa-solid fa-star mr-1"></i>
+                            Artigo em Destaque
+                        </span>
+                        <span class="text-sm text-neutral-medium">15 Jan 2026 • 15 min de leitura</span>
+                    </div>
+                    <h2 class="text-4xl font-bold text-neutral-dark mb-4 leading-tight">
+                        Guia Completo: Como Criar um Testamento Digital Válido no Brasil em 2026
+                    </h2>
+                    <p class="text-lg text-neutral-medium mb-6 leading-relaxed">
+                        Passo a passo detalhado sobre o processo de criação de testamento digital com validade jurídica. Inclui análise das mudanças recentes no Código Civil, requisitos de assinatura digital ICP-Brasil, e como garantir que seu testamento seja reconhecido em cartório.
+                    </p>
+                    <div class="flex items-center space-x-6 mb-8">
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-eye text-primary-gold"></i>
+                            <span class="text-sm font-medium text-neutral-dark">8.432 visualizações</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-heart text-error-red"></i>
+                            <span class="text-sm font-medium text-neutral-dark">342 curtidas</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-comment text-info-blue"></i>
+                            <span class="text-sm font-medium text-neutral-dark">67 comentários</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Author" class="w-14 h-14 rounded-full border-2 border-primary-gold"/>
+                            <div>
+                                <div class="font-bold text-neutral-dark">Dr. Carlos Eduardo Silva</div>
+                                <div class="text-sm text-neutral-medium">Especialista em Direito Sucessório • OAB/SP 234.567</div>
+                            </div>
+                        </div>
+                        <button class="px-8 py-3 bg-primary-deep text-white font-bold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2">
+                            <span>Ler Artigo Completo</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="latest-articles" class="bg-white py-20">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="flex items-center justify-between mb-12">
+            <div>
+                <h2 class="text-3xl font-bold text-neutral-dark mb-2">Artigos Mais Recentes</h2>
+                <p class="text-lg text-neutral-medium">Conteúdo atualizado semanalmente por nossos especialistas</p>
+            </div>
+            <button class="flex items-center space-x-2 text-primary-deep font-semibold hover:text-secondary-blue transition-colors">
+                <span>Assinar Newsletter</span>
+                <i class="fa-solid fa-envelope"></i>
+            </button>
+        </div>
+
+        <div class="grid grid-cols-3 gap-8 mb-12">
+            <article id="article-1" class="bg-white rounded-2xl overflow-hidden border border-neutral-light hover:shadow-xl transition-shadow">
+                <div class="h-56 overflow-hidden">
+                    <img class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/f022a97614-be42361861c9695ef92f.png" alt="cryptocurrency bitcoin ethereum on desk with legal documents, technology meets finance"/>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <span class="px-3 py-1 bg-accent-purple/10 text-accent-purple rounded-full text-xs font-bold uppercase">Criptomoedas</span>
+                        <span class="text-sm text-neutral-medium">12 Jan 2026</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-neutral-dark mb-3 hover:text-primary-deep transition-colors cursor-pointer leading-tight">
+                        Como Incluir Bitcoin e Ethereum no Seu Testamento: Guia Técnico Completo
+                    </h3>
+                    <p class="text-neutral-medium mb-4 leading-relaxed text-sm">
+                        Aprenda a inventariar suas carteiras de criptomoedas, proteger suas seed phrases e garantir que seus herdeiros tenham acesso seguro aos seus ativos digitais após seu falecimento.
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-neutral-light">
+                        <div class="flex items-center space-x-2">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Author" class="w-8 h-8 rounded-full"/>
+                            <span class="text-sm font-medium text-neutral-dark">Dra. Marina Costa</span>
+                        </div>
+                        <span class="text-xs text-neutral-medium">12 min</span>
+                    </div>
+                </div>
+            </article>
+
+            <article id="article-2" class="bg-white rounded-2xl overflow-hidden border border-neutral-light hover:shadow-xl transition-shadow">
+                <div class="h-56 overflow-hidden">
+                    <img class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/452aa274d4-40fb2c75bbb1222dc5c4.png" alt="blockchain network visualization with security locks and digital connections, futuristic technology"/>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <span class="px-3 py-1 bg-accent-emerald/10 text-accent-emerald rounded-full text-xs font-bold uppercase">Tecnologia</span>
+                        <span class="text-sm text-neutral-medium">10 Jan 2026</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-neutral-dark mb-3 hover:text-primary-deep transition-colors cursor-pointer leading-tight">
+                        Blockchain e Testamentos: Por Que a Imutabilidade É Crucial Para Sua Segurança
+                    </h3>
+                    <p class="text-neutral-medium mb-4 leading-relaxed text-sm">
+                        Entenda como a tecnologia blockchain garante que seu testamento não possa ser alterado ou adulterado, proporcionando uma camada adicional de segurança jurídica inédita.
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-neutral-light">
+                        <div class="flex items-center space-x-2">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Author" class="w-8 h-8 rounded-full"/>
+                            <span class="text-sm font-medium text-neutral-dark">Dr. Roberto Almeida</span>
+                        </div>
+                        <span class="text-xs text-neutral-medium">10 min</span>
+                    </div>
+                </div>
+            </article>
+
+            <article id="article-3" class="bg-white rounded-2xl overflow-hidden border border-neutral-light hover:shadow-xl transition-shadow">
+                <div class="h-56 overflow-hidden">
+                    <img class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/152fb6e21e-ffe54a381fd0a7059623.png" alt="family meeting with lawyer discussing inheritance documents, warm office setting, professional photography" />
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <span class="px-3 py-1 bg-info-blue/10 text-info-blue rounded-full text-xs font-bold uppercase">Guias Práticos</span>
+                        <span class="text-sm text-neutral-medium">08 Jan 2026</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-neutral-dark mb-3 hover:text-primary-deep transition-colors cursor-pointer leading-tight">
+                        Herdeiros Legítimos vs. Testamentários: Entenda a Diferença Legal
+                    </h3>
+                    <p class="text-neutral-medium mb-4 leading-relaxed text-sm">
+                        Análise detalhada sobre a regra dos 50% da legítima no direito brasileiro e como distribuir corretamente sua herança respeitando a lei.
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-neutral-light">
+                        <div class="flex items-center space-x-2">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg" alt="Author" class="w-8 h-8 rounded-full"/>
+                            <span class="text-sm font-medium text-neutral-dark">Dra. Juliana Ferreira</span>
+                        </div>
+                        <span class="text-xs text-neutral-medium">9 min</span>
+                    </div>
+                </div>
+            </article>
+
+            <article id="article-4" class="bg-white rounded-2xl overflow-hidden border border-neutral-light hover:shadow-xl transition-shadow">
+                <div class="h-56 overflow-hidden">
+                    <img class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/a2f9cc53e7-aff1c92e0aa80c503918.png" alt="digital signature certificate ICP-Brasil authentication process, modern technology interface" />
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <span class="px-3 py-1 bg-primary-deep/10 text-primary-deep rounded-full text-xs font-bold uppercase">Legislação</span>
+                        <span class="text-sm text-neutral-medium">05 Jan 2026</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-neutral-dark mb-3 hover:text-primary-deep transition-colors cursor-pointer leading-tight">
+                        ICP-Brasil: Como Funciona a Assinatura Digital Legalmente Vinculante
+                    </h3>
+                    <p class="text-neutral-medium mb-4 leading-relaxed text-sm">
+                        Guia completo sobre certificados digitais brasileiros, e-CPF A3, e como garantir que sua assinatura eletrônica tenha validade jurídica plena.
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-neutral-light">
+                        <div class="flex items-center space-x-2">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="Author" class="w-8 h-8 rounded-full"/>
+                            <span class="text-sm font-medium text-neutral-dark">Dr. Paulo Santos</span>
+                        </div>
+                        <span class="text-xs text-neutral-medium">14 min</span>
+                    </div>
+                </div>
+            </article>
+
+            <article id="article-5" class="bg-white rounded-2xl overflow-hidden border border-neutral-light hover:shadow-xl transition-shadow">
+                <div class="h-56 overflow-hidden">
+                    <img class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/1f91f057e7-bc40268a7d94c825e776.png" alt="NFT digital art collection on screens with legal documents, modern gallery setting" />
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <span class="px-3 py-1 bg-accent-purple/10 text-accent-purple rounded-full text-xs font-bold uppercase">Ativos Digitais</span>
+                        <span class="text-sm text-neutral-medium">03 Jan 2026</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-neutral-dark mb-3 hover:text-primary-deep transition-colors cursor-pointer leading-tight">
+                        NFTs e Arte Digital: Como Transferir Propriedade Para Herdeiros
+                    </h3>
+                    <p class="text-neutral-medium mb-4 leading-relaxed text-sm">
+                        Estratégias práticas para inventariar suas coleções de NFTs e garantir que seus herdeiros possam acessar e transferir a propriedade desses ativos únicos.
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-neutral-light">
+                        <div class="flex items-center space-x-2">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-9.jpg" alt="Author" class="w-8 h-8 rounded-full"/>
+                            <span class="text-sm font-medium text-neutral-dark">Dr. Lucas Mendes</span>
+                        </div>
+                        <span class="text-xs text-neutral-medium">11 min</span>
+                    </div>
+                </div>
+            </article>
+
+            <article id="article-6" class="bg-white rounded-2xl overflow-hidden border border-neutral-light hover:shadow-xl transition-shadow">
+                <div class="h-56 overflow-hidden">
+                    <img class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/b56b861ddc-e842390ede135f5f3e1f.png" alt="LGPD data privacy shield with Brazilian flag elements, professional compliance concept" />
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <span class="px-3 py-1 bg-success-green/10 text-success-green rounded-full text-xs font-bold uppercase">Privacidade</span>
+                        <span class="text-sm text-neutral-medium">01 Jan 2026</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-neutral-dark mb-3 hover:text-primary-deep transition-colors cursor-pointer leading-tight">
+                        LGPD e Testamentos Digitais: Seus Direitos de Privacidade Pós-Morte
+                    </h3>
+                    <p class="text-neutral-medium mb-4 leading-relaxed text-sm">
+                        Como a Lei Geral de Proteção de Dados afeta o planejamento sucessório digital e quais direitos seus herdeiros têm sobre seus dados pessoais.
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-neutral-light">
+                        <div class="flex items-center space-x-2">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" alt="Author" class="w-8 h-8 rounded-full"/>
+                            <span class="text-sm font-medium text-neutral-dark">Dra. Ana Paula Lima</span>
+                        </div>
+                        <span class="text-xs text-neutral-medium">13 min</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <div class="flex justify-center">
+            <div class="flex items-center space-x-2">
+                <button class="w-10 h-10 rounded-lg border border-neutral-light flex items-center justify-center hover:bg-bg-subtle transition-colors">
+                    <i class="fa-solid fa-chevron-left text-neutral-medium"></i>
+                </button>
+                <button class="w-10 h-10 rounded-lg bg-primary-deep text-white font-semibold flex items-center justify-center">
+                    1
+                </button>
+                <button class="w-10 h-10 rounded-lg border border-neutral-light flex items-center justify-center hover:bg-bg-subtle transition-colors text-neutral-dark font-medium">
+                    2
+                </button>
+                <button class="w-10 h-10 rounded-lg border border-neutral-light flex items-center justify-center hover:bg-bg-subtle transition-colors text-neutral-dark font-medium">
+                    3
+                </button>
+                <button class="w-10 h-10 rounded-lg border border-neutral-light flex items-center justify-center hover:bg-bg-subtle transition-colors text-neutral-dark font-medium">
+                    4
+                </button>
+                <span class="px-3 text-neutral-medium">...</span>
+                <button class="w-10 h-10 rounded-lg border border-neutral-light flex items-center justify-center hover:bg-bg-subtle transition-colors text-neutral-dark font-medium">
+                    12
+                </button>
+                <button class="w-10 h-10 rounded-lg border border-neutral-light flex items-center justify-center hover:bg-bg-subtle transition-colors">
+                    <i class="fa-solid fa-chevron-right text-neutral-medium"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="popular-articles" class="bg-bg-subtle py-20">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold text-neutral-dark mb-2">Artigos Mais Populares</h2>
+            <p class="text-lg text-neutral-medium">Os conteúdos mais lidos pelos nossos usuários</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8">
+            <article id="popular-1" class="bg-white rounded-2xl p-8 border border-neutral-light hover:shadow-xl transition-shadow">
+                <div class="flex items-start space-x-6">
+                    <div class="text-6xl font-bold text-primary-gold/20">01</div>
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <span class="px-3 py-1 bg-primary-deep/10 text-primary-deep rounded-full text-xs font-bold uppercase">Legislação</span>
+                            <span class="text-sm text-neutral-medium">28 Dez 2025</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-neutral-dark mb-3 hover:text-primary-deep transition-colors cursor-pointer">
+                            10 Erros Comuns ao Fazer Testamento (E Como Evitá-los)
+                        </h3>
+                        <p class="text-neutral-medium mb-4 leading-relaxed">
+                            Lista completa dos erros mais frequentes que invalidam testamentos no Brasil, com exemplos práticos e soluções para cada situação.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Author" class="w-8 h-8 rounded-full"/>
+                                <span class="text-sm font-medium text-neutral-dark">Dr. Carlos Silva</span>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <span class="flex items-center space-x-1 text-sm text-neutral-medium">
+                                    <i class="fa-solid fa-eye"></i>
+                                    <span>12.4k</span>
+                                </span>
+                                <span class="flex items-center space-x-1 text-sm text-neutral-medium">
+                                    <i class="fa-solid fa-heart"></i>
+                                    <span>892</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article id="popular-2" class="bg-white rounded-2xl p-8 border border-neutral-light hover:shadow-xl transition-shadow">
+                <div class="flex items-start space-x-6">
+                    <div class="text-6xl font-bold text-primary-gold/20">02</div>
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <span class="px-3 py-1 bg-info-blue/10 text-info-blue rounded-full text-xs font-bold uppercase">Casos de Uso</span>
+                            <span class="text-sm text-neutral-medium">25 Dez 2025</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-neutral-dark mb-3 hover:text-primary-deep transition-colors cursor-pointer">
+                            Caso Real: Como Evitamos uma Disputa Familiar de R$ 3 Milhões
+                        </h3>
+                        <p class="text-neutral-medium mb-4 leading-relaxed">
+                            História verídica de como um testamento digital bem estruturado preveniu anos de litígio entre herdeiros e preservou o patrimônio familiar.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg" alt="Author" class="w-8 h-8 rounded-full"/>
+                                <span class="text-sm font-medium text-neutral-dark">Dra. Juliana Ferreira</span>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <span class="flex items-center space-x-1 text-sm text-neutral-medium">
+                                    <i class="fa-solid fa-eye"></i>
+                                    <span>11.2k</span>
+                                </span>
+                                <span class="flex items-center space-x-1 text-sm text-neutral-medium">
+                                    <i class="fa-solid fa-heart"></i>
+                                    <span>764</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article id="popular-3" class="bg-white rounded-2xl p-8 border border-neutral-light hover:shadow-xl transition-shadow">
+                <div class="flex items-start space-x-6">
+                    <div class="text-6xl font-bold text-primary-gold/20">03</div>
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <span class="px-3 py-1 bg-accent-purple/10 text-accent-purple rounded-full text-xs font-bold uppercase">Criptomoedas</span>
+                            <span class="text-sm text-neutral-medium">22 Dez 2025</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-neutral-dark mb-3 hover:text-primary-deep transition-colors cursor-pointer">
+                            Wallet Recovery: O Que Acontece Se Você Perder Suas Seeds?
+                        </h3>
+                        <p class="text-neutral-medium mb-4 leading-relaxed">
+                            Análise técnica sobre recuperação de carteiras de criptomoedas e por que um testamento digital é essencial para proteger seus ativos.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Author" class="w-8 h-8 rounded-full"/>
+                                <span class="text-sm font-medium text-neutral-dark">Dra. Marina Costa</span>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <span class="flex items-center space-x-1 text-sm text-neutral-medium">
+                                    <i class="fa-solid fa-eye"></i>
+                                    <span>9.8k</span>
+                                </span>
+                                <span class="flex items-center space-x-1 text-sm text-neutral-medium">
+                                    <i class="fa-solid fa-heart"></i>
+                                    <span>621</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article id="popular-4" class="bg-white rounded-2xl p-8 border border-neutral-light hover:shadow-xl transition-shadow">
+                <div class="flex items-start space-x-6">
+                    <div class="text-6xl font-bold text-primary-gold/20">04</div>
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <span class="px-3 py-1 bg-accent-emerald/10 text-accent-emerald rounded-full text-xs font-bold uppercase">Tecnologia</span>
+                            <span class="text-sm text-neutral-medium">20 Dez 2025</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-neutral-dark mb-3 hover:text-primary-deep transition-colors cursor-pointer">
+                            Shamir Secret Sharing: A Matemática Por Trás da Custódia Segura
+                        </h3>
+                        <p class="text-neutral-medium mb-4 leading-relaxed">
+                            Explicação técnica mas acessível sobre como dividimos sua chave de criptografia em 3 partes e por que isso é mais seguro que métodos tradicionais.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Author" class="w-8 h-8 rounded-full"/>
+                                <span class="text-sm font-medium text-neutral-dark">Dr. Roberto Almeida</span>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <span class="flex items-center space-x-1 text-sm text-neutral-medium">
+                                    <i class="fa-solid fa-eye"></i>
+                                    <span>8.9k</span>
+                                </span>
+                                <span class="flex items-center space-x-1 text-sm text-neutral-medium">
+                                    <i class="fa-solid fa-heart"></i>
+                                    <span>543</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section id="categories-deep-dive" class="bg-white py-20">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold text-neutral-dark mb-2">Explore Por Categoria</h2>
+            <p class="text-lg text-neutral-medium">Conteúdo organizado por temas para facilitar sua pesquisa</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-8">
+            <div id="category-legislation" class="bg-gradient-to-br from-primary-deep to-secondary-blue rounded-2xl p-8 text-white relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+                <div class="relative z-10">
+                    <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-gavel text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Legislação Brasileira</h3>
+                    <p class="text-white/80 mb-6">
+                        Análises aprofundadas sobre o Código Civil, jurisprudência e mudanças legislativas que afetam o planejamento sucessório.
+                    </p>
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-3xl font-bold">42</span>
+                        <span class="text-sm text-white/70">artigos publicados</span>
+                    </div>
+                    <button class="w-full py-3 bg-white text-primary-deep font-semibold rounded-lg hover:bg-white/90 transition-colors">
+                        Explorar Categoria
+                    </button>
+                </div>
+            </div>
+
+            <div id="category-crypto" class="bg-gradient-to-br from-accent-purple to-accent-purple/80 rounded-2xl p-8 text-white relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+                <div class="relative z-10">
+                    <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-brands fa-bitcoin text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Criptomoedas & NFTs</h3>
+                    <p class="text-white/80 mb-6">
+                        Guias especializados sobre como proteger e transferir ativos digitais, incluindo Bitcoin, Ethereum, NFTs e tokens diversos.
+                    </p>
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-3xl font-bold">28</span>
+                        <span class="text-sm text-white/70">artigos publicados</span>
+                    </div>
+                    <button class="w-full py-3 bg-white text-accent-purple font-semibold rounded-lg hover:bg-white/90 transition-colors">
+                        Explorar Categoria
+                    </button>
+                </div>
+            </div>
+
+            <div id="category-technology" class="bg-gradient-to-br from-accent-emerald to-success-green rounded-2xl p-8 text-white relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+                <div class="relative z-10">
+                    <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-microchip text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Tecnologia & Segurança</h3>
+                    <p class="text-white/80 mb-6">
+                        Explicações técnicas sobre blockchain, criptografia, ICP-Brasil e as tecnologias que garantem a segurança do seu testamento.
+                    </p>
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-3xl font-bold">35</span>
+                        <span class="text-sm text-white/70">artigos publicados</span>
+                    </div>
+                    <button class="w-full py-3 bg-white text-accent-emerald font-semibold rounded-lg hover:bg-white/90 transition-colors">
+                        Explorar Categoria
+                    </button>
+                </div>
+            </div>
+
+            <div id="category-practical" class="bg-gradient-to-br from-info-blue to-info-blue/80 rounded-2xl p-8 text-white relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+                <div class="relative z-10">
+                    <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-list-check text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Guias Práticos</h3>
+                    <p class="text-white/80 mb-6">
+                        Tutoriais passo a passo, checklists e instruções práticas para criar e gerenciar seu testamento digital com confiança.
+                    </p>
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-3xl font-bold">31</span>
+                        <span class="text-sm text-white/70">artigos publicados</span>
+                    </div>
+                    <button class="w-full py-3 bg-white text-info-blue font-semibold rounded-lg hover:bg-white/90 transition-colors">
+                        Explorar Categoria
+                    </button>
+                </div>
+            </div>
+
+            <div id="category-cases" class="bg-gradient-to-br from-warning-orange to-accent-amber rounded-2xl p-8 text-white relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+                <div class="relative z-10">
+                    <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-briefcase text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Casos de Uso Reais</h3>
+                    <p class="text-white/80 mb-6">
+                        Histórias verídicas de clientes (anonimizadas) mostrando como o planejamento sucessório resolveu situações complexas.
+                    </p>
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-3xl font-bold">18</span>
+                        <span class="text-sm text-white/70">artigos publicados</span>
+                    </div>
+                    <button class="w-full py-3 bg-white text-warning-orange font-semibold rounded-lg hover:bg-white/90 transition-colors">
+                        Explorar Categoria
+                    </button>
+                </div>
+            </div>
+
+            <div id="category-updates" class="bg-gradient-to-br from-primary-gold to-secondary-gold-light rounded-2xl p-8 text-primary-deep relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full -mr-16 -mt-16"></div>
+                <div class="relative z-10">
+                    <div class="w-16 h-16 bg-primary-deep/10 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-newspaper text-3xl text-primary-deep"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Atualizações da Plataforma</h3>
+                    <p class="text-primary-deep/80 mb-6">
+                        Novidades sobre recursos lançados, melhorias de segurança e roadmap de desenvolvimento do LegacyGuard.
+                    </p>
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-3xl font-bold">22</span>
+                        <span class="text-sm text-primary-deep/70">artigos publicados</span>
+                    </div>
+                    <button class="w-full py-3 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors">
+                        Explorar Categoria
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="expert-authors" class="bg-bg-subtle py-20">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-neutral-dark mb-2">Nossos Especialistas</h2>
+            <p class="text-lg text-neutral-medium">Conheça os advogados e especialistas por trás do conteúdo</p>
+        </div>
+
+        <div class="grid grid-cols-4 gap-8">
+            <div id="author-1" class="bg-white rounded-2xl p-6 text-center border border-neutral-light hover:shadow-xl transition-shadow">
+                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Dr. Carlos Silva" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-primary-gold"/>
+                <h3 class="text-xl font-bold text-neutral-dark mb-1">Dr. Carlos Silva</h3>
+                <p class="text-sm text-neutral-medium mb-3">Direito Sucessório • OAB/SP 234.567</p>
+                <p class="text-sm text-neutral-medium mb-4">Especialista em planejamento patrimonial com 15 anos de experiência.</p>
+                <div class="flex items-center justify-center space-x-4 mb-4">
+                    <span class="text-sm text-neutral-medium">42 artigos</span>
+                    <span class="text-sm text-neutral-medium">•</span>
+                    <span class="text-sm text-neutral-medium">8.2k leitores</span>
+                </div>
+                <button class="w-full py-2 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors text-sm">
+                    Ver Perfil
+                </button>
+            </div>
+
+            <div id="author-2" class="bg-white rounded-2xl p-6 text-center border border-neutral-light hover:shadow-xl transition-shadow">
+                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Dra. Marina Costa" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-accent-purple"/>
+                <h3 class="text-xl font-bold text-neutral-dark mb-1">Dra. Marina Costa</h3>
+                <p class="text-sm text-neutral-medium mb-3">Ativos Digitais • OAB/RJ 345.678</p>
+                <p class="text-sm text-neutral-medium mb-4">Especialista em criptomoedas e blockchain aplicado ao direito.</p>
+                <div class="flex items-center justify-center space-x-4 mb-4">
+                    <span class="text-sm text-neutral-medium">28 artigos</span>
+                    <span class="text-sm text-neutral-medium">•</span>
+                    <span class="text-sm text-neutral-medium">6.5k leitores</span>
+                </div>
+                <button class="w-full py-2 bg-accent-purple text-white font-semibold rounded-lg hover:opacity-90 transition-opacity text-sm">
+                    Ver Perfil
+                </button>
+            </div>
+
+            <div id="author-3" class="bg-white rounded-2xl p-6 text-center border border-neutral-light hover:shadow-xl transition-shadow">
+                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Dr. Roberto Almeida" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-accent-emerald"/>
+                <h3 class="text-xl font-bold text-neutral-dark mb-1">Dr. Roberto Almeida</h3>
+                <p class="text-sm text-neutral-medium mb-3">Tecnologia Jurídica • OAB/MG 456.789</p>
+                <p class="text-sm text-neutral-medium mb-4">Especialista em segurança da informação e criptografia.</p>
+                <div class="flex items-center justify-center space-x-4 mb-4">
+                    <span class="text-sm text-neutral-medium">35 artigos</span>
+                    <span class="text-sm text-neutral-medium">•</span>
+                    <span class="text-sm text-neutral-medium">7.1k leitores</span>
+                </div>
+                <button class="w-full py-2 bg-accent-emerald text-white font-semibold rounded-lg hover:bg-success-green transition-colors text-sm">
+                    Ver Perfil
+                </button>
+            </div>
+
+            <div id="author-4" class="bg-white rounded-2xl p-6 text-center border border-neutral-light hover:shadow-xl transition-shadow">
+                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg" alt="Dra. Juliana Ferreira" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-info-blue"/>
+                <h3 class="text-xl font-bold text-neutral-dark mb-1">Dra. Juliana Ferreira</h3>
+                <p class="text-sm text-neutral-medium mb-3">Direito de Família • OAB/RS 567.890</p>
+                <p class="text-sm text-neutral-medium mb-4">Especialista em disputas familiares e mediação sucessória.</p>
+                <div class="flex items-center justify-center space-x-4 mb-4">
+                    <span class="text-sm text-neutral-medium">31 artigos</span>
+                    <span class="text-sm text-neutral-medium">•</span>
+                    <span class="text-sm text-neutral-medium">5.9k leitores</span>
+                </div>
+                <button class="w-full py-2 bg-info-blue text-white font-semibold rounded-lg hover:opacity-90 transition-opacity text-sm">
+                    Ver Perfil
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="newsletter-cta" class="bg-gradient-to-br from-primary-deep to-secondary-blue text-white py-20">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full mb-6">
+                <i class="fa-solid fa-envelope-open-text text-primary-gold text-3xl"></i>
+            </div>
+            <h2 class="text-4xl font-bold mb-4">Receba Conteúdo Exclusivo no Seu Email</h2>
+            <p class="text-xl text-white/80 mb-8">
+                Assine nossa newsletter semanal e receba análises aprofundadas, atualizações legislativas e guias práticos sobre planejamento sucessório diretamente na sua caixa de entrada.
+            </p>
+            <div class="flex items-center justify-center space-x-4 mb-6">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-check text-primary-gold"></i>
+                    <span>Sem spam</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-check text-primary-gold"></i>
+                    <span>Cancele quando quiser</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-check text-primary-gold"></i>
+                    <span>Conteúdo exclusivo</span>
+                </div>
+            </div>
+            <div class="flex items-center justify-center space-x-4 max-w-2xl mx-auto">
+                <input type="email" placeholder="Seu melhor email" class="flex-1 px-6 py-4 rounded-lg text-neutral-dark font-medium focus:outline-none focus:ring-2 focus:ring-primary-gold"/>
+                <button class="px-8 py-4 bg-primary-gold text-primary-deep font-bold rounded-lg hover:bg-secondary-gold-light transition-colors flex items-center space-x-2">
+                    <span>Assinar Newsletter</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+            <p class="text-sm text-white/60 mt-4">Ao assinar, você concorda com nossa Política de Privacidade</p>
+        </div>
+    </div>
+</section>
+
+<section id="resources-section" class="bg-white py-20">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-neutral-dark mb-2">Recursos Complementares</h2>
+            <p class="text-lg text-neutral-medium">Materiais adicionais para aprofundar seu conhecimento</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-8">
+            <div id="resource-ebook" class="bg-gradient-to-br from-bg-subtle to-white rounded-2xl p-8 border border-neutral-light">
+                <div class="w-16 h-16 bg-primary-deep/10 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-book text-primary-deep text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-neutral-dark mb-3">E-book Gratuito</h3>
+                <p class="text-neutral-medium mb-6 leading-relaxed">
+                    "Guia Completo de Planejamento Sucessório no Brasil" - 87 páginas com tudo que você precisa saber sobre testamentos e herança.
+                </p>
+                <button class="w-full py-3 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-download"></i>
+                    <span>Baixar E-book (PDF)</span>
+                </button>
+            </div>
+
+            <div id="resource-webinar" class="bg-gradient-to-br from-bg-subtle to-white rounded-2xl p-8 border border-neutral-light">
+                <div class="w-16 h-16 bg-accent-emerald/10 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-video text-accent-emerald text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-neutral-dark mb-3">Webinar Gravado</h3>
+                <p class="text-neutral-medium mb-6 leading-relaxed">
+                    "Criptomoedas e Herança: Desafios Legais e Soluções Práticas" - Webinar de 60 minutos com Dr. Carlos Silva e Dra. Marina Costa.
+                </p>
+                <button class="w-full py-3 bg-accent-emerald text-white font-semibold rounded-lg hover:bg-success-green transition-colors flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-play"></i>
+                    <span>Assistir Webinar</span>
+                </button>
+            </div>
+
+            <div id="resource-checklist" class="bg-gradient-to-br from-bg-subtle to-white rounded-2xl p-8 border border-neutral-light">
+                <div class="w-16 h-16 bg-primary-gold/10 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-list-check text-primary-gold text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-neutral-dark mb-3">Checklist Interativo</h3>
+                <p class="text-neutral-medium mb-6 leading-relaxed">
+                    Ferramenta online gratuita para inventariar todos os seus bens e preparar-se para criar seu testamento digital com confiança.
+                </p>
+                <button class="w-full py-3 bg-primary-gold text-primary-deep font-semibold rounded-lg hover:bg-secondary-gold-light transition-colors flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <span>Acessar Checklist</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="seo-faq" class="bg-bg-subtle py-20">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-neutral-dark mb-2">Perguntas Frequentes Sobre Planejamento Sucessório</h2>
+            <p class="text-lg text-neutral-medium">Respostas rápidas para as dúvidas mais comuns</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto space-y-4">
+            <div id="faq-1" class="bg-white rounded-xl p-6 border border-neutral-light">
+                <button class="w-full flex items-center justify-between text-left">
+                    <h3 class="text-lg font-bold text-neutral-dark">O que é um testamento digital e ele tem validade jurídica no Brasil?</h3>
+                    <i class="fa-solid fa-chevron-down text-neutral-medium"></i>
+                </button>
+                <p class="text-neutral-medium mt-4 leading-relaxed">
+                    Um testamento digital é um documento eletrônico que expressa a vontade do testador sobre a distribuição de seus bens após o falecimento. No Brasil, ele tem plena validade jurídica quando assinado com certificado digital ICP-Brasil (e-CPF A3 ou superior) e segue os requisitos do Art. 1.876 do Código Civil. A LegacyGuard garante todos esses requisitos legais.
+                </p>
+            </div>
+
+            <div id="faq-2" class="bg-white rounded-xl p-6 border border-neutral-light">
+                <button class="w-full flex items-center justify-between text-left">
+                    <h3 class="text-lg font-bold text-neutral-dark">Quanto custa fazer um testamento digital comparado ao tradicional?</h3>
+                    <i class="fa-solid fa-chevron-down text-neutral-medium"></i>
+                </button>
+            </div>
+
+            <div id="faq-3" class="bg-white rounded-xl p-6 border border-neutral-light">
+                <button class="w-full flex items-center justify-between text-left">
+                    <h3 class="text-lg font-bold text-neutral-dark">Posso incluir criptomoedas e NFTs no meu testamento?</h3>
+                    <i class="fa-solid fa-chevron-down text-neutral-medium"></i>
+                </button>
+            </div>
+
+            <div id="faq-4" class="bg-white rounded-xl p-6 border border-neutral-light">
+                <button class="w-full flex items-center justify-between text-left">
+                    <h3 class="text-lg font-bold text-neutral-dark">Como funciona o monitoramento de óbito automático?</h3>
+                    <i class="fa-solid fa-chevron-down text-neutral-medium"></i>
+                </button>
+            </div>
+
+            <div id="faq-5" class="bg-white rounded-xl p-6 border border-neutral-light">
+                <button class="w-full flex items-center justify-between text-left">
+                    <h3 class="text-lg font-bold text-neutral-dark">Meu testamento digital pode ser contestado judicialmente?</h3>
+                    <i class="fa-solid fa-chevron-down text-neutral-medium"></i>
+                </button>
+            </div>
+
+            <div id="faq-6" class="bg-white rounded-xl p-6 border border-neutral-light">
+                <button class="w-full flex items-center justify-between text-left">
+                    <h3 class="text-lg font-bold text-neutral-dark">O que acontece se eu não atualizar meu testamento por anos?</h3>
+                    <i class="fa-solid fa-chevron-down text-neutral-medium"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="text-center mt-12">
+            <button class="px-8 py-3 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2 mx-auto">
+                <span>Ver Todas as Perguntas</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+<footer id="footer" class="bg-neutral-dark text-white py-16">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="grid grid-cols-5 gap-12 mb-12">
+            <div class="col-span-2">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-12 h-12 bg-primary-gold rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-deep text-2xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold">LegacyGuard</span>
+                </div>
+                <p class="text-white/70 mb-6 leading-relaxed">
+                    Plataforma líder em planejamento sucessório digital no Brasil. Proteja seu legado com tecnologia blockchain e conformidade legal total.
+                </p>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary-gold transition-colors">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary-gold transition-colors">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary-gold transition-colors">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary-gold transition-colors">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-4">Serviços</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Testamento Digital</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Validação em Vídeo</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Assinatura ICP-Brasil</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Custódia Criptográfica</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Monitoramento de Óbito</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-4">Recursos</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Blog</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">E-books Gratuitos</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Webinars</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Calculadora de Preços</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-4">Empresa</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Sobre Nós</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Nossa Equipe</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Carreiras</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Imprensa</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Contato</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="pt-8 border-t border-white/10">
+            <div class="flex items-center justify-between">
+                <p class="text-white/60 text-sm">© 2026 LegacyGuard. Todos os direitos reservados.</p>
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="text-white/60 hover:text-primary-gold transition-colors text-sm">Política de Privacidade</a>
+                    <a href="#" class="text-white/60 hover:text-primary-gold transition-colors text-sm">Termos de Uso</a>
+                    <a href="#" class="text-white/60 hover:text-primary-gold transition-colors text-sm">LGPD</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

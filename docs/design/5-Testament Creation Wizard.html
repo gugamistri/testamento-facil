@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testament Creation Wizard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-deep': '#1A237E',
+                        'primary-gold': '#C9A054',
+                        'secondary-blue': '#3949AB',
+                        'secondary-pale': '#E8EAF6',
+                        'secondary-gold-light': '#E4D4B4',
+                        'accent-emerald': '#00695C',
+                        'accent-amber': '#FF8F00',
+                        'accent-purple': '#6A1B9A',
+                        'success-green': '#2E7D32',
+                        'error-red': '#C62828',
+                        'warning-orange': '#EF6C00',
+                        'info-blue': '#1565C0',
+                        'neutral-dark': '#37474F',
+                        'neutral-medium': '#78909C',
+                        'neutral-light': '#CFD8DC',
+                        'bg-subtle': '#F5F7FA',
+                        'bg-section': '#ECEFF1',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'crimson': ['Crimson Pro', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Crimson+Pro:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+</head>
+<body class="font-inter bg-bg-subtle">
+
+<header id="header" class="bg-white border-b border-neutral-light sticky top-0 z-50">
+    <div class="max-w-[1440px] mx-auto px-8 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-primary-deep rounded-lg flex items-center justify-center">
+                    <i class="fa-solid fa-shield-halved text-primary-gold text-xl"></i>
+                </div>
+                <span class="text-2xl font-bold text-primary-deep">LegacyGuard</span>
+            </div>
+            <div class="flex items-center space-x-6">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-secondary-pale flex items-center justify-center">
+                        <i class="fa-solid fa-user text-primary-deep"></i>
+                    </div>
+                    <div>
+                        <div class="text-sm font-semibold text-neutral-dark">João Silva</div>
+                        <div class="text-xs text-neutral-medium">joao.silva@email.com</div>
+                    </div>
+                </div>
+                <button class="text-neutral-medium hover:text-neutral-dark transition-colors">
+                    <i class="fa-solid fa-ellipsis-vertical text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div id="wizard-container" class="flex">
+    <aside id="wizard-sidebar" class="w-80 bg-white border-r border-neutral-light min-h-screen">
+        <div class="p-8">
+            <div class="mb-8">
+                <h2 class="text-lg font-bold text-neutral-dark mb-2">Criação de Testamento</h2>
+                <p class="text-sm text-neutral-medium">Preencha todos os passos para concluir</p>
+            </div>
+
+            <div class="space-y-6">
+                <div id="step-indicator-1" class="flex items-start space-x-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-10 h-10 bg-success-green rounded-full flex items-center justify-center text-white border-2 border-success-green">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div class="w-0.5 h-16 bg-success-green mt-2"></div>
+                    </div>
+                    <div class="flex-1 pt-2">
+                        <div class="text-sm font-semibold text-neutral-dark mb-1">Informações Básicas</div>
+                        <div class="text-xs text-success-green">Concluído</div>
+                    </div>
+                </div>
+
+                <div id="step-indicator-2" class="flex items-start space-x-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-10 h-10 bg-primary-deep rounded-full flex items-center justify-center text-white border-2 border-primary-deep">
+                            <span class="text-sm font-bold">2</span>
+                        </div>
+                        <div class="w-0.5 h-16 bg-neutral-light mt-2"></div>
+                    </div>
+                    <div class="flex-1 pt-2">
+                        <div class="text-sm font-semibold text-primary-deep mb-1">Inventário de Bens</div>
+                        <div class="text-xs text-primary-deep">Em andamento</div>
+                    </div>
+                </div>
+
+                <div id="step-indicator-3" class="flex items-start space-x-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-10 h-10 bg-neutral-light rounded-full flex items-center justify-center text-neutral-medium border-2 border-neutral-light">
+                            <span class="text-sm font-bold">3</span>
+                        </div>
+                        <div class="w-0.5 h-16 bg-neutral-light mt-2"></div>
+                    </div>
+                    <div class="flex-1 pt-2">
+                        <div class="text-sm font-semibold text-neutral-medium mb-1">Upload de Documentos</div>
+                        <div class="text-xs text-neutral-medium">Pendente</div>
+                    </div>
+                </div>
+
+                <div id="step-indicator-4" class="flex items-start space-x-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-10 h-10 bg-neutral-light rounded-full flex items-center justify-center text-neutral-medium border-2 border-neutral-light">
+                            <span class="text-sm font-bold">4</span>
+                        </div>
+                        <div class="w-0.5 h-16 bg-neutral-light mt-2"></div>
+                    </div>
+                    <div class="flex-1 pt-2">
+                        <div class="text-sm font-semibold text-neutral-medium mb-1">Beneficiários</div>
+                        <div class="text-xs text-neutral-medium">Pendente</div>
+                    </div>
+                </div>
+
+                <div id="step-indicator-5" class="flex items-start space-x-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-10 h-10 bg-neutral-light rounded-full flex items-center justify-center text-neutral-medium border-2 border-neutral-light">
+                            <span class="text-sm font-bold">5</span>
+                        </div>
+                        <div class="w-0.5 h-16 bg-neutral-light mt-2"></div>
+                    </div>
+                    <div class="flex-1 pt-2">
+                        <div class="text-sm font-semibold text-neutral-medium mb-1">Distribuição de Herança</div>
+                        <div class="text-xs text-neutral-medium">Pendente</div>
+                    </div>
+                </div>
+
+                <div id="step-indicator-6" class="flex items-start space-x-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-10 h-10 bg-neutral-light rounded-full flex items-center justify-center text-neutral-medium border-2 border-neutral-light">
+                            <span class="text-sm font-bold">6</span>
+                        </div>
+                        <div class="w-0.5 h-16 bg-neutral-light mt-2"></div>
+                    </div>
+                    <div class="flex-1 pt-2">
+                        <div class="text-sm font-semibold text-neutral-medium mb-1">Ativos Digitais</div>
+                        <div class="text-xs text-neutral-medium">Pendente</div>
+                    </div>
+                </div>
+
+                <div id="step-indicator-7" class="flex items-start space-x-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-10 h-10 bg-neutral-light rounded-full flex items-center justify-center text-neutral-medium border-2 border-neutral-light">
+                            <span class="text-sm font-bold">7</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 pt-2">
+                        <div class="text-sm font-semibold text-neutral-medium mb-1">Revisão e Confirmação</div>
+                        <div class="text-xs text-neutral-medium">Pendente</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 p-4 bg-secondary-pale rounded-xl">
+                <div class="flex items-center space-x-3 mb-3">
+                    <i class="fa-solid fa-clock text-info-blue text-xl"></i>
+                    <div>
+                        <div class="text-xs font-medium text-neutral-dark">Auto-save ativo</div>
+                        <div class="text-xs text-neutral-medium">Último salvamento: há 12s</div>
+                    </div>
+                </div>
+                <div class="w-full bg-white rounded-full h-2">
+                    <div class="bg-primary-gold rounded-full h-2" style="width: 28%"></div>
+                </div>
+                <div class="text-xs text-neutral-medium mt-2">28% concluído</div>
+            </div>
+
+            <div class="mt-6 p-4 bg-accent-emerald/10 rounded-xl">
+                <div class="flex items-start space-x-3">
+                    <i class="fa-solid fa-shield-halved text-accent-emerald text-lg mt-1"></i>
+                    <div>
+                        <div class="text-xs font-semibold text-neutral-dark mb-1">Criptografia Ativa</div>
+                        <div class="text-xs text-neutral-medium">Todos os dados são criptografados com AES-256</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main id="wizard-main-content" class="flex-1">
+        <div class="bg-white border-b border-neutral-light px-8 py-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-xl font-bold text-neutral-dark">Inventário de Bens</h1>
+                    <p class="text-sm text-neutral-medium mt-1">Liste todos os seus bens imóveis, veículos, contas bancárias e investimentos</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button class="px-5 py-2.5 text-neutral-dark border border-neutral-light rounded-lg hover:bg-bg-subtle transition-colors font-medium">
+                        Salvar Rascunho
+                    </button>
+                    <button class="px-5 py-2.5 text-neutral-dark border border-neutral-light rounded-lg hover:bg-bg-subtle transition-colors font-medium">
+                        Anterior
+                    </button>
+                    <button class="px-5 py-2.5 bg-primary-deep text-white rounded-lg hover:bg-secondary-blue transition-colors font-semibold flex items-center space-x-2">
+                        <span>Próximo</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-8">
+            <div id="asset-category-tabs" class="mb-8">
+                <div class="flex items-center space-x-2 border-b border-neutral-light">
+                    <button class="px-6 py-3 text-primary-deep border-b-2 border-primary-deep font-semibold">
+                        <i class="fa-solid fa-building mr-2"></i>
+                        Imóveis
+                    </button>
+                    <button class="px-6 py-3 text-neutral-medium hover:text-neutral-dark transition-colors">
+                        <i class="fa-solid fa-car mr-2"></i>
+                        Veículos
+                    </button>
+                    <button class="px-6 py-3 text-neutral-medium hover:text-neutral-dark transition-colors">
+                        <i class="fa-solid fa-landmark mr-2"></i>
+                        Contas Bancárias
+                    </button>
+                    <button class="px-6 py-3 text-neutral-medium hover:text-neutral-dark transition-colors">
+                        <i class="fa-solid fa-chart-line mr-2"></i>
+                        Investimentos
+                    </button>
+                    <button class="px-6 py-3 text-neutral-medium hover:text-neutral-dark transition-colors">
+                        <i class="fa-brands fa-bitcoin mr-2"></i>
+                        Criptomoedas
+                    </button>
+                    <button class="px-6 py-3 text-neutral-medium hover:text-neutral-dark transition-colors">
+                        <i class="fa-solid fa-ellipsis mr-2"></i>
+                        Outros
+                    </button>
+                </div>
+            </div>
+
+            <div id="real-estate-section" class="space-y-6">
+                <div class="bg-white rounded-xl border border-neutral-light p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-bold text-neutral-dark">Bens Imóveis Cadastrados</h3>
+                        <button class="px-4 py-2 bg-primary-deep text-white rounded-lg hover:bg-secondary-blue transition-colors font-semibold flex items-center space-x-2">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Adicionar Imóvel</span>
+                        </button>
+                    </div>
+
+                    <div id="property-1" class="bg-bg-subtle rounded-xl p-6 mb-4">
+                        <div class="flex items-start justify-between">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-3 mb-4">
+                                    <div class="w-12 h-12 bg-primary-deep/10 rounded-lg flex items-center justify-center">
+                                        <i class="fa-solid fa-home text-primary-deep text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold text-neutral-dark">Residência Principal</h4>
+                                        <p class="text-sm text-neutral-medium">Apartamento • São Paulo, SP</p>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-3 gap-6 mb-4">
+                                    <div>
+                                        <label class="block text-xs font-semibold text-neutral-medium uppercase tracking-wider mb-2">Endereço Completo</label>
+                                        <input type="text" value="Av. Paulista, 1578 - Apto 142" class="w-full px-4 py-2.5 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep text-neutral-dark"/>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-neutral-medium uppercase tracking-wider mb-2">CEP</label>
+                                        <input type="text" value="01310-200" class="w-full px-4 py-2.5 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep text-neutral-dark"/>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-neutral-medium uppercase tracking-wider mb-2">Matrícula</label>
+                                        <input type="text" value="12345-SP" class="w-full px-4 py-2.5 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep text-neutral-dark"/>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-4 gap-6 mb-4">
+                                    <div>
+                                        <label class="block text-xs font-semibold text-neutral-medium uppercase tracking-wider mb-2">Valor Estimado</label>
+                                        <div class="relative">
+                                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-medium">R$</span>
+                                            <input type="text" value="1.250.000,00" class="w-full pl-10 pr-4 py-2.5 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep text-neutral-dark"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-neutral-medium uppercase tracking-wider mb-2">Área (m²)</label>
+                                        <input type="text" value="120" class="w-full px-4 py-2.5 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep text-neutral-dark"/>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-neutral-medium uppercase tracking-wider mb-2">Tipo de Propriedade</label>
+                                        <select class="w-full px-4 py-2.5 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep text-neutral-dark">
+                                            <option>Apartamento</option>
+                                            <option>Casa</option>
+                                            <option>Terreno</option>
+                                            <option>Comercial</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-neutral-medium uppercase tracking-wider mb-2">% de Propriedade</label>
+                                        <input type="text" value="100%" class="w-full px-4 py-2.5 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep text-neutral-dark"/>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="block text-xs font-semibold text-neutral-medium uppercase tracking-wider mb-2">Observações</label>
+                                    <textarea rows="2" placeholder="Adicione informações relevantes sobre o imóvel..." class="w-full px-4 py-2.5 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep text-neutral-dark resize-none"></textarea>
+                                </div>
+
+                                <div class="flex items-center justify-between pt-4 border-t border-neutral-light">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="flex items-center space-x-2">
+                                            <input type="checkbox" id="financed-1" checked class="w-4 h-4 text-primary-deep border-neutral-light rounded focus:ring-2 focus:ring-primary-deep"/>
+                                            <label for="financed-1" class="text-sm text-neutral-dark">Possui financiamento ativo</label>
+                                        </div>
+                                        <div class="text-sm text-neutral-medium">
+                                            <span class="font-semibold">Saldo devedor:</span> R$ 420.000,00
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <button class="px-3 py-1.5 text-info-blue hover:bg-info-blue/10 rounded-lg transition-colors text-sm font-medium">
+                                            <i class="fa-solid fa-edit mr-1"></i>
+                                            Editar
+                                        </button>
+                                        <button class="px-3 py-1.5 text-error-red hover:bg-error-red/10 rounded-lg transition-colors text-sm font-medium">
+                                            <i class="fa-solid fa-trash mr-1"></i>
+                                            Remover
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="property-2" class="bg-bg-subtle rounded-xl p-6">
+                        <div class="flex items-start justify-between">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-3 mb-4">
+                                    <div class="w-12 h-12 bg-accent-emerald/10 rounded-lg flex items-center justify-center">
+                                        <i class="fa-solid fa-umbrella-beach text-accent-emerald text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold text-neutral-dark">Casa de Praia</h4>
+                                        <p class="text-sm text-neutral-medium">Casa • Guarujá, SP</p>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-3 gap-6 mb-4">
+                                    <div>
+                                        <label class="block text-xs font-semibold text-neutral-medium uppercase tracking-wider mb-2">Endereço Completo</label>
+                                        <input type="text" value="Rua das Ondas, 890" class="w-full px-4 py-2.5 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep text-neutral-dark"/>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-neutral-medium uppercase tracking-wider mb-2">CEP</label>
+                                        <input type="text" value="11410-200" class="w-full px-4 py-2.5 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep text-neutral-dark"/>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-neutral-medium uppercase tracking-wider mb-2">Matrícula</label>
+                                        <input type="text" value="67890-SP" class="w-full px-4 py-2.5 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep text-neutral-dark"/>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-4 gap-6 mb-4">
+                                    <div>
+                                        <label class="block text-xs font-semibold text-neutral-medium uppercase tracking-wider mb-2">Valor Estimado</label>
+                                        <div class="relative">
+                                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-medium">R$</span>
+                                            <input type="text" value="850.000,00" class="w-full pl-10 pr-4 py-2.5 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep text-neutral-dark"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-neutral-medium uppercase tracking-wider mb-2">Área (m²)</label>
+                                        <input type="text" value="180" class="w-full px-4 py-2.5 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep text-neutral-dark"/>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-neutral-medium uppercase tracking-wider mb-2">Tipo de Propriedade</label>
+                                        <select class="w-full px-4 py-2.5 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep text-neutral-dark">
+                                            <option>Casa</option>
+                                            <option>Apartamento</option>
+                                            <option>Terreno</option>
+                                            <option>Comercial</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-neutral-medium uppercase tracking-wider mb-2">% de Propriedade</label>
+                                        <input type="text" value="50%" class="w-full px-4 py-2.5 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep text-neutral-dark"/>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="block text-xs font-semibold text-neutral-medium uppercase tracking-wider mb-2">Observações</label>
+                                    <textarea rows="2" placeholder="Adicione informações relevantes sobre o imóvel..." class="w-full px-4 py-2.5 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep text-neutral-dark resize-none">Propriedade compartilhada com cônjuge Maria Silva (50% cada)</textarea>
+                                </div>
+
+                                <div class="flex items-center justify-between pt-4 border-t border-neutral-light">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="flex items-center space-x-2">
+                                            <input type="checkbox" id="financed-2" class="w-4 h-4 text-primary-deep border-neutral-light rounded focus:ring-2 focus:ring-primary-deep"/>
+                                            <label for="financed-2" class="text-sm text-neutral-dark">Possui financiamento ativo</label>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <button class="px-3 py-1.5 text-info-blue hover:bg-info-blue/10 rounded-lg transition-colors text-sm font-medium">
+                                            <i class="fa-solid fa-edit mr-1"></i>
+                                            Editar
+                                        </button>
+                                        <button class="px-3 py-1.5 text-error-red hover:bg-error-red/10 rounded-lg transition-colors text-sm font-medium">
+                                            <i class="fa-solid fa-trash mr-1"></i>
+                                            Remover
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="summary-card" class="bg-white rounded-xl border border-neutral-light p-6">
+                    <h3 class="text-lg font-bold text-neutral-dark mb-4">Resumo de Imóveis</h3>
+                    <div class="grid grid-cols-4 gap-6">
+                        <div class="bg-primary-deep/5 rounded-lg p-4">
+                            <div class="text-sm text-neutral-medium mb-1">Total de Imóveis</div>
+                            <div class="text-2xl font-bold text-primary-deep">2</div>
+                        </div>
+                        <div class="bg-primary-gold/10 rounded-lg p-4">
+                            <div class="text-sm text-neutral-medium mb-1">Valor Total Estimado</div>
+                            <div class="text-2xl font-bold text-primary-gold">R$ 2.100.000</div>
+                        </div>
+                        <div class="bg-error-red/10 rounded-lg p-4">
+                            <div class="text-sm text-neutral-medium mb-1">Saldo Devedor</div>
+                            <div class="text-2xl font-bold text-error-red">R$ 420.000</div>
+                        </div>
+                        <div class="bg-success-green/10 rounded-lg p-4">
+                            <div class="text-sm text-neutral-medium mb-1">Patrimônio Líquido</div>
+                            <div class="text-2xl font-bold text-success-green">R$ 1.680.000</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="validation-warnings" class="bg-warning-orange/10 border border-warning-orange/30 rounded-xl p-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 bg-warning-orange/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-exclamation-triangle text-warning-orange text-lg"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-base font-bold text-neutral-dark mb-2">Atenção: Validações Necessárias</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-start space-x-2">
+                                    <i class="fa-solid fa-circle text-warning-orange text-xs mt-1.5"></i>
+                                    <span class="text-sm text-neutral-dark">Será necessário fazer upload da escritura do imóvel "Residência Principal" na próxima etapa</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <i class="fa-solid fa-circle text-warning-orange text-xs mt-1.5"></i>
+                                    <span class="text-sm text-neutral-dark">Casa de Praia possui propriedade compartilhada - confirme os dados do co-proprietário</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <i class="fa-solid fa-circle text-warning-orange text-xs mt-1.5"></i>
+                                    <span class="text-sm text-neutral-dark">Financiamento ativo detectado - será necessário informar o banco credor</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="legal-guidance" class="bg-info-blue/10 border border-info-blue/30 rounded-xl p-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 bg-info-blue/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-scale-balanced text-info-blue text-lg"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-base font-bold text-neutral-dark mb-2">Orientação Jurídica</h4>
+                            <p class="text-sm text-neutral-dark leading-relaxed mb-3">
+                                Segundo o Art. 1.789 do Código Civil, imóveis adquiridos durante o casamento em regime de comunhão parcial pertencem a ambos os cônjuges. Certifique-se de informar corretamente a porcentagem de propriedade.
+                            </p>
+                            <button class="text-sm text-info-blue font-semibold hover:underline">
+                                Saiba mais sobre regimes de bens
+                                <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="cpf-validation-section" class="bg-white rounded-xl border border-neutral-light p-6">
+                    <h3 class="text-lg font-bold text-neutral-dark mb-4">Validação de Co-Proprietários</h3>
+                    <p class="text-sm text-neutral-medium mb-4">Para imóveis com propriedade compartilhada, precisamos validar os dados dos co-proprietários</p>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-bg-subtle rounded-lg p-4">
+                            <div class="grid grid-cols-3 gap-4 mb-3">
+                                <div>
+                                    <label class="block text-xs font-semibold text-neutral-medium uppercase tracking-wider mb-2">Nome Completo</label>
+                                    <input type="text" value="Maria Silva" class="w-full px-4 py-2.5 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep text-neutral-dark"/>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-neutral-medium uppercase tracking-wider mb-2">CPF</label>
+                                    <input type="text" value="123.456.789-00" class="w-full px-4 py-2.5 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep text-neutral-dark"/>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-neutral-medium uppercase tracking-wider mb-2">Relacionamento</label>
+                                    <select class="w-full px-4 py-2.5 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep text-neutral-dark">
+                                        <option>Cônjuge</option>
+                                        <option>Filho(a)</option>
+                                        <option>Pai/Mãe</option>
+                                        <option>Irmão/Irmã</option>
+                                        <option>Outro</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-6 h-6 bg-success-green/20 rounded-full flex items-center justify-center">
+                                        <i class="fa-solid fa-check text-success-green text-xs"></i>
+                                    </div>
+                                    <span class="text-sm text-success-green font-medium">CPF validado via Serasa API</span>
+                                </div>
+                                <button class="text-sm text-error-red hover:underline font-medium">
+                                    Remover co-proprietário
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="next-steps-banner" class="bg-gradient-to-r from-primary-deep to-secondary-blue rounded-xl p-6 text-white">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-arrow-right text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold mb-1">Próxima Etapa: Upload de Documentos</h4>
+                                <p class="text-white/80 text-sm">Prepare as escrituras, matrículas e certidões dos imóveis cadastrados</p>
+                            </div>
+                        </div>
+                        <button class="px-6 py-3 bg-white text-primary-deep rounded-lg hover:bg-white/90 transition-colors font-bold flex items-center space-x-2">
+                            <span>Continuar</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div id="help-widget" class="fixed bottom-8 right-8 z-50">
+    <button class="w-14 h-14 bg-primary-deep text-white rounded-full shadow-2xl hover:bg-secondary-blue transition-all transform hover:scale-110 flex items-center justify-center">
+        <i class="fa-solid fa-question text-xl"></i>
+    </button>
+</div>
+
+<div id="floating-save-indicator" class="fixed bottom-8 left-8 bg-white rounded-lg shadow-xl px-4 py-3 flex items-center space-x-3 border border-neutral-light">
+    <div class="w-2 h-2 bg-success-green rounded-full animate-pulse"></div>
+    <span class="text-sm text-neutral-dark">Salvando automaticamente...</span>
+</div>
+
+<script>
+window.addEventListener('load', function() {
+    const autoSaveInterval = setInterval(() => {
+        const indicator = document.getElementById('floating-save-indicator');
+        if (indicator) {
+            indicator.classList.add('opacity-100');
+            setTimeout(() => {
+                indicator.classList.remove('opacity-100');
+            }, 2000);
+        }
+    }, 30000);
+
+    const progressBar = document.querySelector('.bg-primary-gold');
+    let progress = 28;
+    
+    document.querySelectorAll('input, select, textarea').forEach(element => {
+        element.addEventListener('change', () => {
+            progress = Math.min(progress + 2, 100);
+            if (progressBar) {
+                progressBar.style.width = progress + '%';
+            }
+        });
+    });
+
+    document.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', (e) => {
+            if (button.textContent.includes('Próximo')) {
+                e.preventDefault();
+                alert('Progredindo para a próxima etapa: Upload de Documentos');
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>

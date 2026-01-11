@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-deep': '#1A237E',
+                        'primary-gold': '#C9A054',
+                        'secondary-blue': '#3949AB',
+                        'secondary-pale': '#E8EAF6',
+                        'secondary-gold-light': '#E4D4B4',
+                        'accent-emerald': '#00695C',
+                        'accent-amber': '#FF8F00',
+                        'accent-purple': '#6A1B9A',
+                        'success-green': '#2E7D32',
+                        'error-red': '#C62828',
+                        'warning-orange': '#EF6C00',
+                        'info-blue': '#1565C0',
+                        'neutral-dark': '#37474F',
+                        'neutral-medium': '#78909C',
+                        'neutral-light': '#CFD8DC',
+                        'bg-subtle': '#F5F7FA',
+                        'bg-section': '#ECEFF1',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'crimson': ['Crimson Pro', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Crimson+Pro:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+</head>
+<body class="font-inter bg-bg-subtle">
+
+<header id="header" class="bg-white border-b border-neutral-light sticky top-0 z-50">
+    <div class="max-w-[1440px] mx-auto px-8 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-12">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary-deep rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-gold text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-primary-deep">LegacyGuard</span>
+                </div>
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#dashboard" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Dashboard</a>
+                    <a href="#testamento" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Meu Testamento</a>
+                    <a href="#documentos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Documentos</a>
+                    <a href="#pagamentos" class="text-primary-deep font-semibold border-b-2 border-primary-gold">Pagamentos</a>
+                    <a href="#suporte" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Suporte</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="w-10 h-10 bg-bg-subtle rounded-lg flex items-center justify-center hover:bg-secondary-pale transition-colors">
+                    <i class="fa-solid fa-bell text-neutral-dark"></i>
+                </button>
+                <div class="flex items-center space-x-3 pl-4 border-l border-neutral-light">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User" class="w-10 h-10 rounded-full"/>
+                    <div>
+                        <div class="text-sm font-semibold text-neutral-dark">Carlos Silva</div>
+                        <div class="text-xs text-neutral-medium">Premium</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-neutral-medium text-sm"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="max-w-[1440px] mx-auto px-8 py-8">
+    <div id="page-header" class="mb-8">
+        <div class="flex items-center justify-between mb-2">
+            <div>
+                <h1 class="text-3xl font-bold text-neutral-dark mb-2">Gerenciamento de Pagamentos</h1>
+                <p class="text-neutral-medium">Gerencie suas assinaturas, métodos de pagamento e histórico de transações</p>
+            </div>
+            <button class="px-6 py-3 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2">
+                <i class="fa-solid fa-plus"></i>
+                <span>Adicionar Método de Pagamento</span>
+            </button>
+        </div>
+        <div class="flex items-center space-x-4 mt-4">
+            <div class="flex items-center space-x-2 px-4 py-2 bg-success-green/10 rounded-lg">
+                <i class="fa-solid fa-check-circle text-success-green"></i>
+                <span class="text-sm font-medium text-success-green">Assinatura Ativa</span>
+            </div>
+            <div class="flex items-center space-x-2 px-4 py-2 bg-secondary-pale rounded-lg">
+                <i class="fa-solid fa-calendar text-primary-deep"></i>
+                <span class="text-sm text-neutral-dark">Próxima cobrança: <span class="font-semibold">15 Fev 2026</span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-8 mb-8">
+        <div id="stats-card-1" class="bg-white rounded-2xl p-6 border border-neutral-light shadow-sm">
+            <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 bg-primary-gold/10 rounded-xl flex items-center justify-center">
+                    <i class="fa-solid fa-credit-card text-primary-gold text-xl"></i>
+                </div>
+                <span class="px-3 py-1 bg-success-green/10 text-success-green rounded-full text-xs font-semibold">ATIVO</span>
+            </div>
+            <div class="text-3xl font-bold text-neutral-dark mb-1">R$ 1.000</div>
+            <div class="text-sm text-neutral-medium">Assinatura Anual</div>
+            <div class="mt-4 pt-4 border-t border-neutral-light">
+                <div class="text-xs text-neutral-medium">Renovação automática</div>
+            </div>
+        </div>
+
+        <div id="stats-card-2" class="bg-white rounded-2xl p-6 border border-neutral-light shadow-sm">
+            <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 bg-accent-emerald/10 rounded-xl flex items-center justify-center">
+                    <i class="fa-solid fa-receipt text-accent-emerald text-xl"></i>
+                </div>
+                <i class="fa-solid fa-arrow-trend-up text-success-green"></i>
+            </div>
+            <div class="text-3xl font-bold text-neutral-dark mb-1">R$ 2.500</div>
+            <div class="text-sm text-neutral-medium">Total Pago (Lifetime)</div>
+            <div class="mt-4 pt-4 border-t border-neutral-light">
+                <div class="text-xs text-neutral-medium">Desde Jan 2025</div>
+            </div>
+        </div>
+
+        <div id="stats-card-3" class="bg-white rounded-2xl p-6 border border-neutral-light shadow-sm">
+            <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 bg-info-blue/10 rounded-xl flex items-center justify-center">
+                    <i class="fa-solid fa-clock text-info-blue text-xl"></i>
+                </div>
+                <span class="px-3 py-1 bg-secondary-pale text-primary-deep rounded-full text-xs font-semibold">30 DIAS</span>
+            </div>
+            <div class="text-3xl font-bold text-neutral-dark mb-1">15 Fev</div>
+            <div class="text-sm text-neutral-medium">Próxima Cobrança</div>
+            <div class="mt-4 pt-4 border-t border-neutral-light">
+                <div class="text-xs text-neutral-medium">Cartão final ****4532</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-8">
+        <div class="col-span-2 space-y-8">
+            <section id="payment-methods-section" class="bg-white rounded-2xl p-8 border border-neutral-light shadow-sm">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-neutral-dark mb-1">Métodos de Pagamento</h2>
+                        <p class="text-sm text-neutral-medium">Gerencie seus cartões e contas bancárias</p>
+                    </div>
+                    <button class="px-4 py-2 text-primary-deep font-semibold hover:bg-secondary-pale rounded-lg transition-colors flex items-center space-x-2">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Adicionar</span>
+                    </button>
+                </div>
+
+                <div class="space-y-4">
+                    <div id="payment-method-1" class="border-2 border-primary-gold bg-primary-gold/5 rounded-xl p-6">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-14 h-14 bg-gradient-to-br from-primary-deep to-secondary-blue rounded-lg flex items-center justify-center">
+                                    <i class="fa-brands fa-cc-visa text-white text-2xl"></i>
+                                </div>
+                                <div>
+                                    <div class="flex items-center space-x-3 mb-2">
+                                        <span class="text-lg font-bold text-neutral-dark">Visa •••• 4532</span>
+                                        <span class="px-2 py-1 bg-primary-gold text-primary-deep rounded text-xs font-bold">PRINCIPAL</span>
+                                    </div>
+                                    <div class="text-sm text-neutral-medium mb-1">Carlos Silva</div>
+                                    <div class="text-sm text-neutral-medium">Expira em 08/2028</div>
+                                    <div class="flex items-center space-x-4 mt-3">
+                                        <span class="flex items-center space-x-1 text-xs text-success-green">
+                                            <i class="fa-solid fa-check-circle"></i>
+                                            <span>Verificado</span>
+                                        </span>
+                                        <span class="flex items-center space-x-1 text-xs text-info-blue">
+                                            <i class="fa-solid fa-shield-halved"></i>
+                                            <span>3D Secure</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button class="w-10 h-10 hover:bg-secondary-pale rounded-lg flex items-center justify-center transition-colors">
+                                    <i class="fa-solid fa-pen text-neutral-dark"></i>
+                                </button>
+                                <button class="w-10 h-10 hover:bg-error-red/10 rounded-lg flex items-center justify-center transition-colors">
+                                    <i class="fa-solid fa-trash text-error-red"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="payment-method-2" class="border border-neutral-light rounded-xl p-6 hover:border-primary-deep transition-colors">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-14 h-14 bg-gradient-to-br from-neutral-dark to-neutral-medium rounded-lg flex items-center justify-center">
+                                    <i class="fa-brands fa-cc-mastercard text-white text-2xl"></i>
+                                </div>
+                                <div>
+                                    <div class="flex items-center space-x-3 mb-2">
+                                        <span class="text-lg font-bold text-neutral-dark">Mastercard •••• 8921</span>
+                                    </div>
+                                    <div class="text-sm text-neutral-medium mb-1">Carlos Silva</div>
+                                    <div class="text-sm text-neutral-medium">Expira em 12/2027</div>
+                                    <div class="flex items-center space-x-4 mt-3">
+                                        <span class="flex items-center space-x-1 text-xs text-success-green">
+                                            <i class="fa-solid fa-check-circle"></i>
+                                            <span>Verificado</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button class="px-4 py-2 text-primary-deep font-semibold hover:bg-secondary-pale rounded-lg transition-colors text-sm">
+                                    Tornar Principal
+                                </button>
+                                <button class="w-10 h-10 hover:bg-secondary-pale rounded-lg flex items-center justify-center transition-colors">
+                                    <i class="fa-solid fa-pen text-neutral-dark"></i>
+                                </button>
+                                <button class="w-10 h-10 hover:bg-error-red/10 rounded-lg flex items-center justify-center transition-colors">
+                                    <i class="fa-solid fa-trash text-error-red"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="payment-method-3" class="border border-neutral-light rounded-xl p-6 hover:border-primary-deep transition-colors">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-14 h-14 bg-gradient-to-br from-accent-emerald to-success-green rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-building-columns text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="flex items-center space-x-3 mb-2">
+                                        <span class="text-lg font-bold text-neutral-dark">Conta Bancária</span>
+                                        <span class="px-2 py-1 bg-accent-emerald/10 text-accent-emerald rounded text-xs font-bold">PIX</span>
+                                    </div>
+                                    <div class="text-sm text-neutral-medium mb-1">Banco do Brasil - Ag 1234-5</div>
+                                    <div class="text-sm text-neutral-medium">Conta •••• 6789-0</div>
+                                    <div class="flex items-center space-x-4 mt-3">
+                                        <span class="flex items-center space-x-1 text-xs text-success-green">
+                                            <i class="fa-solid fa-check-circle"></i>
+                                            <span>Verificado</span>
+                                        </span>
+                                        <span class="flex items-center space-x-1 text-xs text-accent-emerald">
+                                            <i class="fa-solid fa-bolt"></i>
+                                            <span>PIX Habilitado</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button class="px-4 py-2 text-primary-deep font-semibold hover:bg-secondary-pale rounded-lg transition-colors text-sm">
+                                    Tornar Principal
+                                </button>
+                                <button class="w-10 h-10 hover:bg-secondary-pale rounded-lg flex items-center justify-center transition-colors">
+                                    <i class="fa-solid fa-pen text-neutral-dark"></i>
+                                </button>
+                                <button class="w-10 h-10 hover:bg-error-red/10 rounded-lg flex items-center justify-center transition-colors">
+                                    <i class="fa-solid fa-trash text-error-red"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 p-4 bg-info-blue/5 border border-info-blue/20 rounded-xl">
+                    <div class="flex items-start space-x-3">
+                        <i class="fa-solid fa-circle-info text-info-blue mt-0.5"></i>
+                        <div class="flex-1">
+                            <div class="text-sm font-semibold text-neutral-dark mb-1">Pagamentos Seguros</div>
+                            <div class="text-sm text-neutral-medium">Todos os pagamentos são processados com criptografia SSL/TLS. Seus dados de cartão nunca são armazenados em nossos servidores.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="transaction-history-section" class="bg-white rounded-2xl p-8 border border-neutral-light shadow-sm">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-neutral-dark mb-1">Histórico de Transações</h2>
+                        <p class="text-sm text-neutral-medium">Todas as suas cobranças e pagamentos</p>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button class="px-4 py-2 text-neutral-dark hover:bg-bg-subtle rounded-lg transition-colors flex items-center space-x-2 text-sm">
+                            <i class="fa-solid fa-filter"></i>
+                            <span>Filtrar</span>
+                        </button>
+                        <button class="px-4 py-2 text-neutral-dark hover:bg-bg-subtle rounded-lg transition-colors flex items-center space-x-2 text-sm">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Exportar</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <div id="transaction-1" class="flex items-center justify-between p-4 border border-neutral-light rounded-xl hover:bg-bg-subtle transition-colors">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-success-green/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-check text-success-green text-lg"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-neutral-dark mb-1">Assinatura Anual Premium</div>
+                                <div class="text-sm text-neutral-medium">15 Jan 2026 • Visa ****4532</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-bold text-neutral-dark mb-1">R$ 1.000,00</div>
+                            <div class="flex items-center space-x-2 justify-end">
+                                <span class="px-2 py-1 bg-success-green/10 text-success-green rounded text-xs font-semibold">APROVADO</span>
+                                <button class="text-primary-deep hover:text-secondary-blue">
+                                    <i class="fa-solid fa-receipt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="transaction-2" class="flex items-center justify-between p-4 border border-neutral-light rounded-xl hover:bg-bg-subtle transition-colors">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-success-green/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-check text-success-green text-lg"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-neutral-dark mb-1">Criação de Testamento</div>
+                                <div class="text-sm text-neutral-medium">10 Jan 2025 • PIX</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-bold text-neutral-dark mb-1">R$ 1.500,00</div>
+                            <div class="flex items-center space-x-2 justify-end">
+                                <span class="px-2 py-1 bg-success-green/10 text-success-green rounded text-xs font-semibold">APROVADO</span>
+                                <button class="text-primary-deep hover:text-secondary-blue">
+                                    <i class="fa-solid fa-receipt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="transaction-3" class="flex items-center justify-between p-4 border border-neutral-light rounded-xl hover:bg-bg-subtle transition-colors">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-warning-orange/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-clock text-warning-orange text-lg"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-neutral-dark mb-1">Atualização de Documentos</div>
+                                <div class="text-sm text-neutral-medium">05 Dez 2025 • Boleto</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-bold text-neutral-dark mb-1">R$ 150,00</div>
+                            <div class="flex items-center space-x-2 justify-end">
+                                <span class="px-2 py-1 bg-warning-orange/10 text-warning-orange rounded text-xs font-semibold">PENDENTE</span>
+                                <button class="text-primary-deep hover:text-secondary-blue">
+                                    <i class="fa-solid fa-barcode"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="transaction-4" class="flex items-center justify-between p-4 border border-neutral-light rounded-xl hover:bg-bg-subtle transition-colors">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-success-green/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-check text-success-green text-lg"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-neutral-dark mb-1">Assinatura Anual Premium</div>
+                                <div class="text-sm text-neutral-medium">15 Jan 2025 • Mastercard ****8921</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-bold text-neutral-dark mb-1">R$ 1.000,00</div>
+                            <div class="flex items-center space-x-2 justify-end">
+                                <span class="px-2 py-1 bg-success-green/10 text-success-green rounded text-xs font-semibold">APROVADO</span>
+                                <button class="text-primary-deep hover:text-secondary-blue">
+                                    <i class="fa-solid fa-receipt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="transaction-5" class="flex items-center justify-between p-4 border border-error-red/20 bg-error-red/5 rounded-xl">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-error-red/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-xmark text-error-red text-lg"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-neutral-dark mb-1">Tentativa de Renovação</div>
+                                <div class="text-sm text-neutral-medium">12 Dez 2024 • Visa ****1234 (expirado)</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-bold text-neutral-dark mb-1">R$ 1.000,00</div>
+                            <div class="flex items-center space-x-2 justify-end">
+                                <span class="px-2 py-1 bg-error-red/10 text-error-red rounded text-xs font-semibold">FALHOU</span>
+                                <button class="px-3 py-1 bg-error-red text-white rounded text-xs font-semibold hover:bg-error-red/90">
+                                    Tentar Novamente
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex items-center justify-center">
+                    <button class="px-6 py-3 text-primary-deep font-semibold hover:bg-secondary-pale rounded-lg transition-colors flex items-center space-x-2">
+                        <span>Carregar Mais</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                </div>
+            </section>
+
+            <section id="invoices-section" class="bg-white rounded-2xl p-8 border border-neutral-light shadow-sm">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-neutral-dark mb-1">Notas Fiscais</h2>
+                        <p class="text-sm text-neutral-medium">Baixe suas notas fiscais e comprovantes</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <div id="invoice-1" class="flex items-center justify-between p-4 border border-neutral-light rounded-xl hover:bg-bg-subtle transition-colors">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-primary-deep/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-file-invoice text-primary-deep text-lg"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-neutral-dark mb-1">NF-e #2026-001234</div>
+                                <div class="text-sm text-neutral-medium">Emitida em 15 Jan 2026 • R$ 1.000,00</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="px-4 py-2 text-primary-deep font-semibold hover:bg-secondary-pale rounded-lg transition-colors flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-download"></i>
+                                <span>Baixar PDF</span>
+                            </button>
+                            <button class="px-4 py-2 text-neutral-dark hover:bg-bg-subtle rounded-lg transition-colors flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-envelope"></i>
+                                <span>Enviar Email</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="invoice-2" class="flex items-center justify-between p-4 border border-neutral-light rounded-xl hover:bg-bg-subtle transition-colors">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-primary-deep/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-file-invoice text-primary-deep text-lg"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-neutral-dark mb-1">NF-e #2025-008921</div>
+                                <div class="text-sm text-neutral-medium">Emitida em 10 Jan 2025 • R$ 1.500,00</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="px-4 py-2 text-primary-deep font-semibold hover:bg-secondary-pale rounded-lg transition-colors flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-download"></i>
+                                <span>Baixar PDF</span>
+                            </button>
+                            <button class="px-4 py-2 text-neutral-dark hover:bg-bg-subtle rounded-lg transition-colors flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-envelope"></i>
+                                <span>Enviar Email</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="invoice-3" class="flex items-center justify-between p-4 border border-neutral-light rounded-xl hover:bg-bg-subtle transition-colors">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-primary-deep/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-file-invoice text-primary-deep text-lg"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-neutral-dark mb-1">NF-e #2025-002341</div>
+                                <div class="text-sm text-neutral-medium">Emitida em 15 Jan 2025 • R$ 1.000,00</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="px-4 py-2 text-primary-deep font-semibold hover:bg-secondary-pale rounded-lg transition-colors flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-download"></i>
+                                <span>Baixar PDF</span>
+                            </button>
+                            <button class="px-4 py-2 text-neutral-dark hover:bg-bg-subtle rounded-lg transition-colors flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-envelope"></i>
+                                <span>Enviar Email</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="space-y-8">
+            <section id="subscription-details-section" class="bg-white rounded-2xl p-6 border border-neutral-light shadow-sm">
+                <h3 class="text-xl font-bold text-neutral-dark mb-6">Detalhes da Assinatura</h3>
+                
+                <div class="space-y-4 mb-6">
+                    <div class="flex items-center justify-between py-3 border-b border-neutral-light">
+                        <span class="text-sm text-neutral-medium">Plano Atual</span>
+                        <span class="font-semibold text-neutral-dark">Premium</span>
+                    </div>
+                    <div class="flex items-center justify-between py-3 border-b border-neutral-light">
+                        <span class="text-sm text-neutral-medium">Status</span>
+                        <span class="px-2 py-1 bg-success-green/10 text-success-green rounded text-xs font-semibold">ATIVO</span>
+                    </div>
+                    <div class="flex items-center justify-between py-3 border-b border-neutral-light">
+                        <span class="text-sm text-neutral-medium">Valor Mensal</span>
+                        <span class="font-semibold text-neutral-dark">R$ 1.000,00</span>
+                    </div>
+                    <div class="flex items-center justify-between py-3 border-b border-neutral-light">
+                        <span class="text-sm text-neutral-medium">Ciclo de Cobrança</span>
+                        <span class="font-semibold text-neutral-dark">Anual</span>
+                    </div>
+                    <div class="flex items-center justify-between py-3 border-b border-neutral-light">
+                        <span class="text-sm text-neutral-medium">Data de Início</span>
+                        <span class="font-semibold text-neutral-dark">15 Jan 2025</span>
+                    </div>
+                    <div class="flex items-center justify-between py-3">
+                        <span class="text-sm text-neutral-medium">Próxima Renovação</span>
+                        <span class="font-semibold text-neutral-dark">15 Fev 2026</span>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <button class="w-full py-3 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors">
+                        Atualizar Plano
+                    </button>
+                    <button class="w-full py-3 text-error-red font-semibold hover:bg-error-red/10 rounded-lg transition-colors">
+                        Cancelar Assinatura
+                    </button>
+                </div>
+            </section>
+
+            <section id="payment-settings-section" class="bg-white rounded-2xl p-6 border border-neutral-light shadow-sm">
+                <h3 class="text-xl font-bold text-neutral-dark mb-6">Configurações de Pagamento</h3>
+                
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between py-3 border-b border-neutral-light">
+                        <div>
+                            <div class="font-medium text-neutral-dark mb-1">Renovação Automática</div>
+                            <div class="text-xs text-neutral-medium">Renovar automaticamente no vencimento</div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-11 h-6 bg-success-green peer-focus:ring-2 peer-focus:ring-success-green/20 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                        </label>
+                    </div>
+
+                    <div class="flex items-center justify-between py-3 border-b border-neutral-light">
+                        <div>
+                            <div class="font-medium text-neutral-dark mb-1">Notificações de Pagamento</div>
+                            <div class="text-xs text-neutral-medium">Receber alertas antes da cobrança</div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-11 h-6 bg-success-green peer-focus:ring-2 peer-focus:ring-success-green/20 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                        </label>
+                    </div>
+
+                    <div class="flex items-center justify-between py-3 border-b border-neutral-light">
+                        <div>
+                            <div class="font-medium text-neutral-dark mb-1">Notas Fiscais por Email</div>
+                            <div class="text-xs text-neutral-medium">Enviar automaticamente após pagamento</div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-11 h-6 bg-success-green peer-focus:ring-2 peer-focus:ring-success-green/20 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                        </label>
+                    </div>
+
+                    <div class="flex items-center justify-between py-3">
+                        <div>
+                            <div class="font-medium text-neutral-dark mb-1">Retry em Falhas</div>
+                            <div class="text-xs text-neutral-medium">Tentar novamente em caso de erro</div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-11 h-6 bg-success-green peer-focus:ring-2 peer-focus:ring-success-green/20 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <section id="billing-info-section" class="bg-white rounded-2xl p-6 border border-neutral-light shadow-sm">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-bold text-neutral-dark">Informações de Cobrança</h3>
+                    <button class="text-primary-deep hover:text-secondary-blue">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+                </div>
+                
+                <div class="space-y-3 text-sm">
+                    <div>
+                        <div class="text-neutral-medium mb-1">Nome Completo</div>
+                        <div class="font-medium text-neutral-dark">Carlos Roberto Silva</div>
+                    </div>
+                    <div>
+                        <div class="text-neutral-medium mb-1">CPF</div>
+                        <div class="font-medium text-neutral-dark font-mono">123.456.789-00</div>
+                    </div>
+                    <div>
+                        <div class="text-neutral-medium mb-1">Email</div>
+                        <div class="font-medium text-neutral-dark">carlos.silva@email.com</div>
+                    </div>
+                    <div>
+                        <div class="text-neutral-medium mb-1">Telefone</div>
+                        <div class="font-medium text-neutral-dark">+55 (11) 98765-4321</div>
+                    </div>
+                    <div>
+                        <div class="text-neutral-medium mb-1">Endereço</div>
+                        <div class="font-medium text-neutral-dark">Av. Paulista, 1234 - Bela Vista<br>São Paulo, SP - 01310-100</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="security-info-section" class="bg-gradient-to-br from-accent-emerald/5 to-success-green/5 rounded-2xl p-6 border border-accent-emerald/20">
+                <div class="flex items-start space-x-3 mb-4">
+                    <div class="w-10 h-10 bg-accent-emerald/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-shield-halved text-accent-emerald text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-neutral-dark mb-2">Pagamentos 100% Seguros</h4>
+                        <div class="text-sm text-neutral-medium space-y-2">
+                            <div class="flex items-start space-x-2">
+                                <i class="fa-solid fa-check text-success-green mt-0.5 text-xs"></i>
+                                <span>Criptografia SSL/TLS 256-bit</span>
+                            </div>
+                            <div class="flex items-start space-x-2">
+                                <i class="fa-solid fa-check text-success-green mt-0.5 text-xs"></i>
+                                <span>PCI DSS Level 1 Compliant</span>
+                            </div>
+                            <div class="flex items-start space-x-2">
+                                <i class="fa-solid fa-check text-success-green mt-0.5 text-xs"></i>
+                                <span>Processado por Stripe & Asaas</span>
+                            </div>
+                            <div class="flex items-start space-x-2">
+                                <i class="fa-solid fa-check text-success-green mt-0.5 text-xs"></i>
+                                <span>Dados nunca armazenados</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="help-section" class="bg-white rounded-2xl p-6 border border-neutral-light shadow-sm">
+                <h3 class="text-xl font-bold text-neutral-dark mb-4">Precisa de Ajuda?</h3>
+                <div class="space-y-3">
+                    <a href="#" class="flex items-center justify-between p-3 hover:bg-bg-subtle rounded-lg transition-colors group">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-circle-question text-info-blue"></i>
+                            <span class="text-sm text-neutral-dark group-hover:text-primary-deep">Central de Ajuda</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-neutral-light text-xs"></i>
+                    </a>
+                    <a href="#" class="flex items-center justify-between p-3 hover:bg-bg-subtle rounded-lg transition-colors group">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-headset text-success-green"></i>
+                            <span class="text-sm text-neutral-dark group-hover:text-primary-deep">Falar com Suporte</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-neutral-light text-xs"></i>
+                    </a>
+                    <a href="#" class="flex items-center justify-between p-3 hover:bg-bg-subtle rounded-lg transition-colors group">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-file-lines text-primary-gold"></i>
+                            <span class="text-sm text-neutral-dark group-hover:text-primary-deep">Termos de Serviço</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-neutral-light text-xs"></i>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+
+<footer id="footer" class="bg-neutral-dark text-white mt-24">
+    <div class="max-w-[1440px] mx-auto px-8 py-12">
+        <div class="grid grid-cols-5 gap-8 mb-12">
+            <div class="col-span-2">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 bg-primary-gold rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-deep text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold">LegacyGuard</span>
+                </div>
+                <p class="text-white/70 mb-6 leading-relaxed">
+                    Planejamento sucessório digital com tecnologia blockchain. Proteja seu legado com segurança de nível militar.
+                </p>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="w-10 h-10 bg-white/10 hover:bg-primary-gold rounded-lg flex items-center justify-center transition-colors">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 hover:bg-primary-gold rounded-lg flex items-center justify-center transition-colors">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 hover:bg-primary-gold rounded-lg flex items-center justify-center transition-colors">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Produto</h4>
+                <ul class="space-y-3 text-sm text-white/70">
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Funcionalidades</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Preços</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Segurança</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Roadmap</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Empresa</h4>
+                <ul class="space-y-3 text-sm text-white/70">
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Sobre Nós</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Blog</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Carreiras</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Contato</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Legal</h4>
+                <ul class="space-y-3 text-sm text-white/70">
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Privacidade</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Termos</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">LGPD</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="pt-8 border-t border-white/10 flex items-center justify-between text-sm text-white/70">
+            <div>© 2026 LegacyGuard. Todos os direitos reservados.</div>
+            <div class="flex items-center space-x-6">
+                <span class="flex items-center space-x-2">
+                    <i class="fa-solid fa-certificate text-primary-gold"></i>
+                    <span>ICP-Brasil</span>
+                </span>
+                <span class="flex items-center space-x-2">
+                    <i class="fa-brands fa-ethereum text-accent-purple"></i>
+                    <span>Polygon</span>
+                </span>
+                <span class="flex items-center space-x-2">
+                    <i class="fa-solid fa-shield-halved text-accent-emerald"></i>
+                    <span>LGPD</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

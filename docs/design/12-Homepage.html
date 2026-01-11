@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estate Planning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-deep': '#1A237E',
+                        'primary-gold': '#C9A054',
+                        'secondary-blue': '#3949AB',
+                        'secondary-pale': '#E8EAF6',
+                        'secondary-gold-light': '#E4D4B4',
+                        'accent-emerald': '#00695C',
+                        'accent-amber': '#FF8F00',
+                        'accent-purple': '#6A1B9A',
+                        'success-green': '#2E7D32',
+                        'error-red': '#C62828',
+                        'warning-orange': '#EF6C00',
+                        'info-blue': '#1565C0',
+                        'neutral-dark': '#37474F',
+                        'neutral-medium': '#78909C',
+                        'neutral-light': '#CFD8DC',
+                        'bg-subtle': '#F5F7FA',
+                        'bg-section': '#ECEFF1',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'crimson': ['Crimson Pro', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Crimson+Pro:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+</head>
+<body class="font-inter bg-white">
+
+<header id="header" class="bg-white border-b border-neutral-light sticky top-0 z-50">
+    <div class="max-w-[1440px] mx-auto px-8 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-12">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary-deep rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-gold text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-primary-deep">LegacyGuard</span>
+                </div>
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#servicos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Serviços</a>
+                    <a href="#como-funciona" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Como Funciona</a>
+                    <a href="#tecnologia" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Tecnologia</a>
+                    <a href="#precos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Preços</a>
+                    <a href="#recursos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Recursos</a>
+                    <a href="#blog" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Blog</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="px-6 py-2.5 text-primary-deep font-semibold hover:bg-secondary-pale rounded-lg transition-colors">
+                    Login
+                </button>
+                <button class="px-6 py-2.5 bg-primary-deep text-white font-semibold hover:bg-secondary-blue rounded-lg transition-colors flex items-center space-x-2">
+                    <span>Agendar Consulta</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="hero-section" class="bg-gradient-to-br from-primary-deep via-secondary-blue to-primary-deep text-white relative overflow-hidden h-[680px]">
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-20 left-20 w-96 h-96 bg-primary-gold rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-accent-emerald rounded-full blur-3xl"></div>
+    </div>
+    <div class="max-w-[1440px] mx-auto px-8 py-20 relative z-10">
+        <div class="grid grid-cols-2 gap-16 items-center">
+            <div class="space-y-8">
+                <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
+                    <i class="fa-solid fa-shield-check text-accent-emerald"></i>
+                    <span class="text-sm font-medium">Certificado ICP-Brasil • Blockchain Polygon</span>
+                </div>
+                <h1 class="text-5xl font-bold leading-tight">
+                    Proteja Seu Legado com <span class="text-primary-gold">Tecnologia Blockchain</span>
+                </h1>
+                <p class="text-xl text-white/90 leading-relaxed">
+                    Planejamento sucessório digital com criptografia de nível militar, validação em vídeo e registro imutável em blockchain. Garanta que seus bens cheguem aos seus herdeiros de forma segura e legal.
+                </p>
+                <div class="flex items-center space-x-4">
+                    <button class="px-8 py-4 bg-primary-gold text-primary-deep font-bold rounded-lg hover:bg-secondary-gold-light transition-all transform hover:scale-105 flex items-center space-x-2">
+                        <span>Criar Meu Testamento</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button class="px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-lg hover:bg-white/20 transition-colors flex items-center space-x-2">
+                        <i class="fa-solid fa-play-circle"></i>
+                        <span>Ver Como Funciona</span>
+                    </button>
+                </div>
+                <div class="flex items-center space-x-8 pt-8">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-success-green/20 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-check text-success-green text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold">2.847+</div>
+                            <div class="text-sm text-white/70">Testamentos Criados</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-accent-emerald/20 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-lock text-accent-emerald text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold">100%</div>
+                            <div class="text-sm text-white/70">Segurança Garantida</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary-gold/20 to-accent-emerald/20 rounded-3xl blur-2xl"></div>
+                <div class="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between pb-4 border-b border-white/20">
+                            <span class="text-lg font-semibold">Dashboard de Proteção</span>
+                            <span class="px-3 py-1 bg-success-green/20 text-success-green rounded-full text-sm font-medium">Ativo</span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-white/5 rounded-xl p-4 flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fa-solid fa-file-signature text-primary-gold text-2xl"></i>
+                                    <div>
+                                        <div class="font-semibold">Testamento Digital</div>
+                                        <div class="text-sm text-white/60">Última atualização: 15/01/2026</div>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-check-circle text-success-green text-xl"></i>
+                            </div>
+                            <div class="bg-white/5 rounded-xl p-4 flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fa-solid fa-video text-accent-emerald text-2xl"></i>
+                                    <div>
+                                        <div class="font-semibold">Validação em Vídeo</div>
+                                        <div class="text-sm text-white/60">Certificado e criptografado</div>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-check-circle text-success-green text-xl"></i>
+                            </div>
+                            <div class="bg-white/5 rounded-xl p-4 flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fa-brands fa-ethereum text-accent-purple text-2xl"></i>
+                                    <div>
+                                        <div class="font-semibold">Registro Blockchain</div>
+                                        <div class="text-sm text-white/60 font-mono">0x7a8f...3d2c</div>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-check-circle text-success-green text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-white/20">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-white/70">Próxima verificação</span>
+                                <span class="font-semibold">15/07/2026</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="trust-badges" class="bg-white py-12 border-b border-neutral-light">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="flex items-center justify-between">
+            <div class="text-center">
+                <div class="text-sm font-medium text-neutral-medium uppercase tracking-wider mb-2">Certificado por</div>
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-certificate text-primary-gold text-2xl"></i>
+                    <span class="text-lg font-bold text-neutral-dark">ICP-Brasil</span>
+                </div>
+            </div>
+            <div class="text-center">
+                <div class="text-sm font-medium text-neutral-medium uppercase tracking-wider mb-2">Blockchain</div>
+                <div class="flex items-center space-x-2">
+                    <i class="fa-brands fa-ethereum text-accent-purple text-2xl"></i>
+                    <span class="text-lg font-bold text-neutral-dark">Polygon Network</span>
+                </div>
+            </div>
+            <div class="text-center">
+                <div class="text-sm font-medium text-neutral-medium uppercase tracking-wider mb-2">Criptografia</div>
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-lock text-accent-emerald text-2xl"></i>
+                    <span class="text-lg font-bold text-neutral-dark">AES-256-GCM</span>
+                </div>
+            </div>
+            <div class="text-center">
+                <div class="text-sm font-medium text-neutral-medium uppercase tracking-wider mb-2">Conformidade</div>
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-gavel text-info-blue text-2xl"></i>
+                    <span class="text-lg font-bold text-neutral-dark">LGPD Compliant</span>
+                </div>
+            </div>
+            <div class="text-center">
+                <div class="text-sm font-medium text-neutral-medium uppercase tracking-wider mb-2">Armazenamento</div>
+                <div class="flex items-center space-x-2">
+                    <i class="fa-brands fa-aws text-warning-orange text-2xl"></i>
+                    <span class="text-lg font-bold text-neutral-dark">AWS KMS</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="servicos" class="bg-bg-subtle py-24">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center space-x-2 bg-secondary-pale px-4 py-2 rounded-full mb-4">
+                <i class="fa-solid fa-briefcase text-primary-deep"></i>
+                <span class="text-sm font-semibold text-primary-deep uppercase tracking-wider">Nossos Serviços</span>
+            </div>
+            <h2 class="text-4xl font-bold text-neutral-dark mb-4">Proteção Completa para Seu Legado</h2>
+            <p class="text-xl text-neutral-medium max-w-3xl mx-auto">
+                Combinamos tecnologia de ponta com expertise jurídica para garantir que seus bens sejam distribuídos exatamente como você deseja
+            </p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-8">
+            <div id="service-testament-creation" class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow border border-neutral-light">
+                <div class="w-16 h-16 bg-primary-deep rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-file-contract text-primary-gold text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-neutral-dark mb-4">Criação de Testamento Digital</h3>
+                <p class="text-neutral-medium mb-6 leading-relaxed">
+                    Wizard intuitivo de 7 etapas para inventariar todos os seus bens: imóveis, veículos, contas bancárias, criptomoedas e ativos digitais.
+                </p>
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Auto-save a cada 30 segundos</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Validação de CPF e herdeiros legítimos</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Upload seguro de documentos</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Conformidade com Art. 1.876 CC</span>
+                    </li>
+                </ul>
+                <button class="w-full py-3 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors">
+                    Iniciar Agora
+                </button>
+            </div>
+
+            <div id="service-video-validation" class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow border border-neutral-light">
+                <div class="w-16 h-16 bg-accent-emerald rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-video text-white text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-neutral-dark mb-4">Validação Forense em Vídeo</h3>
+                <p class="text-neutral-medium mb-6 leading-relaxed">
+                    Sessão de videoconferência com advogado da plataforma para declaração oficial do testamento com prova criptográfica.
+                </p>
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Gravação em 1080p/30fps</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Criptografia AES-256 antes do armazenamento</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Timestamp em blockchain Polygon</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Verificação de capacidade mental</span>
+                    </li>
+                </ul>
+                <button class="w-full py-3 bg-accent-emerald text-white font-semibold rounded-lg hover:bg-success-green transition-colors">
+                    Agendar Sessão
+                </button>
+            </div>
+
+            <div id="service-digital-signature" class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow border border-neutral-light">
+                <div class="w-16 h-16 bg-primary-gold rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-signature text-primary-deep text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-neutral-dark mb-4">Assinatura Digital ICP-Brasil</h3>
+                <p class="text-neutral-medium mb-6 leading-relaxed">
+                    Integração com certificadoras brasileiras para assinatura legalmente vinculante no PDF do testamento gerado.
+                </p>
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Suporte a e-CPF A3 em nuvem</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Validação de autenticidade via webhook</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Entrega por email criptografado</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">3 tentativas de assinatura incluídas</span>
+                    </li>
+                </ul>
+                <button class="w-full py-3 bg-primary-gold text-primary-deep font-semibold rounded-lg hover:bg-secondary-gold-light transition-colors">
+                    Saiba Mais
+                </button>
+            </div>
+
+            <div id="service-crypto-custody" class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow border border-neutral-light">
+                <div class="w-16 h-16 bg-accent-purple rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-key text-white text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-neutral-dark mb-4">Custódia Criptográfica Shamir</h3>
+                <p class="text-neutral-medium mb-6 leading-relaxed">
+                    Chave mestra dividida em 3 partes (AWS KMS, advogado, trigger de óbito) exigindo 2 de 3 para descriptografia.
+                </p>
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Chave aleatória de 256 bits</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Threshold 2-of-3 Shamir Secret Sharing</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Backup geográfico em S3 Glacier</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Log de auditoria imutável</span>
+                    </li>
+                </ul>
+                <button class="w-full py-3 bg-accent-purple text-white font-semibold rounded-lg hover:opacity-90 transition-opacity">
+                    Ver Detalhes Técnicos
+                </button>
+            </div>
+
+            <div id="service-blockchain-registry" class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow border border-neutral-light">
+                <div class="w-16 h-16 bg-info-blue rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-cubes text-white text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-neutral-dark mb-4">Registro Imutável Blockchain</h3>
+                <p class="text-neutral-medium mb-6 leading-relaxed">
+                    Hash criptográfico do testamento + metadados registrados na rede Polygon para prova à prova de adulteração.
+                </p>
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Smart contract de emissão de eventos</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Custo ~$0.01 por transação</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Link público para PolygonScan</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Retry automático em caso de falha</span>
+                    </li>
+                </ul>
+                <button class="w-full py-3 bg-info-blue text-white font-semibold rounded-lg hover:opacity-90 transition-opacity">
+                    Verificar na Blockchain
+                </button>
+            </div>
+
+            <div id="service-death-monitoring" class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow border border-neutral-light">
+                <div class="w-16 h-16 bg-warning-orange rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-heartbeat text-white text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-neutral-dark mb-4">Monitoramento de Óbito Automatizado</h3>
+                <p class="text-neutral-medium mb-6 leading-relaxed">
+                    Consulta diária às APIs de registro de óbito (Serasa/CRC) para detectar falecimento e acionar workflow de abertura.
+                </p>
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Verificação diária às 2h da manhã</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Validação em 4 camadas</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Prevenção de falsos positivos</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Revisão manual por advogado</span>
+                    </li>
+                </ul>
+                <button class="w-full py-3 bg-warning-orange text-white font-semibold rounded-lg hover:opacity-90 transition-opacity">
+                    Como Funciona
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="como-funciona" class="bg-white py-24">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center space-x-2 bg-secondary-pale px-4 py-2 rounded-full mb-4">
+                <i class="fa-solid fa-route text-primary-deep"></i>
+                <span class="text-sm font-semibold text-primary-deep uppercase tracking-wider">Processo Simplificado</span>
+            </div>
+            <h2 class="text-4xl font-bold text-neutral-dark mb-4">Como Funciona em 7 Passos</h2>
+            <p class="text-xl text-neutral-medium max-w-3xl mx-auto">
+                Da criação à distribuição aos herdeiros, cada etapa é projetada para máxima segurança e conformidade legal
+            </p>
+        </div>
+
+        <div class="relative">
+            <div class="absolute left-1/2 top-0 bottom-0 w-1 bg-secondary-pale transform -translate-x-1/2"></div>
+            
+            <div id="step-1" class="relative mb-16">
+                <div class="flex items-center">
+                    <div class="w-1/2 pr-16 text-right">
+                        <div class="bg-bg-subtle rounded-2xl p-8 inline-block">
+                            <h3 class="text-2xl font-bold text-neutral-dark mb-3">1. Agendamento de Consulta</h3>
+                            <p class="text-neutral-medium leading-relaxed mb-4">
+                                Agende uma consulta gratuita de 30 minutos com nosso especialista em planejamento sucessório. Receba orientação personalizada sobre seu caso.
+                            </p>
+                            <div class="flex items-center justify-end space-x-4 text-sm">
+                                <span class="flex items-center space-x-2 text-info-blue">
+                                    <i class="fa-solid fa-calendar"></i>
+                                    <span>Cal.com Integration</span>
+                                </span>
+                                <span class="flex items-center space-x-2 text-success-green">
+                                    <i class="fa-solid fa-video"></i>
+                                    <span>Google Meet</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-16 h-16 bg-primary-deep rounded-full flex items-center justify-center border-4 border-white z-10">
+                        <i class="fa-solid fa-calendar-check text-white text-2xl"></i>
+                    </div>
+                    <div class="w-1/2 pl-16"></div>
+                </div>
+            </div>
+
+            <div id="step-2" class="relative mb-16">
+                <div class="flex items-center">
+                    <div class="w-1/2 pr-16"></div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-16 h-16 bg-primary-gold rounded-full flex items-center justify-center border-4 border-white z-10">
+                        <i class="fa-solid fa-clipboard-list text-primary-deep text-2xl"></i>
+                    </div>
+                    <div class="w-1/2 pl-16">
+                        <div class="bg-bg-subtle rounded-2xl p-8 inline-block">
+                            <h3 class="text-2xl font-bold text-neutral-dark mb-3">2. Wizard de Inventário</h3>
+                            <p class="text-neutral-medium leading-relaxed mb-4">
+                                Preencha o formulário detalhado de 7 etapas: imóveis, veículos, contas bancárias, investimentos, criptomoedas e ativos digitais. Auto-save a cada 30 segundos.
+                            </p>
+                            <div class="flex items-start space-x-4 text-sm">
+                                <span class="flex items-center space-x-2 text-accent-purple">
+                                    <i class="fa-solid fa-coins"></i>
+                                    <span>Crypto Assets</span>
+                                </span>
+                                <span class="flex items-center space-x-2 text-accent-emerald">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                    <span>Encrypted Storage</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="step-3" class="relative mb-16">
+                <div class="flex items-center">
+                    <div class="w-1/2 pr-16 text-right">
+                        <div class="bg-bg-subtle rounded-2xl p-8 inline-block">
+                            <h3 class="text-2xl font-bold text-neutral-dark mb-3">3. Upload de Documentos</h3>
+                            <p class="text-neutral-medium leading-relaxed mb-4">
+                                Faça upload de documentos comprobatórios (escrituras, CNHs, extratos). Suporte para arquivos grandes com chunking e escaneamento antivírus.
+                            </p>
+                            <div class="flex items-center justify-end space-x-4 text-sm">
+                                <span class="flex items-center space-x-2 text-error-red">
+                                    <i class="fa-solid fa-virus-slash"></i>
+                                    <span>ClamAV Scan</span>
+                                </span>
+                                <span class="flex items-center space-x-2 text-info-blue">
+                                    <i class="fa-solid fa-database"></i>
+                                    <span>MinIO Storage</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-16 h-16 bg-accent-emerald rounded-full flex items-center justify-center border-4 border-white z-10">
+                        <i class="fa-solid fa-file-upload text-white text-2xl"></i>
+                    </div>
+                    <div class="w-1/2 pl-16"></div>
+                </div>
+            </div>
+
+            <div id="step-4" class="relative mb-16">
+                <div class="flex items-center">
+                    <div class="w-1/2 pr-16"></div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-16 h-16 bg-accent-purple rounded-full flex items-center justify-center border-4 border-white z-10">
+                        <i class="fa-solid fa-video text-white text-2xl"></i>
+                    </div>
+                    <div class="w-1/2 pl-16">
+                        <div class="bg-bg-subtle rounded-2xl p-8 inline-block">
+                            <h3 class="text-2xl font-bold text-neutral-dark mb-3">4. Validação Forense em Vídeo</h3>
+                            <p class="text-neutral-medium leading-relaxed mb-4">
+                                Sessão agendada de 45 minutos com advogado da plataforma. Declaração oficial gravada em 1080p, criptografada com AES-256 e registrada em blockchain.
+                            </p>
+                            <div class="flex items-start space-x-4 text-sm">
+                                <span class="flex items-center space-x-2 text-accent-emerald">
+                                    <i class="fa-solid fa-lock"></i>
+                                    <span>End-to-End Encrypted</span>
+                                </span>
+                                <span class="flex items-center space-x-2 text-info-blue">
+                                    <i class="fa-brands fa-ethereum"></i>
+                                    <span>Blockchain Timestamp</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="step-5" class="relative mb-16">
+                <div class="flex items-center">
+                    <div class="w-1/2 pr-16 text-right">
+                        <div class="bg-bg-subtle rounded-2xl p-8 inline-block">
+                            <h3 class="text-2xl font-bold text-neutral-dark mb-3">5. Assinatura Digital ICP-Brasil</h3>
+                            <p class="text-neutral-medium leading-relaxed mb-4">
+                                Geração do PDF do testamento formatado legalmente. Redirecionamento para certificadora para assinatura com e-CPF A3. Validação de autenticidade via webhook.
+                            </p>
+                            <div class="flex items-center justify-end space-x-4 text-sm">
+                                <span class="flex items-center space-x-2 text-primary-gold">
+                                    <i class="fa-solid fa-certificate"></i>
+                                    <span>ICP-Brasil Certified</span>
+                                </span>
+                                <span class="flex items-center space-x-2 text-success-green">
+                                    <i class="fa-solid fa-check-double"></i>
+                                    <span>Legally Binding</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-16 h-16 bg-primary-gold rounded-full flex items-center justify-center border-4 border-white z-10">
+                        <i class="fa-solid fa-signature text-primary-deep text-2xl"></i>
+                    </div>
+                    <div class="w-1/2 pl-16"></div>
+                </div>
+            </div>
+
+            <div id="step-6" class="relative mb-16">
+                <div class="flex items-center">
+                    <div class="w-1/2 pr-16"></div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-16 h-16 bg-info-blue rounded-full flex items-center justify-center border-4 border-white z-10">
+                        <i class="fa-solid fa-key text-white text-2xl"></i>
+                    </div>
+                    <div class="w-1/2 pl-16">
+                        <div class="bg-bg-subtle rounded-2xl p-8 inline-block">
+                            <h3 class="text-2xl font-bold text-neutral-dark mb-3">6. Custódia Criptográfica Shamir</h3>
+                            <p class="text-neutral-medium leading-relaxed mb-4">
+                                Chave mestra dividida em 3 partes: AWS KMS (share #1), senha do advogado (share #2), trigger de óbito (share #3). Requer 2 de 3 para descriptografar.
+                            </p>
+                            <div class="flex items-start space-x-4 text-sm">
+                                <span class="flex items-center space-x-2 text-warning-orange">
+                                    <i class="fa-brands fa-aws"></i>
+                                    <span>AWS KMS HSM</span>
+                                </span>
+                                <span class="flex items-center space-x-2 text-accent-purple">
+                                    <i class="fa-solid fa-puzzle-piece"></i>
+                                    <span>Shamir 2-of-3</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="step-7" class="relative">
+                <div class="flex items-center">
+                    <div class="w-1/2 pr-16 text-right">
+                        <div class="bg-bg-subtle rounded-2xl p-8 inline-block">
+                            <h3 class="text-2xl font-bold text-neutral-dark mb-3">7. Monitoramento & Distribuição</h3>
+                            <p class="text-neutral-medium leading-relaxed mb-4">
+                                Verificação automática diária de óbito + Dead Man's Switch semestral. Após validação em 4 camadas, testamento é aberto e herdeiros recebem acesso ao portal.
+                            </p>
+                            <div class="flex items-center justify-end space-x-4 text-sm">
+                                <span class="flex items-center space-x-2 text-success-green">
+                                    <i class="fa-solid fa-users"></i>
+                                    <span>Beneficiary Portal</span>
+                                </span>
+                                <span class="flex items-center space-x-2 text-warning-orange">
+                                    <i class="fa-solid fa-bell"></i>
+                                    <span>Automated Alerts</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-16 h-16 bg-success-green rounded-full flex items-center justify-center border-4 border-white z-10">
+                        <i class="fa-solid fa-check text-white text-2xl"></i>
+                    </div>
+                    <div class="w-1/2 pl-16"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="tecnologia" class="bg-primary-deep text-white py-24">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
+                <i class="fa-solid fa-microchip text-primary-gold"></i>
+                <span class="text-sm font-semibold text-primary-gold uppercase tracking-wider">Stack Tecnológico</span>
+            </div>
+            <h2 class="text-4xl font-bold mb-4">Tecnologia de Nível Empresarial</h2>
+            <p class="text-xl text-white/80 max-w-3xl mx-auto">
+                Infraestrutura moderna e escalável construída com as melhores práticas de segurança e conformidade
+            </p>
+        </div>
+
+        <div class="grid grid-cols-4 gap-6 mb-16">
+            <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                <div class="w-12 h-12 bg-primary-gold/20 rounded-lg flex items-center justify-center mb-4">
+                    <i class="fa-brands fa-react text-primary-gold text-2xl"></i>
+                </div>
+                <h4 class="text-lg font-bold mb-2">Next.js 16.1</h4>
+                <p class="text-white/70 text-sm">App Router, SSG, Server Actions para performance máxima</p>
+            </div>
+            <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                <div class="w-12 h-12 bg-accent-emerald/20 rounded-lg flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-database text-accent-emerald text-2xl"></i>
+                </div>
+                <h4 class="text-lg font-bold mb-2">PostgreSQL</h4>
+                <p class="text-white/70 text-sm">Drizzle ORM, versioning, encrypted columns</p>
+            </div>
+            <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                <div class="w-12 h-12 bg-accent-purple/20 rounded-lg flex items-center justify-center mb-4">
+                    <i class="fa-brands fa-ethereum text-accent-purple text-2xl"></i>
+                </div>
+                <h4 class="text-lg font-bold mb-2">Polygon Blockchain</h4>
+                <p class="text-white/70 text-sm">Ethers.js, Smart Contracts, Immutable Registry</p>
+            </div>
+            <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                <div class="w-12 h-12 bg-warning-orange/20 rounded-lg flex items-center justify-center mb-4">
+                    <i class="fa-brands fa-aws text-warning-orange text-2xl"></i>
+                </div>
+                <h4 class="text-lg font-bold mb-2">AWS KMS</h4>
+                <p class="text-white/70 text-sm">Hardware Security Module, key management</p>
+            </div>
+            <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                <div class="w-12 h-12 bg-info-blue/20 rounded-lg flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-video text-info-blue text-2xl"></i>
+                </div>
+                <h4 class="text-lg font-bold mb-2">Daily.co WebRTC</h4>
+                <p class="text-white/70 text-sm">1080p recording, FFmpeg encoding, encryption</p>
+            </div>
+            <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                <div class="w-12 h-12 bg-success-green/20 rounded-lg flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-server text-success-green text-2xl"></i>
+                </div>
+                <h4 class="text-lg font-bold mb-2">MinIO Storage</h4>
+                <p class="text-white/70 text-sm">S3-compatible, encrypted documents, virus scan</p>
+            </div>
+            <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                <div class="w-12 h-12 bg-error-red/20 rounded-lg flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-gears text-error-red text-2xl"></i>
+                </div>
+                <h4 class="text-lg font-bold mb-2">BullMQ</h4>
+                <p class="text-white/70 text-sm">Job scheduling, email automation, monitoring</p>
+            </div>
+            <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                <div class="w-12 h-12 bg-primary-gold/20 rounded-lg flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-shield-halved text-primary-gold text-2xl"></i>
+                </div>
+                <h4 class="text-lg font-bold mb-2">OpenSSL</h4>
+                <p class="text-white/70 text-sm">AES-256-GCM encryption, SHA-256 hashing</p>
+            </div>
+        </div>
+
+        <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-12 border border-white/10">
+            <div class="grid grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 flex items-center space-x-3">
+                        <i class="fa-solid fa-lock text-primary-gold"></i>
+                        <span>Segurança em Camadas</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-success-green/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">Criptografia AES-256-GCM</div>
+                                <div class="text-white/70 text-sm">Padrão militar para todos os documentos e vídeos armazenados</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-success-green/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">Shamir Secret Sharing (2-of-3)</div>
+                                <div class="text-white/70 text-sm">Chave dividida entre AWS KMS, advogado e trigger de óbito</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-success-green/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">Registro Blockchain Polygon</div>
+                                <div class="text-white/70 text-sm">Hash SHA-256 imutável com timestamp verificável publicamente</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-success-green/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">Autenticação 2FA</div>
+                                <div class="text-white/70 text-sm">TOTP authenticator + SMS para acesso ao portal de beneficiários</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-success-green/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">Backup Geográfico</div>
+                                <div class="text-white/70 text-sm">Replicação em AWS S3 Glacier (região São Paulo)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 flex items-center space-x-3">
+                        <i class="fa-solid fa-gavel text-primary-gold"></i>
+                        <span>Conformidade Legal</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-success-green/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">LGPD Compliant</div>
+                                <div class="text-white/70 text-sm">Cookie consent, data portability, right to erasure</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-success-green/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">Art. 1.876 Código Civil</div>
+                                <div class="text-white/70 text-sm">Formatação legal do testamento público brasileiro</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-success-green/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">ICP-Brasil Certified</div>
+                                <div class="text-white/70 text-sm">Assinatura digital legalmente vinculante</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-success-green/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">Validação de Herdeiros Legítimos</div>
+                                <div class="text-white/70 text-sm">Cálculo automático da regra dos 50% (legítima)</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-success-green/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">Auditoria Imutável</div>
+                                <div class="text-white/70 text-sm">Log de todas as ações (IP, timestamp, device)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="precos" class="bg-bg-subtle py-24">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center space-x-2 bg-secondary-pale px-4 py-2 rounded-full mb-4">
+                <i class="fa-solid fa-tag text-primary-deep"></i>
+                <span class="text-sm font-semibold text-primary-deep uppercase tracking-wider">Planos & Preços</span>
+            </div>
+            <h2 class="text-4xl font-bold text-neutral-dark mb-4">Investimento Transparente</h2>
+            <p class="text-xl text-neutral-medium max-w-3xl mx-auto">
+                Sem taxas ocultas. Pagamento único para criação + anuidade opcional para manutenção e monitoramento
+            </p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-8 mb-12">
+            <div id="plan-basic" class="bg-white rounded-2xl p-8 border-2 border-neutral-light hover:border-primary-deep transition-colors">
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-secondary-pale rounded-full mb-4">
+                        <i class="fa-solid fa-file-contract text-primary-deep text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-neutral-dark mb-2">Básico</h3>
+                    <p class="text-neutral-medium mb-6">Criação única de testamento</p>
+                    <div class="flex items-baseline justify-center mb-2">
+                        <span class="text-sm text-neutral-medium">R$</span>
+                        <span class="text-5xl font-bold text-neutral-dark">1.500</span>
+                    </div>
+                    <div class="text-neutral-medium text-sm">Pagamento único</div>
+                </div>
+                <ul class="space-y-4 mb-8">
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Wizard de inventário completo</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Upload de documentos (até 5GB)</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Validação em vídeo (1 sessão)</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Assinatura digital ICP-Brasil</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Registro em blockchain</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-times text-neutral-light mt-1"></i>
+                        <span class="text-neutral-medium line-through">Monitoramento de óbito</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-times text-neutral-light mt-1"></i>
+                        <span class="text-neutral-medium line-through">Dead Man's Switch</span>
+                    </li>
+                </ul>
+                <button class="w-full py-3 bg-white text-primary-deep font-semibold rounded-lg border-2 border-primary-deep hover:bg-primary-deep hover:text-white transition-colors">
+                    Começar Agora
+                </button>
+            </div>
+
+            <div id="plan-premium" class="bg-gradient-to-br from-primary-deep to-secondary-blue rounded-2xl p-8 border-2 border-primary-gold relative transform scale-105 shadow-2xl">
+                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary-gold text-primary-deep px-6 py-2 rounded-full text-sm font-bold">
+                    MAIS POPULAR
+                </div>
+                <div class="text-center mb-8 text-white">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-primary-gold/20 rounded-full mb-4">
+                        <i class="fa-solid fa-crown text-primary-gold text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Premium</h3>
+                    <p class="text-white/80 mb-6">Proteção completa vitalícia</p>
+                    <div class="flex items-baseline justify-center mb-2">
+                        <span class="text-sm text-white/80">R$</span>
+                        <span class="text-5xl font-bold">1.500</span>
+                        <span class="text-neutral-medium mx-2">+</span>
+                        <span class="text-3xl font-bold">1.000</span>
+                        <span class="text-sm text-white/80">/ano</span>
+                    </div>
+                    <div class="text-white/80 text-sm">Criação + Anuidade de manutenção</div>
+                </div>
+                <ul class="space-y-4 mb-8 text-white">
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-primary-gold mt-1"></i>
+                        <span>Tudo do plano Básico</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-primary-gold mt-1"></i>
+                        <span>Monitoramento diário de óbito (Serasa/CRC)</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-primary-gold mt-1"></i>
+                        <span>Dead Man's Switch semestral</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-primary-gold mt-1"></i>
+                        <span>Atualizações ilimitadas do testamento</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-primary-gold mt-1"></i>
+                        <span>Portal de beneficiários com 2FA</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-primary-gold mt-1"></i>
+                        <span>Suporte prioritário 24/7</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-primary-gold mt-1"></i>
+                        <span>Consultoria anual com advogado</span>
+                    </li>
+                </ul>
+                <button class="w-full py-3 bg-primary-gold text-primary-deep font-bold rounded-lg hover:bg-secondary-gold-light transition-colors">
+                    Escolher Premium
+                </button>
+            </div>
+
+            <div id="plan-enterprise" class="bg-white rounded-2xl p-8 border-2 border-neutral-light hover:border-accent-purple transition-colors">
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-accent-purple/10 rounded-full mb-4">
+                        <i class="fa-solid fa-building text-accent-purple text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-neutral-dark mb-2">Empresarial</h3>
+                    <p class="text-neutral-medium mb-6">Para múltiplos testamentos</p>
+                    <div class="flex items-baseline justify-center mb-2">
+                        <span class="text-5xl font-bold text-neutral-dark">Sob</span>
+                    </div>
+                    <div class="text-neutral-medium text-sm">Consulta personalizada</div>
+                </div>
+                <ul class="space-y-4 mb-8">
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Tudo do plano Premium</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Múltiplos testamentos (família)</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">API de integração personalizada</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Advogado dedicado</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">White-label disponível</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">SLA 99.9% uptime</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check text-success-green mt-1"></i>
+                        <span class="text-neutral-dark">Treinamento da equipe</span>
+                    </li>
+                </ul>
+                <button class="w-full py-3 bg-white text-accent-purple font-semibold rounded-lg border-2 border-accent-purple hover:bg-accent-purple hover:text-white transition-colors">
+                    Falar com Vendas
+                </button>
+            </div>
+        </div>
+
+        <div id="pricing-calculator" class="bg-white rounded-2xl p-12 shadow-lg">
+            <div class="text-center mb-8">
+                <h3 class="text-3xl font-bold text-neutral-dark mb-3">Calculadora de Economia</h3>
+                <p class="text-neutral-medium">Veja quanto você economiza comparado ao processo tradicional de inventário</p>
+            </div>
+            <div class="grid grid-cols-2 gap-12">
+                <div>
+                    <h4 class="text-xl font-bold text-neutral-dark mb-6">Processo Tradicional</h4>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center py-3 border-b border-neutral-light">
+                            <span class="text-neutral-medium">Honorários do advogado</span>
+                            <span class="font-bold text-neutral-dark">R$ 15.000</span>
+                        </div>
+                        <div class="flex justify-between items-center py-3 border-b border-neutral-light">
+                            <span class="text-neutral-medium">Custas cartoriais</span>
+                            <span class="font-bold text-neutral-dark">R$ 8.000</span>
+                        </div>
+                        <div class="flex justify-between items-center py-3 border-b border-neutral-light">
+                            <span class="text-neutral-medium">ITCMD (4% do patrimônio)</span>
+                            <span class="font-bold text-neutral-dark">R$ 20.000</span>
+                        </div>
+                        <div class="flex justify-between items-center py-3 border-b border-neutral-light">
+                            <span class="text-neutral-medium">Tempo médio de processo</span>
+                            <span class="font-bold text-error-red">18-24 meses</span>
+                        </div>
+                        <div class="flex justify-between items-center py-4 bg-error-red/10 rounded-lg px-4">
+                            <span class="font-bold text-neutral-dark">Total Estimado</span>
+                            <span class="text-2xl font-bold text-error-red">R$ 43.000+</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold text-neutral-dark mb-6">LegacyGuard Premium</h4>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center py-3 border-b border-neutral-light">
+                            <span class="text-neutral-medium">Criação do testamento</span>
+                            <span class="font-bold text-neutral-dark">R$ 1.500</span>
+                        </div>
+                        <div class="flex justify-between items-center py-3 border-b border-neutral-light">
+                            <span class="text-neutral-medium">Anuidade (10 anos)</span>
+                            <span class="font-bold text-neutral-dark">R$ 10.000</span>
+                        </div>
+                        <div class="flex justify-between items-center py-3 border-b border-neutral-light">
+                            <span class="text-neutral-medium">Custos adicionais</span>
+                            <span class="font-bold text-neutral-dark">R$ 0</span>
+                        </div>
+                        <div class="flex justify-between items-center py-3 border-b border-neutral-light">
+                            <span class="text-neutral-medium">Tempo de processo</span>
+                            <span class="font-bold text-success-green">48 horas</span>
+                        </div>
+                        <div class="flex justify-between items-center py-4 bg-success-green/10 rounded-lg px-4">
+                            <span class="font-bold text-neutral-dark">Total (10 anos)</span>
+                            <span class="text-2xl font-bold text-success-green">R$ 11.500</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 text-center">
+                <div class="inline-flex items-center space-x-4 bg-primary-gold/10 px-8 py-4 rounded-xl">
+                    <i class="fa-solid fa-piggy-bank text-primary-gold text-3xl"></i>
+                    <div class="text-left">
+                        <div class="text-sm text-neutral-medium">Economia Total em 10 Anos</div>
+                        <div class="text-3xl font-bold text-primary-gold">R$ 31.500</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="recursos" class="bg-white py-24">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center space-x-2 bg-secondary-pale px-4 py-2 rounded-full mb-4">
+                <i class="fa-solid fa-sparkles text-primary-deep"></i>
+                <span class="text-sm font-semibold text-primary-deep uppercase tracking-wider">Recursos Avançados</span>
+            </div>
+            <h2 class="text-4xl font-bold text-neutral-dark mb-4">Funcionalidades que Fazem a Diferença</h2>
+            <p class="text-xl text-neutral-medium max-w-3xl mx-auto">
+                Recursos exclusivos desenvolvidos para garantir máxima segurança e facilidade de uso
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8">
+            <div id="feature-dead-mans-switch" class="bg-gradient-to-br from-bg-subtle to-white rounded-2xl p-8 border border-neutral-light">
+                <div class="flex items-start space-x-6">
+                    <div class="w-20 h-20 bg-warning-orange/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-bell text-warning-orange text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-neutral-dark mb-3">Dead Man's Switch</h3>
+                        <p class="text-neutral-medium mb-4 leading-relaxed">
+                            Sistema de verificação semestral via email/SMS. Se não houver resposta após 30 dias de tentativas escalonadas, iniciamos investigação manual antes de qualquer ação.
+                        </p>
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">Email D+0, D+7, D+14</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">Ligação telefônica D+14</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">One-click checkin seguro</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="feature-beneficiary-portal" class="bg-gradient-to-br from-bg-subtle to-white rounded-2xl p-8 border border-neutral-light">
+                <div class="flex items-start space-x-6">
+                    <div class="w-20 h-20 bg-accent-purple/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-users text-accent-purple text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-neutral-dark mb-3">Portal de Beneficiários</h3>
+                        <p class="text-neutral-medium mb-4 leading-relaxed">
+                            Após validação do óbito, herdeiros recebem acesso seguro com 2FA. Revelação progressiva de informações sensíveis com aprovação do advogado.
+                        </p>
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">Magic link authentication</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">KYC validation (ID + comprovante)</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">Watermark anti-screenshot</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="feature-crypto-assets" class="bg-gradient-to-br from-bg-subtle to-white rounded-2xl p-8 border border-neutral-light">
+                <div class="flex items-start space-x-6">
+                    <div class="w-20 h-20 bg-accent-purple/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <i class="fa-brands fa-bitcoin text-accent-purple text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-neutral-dark mb-3">Ativos Digitais & Crypto</h3>
+                        <p class="text-neutral-medium mb-4 leading-relaxed">
+                            Suporte completo para criptomoedas, NFTs e ativos digitais. Seeds e chaves privadas armazenadas com criptografia dupla e revelação controlada.
+                        </p>
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">Bitcoin, Ethereum, Polygon</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">NFT inventory tracking</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">Lawyer-approved transfers</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="feature-multi-language" class="bg-gradient-to-br from-bg-subtle to-white rounded-2xl p-8 border border-neutral-light">
+                <div class="flex items-start space-x-6">
+                    <div class="w-20 h-20 bg-info-blue/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-globe text-info-blue text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-neutral-dark mb-3">Suporte Multi-Idioma</h3>
+                        <p class="text-neutral-medium mb-4 leading-relaxed">
+                            Interface disponível em português (primário), inglês e espanhol. Documentos legais sempre em português para conformidade com legislação brasileira.
+                        </p>
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">Português (pt-BR) nativo</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">English & Español coming soon</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">i18n via Next.js</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="feature-mobile-responsive" class="bg-gradient-to-br from-bg-subtle to-white rounded-2xl p-8 border border-neutral-light">
+                <div class="flex items-start space-x-6">
+                    <div class="w-20 h-20 bg-success-green/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-mobile-screen-button text-success-green text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-neutral-dark mb-3">Mobile-First Design</h3>
+                        <p class="text-neutral-medium mb-4 leading-relaxed">
+                            Interface totalmente responsiva otimizada para dispositivos móveis. 20% dos usuários acessam via smartphone durante o processo de criação.
+                        </p>
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">WCAG 2.1 AA compliant</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">Lighthouse score >90</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">Progressive Web App</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="feature-payment-methods" class="bg-gradient-to-br from-bg-subtle to-white rounded-2xl p-8 border border-neutral-light">
+                <div class="flex items-start space-x-6">
+                    <div class="w-20 h-20 bg-primary-gold/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-credit-card text-primary-gold text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-neutral-dark mb-3">Múltiplas Formas de Pagamento</h3>
+                        <p class="text-neutral-medium mb-4 leading-relaxed">
+                            Aceitamos PIX, boleto bancário e cartões de crédito internacionais. Renovação automática com gestão de dunning para falhas de pagamento.
+                        </p>
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">PIX instantâneo (Asaas)</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">Cartão (Stripe)</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">Boleto bancário (Asaas)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="blog" class="bg-bg-subtle py-24">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="flex items-center justify-between mb-12">
+            <div>
+                <div class="inline-flex items-center space-x-2 bg-secondary-pale px-4 py-2 rounded-full mb-4">
+                    <i class="fa-solid fa-newspaper text-primary-deep"></i>
+                    <span class="text-sm font-semibold text-primary-deep uppercase tracking-wider">Blog & Recursos</span>
+                </div>
+                <h2 class="text-4xl font-bold text-neutral-dark mb-2">Educação sobre Planejamento Sucessório</h2>
+                <p class="text-xl text-neutral-medium">Artigos, guias e atualizações sobre legislação brasileira</p>
+            </div>
+            <button class="px-6 py-3 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2">
+                <span>Ver Todos os Artigos</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <div class="grid grid-cols-3 gap-8">
+            <article id="blog-post-1" class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                <div class="h-48 overflow-hidden">
+                    <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/da31167063-73900274c9131c40c2df.png" alt="modern law office with Brazilian flag and digital technology elements, professional photography" />
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <span class="px-3 py-1 bg-primary-deep/10 text-primary-deep rounded-full text-xs font-semibold uppercase">Legislação</span>
+                        <span class="text-sm text-neutral-medium">15 Jan 2026 • 8 min</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-neutral-dark mb-3 hover:text-primary-deep transition-colors cursor-pointer">
+                        Mudanças no Código Civil 2026: O Que Você Precisa Saber
+                    </h3>
+                    <p class="text-neutral-medium mb-4 leading-relaxed">
+                        Análise completa das recentes alterações na legislação sucessória brasileira e como elas impactam seu planejamento patrimonial...
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Author" class="w-8 h-8 rounded-full"/>
+                            <span class="text-sm font-medium text-neutral-dark">Dr. Carlos Silva</span>
+                        </div>
+                        <button class="text-primary-deep font-semibold hover:text-secondary-blue transition-colors flex items-center space-x-1">
+                            <span>Ler mais</span>
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <article id="blog-post-2" class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                <div class="h-48 overflow-hidden">
+                    <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/f022a97614-be42361861c9695ef92f.png" alt="cryptocurrency bitcoin ethereum on desk with legal documents, technology meets finance" />
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <span class="px-3 py-1 bg-accent-purple/10 text-accent-purple rounded-full text-xs font-semibold uppercase">Criptomoedas</span>
+                        <span class="text-sm text-neutral-medium">12 Jan 2026 • 12 min</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-neutral-dark mb-3 hover:text-primary-deep transition-colors cursor-pointer">
+                        Como Incluir Criptomoedas e NFTs no Seu Testamento
+                    </h3>
+                    <p class="text-neutral-medium mb-4 leading-relaxed">
+                        Guia prático para inventariar ativos digitais: wallets, seeds, exchanges e estratégias de transferência segura para herdeiros...
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Author" class="w-8 h-8 rounded-full"/>
+                            <span class="text-sm font-medium text-neutral-dark">Dra. Marina Costa</span>
+                        </div>
+                        <button class="text-primary-deep font-semibold hover:text-secondary-blue transition-colors flex items-center space-x-1">
+                            <span>Ler mais</span>
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <article id="blog-post-3" class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                <div class="h-48 overflow-hidden">
+                    <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/452aa274d4-40fb2c75bbb1222dc5c4.png" alt="blockchain network visualization with security locks and digital connections, futuristic technology" />
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <span class="px-3 py-1 bg-accent-emerald/10 text-accent-emerald rounded-full text-xs font-semibold uppercase">Tecnologia</span>
+                        <span class="text-sm text-neutral-medium">08 Jan 2026 • 10 min</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-neutral-dark mb-3 hover:text-primary-deep transition-colors cursor-pointer">
+                        Blockchain e Testamentos: Por Que a Imutabilidade Importa
+                    </h3>
+                    <p class="text-neutral-medium mb-4 leading-relaxed">
+                        Entenda como a tecnologia blockchain garante que seu testamento não possa ser alterado e por que isso é crucial para sua segurança jurídica...

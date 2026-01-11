@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Preços</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-deep': '#1A237E',
+                        'primary-gold': '#C9A054',
+                        'secondary-blue': '#3949AB',
+                        'secondary-pale': '#E8EAF6',
+                        'secondary-gold-light': '#E4D4B4',
+                        'accent-emerald': '#00695C',
+                        'accent-amber': '#FF8F00',
+                        'accent-purple': '#6A1B9A',
+                        'success-green': '#2E7D32',
+                        'error-red': '#C62828',
+                        'warning-orange': '#EF6C00',
+                        'info-blue': '#1565C0',
+                        'neutral-dark': '#37474F',
+                        'neutral-medium': '#78909C',
+                        'neutral-light': '#CFD8DC',
+                        'bg-subtle': '#F5F7FA',
+                        'bg-section': '#ECEFF1',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'crimson': ['Crimson Pro', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Crimson+Pro:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+</head>
+<body class="font-inter bg-bg-subtle">
+
+<header id="header" class="bg-white border-b border-neutral-light sticky top-0 z-50">
+    <div class="max-w-[1440px] mx-auto px-8 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-12">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary-deep rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-gold text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-primary-deep">LegacyGuard</span>
+                </div>
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#servicos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Serviços</a>
+                    <a href="#como-funciona" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Como Funciona</a>
+                    <a href="#tecnologia" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Tecnologia</a>
+                    <a href="#precos" class="text-primary-deep font-semibold border-b-2 border-primary-deep">Preços</a>
+                    <a href="#recursos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Recursos</a>
+                    <a href="#blog" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Blog</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="px-6 py-2.5 text-primary-deep font-semibold hover:bg-secondary-pale rounded-lg transition-colors">
+                    Login
+                </button>
+                <button class="px-6 py-2.5 bg-primary-deep text-white font-semibold hover:bg-secondary-blue rounded-lg transition-colors flex items-center space-x-2">
+                    <span>Agendar Consulta</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="calculator-hero" class="bg-gradient-to-br from-primary-deep via-secondary-blue to-primary-deep text-white py-16">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center">
+            <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
+                <i class="fa-solid fa-calculator text-primary-gold"></i>
+                <span class="text-sm font-semibold text-primary-gold uppercase tracking-wider">Calculadora Interativa</span>
+            </div>
+            <h1 class="text-5xl font-bold mb-4">Calcule o Custo do Seu Planejamento Sucessório</h1>
+            <p class="text-xl text-white/90 max-w-3xl mx-auto">
+                Personalize os serviços de acordo com suas necessidades e veja em tempo real quanto você economiza comparado ao processo tradicional
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="main-calculator" class="py-12">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="grid grid-cols-3 gap-8">
+            <div class="col-span-2">
+                <div id="service-selection" class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                    <div class="flex items-center justify-between mb-8">
+                        <h2 class="text-3xl font-bold text-neutral-dark">Configure Seu Plano</h2>
+                        <button id="reset-calculator" class="px-4 py-2 text-neutral-medium hover:text-primary-deep transition-colors flex items-center space-x-2">
+                            <i class="fa-solid fa-rotate-right"></i>
+                            <span>Resetar</span>
+                        </button>
+                    </div>
+
+                    <div id="base-plan-selection" class="mb-10">
+                        <h3 class="text-xl font-bold text-neutral-dark mb-6 flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-primary-deep rounded-lg flex items-center justify-center text-white text-sm font-bold">1</div>
+                            <span>Escolha o Plano Base</span>
+                        </h3>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="plan-option border-2 border-neutral-light rounded-xl p-6 cursor-pointer hover:border-primary-deep transition-all" data-plan="basic" data-price="1500">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h4 class="text-lg font-bold text-neutral-dark">Básico</h4>
+                                    <div class="w-6 h-6 rounded-full border-2 border-neutral-light plan-radio"></div>
+                                </div>
+                                <div class="text-3xl font-bold text-neutral-dark mb-2">R$ 1.500</div>
+                                <div class="text-sm text-neutral-medium mb-4">Pagamento único</div>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-check text-success-green text-xs"></i>
+                                        <span class="text-neutral-dark">Criação de testamento</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-check text-success-green text-xs"></i>
+                                        <span class="text-neutral-dark">Validação em vídeo</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-check text-success-green text-xs"></i>
+                                        <span class="text-neutral-dark">Assinatura ICP-Brasil</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="plan-option border-2 border-primary-gold rounded-xl p-6 cursor-pointer bg-primary-gold/5 relative" data-plan="premium" data-price="1500" data-annual="1000">
+                                <div class="absolute -top-3 right-4 bg-primary-gold text-primary-deep px-3 py-1 rounded-full text-xs font-bold">
+                                    RECOMENDADO
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <h4 class="text-lg font-bold text-neutral-dark">Premium</h4>
+                                    <div class="w-6 h-6 rounded-full border-2 border-primary-gold plan-radio bg-primary-gold flex items-center justify-center">
+                                        <i class="fa-solid fa-check text-white text-xs"></i>
+                                    </div>
+                                </div>
+                                <div class="text-3xl font-bold text-neutral-dark mb-2">R$ 1.500</div>
+                                <div class="text-sm text-neutral-medium mb-4">+ R$ 1.000/ano</div>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-check text-success-green text-xs"></i>
+                                        <span class="text-neutral-dark">Tudo do Básico</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-check text-success-green text-xs"></i>
+                                        <span class="text-neutral-dark">Monitoramento óbito</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-check text-success-green text-xs"></i>
+                                        <span class="text-neutral-dark">Dead Man's Switch</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="plan-option border-2 border-neutral-light rounded-xl p-6 cursor-pointer hover:border-accent-purple transition-all" data-plan="enterprise" data-price="custom">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h4 class="text-lg font-bold text-neutral-dark">Empresarial</h4>
+                                    <div class="w-6 h-6 rounded-full border-2 border-neutral-light plan-radio"></div>
+                                </div>
+                                <div class="text-3xl font-bold text-neutral-dark mb-2">Sob Consulta</div>
+                                <div class="text-sm text-neutral-medium mb-4">Personalizado</div>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-check text-success-green text-xs"></i>
+                                        <span class="text-neutral-dark">Tudo do Premium</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-check text-success-green text-xs"></i>
+                                        <span class="text-neutral-dark">Múltiplos testamentos</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-check text-success-green text-xs"></i>
+                                        <span class="text-neutral-dark">API dedicada</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="asset-complexity" class="mb-10">
+                        <h3 class="text-xl font-bold text-neutral-dark mb-6 flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-primary-deep rounded-lg flex items-center justify-center text-white text-sm font-bold">2</div>
+                            <span>Complexidade do Patrimônio</span>
+                        </h3>
+                        <div class="bg-bg-subtle rounded-xl p-6">
+                            <div class="mb-6">
+                                <label class="block text-sm font-semibold text-neutral-dark mb-3">Número de Imóveis</label>
+                                <div class="flex items-center space-x-4">
+                                    <input type="range" min="0" max="20" value="2" class="flex-1 h-2 bg-neutral-light rounded-lg appearance-none cursor-pointer" id="property-count">
+                                    <div class="w-16 h-12 bg-white rounded-lg flex items-center justify-center border border-neutral-light">
+                                        <span class="text-lg font-bold text-neutral-dark" id="property-display">2</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between text-xs text-neutral-medium mt-2">
+                                    <span>0</span>
+                                    <span>20+</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-semibold text-neutral-dark mb-3">Veículos</label>
+                                <div class="flex items-center space-x-4">
+                                    <input type="range" min="0" max="10" value="1" class="flex-1 h-2 bg-neutral-light rounded-lg appearance-none cursor-pointer" id="vehicle-count">
+                                    <div class="w-16 h-12 bg-white rounded-lg flex items-center justify-center border border-neutral-light">
+                                        <span class="text-lg font-bold text-neutral-dark" id="vehicle-display">1</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between text-xs text-neutral-medium mt-2">
+                                    <span>0</span>
+                                    <span>10+</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-semibold text-neutral-dark mb-3">Contas Bancárias & Investimentos</label>
+                                <div class="flex items-center space-x-4">
+                                    <input type="range" min="0" max="15" value="3" class="flex-1 h-2 bg-neutral-light rounded-lg appearance-none cursor-pointer" id="account-count">
+                                    <div class="w-16 h-12 bg-white rounded-lg flex items-center justify-center border border-neutral-light">
+                                        <span class="text-lg font-bold text-neutral-dark" id="account-display">3</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between text-xs text-neutral-medium mt-2">
+                                    <span>0</span>
+                                    <span>15+</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-neutral-dark mb-3">Número de Herdeiros</label>
+                                <div class="flex items-center space-x-4">
+                                    <input type="range" min="1" max="10" value="2" class="flex-1 h-2 bg-neutral-light rounded-lg appearance-none cursor-pointer" id="heir-count">
+                                    <div class="w-16 h-12 bg-white rounded-lg flex items-center justify-center border border-neutral-light">
+                                        <span class="text-lg font-bold text-neutral-dark" id="heir-display">2</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between text-xs text-neutral-medium mt-2">
+                                    <span>1</span>
+                                    <span>10+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="additional-services" class="mb-10">
+                        <h3 class="text-xl font-bold text-neutral-dark mb-6 flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-primary-deep rounded-lg flex items-center justify-center text-white text-sm font-bold">3</div>
+                            <span>Serviços Adicionais</span>
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="service-addon bg-white border-2 border-neutral-light rounded-xl p-5 cursor-pointer hover:border-primary-deep transition-all" data-price="500">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex items-start space-x-4 flex-1">
+                                        <div class="w-6 h-6 rounded border-2 border-neutral-light addon-checkbox mt-1"></div>
+                                        <div class="flex-1">
+                                            <div class="flex items-center space-x-3 mb-2">
+                                                <h4 class="text-lg font-bold text-neutral-dark">Inventário de Criptomoedas</h4>
+                                                <span class="px-2 py-1 bg-accent-purple/10 text-accent-purple rounded text-xs font-semibold">POPULAR</span>
+                                            </div>
+                                            <p class="text-sm text-neutral-medium mb-3">Suporte especializado para Bitcoin, Ethereum, NFTs e outros ativos digitais com armazenamento seguro de seeds e chaves privadas</p>
+                                            <div class="flex items-center space-x-4 text-xs">
+                                                <span class="flex items-center space-x-1 text-accent-purple">
+                                                    <i class="fa-brands fa-bitcoin"></i>
+                                                    <span>Crypto Assets</span>
+                                                </span>
+                                                <span class="flex items-center space-x-1 text-accent-emerald">
+                                                    <i class="fa-solid fa-shield-halved"></i>
+                                                    <span>Encrypted Storage</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right ml-4">
+                                        <div class="text-2xl font-bold text-neutral-dark">R$ 500</div>
+                                        <div class="text-xs text-neutral-medium">Pagamento único</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="service-addon bg-white border-2 border-neutral-light rounded-xl p-5 cursor-pointer hover:border-primary-deep transition-all" data-price="800">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex items-start space-x-4 flex-1">
+                                        <div class="w-6 h-6 rounded border-2 border-neutral-light addon-checkbox mt-1"></div>
+                                        <div class="flex-1">
+                                            <div class="flex items-center space-x-3 mb-2">
+                                                <h4 class="text-lg font-bold text-neutral-dark">Consultoria Jurídica Avançada</h4>
+                                            </div>
+                                            <p class="text-sm text-neutral-medium mb-3">3 sessões adicionais de 1 hora com advogado especialista para casos complexos, holdings familiares ou estruturas societárias</p>
+                                            <div class="flex items-center space-x-4 text-xs">
+                                                <span class="flex items-center space-x-1 text-info-blue">
+                                                    <i class="fa-solid fa-user-tie"></i>
+                                                    <span>3 Sessions</span>
+                                                </span>
+                                                <span class="flex items-center space-x-1 text-success-green">
+                                                    <i class="fa-solid fa-clock"></i>
+                                                    <span>1h Each</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right ml-4">
+                                        <div class="text-2xl font-bold text-neutral-dark">R$ 800</div>
+                                        <div class="text-xs text-neutral-medium">Pagamento único</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="service-addon bg-white border-2 border-neutral-light rounded-xl p-5 cursor-pointer hover:border-primary-deep transition-all" data-price="300">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex items-start space-x-4 flex-1">
+                                        <div class="w-6 h-6 rounded border-2 border-neutral-light addon-checkbox mt-1"></div>
+                                        <div class="flex-1">
+                                            <div class="flex items-center space-x-3 mb-2">
+                                                <h4 class="text-lg font-bold text-neutral-dark">Atualização Express</h4>
+                                            </div>
+                                            <p class="text-sm text-neutral-medium mb-3">Processamento prioritário em 24 horas para alterações urgentes no testamento com notificação em tempo real</p>
+                                            <div class="flex items-center space-x-4 text-xs">
+                                                <span class="flex items-center space-x-1 text-warning-orange">
+                                                    <i class="fa-solid fa-bolt"></i>
+                                                    <span>24h Processing</span>
+                                                </span>
+                                                <span class="flex items-center space-x-1 text-info-blue">
+                                                    <i class="fa-solid fa-bell"></i>
+                                                    <span>Real-time Alerts</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right ml-4">
+                                        <div class="text-2xl font-bold text-neutral-dark">R$ 300</div>
+                                        <div class="text-xs text-neutral-medium">Por atualização</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="service-addon bg-white border-2 border-neutral-light rounded-xl p-5 cursor-pointer hover:border-primary-deep transition-all" data-price="400">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex items-start space-x-4 flex-1">
+                                        <div class="w-6 h-6 rounded border-2 border-neutral-light addon-checkbox mt-1"></div>
+                                        <div class="flex-1">
+                                            <div class="flex items-center space-x-3 mb-2">
+                                                <h4 class="text-lg font-bold text-neutral-dark">Backup Internacional</h4>
+                                            </div>
+                                            <p class="text-sm text-neutral-medium mb-3">Replicação adicional em data centers nos EUA e Europa para máxima redundância geográfica e proteção contra desastres</p>
+                                            <div class="flex items-center space-x-4 text-xs">
+                                                <span class="flex items-center space-x-1 text-accent-emerald">
+                                                    <i class="fa-solid fa-globe"></i>
+                                                    <span>Multi-region</span>
+                                                </span>
+                                                <span class="flex items-center space-x-1 text-success-green">
+                                                    <i class="fa-solid fa-database"></i>
+                                                    <span>3 Locations</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right ml-4">
+                                        <div class="text-2xl font-bold text-neutral-dark">R$ 400</div>
+                                        <div class="text-xs text-neutral-medium">Anual</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="service-addon bg-white border-2 border-neutral-light rounded-xl p-5 cursor-pointer hover:border-primary-deep transition-all" data-price="600">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex items-start space-x-4 flex-1">
+                                        <div class="w-6 h-6 rounded border-2 border-neutral-light addon-checkbox mt-1"></div>
+                                        <div class="flex-1">
+                                            <div class="flex items-center space-x-3 mb-2">
+                                                <h4 class="text-lg font-bold text-neutral-dark">Portal Familiar Multi-usuário</h4>
+                                            </div>
+                                            <p class="text-sm text-neutral-medium mb-3">Acesso compartilhado para cônjuge ou parceiro(a) com permissões granulares e histórico de auditoria completo</p>
+                                            <div class="flex items-center space-x-4 text-xs">
+                                                <span class="flex items-center space-x-1 text-primary-deep">
+                                                    <i class="fa-solid fa-users"></i>
+                                                    <span>2 Users</span>
+                                                </span>
+                                                <span class="flex items-center space-x-1 text-info-blue">
+                                                    <i class="fa-solid fa-shield-halved"></i>
+                                                    <span>Role-based Access</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right ml-4">
+                                        <div class="text-2xl font-bold text-neutral-dark">R$ 600</div>
+                                        <div class="text-xs text-neutral-medium">Anual</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="service-addon bg-white border-2 border-neutral-light rounded-xl p-5 cursor-pointer hover:border-primary-deep transition-all" data-price="250">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex items-start space-x-4 flex-1">
+                                        <div class="w-6 h-6 rounded border-2 border-neutral-light addon-checkbox mt-1"></div>
+                                        <div class="flex-1">
+                                            <div class="flex items-center space-x-3 mb-2">
+                                                <h4 class="text-lg font-bold text-neutral-dark">Vídeo Mensagem para Herdeiros</h4>
+                                            </div>
+                                            <p class="text-sm text-neutral-medium mb-3">Grave mensagens personalizadas em vídeo para cada herdeiro, liberadas automaticamente após validação do óbito</p>
+                                            <div class="flex items-center space-x-4 text-xs">
+                                                <span class="flex items-center space-x-1 text-error-red">
+                                                    <i class="fa-solid fa-heart"></i>
+                                                    <span>Personal Touch</span>
+                                                </span>
+                                                <span class="flex items-center space-x-1 text-accent-emerald">
+                                                    <i class="fa-solid fa-lock"></i>
+                                                    <span>Encrypted</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right ml-4">
+                                        <div class="text-2xl font-bold text-neutral-dark">R$ 250</div>
+                                        <div class="text-xs text-neutral-medium">Pagamento único</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="subscription-duration" class="mb-8">
+                        <h3 class="text-xl font-bold text-neutral-dark mb-6 flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-primary-deep rounded-lg flex items-center justify-center text-white text-sm font-bold">4</div>
+                            <span>Período de Manutenção (Plano Premium)</span>
+                        </h3>
+                        <div class="bg-bg-subtle rounded-xl p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <label class="text-sm font-semibold text-neutral-dark">Anos de Cobertura</label>
+                                <div class="flex items-center space-x-4">
+                                    <button class="duration-btn w-12 h-12 bg-white rounded-lg border-2 border-neutral-light hover:border-primary-deep transition-colors font-bold text-neutral-dark" data-years="1">1</button>
+                                    <button class="duration-btn w-12 h-12 bg-white rounded-lg border-2 border-neutral-light hover:border-primary-deep transition-colors font-bold text-neutral-dark" data-years="5">5</button>
+                                    <button class="duration-btn w-12 h-12 bg-primary-gold border-2 border-primary-gold rounded-lg font-bold text-primary-deep" data-years="10">10</button>
+                                    <button class="duration-btn w-12 h-12 bg-white rounded-lg border-2 border-neutral-light hover:border-primary-deep transition-colors font-bold text-neutral-dark" data-years="20">20</button>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg p-4 border border-neutral-light">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-neutral-medium">Anuidade R$ 1.000 × <span id="years-multiplier">10</span> anos</span>
+                                    <span class="text-xl font-bold text-neutral-dark">R$ <span id="annual-total">10,000</span></span>
+                                </div>
+                            </div>
+                            <div class="mt-4 bg-primary-gold/10 rounded-lg p-4 flex items-start space-x-3">
+                                <i class="fa-solid fa-lightbulb text-primary-gold text-xl mt-1"></i>
+                                <div>
+                                    <div class="font-semibold text-neutral-dark mb-1">Desconto por Pagamento Antecipado</div>
+                                    <div class="text-sm text-neutral-medium">Pague 10 anos adiantado e ganhe 15% de desconto (economize R$ 1.500)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="payment-method" class="mb-8">
+                        <h3 class="text-xl font-bold text-neutral-dark mb-6 flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-primary-deep rounded-lg flex items-center justify-center text-white text-sm font-bold">5</div>
+                            <span>Forma de Pagamento</span>
+                        </h3>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="payment-option border-2 border-primary-deep bg-primary-deep/5 rounded-xl p-5 cursor-pointer" data-method="pix">
+                                <div class="flex items-center justify-between mb-3">
+                                    <i class="fa-solid fa-qrcode text-primary-deep text-2xl"></i>
+                                    <div class="w-6 h-6 rounded-full border-2 border-primary-deep bg-primary-deep flex items-center justify-center payment-radio">
+                                        <i class="fa-solid fa-check text-white text-xs"></i>
+                                    </div>
+                                </div>
+                                <h4 class="font-bold text-neutral-dark mb-1">PIX</h4>
+                                <p class="text-xs text-neutral-medium mb-2">Aprovação instantânea</p>
+                                <div class="text-success-green text-sm font-semibold">Sem taxas</div>
+                            </div>
+                            <div class="payment-option border-2 border-neutral-light rounded-xl p-5 cursor-pointer hover:border-primary-deep transition-all" data-method="credit">
+                                <div class="flex items-center justify-between mb-3">
+                                    <i class="fa-solid fa-credit-card text-neutral-medium text-2xl"></i>
+                                    <div class="w-6 h-6 rounded-full border-2 border-neutral-light payment-radio"></div>
+                                </div>
+                                <h4 class="font-bold text-neutral-dark mb-1">Cartão de Crédito</h4>
+                                <p class="text-xs text-neutral-medium mb-2">Parcelamento disponível</p>
+                                <div class="text-info-blue text-sm font-semibold">Até 12x</div>
+                            </div>
+                            <div class="payment-option border-2 border-neutral-light rounded-xl p-5 cursor-pointer hover:border-primary-deep transition-all" data-method="boleto">
+                                <div class="flex items-center justify-between mb-3">
+                                    <i class="fa-solid fa-barcode text-neutral-medium text-2xl"></i>
+                                    <div class="w-6 h-6 rounded-full border-2 border-neutral-light payment-radio"></div>
+                                </div>
+                                <h4 class="font-bold text-neutral-dark mb-1">Boleto Bancário</h4>
+                                <p class="text-xs text-neutral-medium mb-2">Aprovação em 1-3 dias</p>
+                                <div class="text-warning-orange text-sm font-semibold">Taxa R$ 3,50</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="comparison-section" class="bg-white rounded-2xl shadow-lg p-8">
+                    <h2 class="text-3xl font-bold text-neutral-dark mb-8 text-center">Comparação com Processo Tradicional</h2>
+                    <div class="grid grid-cols-2 gap-8">
+                        <div>
+                            <div class="text-center mb-6">
+                                <div class="inline-flex items-center justify-center w-16 h-16 bg-error-red/10 rounded-full mb-3">
+                                    <i class="fa-solid fa-gavel text-error-red text-2xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-neutral-dark">Inventário Tradicional</h3>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center py-3 border-b border-neutral-light">
+                                    <span class="text-neutral-medium">Honorários advocatícios</span>
+                                    <span class="font-bold text-neutral-dark">R$ 15.000</span>
+                                </div>
+                                <div class="flex justify-between items-center py-3 border-b border-neutral-light">
+                                    <span class="text-neutral-medium">Custas cartoriais</span>
+                                    <span class="font-bold text-neutral-dark">R$ 8.000</span>
+                                </div>
+                                <div class="flex justify-between items-center py-3 border-b border-neutral-light">
+                                    <span class="text-neutral-medium">ITCMD (4% patrimônio)</span>
+                                    <span class="font-bold text-neutral-dark">R$ 20.000</span>
+                                </div>
+                                <div class="flex justify-between items-center py-3 border-b border-neutral-light">
+                                    <span class="text-neutral-medium">Despesas diversas</span>
+                                    <span class="font-bold text-neutral-dark">R$ 5.000</span>
+                                </div>
+                                <div class="flex justify-between items-center py-3 border-b border-neutral-light">
+                                    <span class="text-neutral-medium">Tempo médio</span>
+                                    <span class="font-bold text-error-red">18-24 meses</span>
+                                </div>
+                                <div class="bg-error-red/10 rounded-xl p-4 mt-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-bold text-neutral-dark">Total Estimado</span>
+                                        <span class="text-3xl font-bold text-error-red">R$ 48.000+</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-center mb-6">
+                                <div class="inline-flex items-center justify-center w-16 h-16 bg-success-green/10 rounded-full mb-3">
+                                    <i class="fa-solid fa-shield-halved text-success-green text-2xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-neutral-dark">LegacyGuard</h3>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center py-3 border-b border-neutral-light">
+                                    <span class="text-neutral-medium">Criação testamento</span>
+                                    <span class="font-bold text-neutral-dark">R$ 1.500</span>
+                                </div>
+                                <div class="flex justify-between items-center py-3 border-b border-neutral-light">
+                                    <span class="text-neutral-medium">Manutenção (10 anos)</span>
+                                    <span class="font-bold text-neutral-dark" id="maintenance-cost-comparison">R$ 10.000</span>
+                                </div>
+                                <div class="flex justify-between items-center py-3 border-b border-neutral-light">
+                                    <span class="text-neutral-medium">Serviços adicionais</span>
+                                    <span class="font-bold text-neutral-dark" id="addons-cost-comparison">R$ 0</span>
+                                </div>
+                                <div class="flex justify-between items-center py-3 border-b border-neutral-light">
+                                    <span class="text-neutral-medium">Custos ocultos</span>
+                                    <span class="font-bold text-success-green">R$ 0</span>
+                                </div>
+                                <div class="flex justify-between items-center py-3 border-b border-neutral-light">
+                                    <span class="text-neutral-medium">Tempo de processo</span>
+                                    <span class="font-bold text-success-green">48 horas</span>
+                                </div>
+                                <div class="bg-success-green/10 rounded-xl p-4 mt-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-bold text-neutral-dark">Total</span>
+                                        <span class="text-3xl font-bold text-success-green" id="legacyguard-total-comparison">R$ 11.500</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 text-center">
+                        <div class="inline-flex items-center space-x-4 bg-primary-gold/10 px-8 py-4 rounded-xl">
+                            <i class="fa-solid fa-piggy-bank text-primary-gold text-3xl"></i>
+                            <div class="text-left">
+                                <div class="text-sm text-neutral-medium">Economia Total</div>
+                                <div class="text-4xl font-bold text-primary-gold" id="total-savings">R$ 36.500</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-1">
+                <div id="price-summary" class="bg-white rounded-2xl shadow-lg p-8 sticky top-24">
+                    <h3 class="text-2xl font-bold text-neutral-dark mb-6">Resumo do Investimento</h3>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div class="flex justify-between items-center pb-3 border-b border-neutral-light">
+                            <span class="text-neutral-medium">Plano Base</span>
+                            <span class="font-bold text-neutral-dark" id="base-price">R$ 1.500</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-neutral-light" id="annual-fee-row" style="display: none;">
+                            <span class="text-neutral-medium">Manutenção Anual</span>
+                            <span class="font-bold text-neutral-dark" id="annual-price">R$ 10.000</span>
+                        </div>
+                        <div id="addons-list" class="space-y-3">
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-neutral-light" id="complexity-fee-row">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-neutral-medium">Taxa de Complexidade</span>
+                                <div class="group relative">
+                                    <i class="fa-solid fa-circle-info text-info-blue text-sm cursor-pointer"></i>
+                                    <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 bg-neutral-dark text-white text-xs rounded-lg p-3 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                        Baseado no número de ativos e herdeiros declarados
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="font-bold text-neutral-dark" id="complexity-fee">R$ 0</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-primary-deep/5 rounded-xl p-4 mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-neutral-dark font-semibold">Subtotal</span>
+                            <span class="text-xl font-bold text-neutral-dark" id="subtotal">R$ 1.500</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm" id="discount-row" style="display: none;">
+                            <span class="text-success-green">Desconto (15%)</span>
+                            <span class="text-success-green font-semibold" id="discount-amount">- R$ 0</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-primary-deep to-secondary-blue rounded-xl p-6 mb-6">
+                        <div class="text-white/80 text-sm mb-2">Total a Pagar</div>
+                        <div class="text-4xl font-bold text-white mb-1" id="total-price">R$ 1.500</div>
+                        <div class="text-white/80 text-sm" id="payment-terms">Pagamento único</div>
+                    </div>
+
+                    <div class="space-y-3 mb-6">
+                        <button class="w-full py-4 bg-primary-gold text-primary-deep font-bold rounded-lg hover:bg-secondary-gold-light transition-all transform hover:scale-105 flex items-center justify-center space-x-2">
+                            <span>Continuar para Pagamento</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <button class="w-full py-3 bg-white text-primary-deep font-semibold rounded-lg border-2 border-primary-deep hover:bg-primary-deep hover:text-white transition-colors flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Baixar Orçamento PDF</span>
+                        </button>
+                        <button class="w-full py-3 bg-white text-neutral-dark font-semibold rounded-lg border border-neutral-light hover:border-primary-deep transition-colors flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>Enviar por Email</span>
+                        </button>
+                    </div>
+
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-start space-x-2">
+                            <i class="fa-solid fa-check text-success-green mt-1"></i>
+                            <span class="text-neutral-medium">Garantia de 30 dias ou seu dinheiro de volta</span>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <i class="fa-solid fa-check text-success-green mt-1"></i>
+                            <span class="text-neutral-medium">Pagamento 100% seguro (SSL/TLS)</span>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <i class="fa-solid fa-check text-success-green mt-1"></i>
+                            <span class="text-neutral-medium">Suporte prioritário incluído</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-info-blue/10 rounded-2xl p-6 mt-6">
+                    <div class="flex items-start space-x-3 mb-4">
+                        <i class="fa-solid fa-headset text-info-blue text-2xl"></i>
+                        <div>
+                            <h4 class="font-bold text-neutral-dark mb-2">Precisa de Ajuda?</h4>
+                            <p class="text-sm text-neutral-medium mb-3">Nossa equipe está pronta para esclarecer suas dúvidas</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <a href="tel:+551140635000" class="flex items-center space-x-2 text-info-blue hover:text-primary-deep transition-colors">
+                            <i class="fa-solid fa-phone"></i>
+                            <span>(11) 4063-5000</span>
+                        </a>
+                        <a href="mailto:contato@legacyguard.com.br" class="flex items-center space-x-2 text-info-blue hover:text-primary-deep transition-colors">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>contato@legacyguard.com.br</span>
+                        </a>
+                        <div class="flex items-center space-x-2 text-neutral-medium">
+                            <i class="fa-solid fa-clock"></i>
+                            <span>Seg-Sex: 9h às 18h</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="faq-section" class="bg-white py-24">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center space-x-2 bg-secondary-pale px-4 py-2 rounded-full mb-4">
+                <i class="fa-solid fa-circle-question text-primary-deep"></i>
+                <span class="text-sm font-semibold text-primary-deep uppercase tracking-wider">Perguntas Frequentes</span>
+            </div>
+            <h2 class="text-4xl font-bold text-neutral-dark mb-4">Dúvidas sobre Preços</h2>
+            <p class="text-xl text-neutral-medium max-w-3xl mx-auto">
+                Respostas para as perguntas mais comuns sobre nossos planos e formas de pagamento
+            </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto space-y-4">
+            <div class="faq-item bg-bg-subtle rounded-xl overflow-hidden">
+                <button class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-white transition-colors">
+                    <span class="text-lg font-semibold text-neutral-dark pr-8">Posso mudar de plano depois?</span>
+                    <i class="fa-solid fa-chevron-down text-primary-deep"></i>
+                </button>
+                <div class="faq-answer px-8 pb-6 text-neutral-medium leading-relaxed" style="display: none;">
+                    Sim! Você pode fazer upgrade do Básico para Premium a qualquer momento. O valor já pago será descontado proporcionalmente. Downgrades não são permitidos devido à natureza dos serviços já prestados.
+                </div>
+            </div>
+
+            <div class="faq-item bg-bg-subtle rounded-xl overflow-hidden">
+                <button class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-white transition-colors">
+                    <span class="text-lg font-semibold text-neutral-dark pr-8">O que acontece se eu não renovar a anuidade?</span>
+                    <i class="fa-solid fa-chevron-down text-primary-deep"></i>
+                </button>
+                <div class="faq-answer px-8 pb-6 text-neutral-medium leading-relaxed" style="display: none;">
+                    Seu testamento permanece válido e seguro. Porém, serviços como monitoramento de óbito, Dead Man's Switch e atualizações serão suspensos após 30 dias de carência. Você pode reativar a qualquer momento pagando a anuidade.
+                </div>
+            </div>
+
+            <div class="faq-item bg-bg-subtle rounded-xl overflow-hidden">
+                <button class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-white transition-colors">
+                    <span class="text-lg font-semibold text-neutral-dark pr-8">Posso parcelar o pagamento?</span>
+                    <i class="fa-solid fa-chevron-down text-primary-deep"></i>
+                </button>
+                <div class="faq-answer px-8 pb-6 text-neutral-medium leading-relaxed" style="display: none;">
+                    Sim! O valor da criação (R$ 1.500) pode ser parcelado em até 12x no cartão de crédito sem juros. A anuidade pode ser dividida em até 3x. PIX e boleto são apenas à vista.
+                </div>
+            </div>
+
+            <div class="faq-item bg-bg-subtle rounded-xl overflow-hidden">
+                <button class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-white transition-colors">
+                    <span class="text-lg font-semibold text-neutral-dark pr-8">Há custos adicionais para atualizar o testamento?</span>
+                    <i class="fa-solid fa-chevron-down text-primary-deep"></i>
+                </button>
+                <div class="faq-answer px-8 pb-6 text-neutral-medium leading-relaxed" style="display: none;">
+                    No plano Premium, atualizações são ilimitadas e gratuitas. No plano Básico, cada atualização custa R$ 200. Alterações simples (endereço, telefone) são sempre gratuitas.
+                </div>
+            </div>
+
+            <div class="faq-item bg-bg-subtle rounded-xl overflow-hidden">
+                <button class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-white transition-colors">
+                    <span class="text-lg font-semibold text-neutral-dark pr-8">Existe desconto para pagamento antecipado?</span>
+                    <i class="fa-solid fa-chevron-down text-primary-deep"></i>
+                </button>
+                <div class="faq-answer px-8 pb-6 text-neutral-medium leading-relaxed" style="display: none;">
+                    Sim! Pagando 10 anos de anuidade antecipadamente, você ganha 15% de desconto (economiza R$ 1.500). Para 20 anos, o desconto é de 20% (economiza R$ 4.000).
+                </div>
+            </div>
+
+            <div class="faq-item bg-bg-subtle rounded-xl overflow-hidden">
+                <button class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-white transition-colors">
+                    <span class="text-lg font-semibold text-neutral-dark pr-8">O que está incluído na taxa de complexidade?</span>
+                    <i class="fa-solid fa-chevron-down text-primary-deep"></i>
+                </button>
+                <div class="faq-answer px-8 pb-6 text-neutral-medium leading-relaxed" style="display: none;">
+                    A taxa varia de R$ 0 a R$ 800 baseada no número de ativos (imóveis, veículos, contas) e herdeiros. Cobre o tempo adicional de análise jurídica, validação de documentos e estruturação complexa da divisão patrimonial.
+                </div>
+            </div>
+
+            <div class="faq-item bg-bg-subtle rounded-xl overflow-hidden">
+                <button class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-white transition-colors">
+                    <span class="text-lg font-semibold text-neutral-dark pr-8">Há garantia de devolução?</span>
+                    <i class="fa-solid fa-chevron-down text-primary-deep"></i>
+                </button>
+                <div class="faq-answer px-8 pb-6 text-neutral-medium leading-relaxed" style="display: none;">
+                    Sim! Oferecemos garantia incondicional de 30 dias. Se não ficar satisfeito por qualquer motivo, devolvemos 100% do valor pago, sem perguntas. Após a validação em vídeo e assinatura ICP-Brasil, a devolução não é mais possível.
+                </div>
+            </div>
+
+            <div class="faq-item bg-bg-subtle rounded-xl overflow-hidden">
+                <button class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-white transition-colors">
+                    <span class="text-lg font-semibold text-neutral-dark pr-8">Empresas têm preço especial?</span>
+                    <i class="fa-solid fa-chevron-down text-primary-deep"></i>
+                </button>
+                <div class="faq-answer px-8 pb-6 text-neutral-medium leading-relaxed" style="display: none;">
+                    Sim! O plano Empresarial oferece descontos progressivos: 10% para 5-10 testamentos, 15% para 11-20, e 20% acima de 20. Entre em contato com nossa equipe comercial para orçamento personalizado.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="testimonials-pricing" class="bg-bg-subtle py-24">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center space-x-2 bg-secondary-pale px-4 py-2 rounded-full mb-4">
+                <i class="fa-solid fa-star text-primary-gold"></i>
+                <span class="text-sm font-semibold text-primary-deep uppercase tracking-wider">Depoimentos</span>
+            </div>
+            <h2 class="text-4xl font-bold text-neutral-dark mb-4">O Que Nossos Clientes Dizem</h2>
+            <p class="text-xl text-neutral-medium max-w-3xl mx-auto">
+                Histórias reais de pessoas que protegeram seu legado com LegacyGuard
+            </p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-8">
+            <div class="bg-white rounded-2xl p-8 shadow-lg">
+                <div class="flex items-center space-x-1 mb-4">
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                </div>
+                <p class="text-neutral-dark leading-relaxed mb-6">
+                    "Economizei mais de R$ 30 mil comparado ao processo tradicional que meu irmão passou. O plano Premium valeu cada centavo, especialmente pelo monitoramento automático."
+                </p>
+                <div class="flex items-center space-x-3">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Roberto Mendes" class="w-12 h-12 rounded-full"/>
+                    <div>
+                        <div class="font-bold text-neutral-dark">Roberto Mendes</div>
+                        <div class="text-sm text-neutral-medium">Empresário, São Paulo</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-8 shadow-lg">
+                <div class="flex items-center space-x-1 mb-4">
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                </div>
+                <p class="text-neutral-dark leading-relaxed mb-6">
+                    "O serviço de inventário de criptomoedas foi essencial. Meus filhos não teriam ideia de como acessar meus Bitcoins sem esse suporte especializado."
+                </p>
+                <div class="flex items-center space-x-3">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="Fernando Costa" class="w-12 h-12 rounded-full"/>
+                    <div>
+                        <div class="font-bold text-neutral-dark">Fernando Costa</div>
+                        <div class="text-sm text-neutral-medium">Investidor, Rio de Janeiro</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-8 shadow-lg">
+                <div class="flex items-center space-x-1 mb-4">
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                    <i class="fa-solid fa-star text-primary-gold"></i>
+                </div>
+                <p class="text-neutral-dark leading-relaxed mb-6">
+                    "A transparência nos preços e a calculadora interativa me ajudaram a tomar a decisão. Paguei 10 anos antecipado e economizei R$ 1.500. Excelente investimento!"
+                </p>
+                <div class="flex items-center space-x-3">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Patricia Silva" class="w-12 h-12 rounded-full"/>
+                    <div>
+                        <div class="font-bold text-neutral-dark">Patricia Silva</div>
+                        <div class="text-sm text-neutral-medium">Médica, Belo Horizonte</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="cta-section" class="bg-gradient-to-br from-primary-deep via-secondary-blue to-primary-deep text-white py-20">
+    <div class="max-w-[1440px] mx-auto px-8 text-center">
+        <h2 class="text-4xl font-bold mb-4">Pronto para Proteger Seu Legado?</h2>
+        <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            Comece agora e tenha seu testamento digital completo em menos de 48 horas
+        </p>
+        <div class="flex items-center justify-center space-x-4">
+            <button class="px-10 py-4 bg-primary-gold text-primary-deep font-bold rounded-lg hover:bg-secondary-gold-light transition-all transform hover:scale-105 flex items-center space-x-2">
+                <span>Criar Meu Testamento Agora</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <button class="px-10 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-lg hover:bg-white/20 transition-colors flex items-center space-x-2">
+                <i class="fa-solid fa-calendar"></i>
+                <span>Agendar Consulta Gratuita</span>
+            </button>
+        </div>
+        <div class="mt-8 flex items-center justify-center space-x-8 text-sm text-white/80">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-shield-check"></i>
+                <span>Garantia 30 dias</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-lock"></i>
+                <span>Pagamento seguro</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-headset"></i>
+                <span>Suporte 24/7</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer id="footer" class="bg-neutral-dark text-white py-16">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="grid grid-cols-5 gap-12 mb-12">
+            <div class="col-span-2">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-10 h-10 bg-primary-gold rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-deep text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold">LegacyGuard</span>
+                </div>
+                <p class="text-white/70 leading-relaxed mb-6">
+                    Planejamento sucessório digital com tecnologia blockchain, criptografia de nível militar e conformidade total com a legislação brasileira.
+                </p>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary-gold hover:text-primary-deep transition-colors">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary-gold hover:text-primary-deep transition-colors">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary-gold hover:text-primary-deep transition-colors">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary-gold hover:text-primary-deep transition-colors">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Serviços</h4>
+                <ul class="space-y-2 text-white/70">
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Testamento Digital</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Validação em Vídeo</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Blockchain Registry</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Criptomoedas</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Empresa</h4>
+                <ul class="space-y-2 text-white/70">
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Sobre Nós</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Equipe Jurídica</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Carreiras</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Imprensa</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Suporte</h4>
+                <ul class="space-y-2 text-white/70">
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Central de Ajuda</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Documentação</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Status do Sistema</a></li>
+                    <li><a href="#" class="hover:text-primary-gold transition-colors">Contato</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-white/10 pt-8 flex items-center justify-between text-sm text-white/70">
+            <div>
+                © 2026 LegacyGuard. Todos os direitos reservados.
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="#" class="hover:text-primary-gold transition-colors">Termos de Uso</a>
+                <a href="#" class="hover:text-primary-gold transition-colors">Política de Privacidade</a>
+                <a href="#" class="hover:text-primary-gold transition-colors">LGPD</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+window.addEventListener('load', function() {
+    let selectedPlan = 'premium';
+    let selectedYears = 10;
+    let basePlanPrice = 1500;
+    let annualFee = 1000;
+    let selectedAddons = [];
+    let complexityFee = 0;
+
+    function updateCalculator() {
+        let subtotal = basePlanPrice;
+        let annualTotal = 0;
+
+        document.getElementById('base-price').textContent = 'R$ ' + basePlanPrice.toLocaleString('pt-BR');
+
+        if (selectedPlan === 'premium') {
+            annualTotal = annualFee * selectedYears;
+            subtotal += annualTotal;
+            document.getElementById('annual-fee-row').style.display = 'flex';
+            document.getElementById('annual-price').textContent = 'R$ ' + annualTotal.toLocaleString('pt-BR');
+            document.getElementById('years-multiplier').textContent = selectedYears;
+            document.getElementById('annual-total').textContent = annualTotal.toLocaleString('pt-BR');
+        } else {
+            document.getElementById('annual-fee-row').style.display = 'none';
+        }
+
+        document.getElementById('addons-list').innerHTML = '';
+        selectedAddons.forEach(addon => {
+            subtotal += addon.price;
+            const addonEl = document.createElement('div');
+            addonEl.className = 'flex justify-between items-center pb-3 border-b border-neutral-light';
+            addonEl.innerHTML = `
+                <span class="text-neutral-medium text-sm">${addon.name}</span>
+                <span class="font-semibold text-neutral-dark">R$ ${addon.price.toLocaleString('pt-BR')}</span>
+            `;
+            document.getElementById('addons-list').appendChild(addonEl);
+        });
+
+        const propertyCount = parseInt(document.getElementById('property-count').value);
+        const vehicleCount = parseInt(document.getElementById('vehicle-count').value);
+        const accountCount = parseInt(document.getElementById('account-count').value);
+        const heirCount = parseInt(document.getElementById('heir-count').value);
+        
+        const totalAssets = propertyCount + vehicleCount + accountCount;
+        if (totalAssets > 10 || heirCount > 3) {
+            complexityFee = Math.min(800, (totalAssets - 10) * 50 + (heirCount - 3) * 100);
+        } else {
+            complexityFee = 0;
+        }
+        
+        subtotal += complexityFee;
+        document.getElementById('complexity-fee').textContent = 'R$ ' + complexityFee.toLocaleString('pt-BR');
+
+        let discount = 0;
+        if (selectedPlan === 'premium' && selectedYears >= 10) {
+            discount = annualTotal * 0.15;
+            document.getElementById('discount-row').style.display = 'flex';
+            document.getElementById('discount-amount').textContent = '- R$ ' + discount.toLocaleString('pt-BR');
+        } else {
+            document.getElementById('discount-row').style.display = 'none';
+        }
+
+        const total = subtotal - discount;
+
+        document.getElementById('subtotal').textContent = 'R$ ' + subtotal.toLocaleString('pt-BR');
+        document.getElementById('total-price').textContent = 'R$ ' + total.toLocaleString('pt-BR');
+
+        if (selectedPlan === 'premium') {
+            document.getElementById('payment-terms').textContent = 'Criação + ' + selectedYears + ' anos de manutenção';
+        } else {
+            document.getElementById('payment-terms').textContent = 'Pagamento único';
+        }
+
+        const traditionalCost = 48000;
+        const savings = traditionalCost - total;
+        document.getElementById('total-savings').textContent = 'R$ ' + savings.toLocaleString('pt-BR');
+        
+        const addonsCost = selectedAddons.reduce((sum, addon) => sum + addon.price, 0);
+        document.getElementById('maintenance-cost-comparison').textContent = 'R$ ' + annualTotal.toLocaleString('pt-BR');
+        document.getElementById('addons-cost-comparison').textContent = 'R$ ' + addonsCost.toLocaleString('pt-BR');
+        document.getElementById('legacyguard-total-comparison').textContent = 'R$ ' + total.toLocaleString('pt-BR');
+    }
+
+    document.querySelectorAll('.plan-option').forEach(option => {
+        option.addEventListener('click', function() {
+            document.querySelectorAll('.plan-option').forEach(opt => {
+                opt.classList.remove('border-primary-deep', 'border-primary-gold', 'bg-primary-gold/5');
+                opt.classList.add('border-neutral-light');
+                const radio = opt.querySelector('.plan-radio');
+                radio.classList.remove('bg-primary-deep', 'bg-primary-gold', 'border-primary-deep', 'border-primary-gold');
+                radio.classList.add('border-neutral-light');
+                radio.innerHTML = '';
+            });
+
+            selectedPlan = this.dataset.plan;
+            basePlanPrice = parseInt(this.dataset.price) || 1500;
+            
+            if (selectedPlan === 'premium') {
+                this.classList.add('border-primary-gold', 'bg-primary-gold/5');
+                this.classList.remove('border-neutral-light');
+                const radio = this.querySelector('.plan-radio');
+                radio.classList.add('bg-primary-gold', 'border-primary-gold');
+                radio.classList.remove('border-neutral-light');
+                radio.innerHTML = '<i class="fa-solid fa-check text-white text-xs"></i>';
+            } else {
+                this.classList.add('border-primary-deep');
+                this.classList.remove('border-neutral-light');
+                const radio = this.querySelector('.plan-radio');
+                radio.classList.add('bg-primary-deep', 'border-primary-deep');
+                radio.classList.remove('border-neutral-light');
+                radio.innerHTML = '<i class="fa-solid fa-check text-white text-xs"></i>';
+            }
+            
+            updateCalculator();
+        });
+    });
+
+    document.querySelectorAll('.service-addon').forEach(addon => {
+        addon.addEventListener('click', function() {
+            const checkbox = this.querySelector('.addon-checkbox');
+            const price = parseInt(this.dataset.price);
+            const name = this.querySelector('h4').textContent;
+            
+            if (checkbox.classList.contains('bg-primary-deep')) {
+                checkbox.classList.remove('bg-primary-deep', 'border-primary-deep');
+                checkbox.classList.add('border-neutral-light');
+                checkbox.innerHTML = '';
+                this.classList.remove('border-primary-deep');
+                this.classList.add('border-neutral-light');
+                selectedAddons = selectedAddons.filter(a => a.name !== name);
+            } else {
+                checkbox.classList.add('bg-primary-deep', 'border-primary-deep');
+                checkbox.classList.remove('border-neutral-light');
+                checkbox.innerHTML = '<i class="fa-solid fa-check text-white text-xs"></i>';
+                this.classList.add('border-primary-deep');
+                this.classList.remove('border-neutral-light');
+                selectedAddons.push({ name, price });
+            }
+            
+            updateCalculator();
+        });
+    });
+
+    document.querySelectorAll('.duration-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.duration-btn').forEach(b => {
+                b.classList.remove('bg-primary-gold', 'border-primary-gold', 'text-primary-deep');
+                b.classList.add('bg-white', 'border-neutral-light', 'text-neutral-dark');
+            });
+            
+            this.classList.add('bg-primary-gold', 'border-primary-gold', 'text-primary-deep');
+            this.classList.remove('bg-white', 'border-neutral-light', 'text-neutral-dark');
+            
+            selectedYears = parseInt(this.dataset.years);
+            updateCalculator();
+        });
+    });
+
+    document.querySelectorAll('.payment-option').forEach(option => {
+        option.addEventListener('click', function() {
+            document.querySelectorAll('.payment-option').forEach(opt => {
+                opt.classList.remove('border-primary-deep', 'bg-primary-deep/5');
+                opt.classList.add('border-neutral-light');
+                const radio = opt.querySelector('.payment-radio');
+                radio.classList.remove('bg-primary-deep', 'border-primary-deep');
+                radio.classList.add('border-neutral-light');
+                radio.innerHTML = '';
+            });
+            
+            this.classList.add('border-primary-deep', 'bg-primary-deep/5');
+            this.classList.remove('border-neutral-light');
+            const radio = this.querySelector('.payment-radio');
+            radio.classList.add('bg-primary-deep', 'border-primary-deep');
+            radio.classList.remove('border-neutral-light');
+            radio.innerHTML = '<i class="fa-solid fa-check text-white text-xs"></i>';
+        });
+    });
+
+    const sliders = [
+        { id: 'property-count', display: 'property-display' },
+        { id: 'vehicle-count', display: 'vehicle-display' },
+        { id: 'account-count', display: 'account-display' },
+        { id: 'heir-count', display: 'heir-display' }
+    ];
+
+    sliders.forEach(slider => {
+        const input = document.getElementById(slider.id);
+        const display = document.getElementById(slider.display);
+        
+        input.addEventListener('input', function() {
+            display.textContent = this.value;
+            updateCalculator();
+        });
+    });
+
+    document.getElementById('reset-calculator').addEventListener('click', function() {
+        document.querySelectorAll('.service-addon').forEach(addon => {
+            const checkbox = addon.querySelector('.addon-checkbox');
+            checkbox.classList.remove('bg-primary-deep', 'border-primary-deep');
+            checkbox.classList.add('border-neutral-light');
+            checkbox.innerHTML = '';
+            addon.classList.remove('border-primary-deep');
+            addon.classList.add('border-neutral-light');
+        });
+        
+        selectedAddons = [];
+        
+        document.getElementById('property-count').value = 2;
+        document.getElementById('property-display').textContent = 2;
+        document.getElementById('vehicle-count').value = 1;
+        document.getElementById('vehicle-display').textContent = 1;
+        document.getElementById('account-count').value = 3;
+        document.getElementById('account-display').textContent = 3;
+        document.getElementById('heir-count').value = 2;
+        document.getElementById('heir-display').textContent = 2;
+        
+        updateCalculator();
+    });
+
+    document.querySelectorAll('.faq-item button').forEach(button => {
+        button.addEventListener('click', function() {
+            const answer = this.nextElementSibling;
+            const icon = this.querySelector('i');
+            
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            } else {
+                document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+                document.querySelectorAll('.faq-item button i').forEach(i => {
+                    i.classList.remove('fa-chevron-up');
+                    i.classList.add('fa-chevron-down');
+                });
+                answer.style.display = 'block';
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            }
+        });
+    });
+
+    updateCalculator();
+});
+</script>
+
+</body>
+</html>

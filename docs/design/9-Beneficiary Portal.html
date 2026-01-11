@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beneficiary Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-deep': '#1A237E',
+                        'primary-gold': '#C9A054',
+                        'secondary-blue': '#3949AB',
+                        'secondary-pale': '#E8EAF6',
+                        'secondary-gold-light': '#E4D4B4',
+                        'accent-emerald': '#00695C',
+                        'accent-amber': '#FF8F00',
+                        'accent-purple': '#6A1B9A',
+                        'success-green': '#2E7D32',
+                        'error-red': '#C62828',
+                        'warning-orange': '#EF6C00',
+                        'info-blue': '#1565C0',
+                        'neutral-dark': '#37474F',
+                        'neutral-medium': '#78909C',
+                        'neutral-light': '#CFD8DC',
+                        'bg-subtle': '#F5F7FA',
+                        'bg-section': '#ECEFF1',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'crimson': ['Crimson Pro', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Crimson+Pro:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+</head>
+<body class="font-inter bg-bg-subtle">
+
+<header id="header" class="bg-white border-b border-neutral-light sticky top-0 z-50">
+    <div class="max-w-[1440px] mx-auto px-8 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-primary-deep rounded-lg flex items-center justify-center">
+                    <i class="fa-solid fa-shield-halved text-primary-gold text-xl"></i>
+                </div>
+                <span class="text-2xl font-bold text-primary-deep">LegacyGuard</span>
+                <span class="text-sm text-neutral-medium ml-4">Portal do Beneficiário</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-3 px-4 py-2 bg-bg-subtle rounded-lg">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Beneficiary" class="w-8 h-8 rounded-full"/>
+                    <div>
+                        <div class="text-sm font-semibold text-neutral-dark">Maria Silva Santos</div>
+                        <div class="text-xs text-neutral-medium">Beneficiária Verificada</div>
+                    </div>
+                </div>
+                <button class="px-4 py-2 text-neutral-medium hover:text-error-red font-medium transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Sair</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="security-banner" class="bg-gradient-to-r from-accent-emerald to-success-green text-white py-4">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-shield-check text-xl"></i>
+                </div>
+                <div>
+                    <div class="font-semibold">Sessão Segura Ativa</div>
+                    <div class="text-sm text-white/80">Autenticação 2FA verificada • IP: 189.***.***.142 • São Paulo, BR</div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-6">
+                <div class="text-sm">
+                    <span class="text-white/80">Expira em:</span>
+                    <span class="font-bold ml-2">14:52</span>
+                </div>
+                <button class="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-semibold transition-colors">
+                    Estender Sessão
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="testament-unsealed-notice" class="bg-white border-b border-neutral-light py-8">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="flex items-start space-x-6">
+            <div class="w-16 h-16 bg-primary-gold/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                <i class="fa-solid fa-envelope-open-text text-primary-gold text-3xl"></i>
+            </div>
+            <div class="flex-1">
+                <h1 class="text-3xl font-bold text-neutral-dark mb-3">Testamento Aberto e Validado</h1>
+                <p class="text-lg text-neutral-medium mb-4">
+                    O testamento de <span class="font-bold text-neutral-dark">João Carlos Santos</span> (CPF: ***.***.789-**) foi oficialmente aberto em <span class="font-semibold">10 de Janeiro de 2026</span> após validação em 4 camadas de segurança.
+                </p>
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="bg-bg-subtle rounded-xl p-4">
+                        <div class="flex items-center space-x-2 mb-2">
+                            <i class="fa-solid fa-check-circle text-success-green"></i>
+                            <span class="text-sm font-semibold text-neutral-dark">Camada 1</span>
+                        </div>
+                        <div class="text-xs text-neutral-medium">API Serasa confirmou óbito</div>
+                    </div>
+                    <div class="bg-bg-subtle rounded-xl p-4">
+                        <div class="flex items-center space-x-2 mb-2">
+                            <i class="fa-solid fa-check-circle text-success-green"></i>
+                            <span class="text-sm font-semibold text-neutral-dark">Camada 2</span>
+                        </div>
+                        <div class="text-xs text-neutral-medium">Validação cruzada CRC</div>
+                    </div>
+                    <div class="bg-bg-subtle rounded-xl p-4">
+                        <div class="flex items-center space-x-2 mb-2">
+                            <i class="fa-solid fa-check-circle text-success-green"></i>
+                            <span class="text-sm font-semibold text-neutral-dark">Camada 3</span>
+                        </div>
+                        <div class="text-xs text-neutral-medium">Certidão de óbito verificada</div>
+                    </div>
+                    <div class="bg-bg-subtle rounded-xl p-4">
+                        <div class="flex items-center space-x-2 mb-2">
+                            <i class="fa-solid fa-check-circle text-success-green"></i>
+                            <span class="text-sm font-semibold text-neutral-dark">Camada 4</span>
+                        </div>
+                        <div class="text-xs text-neutral-medium">Revisão jurídica aprovada</div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col space-y-3">
+                <button class="px-6 py-3 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-gavel"></i>
+                    <span>Contatar Advogado</span>
+                </button>
+                <button class="px-6 py-3 bg-white text-info-blue border-2 border-info-blue font-semibold rounded-lg hover:bg-info-blue hover:text-white transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span>Ver Testamento</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="max-w-[1440px] mx-auto px-8 py-8">
+    <div class="grid grid-cols-3 gap-8">
+        <div class="col-span-2 space-y-8">
+            <section id="inheritance-summary" class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-light">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-neutral-dark flex items-center space-x-3">
+                        <i class="fa-solid fa-chart-pie text-primary-gold"></i>
+                        <span>Sua Herança</span>
+                    </h2>
+                    <div class="flex items-center space-x-2 px-4 py-2 bg-success-green/10 rounded-lg">
+                        <i class="fa-solid fa-shield-check text-success-green"></i>
+                        <span class="text-sm font-semibold text-success-green">Verificado</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-primary-deep to-secondary-blue rounded-2xl p-8 text-white mb-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="text-sm text-white/70 mb-2">Percentual Total da Herança</div>
+                            <div class="text-5xl font-bold mb-1">32.5%</div>
+                            <div class="text-white/80">Filha legítima • Herdeira necessária</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-sm text-white/70 mb-2">Valor Estimado</div>
+                            <div class="text-3xl font-bold">R$ 1.625.000</div>
+                            <div class="text-sm text-white/80 mt-1">Base: Avaliação 15/01/2026</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6 mb-6">
+                    <div class="bg-bg-subtle rounded-xl p-6">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-12 h-12 bg-primary-gold/20 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-balance-scale text-primary-gold text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-neutral-medium">Legítima (50%)</div>
+                                <div class="text-xl font-bold text-neutral-dark">R$ 812.500</div>
+                            </div>
+                        </div>
+                        <div class="text-xs text-neutral-medium">Protegida por lei (Art. 1.846 CC)</div>
+                    </div>
+                    <div class="bg-bg-subtle rounded-xl p-6">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-12 h-12 bg-accent-emerald/20 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-gift text-accent-emerald text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-neutral-medium">Parte Disponível</div>
+                                <div class="text-xl font-bold text-neutral-dark">R$ 812.500</div>
+                            </div>
+                        </div>
+                        <div class="text-xs text-neutral-medium">Disposição testamentária livre</div>
+                    </div>
+                </div>
+
+                <div class="border-t border-neutral-light pt-6">
+                    <h3 class="text-lg font-bold text-neutral-dark mb-4">Composição da Herança</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-4 bg-bg-subtle rounded-lg hover:bg-bg-section transition-colors cursor-pointer">
+                            <div class="flex items-center space-x-3">
+                                <i class="fa-solid fa-building text-primary-deep text-xl"></i>
+                                <div>
+                                    <div class="font-semibold text-neutral-dark">Imóveis</div>
+                                    <div class="text-sm text-neutral-medium">3 propriedades</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-neutral-dark">R$ 975.000</div>
+                                <div class="text-sm text-neutral-medium">60% do total</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-bg-subtle rounded-lg hover:bg-bg-section transition-colors cursor-pointer">
+                            <div class="flex items-center space-x-3">
+                                <i class="fa-solid fa-landmark text-info-blue text-xl"></i>
+                                <div>
+                                    <div class="font-semibold text-neutral-dark">Investimentos Financeiros</div>
+                                    <div class="text-sm text-neutral-medium">CDBs, Tesouro, Ações</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-neutral-dark">R$ 487.500</div>
+                                <div class="text-sm text-neutral-medium">30% do total</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-bg-subtle rounded-lg hover:bg-bg-section transition-colors cursor-pointer">
+                            <div class="flex items-center space-x-3">
+                                <i class="fa-brands fa-bitcoin text-accent-purple text-xl"></i>
+                                <div>
+                                    <div class="font-semibold text-neutral-dark">Criptomoedas & NFTs</div>
+                                    <div class="text-sm text-neutral-medium">Bitcoin, Ethereum, Polygon</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-neutral-dark">R$ 162.500</div>
+                                <div class="text-sm text-neutral-medium">10% do total</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="asset-details" class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-light">
+                <h2 class="text-2xl font-bold text-neutral-dark mb-6 flex items-center space-x-3">
+                    <i class="fa-solid fa-list-check text-primary-gold"></i>
+                    <span>Detalhamento de Bens</span>
+                </h2>
+
+                <div class="space-y-6">
+                    <div id="real-estate-section">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-neutral-dark">Imóveis</h3>
+                            <button class="text-primary-deep font-semibold hover:text-secondary-blue transition-colors flex items-center space-x-2">
+                                <span>Expandir Todos</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="border border-neutral-light rounded-xl overflow-hidden">
+                                <div class="bg-bg-subtle p-4 flex items-center justify-between cursor-pointer hover:bg-bg-section transition-colors">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="w-16 h-16 bg-primary-deep/10 rounded-lg flex items-center justify-center">
+                                            <i class="fa-solid fa-home text-primary-deep text-2xl"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-neutral-dark">Apartamento • Jardins, São Paulo</div>
+                                            <div class="text-sm text-neutral-medium">Rua Augusta, 2500 - Apto 1504</div>
+                                            <div class="flex items-center space-x-4 mt-2">
+                                                <span class="text-xs px-2 py-1 bg-success-green/10 text-success-green rounded">Quitado</span>
+                                                <span class="text-xs text-neutral-medium">185m² • 3 quartos</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-xl font-bold text-neutral-dark">R$ 1.850.000</div>
+                                        <div class="text-sm text-neutral-medium">Sua parte: R$ 601.250</div>
+                                        <button class="mt-2 text-info-blue font-semibold text-sm hover:text-secondary-blue transition-colors">
+                                            Ver Escritura
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border border-neutral-light rounded-xl overflow-hidden">
+                                <div class="bg-bg-subtle p-4 flex items-center justify-between cursor-pointer hover:bg-bg-section transition-colors">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="w-16 h-16 bg-primary-deep/10 rounded-lg flex items-center justify-center">
+                                            <i class="fa-solid fa-warehouse text-primary-deep text-2xl"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-neutral-dark">Galpão Comercial • Osasco</div>
+                                            <div class="text-sm text-neutral-medium">Av. dos Autonomistas, 4500</div>
+                                            <div class="flex items-center space-x-4 mt-2">
+                                                <span class="text-xs px-2 py-1 bg-warning-orange/10 text-warning-orange rounded">Alugado</span>
+                                                <span class="text-xs text-neutral-medium">850m² • Renda: R$ 12.000/mês</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-xl font-bold text-neutral-dark">R$ 950.000</div>
+                                        <div class="text-sm text-neutral-medium">Sua parte: R$ 308.750</div>
+                                        <button class="mt-2 text-info-blue font-semibold text-sm hover:text-secondary-blue transition-colors">
+                                            Ver Contrato
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border border-neutral-light rounded-xl overflow-hidden">
+                                <div class="bg-bg-subtle p-4 flex items-center justify-between cursor-pointer hover:bg-bg-section transition-colors">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="w-16 h-16 bg-primary-deep/10 rounded-lg flex items-center justify-center">
+                                            <i class="fa-solid fa-umbrella-beach text-primary-deep text-2xl"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-neutral-dark">Casa de Praia • Guarujá</div>
+                                            <div class="text-sm text-neutral-medium">Praia da Enseada - Condomínio Riviera</div>
+                                            <div class="flex items-center space-x-4 mt-2">
+                                                <span class="text-xs px-2 py-1 bg-success-green/10 text-success-green rounded">Quitado</span>
+                                                <span class="text-xs text-neutral-medium">220m² • 4 quartos</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-xl font-bold text-neutral-dark">R$ 1.200.000</div>
+                                        <div class="text-sm text-neutral-medium">Sua parte: R$ 390.000</div>
+                                        <button class="mt-2 text-info-blue font-semibold text-sm hover:text-secondary-blue transition-colors">
+                                            Ver Matrícula
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="financial-assets-section" class="pt-6 border-t border-neutral-light">
+                        <h3 class="text-xl font-bold text-neutral-dark mb-4">Investimentos Financeiros</h3>
+                        <div class="space-y-4">
+                            <div class="border border-neutral-light rounded-xl p-4">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center space-x-3">
+                                        <i class="fa-solid fa-piggy-bank text-info-blue text-2xl"></i>
+                                        <div>
+                                            <div class="font-bold text-neutral-dark">CDB Banco Itaú</div>
+                                            <div class="text-sm text-neutral-medium">Ag: 0123 • Conta: 45678-9</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-lg font-bold text-neutral-dark">R$ 450.000</div>
+                                        <div class="text-sm text-neutral-medium">Sua parte: R$ 146.250</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-neutral-medium">Vencimento: 15/12/2027 • Taxa: 110% CDI</span>
+                                    <button class="text-info-blue font-semibold hover:text-secondary-blue transition-colors">
+                                        Ver Extrato
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="border border-neutral-light rounded-xl p-4">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center space-x-3">
+                                        <i class="fa-solid fa-chart-line text-success-green text-2xl"></i>
+                                        <div>
+                                            <div class="font-bold text-neutral-dark">Ações B3</div>
+                                            <div class="text-sm text-neutral-medium">Corretora XP Investimentos</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-lg font-bold text-neutral-dark">R$ 380.000</div>
+                                        <div class="text-sm text-neutral-medium">Sua parte: R$ 123.500</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-neutral-medium">PETR4, VALE3, ITUB4, BBDC4 • Diversificado</span>
+                                    <button class="text-info-blue font-semibold hover:text-secondary-blue transition-colors">
+                                        Ver Carteira
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="border border-neutral-light rounded-xl p-4">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center space-x-3">
+                                        <i class="fa-solid fa-landmark text-primary-gold text-2xl"></i>
+                                        <div>
+                                            <div class="font-bold text-neutral-dark">Tesouro Direto</div>
+                                            <div class="text-sm text-neutral-medium">Tesouro IPCA+ 2035</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-lg font-bold text-neutral-dark">R$ 670.000</div>
+                                        <div class="text-sm text-neutral-medium">Sua parte: R$ 217.750</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-neutral-medium">IPCA + 6,15% a.a. • Vencimento: 15/05/2035</span>
+                                    <button class="text-info-blue font-semibold hover:text-secondary-blue transition-colors">
+                                        Ver Posição
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="crypto-assets-section" class="pt-6 border-t border-neutral-light">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-neutral-dark flex items-center space-x-2">
+                                <span>Criptomoedas & NFTs</span>
+                                <span class="px-3 py-1 bg-warning-orange/10 text-warning-orange text-xs font-semibold rounded-full">
+                                    Requer Aprovação do Advogado
+                                </span>
+                            </h3>
+                        </div>
+
+                        <div class="bg-accent-purple/5 border border-accent-purple/20 rounded-xl p-6 mb-4">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-accent-purple/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-lock text-accent-purple text-xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-neutral-dark mb-2">Acesso Progressivo a Informações Sensíveis</h4>
+                                    <p class="text-sm text-neutral-medium mb-4">
+                                        Seeds de wallets, chaves privadas e instruções de transferência de criptomoedas estão protegidas por criptografia adicional. Para acessar essas informações, você precisará:
+                                    </p>
+                                    <ul class="space-y-2 text-sm">
+                                        <li class="flex items-start space-x-2">
+                                            <i class="fa-solid fa-check text-accent-purple mt-1"></i>
+                                            <span>Completar autenticação 2FA adicional</span>
+                                        </li>
+                                        <li class="flex items-start space-x-2">
+                                            <i class="fa-solid fa-check text-accent-purple mt-1"></i>
+                                            <span>Solicitar aprovação do advogado responsável</span>
+                                        </li>
+                                        <li class="flex items-start space-x-2">
+                                            <i class="fa-solid fa-check text-accent-purple mt-1"></i>
+                                            <span>Aguardar período de 48h para liberação</span>
+                                        </li>
+                                    </ul>
+                                    <button class="mt-4 px-6 py-2 bg-accent-purple text-white font-semibold rounded-lg hover:opacity-90 transition-opacity">
+                                        Solicitar Acesso Completo
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="border border-neutral-light rounded-xl p-4">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center space-x-3">
+                                        <i class="fa-brands fa-bitcoin text-warning-orange text-2xl"></i>
+                                        <div>
+                                            <div class="font-bold text-neutral-dark">Bitcoin (BTC)</div>
+                                            <div class="text-sm text-neutral-medium">Wallet: Hardware Ledger Nano X</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-lg font-bold text-neutral-dark">2.45 BTC</div>
+                                        <div class="text-sm text-neutral-medium">≈ R$ 520.000</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-sm text-neutral-medium">
+                                        <span class="font-mono">bc1q...7x9m</span>
+                                    </div>
+                                    <button class="px-4 py-2 bg-neutral-light text-neutral-dark font-semibold rounded-lg text-sm flex items-center space-x-2" disabled>
+                                        <i class="fa-solid fa-lock"></i>
+                                        <span>Seed Bloqueada</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="border border-neutral-light rounded-xl p-4">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center space-x-3">
+                                        <i class="fa-brands fa-ethereum text-info-blue text-2xl"></i>
+                                        <div>
+                                            <div class="font-bold text-neutral-dark">Ethereum (ETH)</div>
+                                            <div class="text-sm text-neutral-medium">Wallet: MetaMask</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-lg font-bold text-neutral-dark">18.7 ETH</div>
+                                        <div class="text-sm text-neutral-medium">≈ R$ 280.000</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-sm text-neutral-medium">
+                                        <span class="font-mono">0x7a8f...3d2c</span>
+                                    </div>
+                                    <button class="px-4 py-2 bg-neutral-light text-neutral-dark font-semibold rounded-lg text-sm flex items-center space-x-2" disabled>
+                                        <i class="fa-solid fa-lock"></i>
+                                        <span>Chave Bloqueada</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="border border-neutral-light rounded-xl p-4">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center space-x-3">
+                                        <i class="fa-solid fa-image text-accent-purple text-2xl"></i>
+                                        <div>
+                                            <div class="font-bold text-neutral-dark">NFT Collection</div>
+                                            <div class="text-sm text-neutral-medium">Bored Ape, CryptoPunks, Art Blocks</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-lg font-bold text-neutral-dark">12 NFTs</div>
+                                        <div class="text-sm text-neutral-medium">≈ R$ 450.000</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-sm text-neutral-medium">
+                                        OpenSea • Rarible • Foundation
+                                    </div>
+                                    <button class="px-4 py-2 bg-neutral-light text-neutral-dark font-semibold rounded-lg text-sm flex items-center space-x-2" disabled>
+                                        <i class="fa-solid fa-lock"></i>
+                                        <span>Acesso Restrito</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="digital-assets" class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-light">
+                <h2 class="text-2xl font-bold text-neutral-dark mb-6 flex items-center space-x-3">
+                    <i class="fa-solid fa-cloud text-primary-gold"></i>
+                    <span>Ativos Digitais & Senhas</span>
+                </h2>
+
+                <div class="bg-warning-orange/5 border border-warning-orange/20 rounded-xl p-6 mb-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-warning-orange/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-exclamation-triangle text-warning-orange text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-neutral-dark mb-2">Proteção Anti-Screenshot Ativa</h4>
+                            <p class="text-sm text-neutral-medium">
+                                Senhas e informações sensíveis serão exibidas por apenas 30 segundos com marca d'água sobreposta. Capturas de tela são bloqueadas durante a visualização.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="border border-neutral-light rounded-xl p-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <i class="fa-brands fa-google text-error-red text-2xl"></i>
+                                <div>
+                                    <div class="font-bold text-neutral-dark">Google Account</div>
+                                    <div class="text-sm text-neutral-medium">joao.santos@gmail.com</div>
+                                </div>
+                            </div>
+                            <button class="px-4 py-2 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2">
+                                <i class="fa-solid fa-eye"></i>
+                                <span>Revelar Senha</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="border border-neutral-light rounded-xl p-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <i class="fa-brands fa-apple text-neutral-dark text-2xl"></i>
+                                <div>
+                                    <div class="font-bold text-neutral-dark">Apple ID</div>
+                                    <div class="text-sm text-neutral-medium">joao.santos@icloud.com</div>
+                                </div>
+                            </div>
+                            <button class="px-4 py-2 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2">
+                                <i class="fa-solid fa-eye"></i>
+                                <span>Revelar Senha</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="border border-neutral-light rounded-xl p-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <i class="fa-brands fa-microsoft text-info-blue text-2xl"></i>
+                                <div>
+                                    <div class="font-bold text-neutral-dark">Microsoft 365</div>
+                                    <div class="text-sm text-neutral-medium">Licença Business Premium</div>
+                                </div>
+                            </div>
+                            <button class="px-4 py-2 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2">
+                                <i class="fa-solid fa-eye"></i>
+                                <span>Revelar Credenciais</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="border border-neutral-light rounded-xl p-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <i class="fa-solid fa-server text-success-green text-2xl"></i>
+                                <div>
+                                    <div class="font-bold text-neutral-dark">Servidor AWS</div>
+                                    <div class="text-sm text-neutral-medium">Instâncias EC2 • S3 Buckets</div>
+                                </div>
+                            </div>
+                            <button class="px-4 py-2 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2">
+                                <i class="fa-solid fa-eye"></i>
+                                <span>Ver Access Keys</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="border border-neutral-light rounded-xl p-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <i class="fa-solid fa-lock text-accent-emerald text-2xl"></i>
+                                <div>
+                                    <div class="font-bold text-neutral-dark">1Password Vault</div>
+                                    <div class="text-sm text-neutral-medium">Master Password + Secret Key</div>
+                                </div>
+                            </div>
+                            <button class="px-4 py-2 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2">
+                                <i class="fa-solid fa-eye"></i>
+                                <span>Revelar Master Key</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="documents-downloads" class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-light">
+                <h2 class="text-2xl font-bold text-neutral-dark mb-6 flex items-center space-x-3">
+                    <i class="fa-solid fa-file-pdf text-error-red"></i>
+                    <span>Documentos para Download</span>
+                </h2>
+
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 bg-bg-subtle rounded-xl hover:bg-bg-section transition-colors">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-error-red/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-file-pdf text-error-red text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-neutral-dark">Testamento Completo</div>
+                                <div class="text-sm text-neutral-medium">Assinado digitalmente ICP-Brasil • 2.4 MB</div>
+                            </div>
+                        </div>
+                        <button class="px-6 py-2 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Baixar PDF</span>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-bg-subtle rounded-xl hover:bg-bg-section transition-colors">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-accent-emerald/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-shield-check text-accent-emerald text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-neutral-dark">Certificado Blockchain</div>
+                                <div class="text-sm text-neutral-medium">Registro Polygon • Hash SHA-256 • 156 KB</div>
+                            </div>
+                        </div>
+                        <button class="px-6 py-2 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Baixar</span>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-bg-subtle rounded-xl hover:bg-bg-section transition-colors">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-info-blue/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-video text-info-blue text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-neutral-dark">Vídeo de Validação Forense</div>
+                                <div class="text-sm text-neutral-medium">Criptografado AES-256 • 1080p • 487 MB</div>
+                            </div>
+                        </div>
+                        <button class="px-6 py-2 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Baixar</span>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-bg-subtle rounded-xl hover:bg-bg-section transition-colors">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-primary-gold/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-file-invoice text-primary-gold text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-neutral-dark">Inventário Completo de Bens</div>
+                                <div class="text-sm text-neutral-medium">Planilha detalhada • Excel • 245 KB</div>
+                            </div>
+                        </div>
+                        <button class="px-6 py-2 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Baixar</span>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-bg-subtle rounded-xl hover:bg-bg-section transition-colors">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-success-green/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-file-contract text-success-green text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-neutral-dark">Certidão de Óbito Verificada</div>
+                                <div class="text-sm text-neutral-medium">Documento oficial • PDF • 890 KB</div>
+                            </div>
+                        </div>
+                        <button class="px-6 py-2 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Baixar</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="space-y-8">
+            <section id="beneficiary-info" class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-light">
+                <h3 class="text-xl font-bold text-neutral-dark mb-6">Suas Informações</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4 pb-4 border-b border-neutral-light">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Beneficiary" class="w-16 h-16 rounded-full"/>
+                        <div>
+                            <div class="font-bold text-neutral-dark">Maria Silva Santos</div>
+                            <div class="text-sm text-neutral-medium">Filha • Herdeira Necessária</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-neutral-medium mb-1">CPF</div>
+                        <div class="font-semibold text-neutral-dark">***.***.456-**</div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-neutral-medium mb-1">Email Verificado</div>
+                        <div class="font-semibold text-neutral-dark">maria.santos@email.com</div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-neutral-medium mb-1">Telefone</div>
+                        <div class="font-semibold text-neutral-dark">(11) 98765-4321</div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-neutral-medium mb-1">Status KYC</div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-check-circle text-success-green"></i>
+                            <span class="font-semibold text-success-green">Verificado</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="other-beneficiaries" class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-light">
+                <h3 class="text-xl font-bold text-neutral-dark mb-6">Outros Beneficiários</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 bg-bg-subtle rounded-xl">
+                        <div class="flex items-center space-x-3">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Pedro Santos" class="w-10 h-10 rounded-full"/>
+                            <div>
+                                <div class="font-semibold text-neutral-dark">Pedro Santos</div>
+                                <div class="text-xs text-neutral-medium">Filho • Herdeiro Necessário</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-bold text-neutral-dark">32.5%</div>
+                            <div class="text-xs text-neutral-medium">R$ 1.625.000</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-bg-subtle rounded-xl">
+                        <div class="flex items-center space-x-3">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" alt="Ana Santos" class="w-10 h-10 rounded-full"/>
+                            <div>
+                                <div class="font-semibold text-neutral-dark">Ana Santos Costa</div>
+                                <div class="text-xs text-neutral-medium">Cônjuge • Meação</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-bold text-neutral-dark">35.0%</div>
+                            <div class="text-xs text-neutral-medium">R$ 1.750.000</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="lawyer-contact" class="bg-gradient-to-br from-primary-deep to-secondary-blue rounded-2xl p-8 text-white shadow-lg">
+                <h3 class="text-xl font-bold mb-4 flex items-center space-x-2">
+                    <i class="fa-solid fa-gavel"></i>
+                    <span>Advogado Responsável</span>
+                </h3>
+                <div class="flex items-center space-x-4 mb-6">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Lawyer" class="w-16 h-16 rounded-full border-4 border-white/20"/>
+                    <div>
+                        <div class="font-bold text-lg">Dr. Carlos Eduardo Silva</div>
+                        <div class="text-white/80 text-sm">OAB/SP 123.456</div>
+                    </div>
+                </div>
+                <div class="space-y-3 mb-6">
+                    <div class="flex items-center space-x-2 text-sm">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>carlos.silva@legacyguard.com.br</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-sm">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>(11) 3456-7890</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-sm">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span>(11) 98765-1234</span>
+                    </div>
+                </div>
+                <button class="w-full py-3 bg-white text-primary-deep font-bold rounded-lg hover:bg-white/90 transition-colors">
+                    Agendar Consulta
+                </button>
+            </section>
+
+            <section id="security-timeline" class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-light">
+                <h3 class="text-xl font-bold text-neutral-dark mb-6 flex items-center space-x-2">
+                    <i class="fa-solid fa-clock-rotate-left text-primary-gold"></i>
+                    <span>Linha do Tempo</span>
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-success-green/20 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-check text-success-green text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold text-neutral-dark">Testamento Aberto</div>
+                            <div class="text-xs text-neutral-medium">10 Jan 2026 • 14:32</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-success-green/20 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-check text-success-green text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold text-neutral-dark">KYC Aprovado</div>
+                            <div class="text-xs text-neutral-medium">10 Jan 2026 • 16:45</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-success-green/20 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-check text-success-green text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold text-neutral-dark">2FA Configurado</div>
+                            <div class="text-xs text-neutral-medium">10 Jan 2026 • 17:12</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-info-blue/20 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-clock text-info-blue text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold text-neutral-dark">Acesso ao Portal</div>
+                            <div class="text-xs text-neutral-medium">10 Jan 2026 • 18:05 (atual)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="blockchain-verification" class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-light">
+                <h3 class="text-xl font-bold text-neutral-dark mb-6 flex items-center space-x-2">
+                    <i class="fa-brands fa-ethereum text-accent-purple"></i>
+                    <span>Verificação Blockchain</span>
+                </h3>
+                <div class="space-y-4">
+                    <div>
+                        <div class="text-sm text-neutral-medium mb-2">Transaction Hash</div>
+                        <div class="font-mono text-xs bg-bg-subtle p-3 rounded-lg break-all text-neutral-dark">
+                            0x7a8f3d2c9b1e4f6a8c2d5e7b9f1a3c5e7d9b1f3a5c7e9d1b3f5a7c9e1d3b5f7a
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-neutral-medium mb-2">Block Number</div>
+                        <div class="font-semibold text-neutral-dark">45,678,912</div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-neutral-medium mb-2">Timestamp</div>
+                        <div class="font-semibold text-neutral-dark">15 Jan 2026 • 10:23:45 UTC</div>
+                    </div>
+                    <a href="#" class="flex items-center justify-center space-x-2 w-full py-3 bg-accent-purple text-white font-semibold rounded-lg hover:opacity-90 transition-opacity">
+                        <i class="fa-solid fa-external-link-alt"></i>
+                        <span>Ver no PolygonScan</span>
+                    </a>
+                </div>
+            </section>
+
+            <section id="help-support" class="bg-bg-section rounded-2xl p-8 border border-neutral-light">
+                <h3 class="text-xl font-bold text-neutral-dark mb-4">Precisa de Ajuda?</h3>
+                <p class="text-sm text-neutral-medium mb-6">
+                    Nossa equipe está disponível 24/7 para auxiliar com qualquer dúvida sobre o processo de herança.
+                </p>
+                <div class="space-y-3">
+                    <button class="w-full py-3 bg-white text-primary-deep border-2 border-primary-deep font-semibold rounded-lg hover:bg-primary-deep hover:text-white transition-colors flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-headset"></i>
+                        <span>Suporte 24/7</span>
+                    </button>
+                    <button class="w-full py-3 bg-white text-success-green border-2 border-success-green font-semibold rounded-lg hover:bg-success-green hover:text-white transition-colors flex items-center justify-center space-x-2">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </button>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<footer id="footer" class="bg-neutral-dark text-white py-12 mt-16">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="grid grid-cols-4 gap-12 mb-8">
+            <div>
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 bg-primary-gold rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-deep text-xl"></i>
+                    </div>
+                    <span class="text-xl font-bold">LegacyGuard</span>
+                </div>
+                <p class="text-white/70 text-sm leading-relaxed">
+                    Proteção digital do seu legado com tecnologia blockchain e conformidade legal brasileira.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Portal</h4>
+                <ul class="space-y-2 text-sm text-white/70">
+                    <li><a href="#" class="hover:text-white transition-colors">Minha Herança</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Documentos</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Ativos Digitais</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Configurações</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Suporte</h4>
+                <ul class="space-y-2 text-sm text-white/70">
+                    <li><a href="#" class="hover:text-white transition-colors">Central de Ajuda</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">FAQ</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Contato</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Status do Sistema</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Legal</h4>
+                <ul class="space-y-2 text-sm text-white/70">
+                    <li><a href="#" class="hover:text-white transition-colors">Termos de Uso</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Privacidade</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">LGPD</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Segurança</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-white/10 pt-8 flex items-center justify-between">
+            <div class="text-sm text-white/50">
+                © 2026 LegacyGuard. Todos os direitos reservados.
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="text-sm text-white/50">Protegido por:</span>
+                <i class="fa-solid fa-shield-check text-accent-emerald"></i>
+                <i class="fa-brands fa-ethereum text-accent-purple"></i>
+                <i class="fa-brands fa-aws text-warning-orange"></i>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+window.addEventListener('load', function() {
+    let sessionTimer = 895;
+    const timerDisplay = document.querySelector('#security-banner .font-bold');
+    
+    setInterval(() => {
+        if (sessionTimer > 0) {
+            sessionTimer--;
+            const minutes = Math.floor(sessionTimer / 60);
+            const seconds = sessionTimer % 60;
+            timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+    }, 1000);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-deep': '#1A237E',
+                        'primary-gold': '#C9A054',
+                        'secondary-blue': '#3949AB',
+                        'secondary-pale': '#E8EAF6',
+                        'secondary-gold-light': '#E4D4B4',
+                        'accent-emerald': '#00695C',
+                        'accent-amber': '#FF8F00',
+                        'accent-purple': '#6A1B9A',
+                        'success-green': '#2E7D32',
+                        'error-red': '#C62828',
+                        'warning-orange': '#EF6C00',
+                        'info-blue': '#1565C0',
+                        'neutral-dark': '#37474F',
+                        'neutral-medium': '#78909C',
+                        'neutral-light': '#CFD8DC',
+                        'bg-subtle': '#F5F7FA',
+                        'bg-section': '#ECEFF1',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'crimson': ['Crimson Pro', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Crimson+Pro:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+</head>
+<body class="font-inter bg-bg-subtle">
+
+<header id="header" class="bg-white border-b border-neutral-light sticky top-0 z-50">
+    <div class="max-w-[1440px] mx-auto px-8 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-12">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary-deep rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-gold text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-primary-deep">LegacyGuard</span>
+                </div>
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#" class="text-primary-deep font-semibold border-b-2 border-primary-deep pb-1">Dashboard</a>
+                    <a href="#" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Testamentos</a>
+                    <a href="#" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Consultas</a>
+                    <a href="#" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Documentos</a>
+                    <a href="#" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Relatórios</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="relative p-2 hover:bg-secondary-pale rounded-lg transition-colors">
+                    <i class="fa-solid fa-bell text-neutral-dark text-lg"></i>
+                    <span class="absolute top-1 right-1 w-2 h-2 bg-error-red rounded-full"></span>
+                </button>
+                <button class="px-4 py-2 text-neutral-dark hover:bg-secondary-pale rounded-lg transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-question-circle"></i>
+                    <span class="font-medium">Ajuda</span>
+                </button>
+                <div class="flex items-center space-x-3 pl-4 border-l border-neutral-light">
+                    <div class="text-right">
+                        <div class="text-sm font-semibold text-neutral-dark">Dr. Carlos Silva</div>
+                        <div class="text-xs text-neutral-medium">Advogado Consultor</div>
+                    </div>
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Profile" class="w-10 h-10 rounded-full"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div id="main-container" class="max-w-[1440px] mx-auto px-8 py-8">
+    <div class="flex items-center justify-between mb-8">
+        <div>
+            <h1 class="text-3xl font-bold text-neutral-dark mb-2">Painel de Consultas</h1>
+            <p class="text-neutral-medium">Gerencie consultas agendadas, visualize contexto de leads e faça anotações</p>
+        </div>
+        <div class="flex items-center space-x-3">
+            <button class="px-4 py-2 bg-white border border-neutral-light text-neutral-dark font-semibold rounded-lg hover:bg-secondary-pale transition-colors flex items-center space-x-2">
+                <i class="fa-solid fa-filter"></i>
+                <span>Filtros</span>
+            </button>
+            <button class="px-6 py-2 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors flex items-center space-x-2">
+                <i class="fa-solid fa-calendar-plus"></i>
+                <span>Nova Consulta</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="stats-overview" class="grid grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-xl p-6 border border-neutral-light">
+            <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 bg-info-blue/10 rounded-lg flex items-center justify-center">
+                    <i class="fa-solid fa-calendar-check text-info-blue text-xl"></i>
+                </div>
+                <span class="text-xs font-semibold text-success-green bg-success-green/10 px-2 py-1 rounded">+12%</span>
+            </div>
+            <div class="text-3xl font-bold text-neutral-dark mb-1">24</div>
+            <div class="text-sm text-neutral-medium">Consultas Hoje</div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 border border-neutral-light">
+            <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 bg-warning-orange/10 rounded-lg flex items-center justify-center">
+                    <i class="fa-solid fa-clock text-warning-orange text-xl"></i>
+                </div>
+                <span class="text-xs font-semibold text-warning-orange bg-warning-orange/10 px-2 py-1 rounded">Próxima: 14:30</span>
+            </div>
+            <div class="text-3xl font-bold text-neutral-dark mb-1">8</div>
+            <div class="text-sm text-neutral-medium">Pendentes</div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 border border-neutral-light">
+            <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 bg-success-green/10 rounded-lg flex items-center justify-center">
+                    <i class="fa-solid fa-check-circle text-success-green text-xl"></i>
+                </div>
+                <span class="text-xs font-semibold text-neutral-medium bg-neutral-light px-2 py-1 rounded">94%</span>
+            </div>
+            <div class="text-3xl font-bold text-neutral-dark mb-1">142</div>
+            <div class="text-sm text-neutral-medium">Concluídas (Mês)</div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 border border-neutral-light">
+            <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 bg-error-red/10 rounded-lg flex items-center justify-center">
+                    <i class="fa-solid fa-user-xmark text-error-red text-xl"></i>
+                </div>
+                <span class="text-xs font-semibold text-error-red bg-error-red/10 px-2 py-1 rounded">-3%</span>
+            </div>
+            <div class="text-3xl font-bold text-neutral-dark mb-1">6</div>
+            <div class="text-sm text-neutral-medium">No-shows</div>
+        </div>
+    </div>
+
+    <div id="next-consultation-banner" class="bg-gradient-to-r from-primary-deep to-secondary-blue text-white rounded-2xl p-8 mb-8">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-6">
+                <div class="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-video text-white text-3xl"></i>
+                </div>
+                <div>
+                    <div class="text-sm font-medium text-white/80 mb-1">Próxima Consulta em</div>
+                    <div class="text-4xl font-bold mb-2">1h 23m</div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-2">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Client" class="w-8 h-8 rounded-full border-2 border-white"/>
+                            <span class="font-semibold">Roberto Almeida</span>
+                        </div>
+                        <span class="text-white/60">•</span>
+                        <span class="text-white/90">14:30 - 15:15 (45 min)</span>
+                        <span class="text-white/60">•</span>
+                        <span class="flex items-center space-x-1 text-white/90">
+                            <i class="fa-solid fa-video text-sm"></i>
+                            <span>Google Meet</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button class="px-6 py-3 bg-white/20 backdrop-blur-sm text-white font-semibold rounded-lg hover:bg-white/30 transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-file-lines"></i>
+                    <span>Ver Contexto</span>
+                </button>
+                <button class="px-6 py-3 bg-primary-gold text-primary-deep font-bold rounded-lg hover:bg-secondary-gold-light transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                    <span>Entrar na Sala</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-8">
+        <div id="consultations-list" class="col-span-2 space-y-4">
+            <div class="bg-white rounded-xl border border-neutral-light">
+                <div class="p-6 border-b border-neutral-light">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-bold text-neutral-dark">Consultas de Hoje</h2>
+                        <div class="flex items-center space-x-2">
+                            <button class="px-3 py-1.5 text-sm font-medium text-primary-deep bg-secondary-pale rounded-lg">Todas</button>
+                            <button class="px-3 py-1.5 text-sm font-medium text-neutral-medium hover:bg-secondary-pale rounded-lg transition-colors">Pendentes</button>
+                            <button class="px-3 py-1.5 text-sm font-medium text-neutral-medium hover:bg-secondary-pale rounded-lg transition-colors">Concluídas</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="consultation-item-1" class="p-6 border-b border-neutral-light hover:bg-bg-subtle transition-colors">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-start space-x-4">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Client" class="w-14 h-14 rounded-full"/>
+                            <div>
+                                <div class="flex items-center space-x-3 mb-2">
+                                    <h3 class="text-lg font-bold text-neutral-dark">Roberto Almeida</h3>
+                                    <span class="px-2 py-1 bg-warning-orange/10 text-warning-orange rounded text-xs font-semibold">EM BREVE</span>
+                                </div>
+                                <div class="flex items-center space-x-4 text-sm text-neutral-medium mb-2">
+                                    <span class="flex items-center space-x-1">
+                                        <i class="fa-solid fa-clock"></i>
+                                        <span>14:30 - 15:15</span>
+                                    </span>
+                                    <span class="flex items-center space-x-1">
+                                        <i class="fa-solid fa-video"></i>
+                                        <span>Google Meet</span>
+                                    </span>
+                                    <span class="flex items-center space-x-1">
+                                        <i class="fa-solid fa-envelope"></i>
+                                        <span>roberto.almeida@email.com</span>
+                                    </span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="px-2 py-1 bg-accent-purple/10 text-accent-purple rounded text-xs font-medium">Primeira Consulta</span>
+                                    <span class="px-2 py-1 bg-info-blue/10 text-info-blue rounded text-xs font-medium">Criptomoedas</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="p-2 hover:bg-secondary-pale rounded-lg transition-colors" title="Ver contexto">
+                                <i class="fa-solid fa-file-lines text-neutral-medium"></i>
+                            </button>
+                            <button class="p-2 hover:bg-secondary-pale rounded-lg transition-colors" title="Editar">
+                                <i class="fa-solid fa-pencil text-neutral-medium"></i>
+                            </button>
+                            <button class="px-4 py-2 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors">
+                                Entrar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bg-bg-subtle rounded-lg p-4">
+                        <div class="text-sm font-semibold text-neutral-dark mb-2">Contexto do Lead:</div>
+                        <p class="text-sm text-neutral-medium leading-relaxed">Empresário, 52 anos, possui R$ 8M em patrimônio incluindo 2.5 BTC e NFTs. Preocupado com sucessão de criptoativos. Esposa e 2 filhos maiores. Quer incluir instruções específicas para wallets.</p>
+                    </div>
+                </div>
+
+                <div id="consultation-item-2" class="p-6 border-b border-neutral-light hover:bg-bg-subtle transition-colors">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-start space-x-4">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Client" class="w-14 h-14 rounded-full"/>
+                            <div>
+                                <div class="flex items-center space-x-3 mb-2">
+                                    <h3 class="text-lg font-bold text-neutral-dark">Ana Paula Santos</h3>
+                                    <span class="px-2 py-1 bg-info-blue/10 text-info-blue rounded text-xs font-semibold">AGENDADA</span>
+                                </div>
+                                <div class="flex items-center space-x-4 text-sm text-neutral-medium mb-2">
+                                    <span class="flex items-center space-x-1">
+                                        <i class="fa-solid fa-clock"></i>
+                                        <span>16:00 - 16:30</span>
+                                    </span>
+                                    <span class="flex items-center space-x-1">
+                                        <i class="fa-solid fa-phone"></i>
+                                        <span>Telefone</span>
+                                    </span>
+                                    <span class="flex items-center space-x-1">
+                                        <i class="fa-solid fa-envelope"></i>
+                                        <span>ana.santos@email.com</span>
+                                    </span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="px-2 py-1 bg-success-green/10 text-success-green rounded text-xs font-medium">Retorno</span>
+                                    <span class="px-2 py-1 bg-primary-gold/10 text-primary-gold rounded text-xs font-medium">Imóveis</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="p-2 hover:bg-secondary-pale rounded-lg transition-colors" title="Ver contexto">
+                                <i class="fa-solid fa-file-lines text-neutral-medium"></i>
+                            </button>
+                            <button class="p-2 hover:bg-secondary-pale rounded-lg transition-colors" title="Editar">
+                                <i class="fa-solid fa-pencil text-neutral-medium"></i>
+                            </button>
+                            <button class="px-4 py-2 bg-white border border-neutral-light text-neutral-dark font-semibold rounded-lg hover:bg-secondary-pale transition-colors">
+                                Preparar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bg-bg-subtle rounded-lg p-4">
+                        <div class="text-sm font-semibold text-neutral-dark mb-2">Contexto do Lead:</div>
+                        <p class="text-sm text-neutral-medium leading-relaxed">Segunda consulta. Médica, 45 anos, R$ 3.2M em imóveis. Já iniciou wizard mas tem dúvidas sobre divisão entre filhos de casamentos diferentes. Precisa revisar cálculo de legítima.</p>
+                    </div>
+                </div>
+
+                <div id="consultation-item-3" class="p-6 border-b border-neutral-light hover:bg-bg-subtle transition-colors">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-start space-x-4">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="Client" class="w-14 h-14 rounded-full"/>
+                            <div>
+                                <div class="flex items-center space-x-3 mb-2">
+                                    <h3 class="text-lg font-bold text-neutral-dark">Fernando Costa</h3>
+                                    <span class="px-2 py-1 bg-info-blue/10 text-info-blue rounded text-xs font-semibold">AGENDADA</span>
+                                </div>
+                                <div class="flex items-center space-x-4 text-sm text-neutral-medium mb-2">
+                                    <span class="flex items-center space-x-1">
+                                        <i class="fa-solid fa-clock"></i>
+                                        <span>17:30 - 18:15</span>
+                                    </span>
+                                    <span class="flex items-center space-x-1">
+                                        <i class="fa-solid fa-video"></i>
+                                        <span>Zoom</span>
+                                    </span>
+                                    <span class="flex items-center space-x-1">
+                                        <i class="fa-solid fa-envelope"></i>
+                                        <span>fernando.costa@email.com</span>
+                                    </span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="px-2 py-1 bg-accent-purple/10 text-accent-purple rounded text-xs font-medium">Primeira Consulta</span>
+                                    <span class="px-2 py-1 bg-accent-emerald/10 text-accent-emerald rounded text-xs font-medium">Empresas</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="p-2 hover:bg-secondary-pale rounded-lg transition-colors" title="Ver contexto">
+                                <i class="fa-solid fa-file-lines text-neutral-medium"></i>
+                            </button>
+                            <button class="p-2 hover:bg-secondary-pale rounded-lg transition-colors" title="Editar">
+                                <i class="fa-solid fa-pencil text-neutral-medium"></i>
+                            </button>
+                            <button class="px-4 py-2 bg-white border border-neutral-light text-neutral-dark font-semibold rounded-lg hover:bg-secondary-pale transition-colors">
+                                Preparar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bg-bg-subtle rounded-lg p-4">
+                        <div class="text-sm font-semibold text-neutral-dark mb-2">Contexto do Lead:</div>
+                        <p class="text-sm text-neutral-medium leading-relaxed">Empresário, 58 anos, sócio de 3 empresas (holding familiar). Patrimônio estimado R$ 15M. Quer estruturar sucessão empresarial + patrimonial. 4 filhos, 2 trabalham nas empresas.</p>
+                    </div>
+                </div>
+
+                <div id="consultation-item-4" class="p-6 hover:bg-bg-subtle transition-colors">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-start space-x-4">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" alt="Client" class="w-14 h-14 rounded-full"/>
+                            <div>
+                                <div class="flex items-center space-x-3 mb-2">
+                                    <h3 class="text-lg font-bold text-neutral-dark">Mariana Oliveira</h3>
+                                    <span class="px-2 py-1 bg-success-green/10 text-success-green rounded text-xs font-semibold">CONCLUÍDA</span>
+                                </div>
+                                <div class="flex items-center space-x-4 text-sm text-neutral-medium mb-2">
+                                    <span class="flex items-center space-x-1">
+                                        <i class="fa-solid fa-clock"></i>
+                                        <span>10:00 - 10:45</span>
+                                    </span>
+                                    <span class="flex items-center space-x-1">
+                                        <i class="fa-solid fa-video"></i>
+                                        <span>Google Meet</span>
+                                    </span>
+                                    <span class="flex items-center space-x-1">
+                                        <i class="fa-solid fa-envelope"></i>
+                                        <span>mariana.oli@email.com</span>
+                                    </span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="px-2 py-1 bg-success-green/10 text-success-green rounded text-xs font-medium">Validação em Vídeo</span>
+                                    <span class="px-2 py-1 bg-primary-gold/10 text-primary-gold rounded text-xs font-medium">Completo</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="p-2 hover:bg-secondary-pale rounded-lg transition-colors" title="Ver notas">
+                                <i class="fa-solid fa-file-lines text-neutral-medium"></i>
+                            </button>
+                            <button class="p-2 hover:bg-secondary-pale rounded-lg transition-colors" title="Ver gravação">
+                                <i class="fa-solid fa-video text-neutral-medium"></i>
+                            </button>
+                            <span class="px-4 py-2 text-success-green font-semibold flex items-center space-x-2">
+                                <i class="fa-solid fa-check-circle"></i>
+                                <span>Finalizada</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="upcoming-consultations" class="bg-white rounded-xl border border-neutral-light">
+                <div class="p-6 border-b border-neutral-light">
+                    <h2 class="text-xl font-bold text-neutral-dark">Próximos Dias</h2>
+                </div>
+
+                <div class="p-6 border-b border-neutral-light">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-secondary-pale rounded-lg flex items-center justify-center">
+                                <div class="text-center">
+                                    <div class="text-xs font-semibold text-primary-deep">JAN</div>
+                                    <div class="text-lg font-bold text-primary-deep">16</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="font-bold text-neutral-dark">Quinta-feira</div>
+                                <div class="text-sm text-neutral-medium">6 consultas agendadas</div>
+                            </div>
+                        </div>
+                        <button class="text-primary-deep font-semibold hover:text-secondary-blue transition-colors">
+                            Ver detalhes
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-2 overflow-x-auto pb-2">
+                        <div class="flex-shrink-0 px-3 py-2 bg-bg-subtle rounded-lg text-sm">
+                            <div class="text-neutral-medium mb-1">09:00</div>
+                            <div class="font-semibold text-neutral-dark">Lucas Mendes</div>
+                        </div>
+                        <div class="flex-shrink-0 px-3 py-2 bg-bg-subtle rounded-lg text-sm">
+                            <div class="text-neutral-medium mb-1">11:00</div>
+                            <div class="font-semibold text-neutral-dark">Juliana Rocha</div>
+                        </div>
+                        <div class="flex-shrink-0 px-3 py-2 bg-bg-subtle rounded-lg text-sm">
+                            <div class="text-neutral-medium mb-1">14:30</div>
+                            <div class="font-semibold text-neutral-dark">Pedro Silva</div>
+                        </div>
+                        <div class="flex-shrink-0 px-3 py-2 bg-bg-subtle rounded-lg text-sm">
+                            <div class="text-neutral-medium mb-1">16:00</div>
+                            <div class="font-semibold text-neutral-dark">Carla Dias</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-secondary-pale rounded-lg flex items-center justify-center">
+                                <div class="text-center">
+                                    <div class="text-xs font-semibold text-primary-deep">JAN</div>
+                                    <div class="text-lg font-bold text-primary-deep">17</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="font-bold text-neutral-dark">Sexta-feira</div>
+                                <div class="text-sm text-neutral-medium">4 consultas agendadas</div>
+                            </div>
+                        </div>
+                        <button class="text-primary-deep font-semibold hover:text-secondary-blue transition-colors">
+                            Ver detalhes
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="sidebar-panels" class="space-y-6">
+            <div id="quick-notes-panel" class="bg-white rounded-xl border border-neutral-light p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-neutral-dark">Notas Rápidas</h3>
+                    <button class="text-primary-deep hover:text-secondary-blue transition-colors">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+                <textarea class="w-full h-32 p-3 border border-neutral-light rounded-lg text-sm text-neutral-dark placeholder-neutral-medium focus:outline-none focus:ring-2 focus:ring-primary-deep/20 resize-none" placeholder="Digite suas anotações aqui..."></textarea>
+                <div class="flex items-center justify-between mt-3">
+                    <div class="flex items-center space-x-2">
+                        <button class="p-2 hover:bg-secondary-pale rounded transition-colors" title="Anexar arquivo">
+                            <i class="fa-solid fa-paperclip text-neutral-medium"></i>
+                        </button>
+                        <button class="p-2 hover:bg-secondary-pale rounded transition-colors" title="Gravar áudio">
+                            <i class="fa-solid fa-microphone text-neutral-medium"></i>
+                        </button>
+                    </div>
+                    <button class="px-4 py-2 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors text-sm">
+                        Salvar
+                    </button>
+                </div>
+            </div>
+
+            <div id="recent-notes" class="bg-white rounded-xl border border-neutral-light p-6">
+                <h3 class="text-lg font-bold text-neutral-dark mb-4">Notas Recentes</h3>
+                <div class="space-y-3">
+                    <div class="p-3 bg-bg-subtle rounded-lg">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="text-xs font-semibold text-neutral-medium">Roberto Almeida</span>
+                            <span class="text-xs text-neutral-medium">Há 2h</span>
+                        </div>
+                        <p class="text-sm text-neutral-dark">Cliente demonstrou preocupação com segurança de seeds. Explicar processo de custódia Shamir em detalhes.</p>
+                    </div>
+                    <div class="p-3 bg-bg-subtle rounded-lg">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="text-xs font-semibold text-neutral-medium">Ana Paula Santos</span>
+                            <span class="text-xs text-neutral-medium">Ontem</span>
+                        </div>
+                        <p class="text-sm text-neutral-dark">Revisar cálculo de legítima. Filhos do primeiro casamento têm direito a 50% do patrimônio total.</p>
+                    </div>
+                    <div class="p-3 bg-bg-subtle rounded-lg">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="text-xs font-semibold text-neutral-medium">Mariana Oliveira</span>
+                            <span class="text-xs text-neutral-medium">Hoje</span>
+                        </div>
+                        <p class="text-sm text-neutral-dark">Validação em vídeo concluída com sucesso. Cliente aprovou preview do PDF. Próximo: assinatura ICP-Brasil.</p>
+                    </div>
+                </div>
+                <button class="w-full mt-4 py-2 text-primary-deep font-semibold hover:bg-secondary-pale rounded-lg transition-colors text-sm">
+                    Ver todas as notas
+                </button>
+            </div>
+
+            <div id="lead-context-panel" class="bg-gradient-to-br from-primary-deep to-secondary-blue text-white rounded-xl p-6">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-lightbulb text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-bold">Insights do Lead</h3>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex items-start space-x-2">
+                        <i class="fa-solid fa-circle-check text-primary-gold mt-1 text-sm"></i>
+                        <p class="text-sm text-white/90">Cliente possui alta complexidade patrimonial - reservar 60min</p>
+                    </div>
+                    <div class="flex items-start space-x-2">
+                        <i class="fa-solid fa-circle-check text-primary-gold mt-1 text-sm"></i>
+                        <p class="text-sm text-white/90">Mencionar benefícios fiscais de planejamento antecipado</p>
+                    </div>
+                    <div class="flex items-start space-x-2">
+                        <i class="fa-solid fa-circle-check text-primary-gold mt-1 text-sm"></i>
+                        <p class="text-sm text-white/90">Preparar exemplo prático de divisão com criptoativos</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="conversion-tracker" class="bg-white rounded-xl border border-neutral-light p-6">
+                <h3 class="text-lg font-bold text-neutral-dark mb-4">Taxa de Conversão</h3>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-neutral-medium">Lead → Consulta</span>
+                            <span class="text-sm font-bold text-neutral-dark">68%</span>
+                        </div>
+                        <div class="w-full h-2 bg-neutral-light rounded-full overflow-hidden">
+                            <div class="h-full bg-info-blue rounded-full" style="width: 68%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-neutral-medium">Consulta → Criação</span>
+                            <span class="text-sm font-bold text-neutral-dark">82%</span>
+                        </div>
+                        <div class="w-full h-2 bg-neutral-light rounded-full overflow-hidden">
+                            <div class="h-full bg-success-green rounded-full" style="width: 82%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-neutral-medium">Criação → Assinatura</span>
+                            <span class="text-sm font-bold text-neutral-dark">94%</span>
+                        </div>
+                        <div class="w-full h-2 bg-neutral-light rounded-full overflow-hidden">
+                            <div class="h-full bg-primary-gold rounded-full" style="width: 94%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="quick-actions" class="bg-white rounded-xl border border-neutral-light p-6">
+                <h3 class="text-lg font-bold text-neutral-dark mb-4">Ações Rápidas</h3>
+                <div class="space-y-2">
+                    <button class="w-full py-3 bg-secondary-pale text-primary-deep font-semibold rounded-lg hover:bg-primary-deep hover:text-white transition-colors flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>Enviar Follow-up</span>
+                    </button>
+                    <button class="w-full py-3 bg-secondary-pale text-primary-deep font-semibold rounded-lg hover:bg-primary-deep hover:text-white transition-colors flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>Gerar Relatório</span>
+                    </button>
+                    <button class="w-full py-3 bg-secondary-pale text-primary-deep font-semibold rounded-lg hover:bg-primary-deep hover:text-white transition-colors flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <span>Ver Calendário</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="follow-up-automation" class="bg-white rounded-xl border border-neutral-light p-8 mt-8">
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h2 class="text-2xl font-bold text-neutral-dark mb-2">Automação de Follow-up</h2>
+                <p class="text-neutral-medium">Sequências de email automatizadas para leads e clientes</p>
+            </div>
+            <button class="px-6 py-3 bg-accent-emerald text-white font-semibold rounded-lg hover:opacity-90 transition-opacity flex items-center space-x-2">
+                <i class="fa-solid fa-plus"></i>
+                <span>Nova Sequência</span>
+            </button>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6">
+            <div class="border border-neutral-light rounded-xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-neutral-dark">Pós-Consulta</h3>
+                    <span class="px-2 py-1 bg-success-green/10 text-success-green rounded text-xs font-semibold">ATIVA</span>
+                </div>
+                <div class="space-y-3 mb-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-6 h-6 bg-info-blue/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="text-xs font-bold text-info-blue">1</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-sm font-semibold text-neutral-dark">D+1: Email de agradecimento</div>
+                            <div class="text-xs text-neutral-medium">Taxa de abertura: 87%</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-6 h-6 bg-info-blue/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="text-xs font-bold text-info-blue">2</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-sm font-semibold text-neutral-dark">D+3: Lembrete de wizard</div>
+                            <div class="text-xs text-neutral-medium">Taxa de clique: 64%</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-6 h-6 bg-info-blue/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="text-xs font-bold text-info-blue">3</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-sm font-semibold text-neutral-dark">D+7: Oferta de suporte</div>
+                            <div class="text-xs text-neutral-medium">Taxa de resposta: 41%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-4 border-t border-neutral-light">
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-neutral-medium">Conversão</span>
+                        <span class="font-bold text-success-green">78%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border border-neutral-light rounded-xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-neutral-dark">No-show Recovery</h3>
+                    <span class="px-2 py-1 bg-warning-orange/10 text-warning-orange rounded text-xs font-semibold">ATIVA</span>
+                </div>
+                <div class="space-y-3 mb-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-6 h-6 bg-warning-orange/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="text-xs font-bold text-warning-orange">1</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-sm font-semibold text-neutral-dark">Imediato: SMS de lembrete</div>
+                            <div class="text-xs text-neutral-medium">Taxa de resposta: 52%</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-6 h-6 bg-warning-orange/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="text-xs font-bold text-warning-orange">2</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-sm font-semibold text-neutral-dark">D+1: Reagendamento fácil</div>
+                            <div class="text-xs text-neutral-medium">Taxa de clique: 38%</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-6 h-6 bg-warning-orange/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="text-xs font-bold text-warning-orange">3</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-sm font-semibold text-neutral-dark">D+3: Último contato</div>
+                            <div class="text-xs text-neutral-medium">Taxa de conversão: 23%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-4 border-t border-neutral-light">
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-neutral-medium">Recovery Rate</span>
+                        <span class="font-bold text-warning-orange">45%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border border-neutral-light rounded-xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-neutral-dark">Wizard Incompleto</h3>
+                    <span class="px-2 py-1 bg-success-green/10 text-success-green rounded text-xs font-semibold">ATIVA</span>
+                </div>
+                <div class="space-y-3 mb-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-6 h-6 bg-accent-purple/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="text-xs font-bold text-accent-purple">1</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-sm font-semibold text-neutral-dark">D+2: Retomar progresso</div>
+                            <div class="text-xs text-neutral-medium">Taxa de abertura: 71%</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-6 h-6 bg-accent-purple/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="text-xs font-bold text-accent-purple">2</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-sm font-semibold text-neutral-dark">D+5: Dúvidas comuns</div>
+                            <div class="text-xs text-neutral-medium">Taxa de clique: 56%</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-6 h-6 bg-accent-purple/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="text-xs font-bold text-accent-purple">3</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-sm font-semibold text-neutral-dark">D+10: Oferta de ajuda</div>
+                            <div class="text-xs text-neutral-medium">Taxa de resposta: 34%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-4 border-t border-neutral-light">
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-neutral-medium">Completion Rate</span>
+                        <span class="font-bold text-accent-purple">62%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="analytics-dashboard" class="bg-white rounded-xl border border-neutral-light p-8 mt-8">
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h2 class="text-2xl font-bold text-neutral-dark mb-2">Análise de Performance</h2>
+                <p class="text-neutral-medium">Métricas de consultas e conversão dos últimos 30 dias</p>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button class="px-4 py-2 text-sm font-medium text-primary-deep bg-secondary-pale rounded-lg">30 dias</button>
+                <button class="px-4 py-2 text-sm font-medium text-neutral-medium hover:bg-secondary-pale rounded-lg transition-colors">90 dias</button>
+                <button class="px-4 py-2 text-sm font-medium text-neutral-medium hover:bg-secondary-pale rounded-lg transition-colors">1 ano</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-4 gap-6 mb-8">
+            <div class="text-center p-6 bg-bg-subtle rounded-xl">
+                <div class="text-4xl font-bold text-neutral-dark mb-2">356</div>
+                <div class="text-sm text-neutral-medium mb-1">Total de Consultas</div>
+                <div class="flex items-center justify-center space-x-1 text-success-green text-xs">
+                    <i class="fa-solid fa-arrow-up"></i>
+                    <span>+18% vs mês anterior</span>
+                </div>
+            </div>
+            <div class="text-center p-6 bg-bg-subtle rounded-xl">
+                <div class="text-4xl font-bold text-neutral-dark mb-2">4.2</div>
+                <div class="text-sm text-neutral-medium mb-1">Avaliação Média</div>
+                <div class="flex items-center justify-center space-x-1">
+                    <i class="fa-solid fa-star text-primary-gold text-xs"></i>
+                    <i class="fa-solid fa-star text-primary-gold text-xs"></i>
+                    <i class="fa-solid fa-star text-primary-gold text-xs"></i>
+                    <i class="fa-solid fa-star text-primary-gold text-xs"></i>
+                    <i class="fa-regular fa-star text-primary-gold text-xs"></i>
+                </div>
+            </div>
+            <div class="text-center p-6 bg-bg-subtle rounded-xl">
+                <div class="text-4xl font-bold text-neutral-dark mb-2">82%</div>
+                <div class="text-sm text-neutral-medium mb-1">Taxa de Conversão</div>
+                <div class="flex items-center justify-center space-x-1 text-success-green text-xs">
+                    <i class="fa-solid fa-arrow-up"></i>
+                    <span>+5% vs mês anterior</span>
+                </div>
+            </div>
+            <div class="text-center p-6 bg-bg-subtle rounded-xl">
+                <div class="text-4xl font-bold text-neutral-dark mb-2">38min</div>
+                <div class="text-sm text-neutral-medium mb-1">Duração Média</div>
+                <div class="flex items-center justify-center space-x-1 text-neutral-medium text-xs">
+                    <i class="fa-solid fa-minus"></i>
+                    <span>Estável</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8">
+            <div>
+                <h3 class="text-lg font-bold text-neutral-dark mb-4">Consultas por Tipo</h3>
+                <div class="space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-accent-purple rounded"></div>
+                                <span class="text-sm text-neutral-dark">Primeira Consulta</span>
+                            </div>
+                            <span class="text-sm font-bold text-neutral-dark">142 (40%)</span>
+                        </div>
+                        <div class="w-full h-2 bg-neutral-light rounded-full overflow-hidden">
+                            <div class="h-full bg-accent-purple rounded-full" style="width: 40%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-success-green rounded"></div>
+                                <span class="text-sm text-neutral-dark">Retorno</span>
+                            </div>
+                            <span class="text-sm font-bold text-neutral-dark">107 (30%)</span>
+                        </div>
+                        <div class="w-full h-2 bg-neutral-light rounded-full overflow-hidden">
+                            <div class="h-full bg-success-green rounded-full" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-primary-gold rounded"></div>
+                                <span class="text-sm text-neutral-dark">Validação em Vídeo</span>
+                            </div>
+                            <span class="text-sm font-bold text-neutral-dark">89 (25%)</span>
+                        </div>
+                        <div class="w-full h-2 bg-neutral-light rounded-full overflow-hidden">
+                            <div class="h-full bg-primary-gold rounded-full" style="width: 25%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-info-blue rounded"></div>
+                                <span class="text-sm text-neutral-dark">Suporte Técnico</span>
+                            </div>
+                            <span class="text-sm font-bold text-neutral-dark">18 (5%)</span>
+                        </div>
+                        <div class="w-full h-2 bg-neutral-light rounded-full overflow-hidden">
+                            <div class="h-full bg-info-blue rounded-full" style="width: 5%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-bold text-neutral-dark mb-4">Tópicos Mais Discutidos</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-3 bg-bg-subtle rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-accent-purple/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-brands fa-bitcoin text-accent-purple"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-neutral-dark">Criptomoedas</span>
+                        </div>
+                        <span class="text-sm font-bold text-neutral-dark">124</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-bg-subtle rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-primary-gold/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-building text-primary-gold"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-neutral-dark">Imóveis</span>
+                        </div>
+                        <span class="text-sm font-bold text-neutral-dark">98</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-bg-subtle rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-accent-emerald/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-briefcase text-accent-emerald"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-neutral-dark">Empresas</span>
+                        </div>
+                        <span class="text-sm font-bold text-neutral-dark">76</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-bg-subtle rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-info-blue/10 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-users text-info-blue"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-neutral-dark">Herdeiros</span>
+                        </div>
+                        <span class="text-sm font-bold text-neutral-dark">68</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="integration-status" class="bg-white rounded-xl border border-neutral-light p-8 mt-8">
+        <h2 class="text-2xl font-bold text-neutral-dark mb-6">Status de Integrações</h2>
+        <div class="grid grid-cols-4 gap-6">
+            <div class="text-center p-6 border border-neutral-light rounded-xl">
+                <div class="w-16 h-16 bg-success-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-calendar-check text-success-green text-2xl"></i>
+                </div>
+                <div class="font-bold text-neutral-dark mb-1">Cal.com</div>
+                <div class="text-xs text-neutral-medium mb-3">Agendamento</div>
+                <span class="inline-flex items-center space-x-1 text-success-green text-xs font-semibold">
+                    <i class="fa-solid fa-circle text-[6px]"></i>
+                    <span>Conectado</span>
+                </span>
+            </div>
+
+            <div class="text-center p-6 border border-neutral-light rounded-xl">
+                <div class="w-16 h-16 bg-success-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-video text-success-green text-2xl"></i>
+                </div>
+                <div class="font-bold text-neutral-dark mb-1">Google Meet</div>
+                <div class="text-xs text-neutral-medium mb-3">Videoconferência</div>
+                <span class="inline-flex items-center space-x-1 text-success-green text-xs font-semibold">
+                    <i class="fa-solid fa-circle text-[6px]"></i>
+                    <span>Conectado</span>
+                </span>
+            </div>
+
+            <div class="text-center p-6 border border-neutral-light rounded-xl">
+                <div class="w-16 h-16 bg-success-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-envelope text-success-green text-2xl"></i>
+                </div>
+                <div class="font-bold text-neutral-dark mb-1">Resend</div>
+                <div class="text-xs text-neutral-medium mb-3">Email Transacional</div>
+                <span class="inline-flex items-center space-x-1 text-success-green text-xs font-semibold">
+                    <i class="fa-solid fa-circle text-[6px]"></i>
+                    <span>Conectado</span>
+                </span>
+            </div>
+
+            <div class="text-center p-6 border border-neutral-light rounded-xl">
+                <div class="w-16 h-16 bg-warning-orange/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-database text-warning-orange text-2xl"></i>
+                </div>
+                <div class="font-bold text-neutral-dark mb-1">Notion</div>
+                <div class="text-xs text-neutral-medium mb-3">CRM Externo</div>
+                <span class="inline-flex items-center space-x-1 text-warning-orange text-xs font-semibold">
+                    <i class="fa-solid fa-circle text-[6px]"></i>
+                    <span>Sincronizando</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="help-button" class="fixed bottom-8 right-8 z-50">
+    <button class="w-14 h-14 bg-accent-emerald text-white rounded-full shadow-lg hover:bg-success-green transition-colors flex items-center justify-center">
+        <i class="fa-solid fa-headset text-xl"></i>
+    </button>
+</div>
+
+</body>
+</html>

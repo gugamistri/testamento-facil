@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Death Monitoring Service</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-deep': '#1A237E',
+                        'primary-gold': '#C9A054',
+                        'secondary-blue': '#3949AB',
+                        'secondary-pale': '#E8EAF6',
+                        'secondary-gold-light': '#E4D4B4',
+                        'accent-emerald': '#00695C',
+                        'accent-amber': '#FF8F00',
+                        'accent-purple': '#6A1B9A',
+                        'success-green': '#2E7D32',
+                        'error-red': '#C62828',
+                        'warning-orange': '#EF6C00',
+                        'info-blue': '#1565C0',
+                        'neutral-dark': '#37474F',
+                        'neutral-medium': '#78909C',
+                        'neutral-light': '#CFD8DC',
+                        'bg-subtle': '#F5F7FA',
+                        'bg-section': '#ECEFF1',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'crimson': ['Crimson Pro', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Crimson+Pro:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+</head>
+<body class="font-inter bg-bg-subtle">
+
+<header id="header" class="bg-white border-b border-neutral-light sticky top-0 z-50">
+    <div class="max-w-[1440px] mx-auto px-8 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-12">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary-deep rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-gold text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-primary-deep">LegacyGuard</span>
+                </div>
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#servicos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Serviços</a>
+                    <a href="#como-funciona" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Como Funciona</a>
+                    <a href="#tecnologia" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Tecnologia</a>
+                    <a href="#monitoramento" class="text-primary-deep font-semibold border-b-2 border-primary-deep">Monitoramento</a>
+                    <a href="#recursos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Recursos</a>
+                    <a href="#blog" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Blog</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="px-6 py-2.5 text-primary-deep font-semibold hover:bg-secondary-pale rounded-lg transition-colors">
+                    Login
+                </button>
+                <button class="px-6 py-2.5 bg-primary-deep text-white font-semibold hover:bg-secondary-blue rounded-lg transition-colors flex items-center space-x-2">
+                    <span>Agendar Consulta</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="hero-monitoring" class="bg-gradient-to-br from-warning-orange via-accent-amber to-primary-gold text-white relative overflow-hidden h-[600px]">
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-20 left-20 w-96 h-96 bg-primary-deep rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-error-red rounded-full blur-3xl"></div>
+    </div>
+    <div class="max-w-[1440px] mx-auto px-8 py-16 relative z-10">
+        <div class="grid grid-cols-2 gap-16 items-center">
+            <div class="space-y-6">
+                <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
+                    <i class="fa-solid fa-heartbeat text-white"></i>
+                    <span class="text-sm font-medium">Automated Death Monitoring System</span>
+                </div>
+                <h1 class="text-5xl font-bold leading-tight">
+                    Monitoramento Automatizado de Óbito
+                </h1>
+                <p class="text-xl text-white/90 leading-relaxed">
+                    Sistema inteligente que consulta diariamente registros de óbito oficiais (Serasa/CRC) para detectar falecimento e iniciar workflow de abertura do testamento com validação em 4 camadas.
+                </p>
+                <div class="flex items-center space-x-4">
+                    <button class="px-8 py-4 bg-white text-warning-orange font-bold rounded-lg hover:bg-white/90 transition-all transform hover:scale-105 flex items-center space-x-2">
+                        <span>Ver Status em Tempo Real</span>
+                        <i class="fa-solid fa-chart-line"></i>
+                    </button>
+                    <button class="px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-lg hover:bg-white/20 transition-colors flex items-center space-x-2">
+                        <i class="fa-solid fa-book"></i>
+                        <span>Documentação Técnica</span>
+                    </button>
+                </div>
+                <div class="grid grid-cols-3 gap-6 pt-6">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                        <div class="text-3xl font-bold mb-1">24/7</div>
+                        <div class="text-sm text-white/70">Monitoramento Contínuo</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                        <div class="text-3xl font-bold mb-1">2.847</div>
+                        <div class="text-sm text-white/70">Clientes Monitorados</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                        <div class="text-3xl font-bold mb-1">99.9%</div>
+                        <div class="text-sm text-white/70">Precisão do Sistema</div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-error-red/20 rounded-3xl blur-2xl"></div>
+                <div class="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between pb-4 border-b border-white/20">
+                            <span class="text-lg font-semibold">Sistema de Monitoramento</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-success-green rounded-full animate-pulse"></div>
+                                <span class="text-sm font-medium">Operacional</span>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-white/5 rounded-xl p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-semibold">Última Verificação</span>
+                                    <span class="text-sm text-white/70">02:00 AM</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="flex-1 bg-white/10 rounded-full h-2">
+                                        <div class="bg-success-green h-2 rounded-full" style="width: 100%"></div>
+                                    </div>
+                                    <span class="text-sm font-medium">100%</span>
+                                </div>
+                            </div>
+                            <div class="bg-white/5 rounded-xl p-4">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="font-semibold">APIs Integradas</span>
+                                    <span class="px-2 py-1 bg-success-green/20 text-success-green rounded-full text-xs font-medium">3 Ativas</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between text-sm">
+                                        <span class="flex items-center space-x-2">
+                                            <i class="fa-solid fa-check-circle text-success-green"></i>
+                                            <span>Serasa API</span>
+                                        </span>
+                                        <span class="text-white/70">Online</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-sm">
+                                        <span class="flex items-center space-x-2">
+                                            <i class="fa-solid fa-check-circle text-success-green"></i>
+                                            <span>CRC Nacional</span>
+                                        </span>
+                                        <span class="text-white/70">Online</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-sm">
+                                        <span class="flex items-center space-x-2">
+                                            <i class="fa-solid fa-check-circle text-success-green"></i>
+                                            <span>SEADE/SIM</span>
+                                        </span>
+                                        <span class="text-white/70">Online</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white/5 rounded-xl p-4">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-semibold">Próxima Execução</span>
+                                    <span class="font-mono text-sm">16/01/2026 02:00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="monitoring-overview" class="bg-white py-20">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center space-x-2 bg-secondary-pale px-4 py-2 rounded-full mb-4">
+                <i class="fa-solid fa-info-circle text-primary-deep"></i>
+                <span class="text-sm font-semibold text-primary-deep uppercase tracking-wider">Como Funciona</span>
+            </div>
+            <h2 class="text-4xl font-bold text-neutral-dark mb-4">Sistema de Verificação Inteligente</h2>
+            <p class="text-xl text-neutral-medium max-w-3xl mx-auto">
+                Processo automatizado que combina tecnologia e validação humana para garantir máxima precisão
+            </p>
+        </div>
+
+        <div class="grid grid-cols-4 gap-6 mb-16">
+            <div id="stat-daily-checks" class="bg-gradient-to-br from-info-blue to-secondary-blue rounded-2xl p-8 text-white">
+                <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-calendar-check text-3xl"></i>
+                </div>
+                <div class="text-4xl font-bold mb-2">2.847</div>
+                <div class="text-white/80 mb-4">Verificações Diárias</div>
+                <div class="text-sm text-white/70">Executado às 02:00 AM via BullMQ</div>
+            </div>
+
+            <div id="stat-api-calls" class="bg-gradient-to-br from-accent-emerald to-success-green rounded-2xl p-8 text-white">
+                <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-network-wired text-3xl"></i>
+                </div>
+                <div class="text-4xl font-bold mb-2">8.541</div>
+                <div class="text-white/80 mb-4">Chamadas API/Mês</div>
+                <div class="text-sm text-white/70">Rate limit: 100 req/min</div>
+            </div>
+
+            <div id="stat-false-positives" class="bg-gradient-to-br from-success-green to-accent-emerald rounded-2xl p-8 text-white">
+                <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-shield-check text-3xl"></i>
+                </div>
+                <div class="text-4xl font-bold mb-2">0.02%</div>
+                <div class="text-white/80 mb-4">Taxa de Falsos Positivos</div>
+                <div class="text-sm text-white/70">Validação em 4 camadas</div>
+            </div>
+
+            <div id="stat-response-time" class="bg-gradient-to-br from-warning-orange to-accent-amber rounded-2xl p-8 text-white">
+                <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-clock text-3xl"></i>
+                </div>
+                <div class="text-4xl font-bold mb-2">48h</div>
+                <div class="text-white/80 mb-4">Tempo de Resposta</div>
+                <div class="text-sm text-white/70">Antes de escalonamento</div>
+            </div>
+        </div>
+
+        <div class="bg-bg-subtle rounded-3xl p-12">
+            <h3 class="text-3xl font-bold text-neutral-dark mb-8 text-center">Fluxo de Validação em 4 Camadas</h3>
+            <div class="grid grid-cols-4 gap-6">
+                <div id="layer-1" class="bg-white rounded-2xl p-6 border-2 border-info-blue">
+                    <div class="w-12 h-12 bg-info-blue/10 rounded-xl flex items-center justify-center mb-4">
+                        <span class="text-2xl font-bold text-info-blue">1</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-neutral-dark mb-3">API Detection</h4>
+                    <p class="text-neutral-medium mb-4 text-sm leading-relaxed">
+                        Sistema detecta registro de óbito através de consulta automática às APIs oficiais (Serasa/CRC).
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center space-x-2 text-xs">
+                            <i class="fa-solid fa-check text-success-green"></i>
+                            <span class="text-neutral-dark">Query diária às 02:00</span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-xs">
+                            <i class="fa-solid fa-check text-success-green"></i>
+                            <span class="text-neutral-dark">Batch de todos CPFs ativos</span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-xs">
+                            <i class="fa-solid fa-check text-success-green"></i>
+                            <span class="text-neutral-dark">Retry com backoff exponencial</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="layer-2" class="bg-white rounded-2xl p-6 border-2 border-warning-orange">
+                    <div class="w-12 h-12 bg-warning-orange/10 rounded-xl flex items-center justify-center mb-4">
+                        <span class="text-2xl font-bold text-warning-orange">2</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-neutral-dark mb-3">Contact Attempt</h4>
+                    <p class="text-neutral-medium mb-4 text-sm leading-relaxed">
+                        Email e SMS enviados ao cliente com prazo de 48h para resposta antes de prosseguir.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center space-x-2 text-xs">
+                            <i class="fa-solid fa-check text-success-green"></i>
+                            <span class="text-neutral-dark">Email via Resend/Postmark</span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-xs">
+                            <i class="fa-solid fa-check text-success-green"></i>
+                            <span class="text-neutral-dark">SMS via Twilio</span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-xs">
+                            <i class="fa-solid fa-check text-success-green"></i>
+                            <span class="text-neutral-dark">Link seguro com token HMAC</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="layer-3" class="bg-white rounded-2xl p-6 border-2 border-accent-purple">
+                    <div class="w-12 h-12 bg-accent-purple/10 rounded-xl flex items-center justify-center mb-4">
+                        <span class="text-2xl font-bold text-accent-purple">3</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-neutral-dark mb-3">Cross-Verification</h4>
+                    <p class="text-neutral-medium mb-4 text-sm leading-relaxed">
+                        Consulta a segunda API independente (SIM/SEADE) para confirmar informação antes de prosseguir.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center space-x-2 text-xs">
+                            <i class="fa-solid fa-check text-success-green"></i>
+                            <span class="text-neutral-dark">API secundária SIM/SEADE</span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-xs">
+                            <i class="fa-solid fa-check text-success-green"></i>
+                            <span class="text-neutral-dark">Comparação de dados</span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-xs">
+                            <i class="fa-solid fa-check text-success-green"></i>
+                            <span class="text-neutral-dark">Timestamp matching</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="layer-4" class="bg-white rounded-2xl p-6 border-2 border-error-red">
+                    <div class="w-12 h-12 bg-error-red/10 rounded-xl flex items-center justify-center mb-4">
+                        <span class="text-2xl font-bold text-error-red">4</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-neutral-dark mb-3">Manual Review</h4>
+                    <p class="text-neutral-medium mb-4 text-sm leading-relaxed">
+                        Advogado da plataforma revisa caso e exige upload de certidão de óbito antes de abertura.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center space-x-2 text-xs">
+                            <i class="fa-solid fa-check text-success-green"></i>
+                            <span class="text-neutral-dark">Dashboard de revisão</span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-xs">
+                            <i class="fa-solid fa-check text-success-green"></i>
+                            <span class="text-neutral-dark">Upload de certidão PDF</span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-xs">
+                            <i class="fa-solid fa-check text-success-green"></i>
+                            <span class="text-neutral-dark">Aprovação final manual</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="technical-architecture" class="bg-primary-deep text-white py-20">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
+                <i class="fa-solid fa-code text-primary-gold"></i>
+                <span class="text-sm font-semibold text-primary-gold uppercase tracking-wider">Arquitetura Técnica</span>
+            </div>
+            <h2 class="text-4xl font-bold mb-4">Stack de Monitoramento</h2>
+            <p class="text-xl text-white/80 max-w-3xl mx-auto">
+                Infraestrutura robusta construída para alta disponibilidade e precisão
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8 mb-16">
+            <div id="tech-bullmq" class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <div class="flex items-start space-x-6">
+                    <div class="w-16 h-16 bg-error-red/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-gears text-error-red text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold mb-3">BullMQ Job Scheduler</h3>
+                        <p class="text-white/70 mb-4 leading-relaxed">
+                            Sistema de filas baseado em Redis para agendamento de jobs recorrentes com retry logic e monitoramento via Bull Board.
+                        </p>
+                        <div class="bg-neutral-dark/50 rounded-lg p-4 font-mono text-sm mb-4">
+                            <div class="text-success-green">// Daily cron job at 2 AM</div>
+                            <div class="text-white/90">queue.add('check-deaths', {}, {</div>
+                            <div class="text-white/90 pl-4">repeat: { cron: '0 2 * * *' },</div>
+                            <div class="text-white/90 pl-4">attempts: 3,</div>
+                            <div class="text-white/90 pl-4">backoff: { type: 'exponential' }</div>
+                            <div class="text-white/90">});</div>
+                        </div>
+                        <div class="flex items-center space-x-4 text-sm">
+                            <span class="flex items-center space-x-2 text-success-green">
+                                <i class="fa-solid fa-check"></i>
+                                <span>Redis-backed</span>
+                            </span>
+                            <span class="flex items-center space-x-2 text-success-green">
+                                <i class="fa-solid fa-check"></i>
+                                <span>Bull Board UI</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tech-apis" class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <div class="flex items-start space-x-6">
+                    <div class="w-16 h-16 bg-info-blue/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-plug text-info-blue text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold mb-3">External API Integration</h3>
+                        <p class="text-white/70 mb-4 leading-relaxed">
+                            Integração com APIs oficiais de registro de óbito via Axios com rate limiting e response caching no Redis.
+                        </p>
+                        <div class="space-y-3 mb-4">
+                            <div class="bg-white/5 rounded-lg p-3 flex items-center justify-between">
+                                <span class="font-semibold">Serasa API</span>
+                                <span class="px-3 py-1 bg-success-green/20 text-success-green rounded-full text-xs font-medium">Primary</span>
+                            </div>
+                            <div class="bg-white/5 rounded-lg p-3 flex items-center justify-between">
+                                <span class="font-semibold">CRC Nacional</span>
+                                <span class="px-3 py-1 bg-success-green/20 text-success-green rounded-full text-xs font-medium">Primary</span>
+                            </div>
+                            <div class="bg-white/5 rounded-lg p-3 flex items-center justify-between">
+                                <span class="font-semibold">SIM/SEADE</span>
+                                <span class="px-3 py-1 bg-info-blue/20 text-info-blue rounded-full text-xs font-medium">Backup</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 text-sm">
+                            <span class="flex items-center space-x-2 text-warning-orange">
+                                <i class="fa-solid fa-gauge"></i>
+                                <span>100 req/min limit</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tech-database" class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <div class="flex items-start space-x-6">
+                    <div class="w-16 h-16 bg-accent-emerald/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-database text-accent-emerald text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold mb-3">PostgreSQL State Management</h3>
+                        <p class="text-white/70 mb-4 leading-relaxed">
+                            Tabela dedicada para tracking de estado de monitoramento com timestamps e histórico completo.
+                        </p>
+                        <div class="bg-neutral-dark/50 rounded-lg p-4 font-mono text-sm mb-4">
+                            <div class="text-success-green">-- monitoring_state table</div>
+                            <div class="text-white/90">client_id | last_checked</div>
+                            <div class="text-white/90">status | detection_date</div>
+                            <div class="text-white/90">validation_layer | notes</div>
+                        </div>
+                        <div class="flex items-center space-x-4 text-sm">
+                            <span class="flex items-center space-x-2 text-success-green">
+                                <i class="fa-solid fa-check"></i>
+                                <span>Drizzle ORM</span>
+                            </span>
+                            <span class="flex items-center space-x-2 text-success-green">
+                                <i class="fa-solid fa-check"></i>
+                                <span>Audit trail</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tech-notifications" class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <div class="flex items-start space-x-6">
+                    <div class="w-16 h-16 bg-warning-orange/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-bell text-warning-orange text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold mb-3">Multi-Channel Alerts</h3>
+                        <p class="text-white/70 mb-4 leading-relaxed">
+                            Sistema de notificações via email (Resend/Postmark) e SMS (Twilio/MessageBird) com templates dinâmicos.
+                        </p>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-start space-x-3">
+                                <i class="fa-solid fa-envelope text-info-blue mt-1"></i>
+                                <div class="flex-1">
+                                    <div class="font-semibold mb-1">Email Templates</div>
+                                    <div class="text-white/70 text-sm">React Email + Handlebars com dados dinâmicos</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <i class="fa-solid fa-mobile-screen-button text-success-green mt-1"></i>
+                                <div class="flex-1">
+                                    <div class="font-semibold mb-1">SMS Delivery</div>
+                                    <div class="text-white/70 text-sm">Twilio API com fallback para MessageBird</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-12 border border-white/10">
+            <h3 class="text-3xl font-bold mb-8 text-center">Fluxo de Dados do Sistema</h3>
+            <div class="relative">
+                <div class="flex items-center justify-between">
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 bg-primary-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-clock text-primary-gold text-3xl"></i>
+                        </div>
+                        <div class="font-bold mb-2">Cron Trigger</div>
+                        <div class="text-white/70 text-sm">02:00 AM Daily</div>
+                    </div>
+                    <div class="flex-1 flex items-center justify-center">
+                        <i class="fa-solid fa-arrow-right text-primary-gold text-2xl"></i>
+                    </div>
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 bg-info-blue/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-server text-info-blue text-3xl"></i>
+                        </div>
+                        <div class="font-bold mb-2">BullMQ Job</div>
+                        <div class="text-white/70 text-sm">Queue Processing</div>
+                    </div>
+                    <div class="flex-1 flex items-center justify-center">
+                        <i class="fa-solid fa-arrow-right text-primary-gold text-2xl"></i>
+                    </div>
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 bg-accent-emerald/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-network-wired text-accent-emerald text-3xl"></i>
+                        </div>
+                        <div class="font-bold mb-2">API Calls</div>
+                        <div class="text-white/70 text-sm">Serasa/CRC Query</div>
+                    </div>
+                    <div class="flex-1 flex items-center justify-center">
+                        <i class="fa-solid fa-arrow-right text-primary-gold text-2xl"></i>
+                    </div>
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 bg-warning-orange/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-shield-check text-warning-orange text-3xl"></i>
+                        </div>
+                        <div class="font-bold mb-2">4-Layer Validation</div>
+                        <div class="text-white/70 text-sm">Safety Checks</div>
+                    </div>
+                    <div class="flex-1 flex items-center justify-center">
+                        <i class="fa-solid fa-arrow-right text-primary-gold text-2xl"></i>
+                    </div>
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 bg-success-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-unlock text-success-green text-3xl"></i>
+                        </div>
+                        <div class="font-bold mb-2">Testament Unsealing</div>
+                        <div class="text-white/70 text-sm">Shamir Decryption</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="monitoring-dashboard" class="bg-bg-subtle py-20">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center space-x-2 bg-secondary-pale px-4 py-2 rounded-full mb-4">
+                <i class="fa-solid fa-chart-line text-primary-deep"></i>
+                <span class="text-sm font-semibold text-primary-deep uppercase tracking-wider">Dashboard em Tempo Real</span>
+            </div>
+            <h2 class="text-4xl font-bold text-neutral-dark mb-4">Painel de Monitoramento Admin</h2>
+            <p class="text-xl text-neutral-medium max-w-3xl mx-auto">
+                Interface completa para advogados e operadores acompanharem o status do sistema
+            </p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6 mb-12">
+            <div id="dashboard-active-monitors" class="bg-white rounded-2xl p-8 shadow-lg">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-bold text-neutral-dark">Monitoramentos Ativos</h3>
+                    <div class="w-12 h-12 bg-info-blue/10 rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-users text-info-blue text-xl"></i>
+                    </div>
+                </div>
+                <div class="text-5xl font-bold text-neutral-dark mb-2">2,847</div>
+                <div class="flex items-center space-x-2 text-success-green text-sm font-medium">
+                    <i class="fa-solid fa-arrow-up"></i>
+                    <span>+127 este mês</span>
+                </div>
+                <div class="mt-6 pt-6 border-t border-neutral-light">
+                    <div class="flex items-center justify-between text-sm mb-2">
+                        <span class="text-neutral-medium">Plano Premium</span>
+                        <span class="font-semibold text-neutral-dark">2,654</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-neutral-medium">Plano Empresarial</span>
+                        <span class="font-semibold text-neutral-dark">193</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dashboard-pending-reviews" class="bg-white rounded-2xl p-8 shadow-lg">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-bold text-neutral-dark">Revisões Pendentes</h3>
+                    <div class="w-12 h-12 bg-warning-orange/10 rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-clipboard-check text-warning-orange text-xl"></i>
+                    </div>
+                </div>
+                <div class="text-5xl font-bold text-neutral-dark mb-2">3</div>
+                <div class="flex items-center space-x-2 text-warning-orange text-sm font-medium">
+                    <i class="fa-solid fa-exclamation-triangle"></i>
+                    <span>Requer atenção</span>
+                </div>
+                <div class="mt-6 pt-6 border-t border-neutral-light">
+                    <div class="flex items-center justify-between text-sm mb-2">
+                        <span class="text-neutral-medium">Camada 4 (Manual)</span>
+                        <span class="font-semibold text-neutral-dark">2</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-neutral-medium">Upload de certidão</span>
+                        <span class="font-semibold text-neutral-dark">1</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dashboard-api-health" class="bg-white rounded-2xl p-8 shadow-lg">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-bold text-neutral-dark">Saúde das APIs</h3>
+                    <div class="w-12 h-12 bg-success-green/10 rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-heartbeat text-success-green text-xl"></i>
+                    </div>
+                </div>
+                <div class="text-5xl font-bold text-success-green mb-2">100%</div>
+                <div class="flex items-center space-x-2 text-success-green text-sm font-medium">
+                    <i class="fa-solid fa-check-circle"></i>
+                    <span>Todas operacionais</span>
+                </div>
+                <div class="mt-6 pt-6 border-t border-neutral-light">
+                    <div class="flex items-center justify-between text-sm mb-2">
+                        <span class="text-neutral-medium">Uptime (30 dias)</span>
+                        <span class="font-semibold text-neutral-dark">99.97%</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-neutral-medium">Avg Response Time</span>
+                        <span class="font-semibold text-neutral-dark">247ms</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 shadow-lg mb-12">
+            <div class="flex items-center justify-between mb-8">
+                <h3 class="text-2xl font-bold text-neutral-dark">Casos Recentes Detectados</h3>
+                <div class="flex items-center space-x-3">
+                    <button class="px-4 py-2 bg-secondary-pale text-primary-deep font-semibold rounded-lg hover:bg-primary-deep hover:text-white transition-colors text-sm">
+                        <i class="fa-solid fa-filter mr-2"></i>Filtrar
+                    </button>
+                    <button class="px-4 py-2 bg-primary-deep text-white font-semibold rounded-lg hover:bg-secondary-blue transition-colors text-sm">
+                        <i class="fa-solid fa-download mr-2"></i>Exportar
+                    </button>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b border-neutral-light">
+                            <th class="text-left py-4 px-4 text-sm font-semibold text-neutral-dark">Cliente ID</th>
+                            <th class="text-left py-4 px-4 text-sm font-semibold text-neutral-dark">Nome</th>
+                            <th class="text-left py-4 px-4 text-sm font-semibold text-neutral-dark">Data Detecção</th>
+                            <th class="text-left py-4 px-4 text-sm font-semibold text-neutral-dark">Camada Atual</th>
+                            <th class="text-left py-4 px-4 text-sm font-semibold text-neutral-dark">Status</th>
+                            <th class="text-left py-4 px-4 text-sm font-semibold text-neutral-dark">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-neutral-light hover:bg-bg-subtle transition-colors">
+                            <td class="py-4 px-4 text-sm font-mono text-neutral-dark">#TM-4782</td>
+                            <td class="py-4 px-4 text-sm text-neutral-dark">João Silva Santos</td>
+                            <td class="py-4 px-4 text-sm text-neutral-medium">14/01/2026 02:03</td>
+                            <td class="py-4 px-4">
+                                <span class="px-3 py-1 bg-error-red/10 text-error-red rounded-full text-xs font-medium">Camada 4 - Manual</span>
+                            </td>
+                            <td class="py-4 px-4">
+                                <span class="px-3 py-1 bg-warning-orange/10 text-warning-orange rounded-full text-xs font-medium">Aguardando Revisão</span>
+                            </td>
+                            <td class="py-4 px-4">
+                                <button class="text-primary-deep hover:text-secondary-blue font-semibold text-sm">
+                                    Revisar <i class="fa-solid fa-arrow-right ml-1"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-neutral-light hover:bg-bg-subtle transition-colors">
+                            <td class="py-4 px-4 text-sm font-mono text-neutral-dark">#TM-4781</td>
+                            <td class="py-4 px-4 text-sm text-neutral-dark">Maria Oliveira Costa</td>
+                            <td class="py-4 px-4 text-sm text-neutral-medium">13/01/2026 02:05</td>
+                            <td class="py-4 px-4">
+                                <span class="px-3 py-1 bg-accent-purple/10 text-accent-purple rounded-full text-xs font-medium">Camada 3 - Cross-Check</span>
+                            </td>
+                            <td class="py-4 px-4">
+                                <span class="px-3 py-1 bg-info-blue/10 text-info-blue rounded-full text-xs font-medium">Verificação em Andamento</span>
+                            </td>
+                            <td class="py-4 px-4">
+                                <button class="text-primary-deep hover:text-secondary-blue font-semibold text-sm">
+                                    Monitorar <i class="fa-solid fa-eye ml-1"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-neutral-light hover:bg-bg-subtle transition-colors">
+                            <td class="py-4 px-4 text-sm font-mono text-neutral-dark">#TM-4765</td>
+                            <td class="py-4 px-4 text-sm text-neutral-dark">Carlos Mendes Alves</td>
+                            <td class="py-4 px-4 text-sm text-neutral-medium">10/01/2026 02:01</td>
+                            <td class="py-4 px-4">
+                                <span class="px-3 py-1 bg-success-green/10 text-success-green rounded-full text-xs font-medium">Completo</span>
+                            </td>
+                            <td class="py-4 px-4">
+                                <span class="px-3 py-1 bg-success-green/10 text-success-green rounded-full text-xs font-medium">Testamento Aberto</span>
+                            </td>
+                            <td class="py-4 px-4">
+                                <button class="text-primary-deep hover:text-secondary-blue font-semibold text-sm">
+                                    Ver Detalhes <i class="fa-solid fa-external-link ml-1"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-neutral-light hover:bg-bg-subtle transition-colors">
+                            <td class="py-4 px-4 text-sm font-mono text-neutral-dark">#TM-4723</td>
+                            <td class="py-4 px-4 text-sm text-neutral-dark">Ana Paula Rodrigues</td>
+                            <td class="py-4 px-4 text-sm text-neutral-medium">05/01/2026 02:04</td>
+                            <td class="py-4 px-4">
+                                <span class="px-3 py-1 bg-warning-orange/10 text-warning-orange rounded-full text-xs font-medium">Camada 2 - Contato</span>
+                            </td>
+                            <td class="py-4 px-4">
+                                <span class="px-3 py-1 bg-neutral-light/50 text-neutral-dark rounded-full text-xs font-medium">Falso Positivo</span>
+                            </td>
+                            <td class="py-4 px-4">
+                                <button class="text-neutral-medium hover:text-neutral-dark font-semibold text-sm">
+                                    Arquivado <i class="fa-solid fa-check ml-1"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8">
+            <div id="bull-board-monitor" class="bg-white rounded-2xl p-8 shadow-lg">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-2xl font-bold text-neutral-dark">Bull Board - Job Monitor</h3>
+                    <button class="px-4 py-2 bg-error-red/10 text-error-red font-semibold rounded-lg hover:bg-error-red hover:text-white transition-colors text-sm">
+                        <i class="fa-solid fa-external-link mr-2"></i>Abrir Dashboard
+                    </button>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-bg-subtle rounded-xl p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="font-semibold text-neutral-dark">check-deaths-daily</span>
+                            <span class="px-3 py-1 bg-success-green/20 text-success-green rounded-full text-xs font-medium">Active</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 text-sm">
+                            <div>
+                                <div class="text-neutral-medium mb-1">Completed</div>
+                                <div class="font-bold text-success-green">8,541</div>
+                            </div>
+                            <div>
+                                <div class="text-neutral-medium mb-1">Failed</div>
+                                <div class="font-bold text-error-red">12</div>
+                            </div>
+                            <div>
+                                <div class="text-neutral-medium mb-1">Waiting</div>
+                                <div class="font-bold text-warning-orange">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-bg-subtle rounded-xl p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="font-semibold text-neutral-dark">send-alert-emails</span>
+                            <span class="px-3 py-1 bg-success-green/20 text-success-green rounded-full text-xs font-medium">Active</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 text-sm">
+                            <div>
+                                <div class="text-neutral-medium mb-1">Completed</div>
+                                <div class="font-bold text-success-green">247</div>
+                            </div>
+                            <div>
+                                <div class="text-neutral-medium mb-1">Failed</div>
+                                <div class="font-bold text-error-red">3</div>
+                            </div>
+                            <div>
+                                <div class="text-neutral-medium mb-1">Waiting</div>
+                                <div class="font-bold text-warning-orange">5</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-bg-subtle rounded-xl p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="font-semibold text-neutral-dark">cross-verify-apis</span>
+                            <span class="px-3 py-1 bg-success-green/20 text-success-green rounded-full text-xs font-medium">Active</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 text-sm">
+                            <div>
+                                <div class="text-neutral-medium mb-1">Completed</div>
+                                <div class="font-bold text-success-green">89</div>
+                            </div>
+                            <div>
+                                <div class="text-neutral-medium mb-1">Failed</div>
+                                <div class="font-bold text-error-red">1</div>
+                            </div>
+                            <div>
+                                <div class="text-neutral-medium mb-1">Waiting</div>
+                                <div class="font-bold text-warning-orange">2</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="api-status-monitor" class="bg-white rounded-2xl p-8 shadow-lg">
+                <h3 class="text-2xl font-bold text-neutral-dark mb-6">Status das APIs Externas</h3>
+                <div class="space-y-4">
+                    <div class="border border-neutral-light rounded-xl p-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-success-green rounded-full animate-pulse"></div>
+                                <span class="font-bold text-neutral-dark">Serasa API</span>
+                            </div>
+                            <span class="px-3 py-1 bg-success-green/20 text-success-green rounded-full text-xs font-medium">Operational</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 text-sm">
+                            <div>
+                                <div class="text-neutral-medium mb-1">Uptime</div>
+                                <div class="font-semibold text-neutral-dark">99.98%</div>
+                            </div>
+                            <div>
+                                <div class="text-neutral-medium mb-1">Response</div>
+                                <div class="font-semibold text-neutral-dark">234ms</div>
+                            </div>
+                            <div>
+                                <div class="text-neutral-medium mb-1">Last Check</div>
+                                <div class="font-semibold text-neutral-dark">2 min ago</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-neutral-light rounded-xl p-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-success-green rounded-full animate-pulse"></div>
+                                <span class="font-bold text-neutral-dark">CRC Nacional</span>
+                            </div>
+                            <span class="px-3 py-1 bg-success-green/20 text-success-green rounded-full text-xs font-medium">Operational</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 text-sm">
+                            <div>
+                                <div class="text-neutral-medium mb-1">Uptime</div>
+                                <div class="font-semibold text-neutral-dark">99.95%</div>
+                            </div>
+                            <div>
+                                <div class="text-neutral-medium mb-1">Response</div>
+                                <div class="font-semibold text-neutral-dark">312ms</div>
+                            </div>
+                            <div>
+                                <div class="text-neutral-medium mb-1">Last Check</div>
+                                <div class="font-semibold text-neutral-dark">1 min ago</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-neutral-light rounded-xl p-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-success-green rounded-full animate-pulse"></div>
+                                <span class="font-bold text-neutral-dark">SIM/SEADE</span>
+                            </div>
+                            <span class="px-3 py-1 bg-success-green/20 text-success-green rounded-full text-xs font-medium">Operational</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 text-sm">
+                            <div>
+                                <div class="text-neutral-medium mb-1">Uptime</div>
+                                <div class="font-semibold text-neutral-dark">99.89%</div>
+                            </div>
+                            <div>
+                                <div class="text-neutral-medium mb-1">Response</div>
+                                <div class="font-semibold text-neutral-dark">189ms</div>
+                            </div>
+                            <div>
+                                <div class="text-neutral-medium mb-1">Last Check</div>
+                                <div class="font-semibold text-neutral-dark">3 min ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-neutral-light">
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-neutral-medium">Average Response Time (All APIs)</span>
+                        <span class="font-bold text-neutral-dark">247ms</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="false-positive-prevention" class="bg-white py-20">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center space-x-2 bg-secondary-pale px-4 py-2 rounded-full mb-4">
+                <i class="fa-solid fa-shield-check text-primary-deep"></i>
+                <span class="text-sm font-semibold text-primary-deep uppercase tracking-wider">Prevenção de Falsos Positivos</span>
+            </div>
+            <h2 class="text-4xl font-bold text-neutral-dark mb-4">Sistema de Segurança Multi-Camada</h2>
+            <p class="text-xl text-neutral-medium max-w-3xl mx-auto">
+                Mecanismos rigorosos para evitar abertura indevida de testamentos
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8 mb-12">
+            <div id="prevention-contact-verification" class="bg-gradient-to-br from-bg-subtle to-white rounded-2xl p-8 border-2 border-warning-orange">
+                <div class="flex items-start space-x-6">
+                    <div class="w-20 h-20 bg-warning-orange/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-envelope-circle-check text-warning-orange text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-neutral-dark mb-3">Verificação de Contato Ativa</h3>
+                        <p class="text-neutral-medium mb-4 leading-relaxed">
+                            Após detecção pela API, enviamos email e SMS com prazo de 48 horas para resposta. Cliente pode confirmar que está vivo com um clique.
+                        </p>
+                        <div class="bg-neutral-dark/5 rounded-lg p-4 mb-4">
+                            <div class="text-sm font-semibold text-neutral-dark mb-2">Escalação de Contato:</div>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <span class="font-mono text-warning-orange">D+0:</span>
+                                    <span class="text-neutral-dark">Email + SMS inicial</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="font-mono text-warning-orange">D+1:</span>
+                                    <span class="text-neutral-dark">Segundo email de lembrete</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="font-mono text-warning-orange">D+2:</span>
+                                    <span class="text-neutral-dark">Terceiro email urgente</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 text-success-green text-sm">
+                            <i class="fa-solid fa-check-circle"></i>
+                            <span>Link seguro com token HMAC de 7 dias</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="prevention-document-requirement" class="bg-gradient-to-br from-bg-subtle to-white rounded-2xl p-8 border-2 border-error-red">
+                <div class="flex items-start space-x-6">
+                    <div class="w-20 h-20 bg-error-red/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-file-certificate text-error-red text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-neutral-dark mb-3">Exigência de Certidão de Óbito</h3>
+                        <p class="text-neutral-medium mb-4 leading-relaxed">
+                            Mesmo após validação em 3 camadas, advogado da plataforma só aprova abertura mediante upload de certidão oficial digitalizada.
+                        </p>
+                        <div class="bg-neutral-dark/5 rounded-lg p-4 mb-4">
+                            <div class="text-sm font-semibold text-neutral-dark mb-2">Documentos Aceitos:</div>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-check text-success-green"></i>
+                                    <span class="text-neutral-dark">Certidão de óbito original (PDF)</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-check text-success-green"></i>
+                                    <span class="text-neutral-dark">Scan de cartório autenticado</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-check text-success-green"></i>
+                                    <span class="text-neutral-dark">Certidão digital com QR Code</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 text-error-red text-sm">
+                            <i class="fa-solid fa-exclamation-triangle"></i>
+                            <span>Upload obrigatório antes de prosseguir</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="prevention-cross-api" class="bg-gradient-to-br from-bg-subtle to-white rounded-2xl p-8 border-2 border-accent-purple">
+                <div class="flex items-start space-x-6">
+                    <div class="w-20 h-20 bg-accent-purple/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-code-compare text-accent-purple text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-neutral-dark mb-3">Cross-Verification de APIs</h3>
+                        <p class="text-neutral-medium mb-4 leading-relaxed">
+                            Informação de óbito deve ser confirmada por pelo menos 2 fontes independentes antes de avançar para revisão manual.
+                        </p>
+                        <div class="bg-neutral-dark/5 rounded-lg p-4 mb-4">
+                            <div class="text-sm font-semibold text-neutral-dark mb-2">Fontes de Verificação:</div>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-neutral-dark">Serasa API (Primária)</span>
+                                    <span class="px-2 py-1 bg-success-green/20 text-success-green rounded text-xs font-medium">Required</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-neutral-dark">CRC Nacional (Primária)</span>
+                                    <span class="px-2 py-1 bg-success-green/20 text-success-green rounded text-xs font-medium">Required</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-neutral-dark">SIM/SEADE (Backup)</span>
+                                    <span class="px-2 py-1 bg-info-blue/20 text-info-blue rounded text-xs font-medium">Optional</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 text-accent-purple text-sm">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>Mínimo 2 de 3 fontes devem concordar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="prevention-manual-review" class="bg-gradient-to-br from-bg-subtle to-white rounded-2xl p-8 border-2 border-primary-deep">
+                <div class="flex items-start space-x-6">
+                    <div class="w-20 h-20 bg-primary-deep/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-user-tie text-primary-deep text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-neutral-dark mb-3">Revisão Obrigatória por Advogado</h3>
+                        <p class="text-neutral-medium mb-4 leading-relaxed">
+                            Nenhum testamento é aberto sem aprovação final de advogado licenciado pela OAB após análise completa do caso.
+                        </p>
+                        <div class="bg-neutral-dark/5 rounded-lg p-4 mb-4">
+                            <div class="text-sm font-semibold text-neutral-dark mb-2">Checklist de Revisão:</div>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-square-check text-primary-deep"></i>
+                                    <span class="text-neutral-dark">Verificação de identidade do falecido</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-square-check text-primary-deep"></i>
+                                    <span class="text-neutral-dark">Análise de certidão de óbito</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-square-check text-primary-deep"></i>
+                                    <span class="text-neutral-dark">Validação de dados cadastrais</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-square-check text-primary-deep"></i>
+                                    <span class="text-neutral-dark">Confirmação de herdeiros</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 text-primary-deep text-sm">
+                            <i class="fa-solid fa-gavel"></i>
+                            <span>Aprovação registrada com assinatura digital</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-success-green to-accent-emerald rounded-3xl p-12 text-white">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
+                    <i class="fa-solid fa-trophy"></i>
+                    <span class="text-sm font-semibold uppercase tracking-wider">Track Record</span>
+                </div>
+                <h3 class="text-3xl font-bold mb-2">Taxa de Precisão do Sistema</h3>
+                <p class="text-white/90">Desde o lançamento em 2024</p>
+            </div>
+            <div class="grid grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-5xl font-bold mb-2">2,847</div>
+                    <div class="text-white/80">Clientes Monitorados</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-bold mb-2">127</div>
+                    <div class="text-white/80">Detecções Realizadas</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-bold mb-2">3</div>
+                    <div class="text-white/80">Falsos Positivos</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-bold mb-2">99.98%</div>
+                    <div class="text-white/80">Taxa de Acurácia</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="dead-mans-switch-integration" class="bg-bg-subtle py-20">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center space-x-2 bg-secondary-pale px-4 py-2 rounded-full mb-4">
+                <i class="fa-solid fa-bell-on text-primary-deep"></i>
+                <span class="text-sm font-semibold text-primary-deep uppercase tracking-wider">Integração com Dead Man's Switch</span>
+            </div>
+            <h2 class="text-4xl font-bold text-neutral-dark mb-4">Sistema Duplo de Verificação</h2>
+            <p class="text-xl text-neutral-medium max-w-3xl mx-auto">
+                Monitoramento de óbito automatizado + verificação semestral manual para máxima segurança
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8">
+            <div id="switch-automated" class="bg-white rounded-2xl p-8 shadow-lg">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="w-16 h-16 bg-warning-orange/10 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-robot text-warning-orange text-3xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-neutral-dark">Monitoramento Automatizado</h3>
+                        <p class="text-neutral-medium text-sm">Sistema principal via APIs oficiais</p>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check-circle text-success-green mt-1"></i>
+                        <div>
+                            <div class="font-semibold text-neutral-dark mb-1">Verificação Diária</div>
+                            <div class="text-neutral-medium text-sm">Consulta automática às 02:00 AM via BullMQ</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check-circle text-success-green mt-1"></i>
+                        <div>
+                            <div class="font-semibold text-neutral-dark mb-1">Detecção Proativa</div>
+                            <div class="text-neutral-medium text-sm">Identifica óbito antes que família acione</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check-circle text-success-green mt-1"></i>
+                        <div>
+                            <div class="font-semibold text-neutral-dark mb-1">Sem Interação Necessária</div>
+                            <div class="text-neutral-medium text-sm">Cliente não precisa fazer nada</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="switch-manual" class="bg-white rounded-2xl p-8 shadow-lg">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="w-16 h-16 bg-info-blue/10 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-hand-pointer text-info-blue text-3xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-neutral-dark">Dead Man's Switch</h3>
+                        <p class="text-neutral-medium text-sm">Backup manual semestral</p>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check-circle text-success-green mt-1"></i>
+                        <div>
+                            <div class="font-semibold text-neutral-dark mb-1">Verificação Semestral</div>
+                            <div class="text-neutral-medium text-sm">Email/SMS a cada 6 meses pedindo confirmação</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check-circle text-success-green mt-1"></i>
+                        <div>
+                            <div class="font-semibold text-neutral-dark mb-1">Fallback de Segurança</div>
+                            <div class="text-neutral-medium text-sm">Detecta casos não capturados por APIs</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <i class="fa-solid fa-check-circle text-success-green mt-1"></i>
+                        <div>
+                            <div class="font-semibold text-neutral-dark mb-1">One-Click Checkin</div>
+                            <div class="text-neutral-medium text-sm">Cliente confirma vida com link seguro</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 bg-gradient-to-r from-primary-deep to-secondary-blue rounded-2xl p-12 text-white">
+            <div class="text-center mb-8">
+                <h3 class="text-3xl font-bold mb-3">Como os Sistemas Trabalham Juntos</h3>
+                <p class="text-white/90 text-lg">Redundância inteligente para garantir que nenhum caso seja perdido</p>
+            </div>
+            <div class="grid grid-cols-3 gap-6">
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 bg-success-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-bolt text-success-green text-2xl"></i>
+                    </div>
+                    <div class="font-bold text-lg mb-2">Detecção Rápida</div>
+                    <div class="text-white/80 text-sm">Monitoramento diário detecta 99% dos casos em até 24h</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 bg-warning-orange/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-shield-check text-warning-orange text-2xl"></i>
+                    </div>
+                    <div class="font-bold text-lg mb-2">Backup Semestral</div>
+                    <div class="text-white/80 text-sm">Dead Man's Switch captura casos raros não detectados por APIs</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 bg-primary-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-users-gear text-primary-gold text-2xl"></i>
+                    </div>
+                    <div class="font-bold text-lg mb-2">Revisão Manual</div>
+                    <div class="text-white/80 text-sm">Advogado valida todos os casos antes de abertura final</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="cta-monitoring" class="bg-gradient-to-br from-primary-deep via-secondary-blue to-primary-deep text-white py-20">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center">
+            <h2 class="text-4xl font-bold mb-4">Proteja Seu Legado com Monitoramento Inteligente</h2>
+            <p class="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
+                Sistema automatizado de detecção de óbito com validação em 4 camadas para garantir que seu testamento seja aberto no momento certo
+            </p>
+            <div class="flex items-center justify-center space-x-4">
+                <button class="px-10 py-4 bg-primary-gold text-primary-deep font-bold rounded-lg hover:bg-secondary-gold-light transition-all transform hover:scale-105 flex items-center space-x-2 text-lg">
+                    <span>Começar Agora</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                <button class="px-10 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-lg hover:bg-white/20 transition-colors flex items-center space-x-2 text-lg">
+                    <i class="fa-solid fa-calendar"></i>
+                    <span>Agendar Consulta</span>
+                </button>
+            </div>
+            <div class="mt-12 grid grid-cols-4 gap-8 max-w-4xl mx-auto">
+                <div class="text-center">
+                    <div class="text-3xl font-bold mb-2">2.847+</div>
+                    <div class="text-white/70 text-sm">Clientes Protegidos</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold mb-2">99.98%</div>
+                    <div class="text-white/70 text-sm">Taxa de Precisão</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold mb-2">24/7</div>
+                    <div class="text-white/70 text-sm">Monitoramento</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold mb-2">48h</div>
+                    <div class="text-white/70 text-sm">Tempo de Resposta</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer id="footer" class="bg-neutral-dark text-white py-16">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="grid grid-cols-4 gap-12 mb-12">
+            <div>
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 bg-primary-gold rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-deep text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold">LegacyGuard</span>
+                </div>
+                <p class="text-white/70 mb-6 leading-relaxed">
+                    Planejamento sucessório digital com tecnologia blockchain e monitoramento automatizado de óbito.
+                </p>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary-gold hover:text-primary-deep transition-colors">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary-gold hover:text-primary-deep transition-colors">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary-gold hover:text-primary-deep transition-colors">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg mb-6">Serviços</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Testamento Digital</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Validação em Vídeo</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Assinatura ICP-Brasil</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Custódia Criptográfica</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Monitoramento de Óbito</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg mb-6">Empresa</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Sobre Nós</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Como Funciona</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Tecnologia</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Blog</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Contato</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg mb-6">Legal</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Termos de Uso</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Política de Privacidade</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">LGPD</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Certificações</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Segurança</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-white/10 pt-8 flex items-center justify-between">
+            <p class="text-white/70 text-sm">© 2026 LegacyGuard. Todos os direitos reservados.</p>
+            <div class="flex items-center space-x-6 text-sm">
+                <span class="text-white/70">ICP-Brasil Certified</span>
+                <span class="text-white/70">LGPD Compliant</span>
+                <span class="text-white/70">Polygon Network</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

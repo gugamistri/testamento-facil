@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Consulta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-deep': '#1A237E',
+                        'primary-gold': '#C9A054',
+                        'secondary-blue': '#3949AB',
+                        'secondary-pale': '#E8EAF6',
+                        'secondary-gold-light': '#E4D4B4',
+                        'accent-emerald': '#00695C',
+                        'accent-amber': '#FF8F00',
+                        'accent-purple': '#6A1B9A',
+                        'success-green': '#2E7D32',
+                        'error-red': '#C62828',
+                        'warning-orange': '#EF6C00',
+                        'info-blue': '#1565C0',
+                        'neutral-dark': '#37474F',
+                        'neutral-medium': '#78909C',
+                        'neutral-light': '#CFD8DC',
+                        'bg-subtle': '#F5F7FA',
+                        'bg-section': '#ECEFF1',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'crimson': ['Crimson Pro', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Crimson+Pro:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+</head>
+<body class="font-inter bg-bg-subtle">
+
+<header id="header" class="bg-white border-b border-neutral-light sticky top-0 z-50">
+    <div class="max-w-[1440px] mx-auto px-8 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-12">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary-deep rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-gold text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-primary-deep">LegacyGuard</span>
+                </div>
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#servicos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Serviços</a>
+                    <a href="#como-funciona" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Como Funciona</a>
+                    <a href="#tecnologia" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Tecnologia</a>
+                    <a href="#precos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Preços</a>
+                    <a href="#recursos" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Recursos</a>
+                    <a href="#blog" class="text-neutral-dark hover:text-primary-deep font-medium transition-colors">Blog</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="px-6 py-2.5 text-primary-deep font-semibold hover:bg-secondary-pale rounded-lg transition-colors">
+                    Login
+                </button>
+                <button class="px-6 py-2.5 bg-primary-deep text-white font-semibold hover:bg-secondary-blue rounded-lg transition-colors flex items-center space-x-2">
+                    <span>Agendar Consulta</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="breadcrumb-section" class="bg-white border-b border-neutral-light py-4">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="flex items-center space-x-2 text-sm">
+            <a href="#" class="text-neutral-medium hover:text-primary-deep transition-colors">Início</a>
+            <i class="fa-solid fa-chevron-right text-neutral-light text-xs"></i>
+            <span class="text-neutral-dark font-medium">Agendar Consulta</span>
+        </div>
+    </div>
+</section>
+
+<section id="hero-booking" class="bg-gradient-to-br from-primary-deep to-secondary-blue text-white py-16">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="max-w-4xl">
+            <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
+                <i class="fa-solid fa-calendar-check text-primary-gold"></i>
+                <span class="text-sm font-medium">Consulta Gratuita de 30 Minutos</span>
+            </div>
+            <h1 class="text-5xl font-bold mb-6">Agende Sua Consulta com Especialista</h1>
+            <p class="text-xl text-white/90 leading-relaxed mb-8">
+                Converse com nosso advogado especializado em planejamento sucessório. Tire suas dúvidas, entenda o processo e receba orientação personalizada sobre seu caso específico.
+            </p>
+            <div class="flex items-center space-x-8">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-success-green/20 rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-video text-success-green text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">100% Online</div>
+                        <div class="text-sm text-white/70">Via Google Meet</div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-primary-gold/20 rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-clock text-primary-gold text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">30 Minutos</div>
+                        <div class="text-sm text-white/70">Tempo dedicado</div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-accent-emerald/20 rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-dollar-sign text-accent-emerald text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">Gratuito</div>
+                        <div class="text-sm text-white/70">Sem compromisso</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="main-booking-section" class="py-16">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="grid grid-cols-3 gap-12">
+            <div class="col-span-2">
+                <div id="booking-form-card" class="bg-white rounded-2xl p-10 shadow-lg">
+                    <div class="mb-8">
+                        <h2 class="text-3xl font-bold text-neutral-dark mb-3">Informações Pessoais</h2>
+                        <p class="text-neutral-medium">Preencha seus dados para agendarmos sua consulta gratuita</p>
+                    </div>
+
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-neutral-dark mb-2">Nome Completo *</label>
+                                <input type="text" placeholder="Ex: João Silva Santos" class="w-full px-4 py-3 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep focus:border-transparent" required/>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-neutral-dark mb-2">CPF *</label>
+                                <input type="text" placeholder="000.000.000-00" class="w-full px-4 py-3 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep focus:border-transparent" required/>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-neutral-dark mb-2">Email *</label>
+                                <input type="email" placeholder="seu@email.com" class="w-full px-4 py-3 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep focus:border-transparent" required/>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-neutral-dark mb-2">Telefone/WhatsApp *</label>
+                                <input type="tel" placeholder="(11) 99999-9999" class="w-full px-4 py-3 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep focus:border-transparent" required/>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-neutral-dark mb-2">Estado *</label>
+                            <select class="w-full px-4 py-3 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep focus:border-transparent appearance-none bg-white" required>
+                                <option value="">Selecione seu estado</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="BA">Bahia</option>
+                                <option value="PR">Paraná</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="CE">Ceará</option>
+                                <option value="GO">Goiás</option>
+                                <option value="DF">Distrito Federal</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-neutral-dark mb-2">Patrimônio Estimado</label>
+                            <select class="w-full px-4 py-3 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep focus:border-transparent appearance-none bg-white">
+                                <option value="">Selecione uma faixa (opcional)</option>
+                                <option value="0-500k">Até R$ 500 mil</option>
+                                <option value="500k-1m">R$ 500 mil - R$ 1 milhão</option>
+                                <option value="1m-3m">R$ 1 milhão - R$ 3 milhões</option>
+                                <option value="3m-5m">R$ 3 milhões - R$ 5 milhões</option>
+                                <option value="5m+">Acima de R$ 5 milhões</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-neutral-dark mb-2">O que você gostaria de discutir? *</label>
+                            <textarea rows="4" placeholder="Descreva brevemente sua situação e principais dúvidas..." class="w-full px-4 py-3 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep focus:border-transparent resize-none" required></textarea>
+                        </div>
+
+                        <div class="bg-secondary-pale rounded-xl p-6">
+                            <h3 class="text-lg font-bold text-neutral-dark mb-4">Selecione Data e Horário Preferencial</h3>
+                            <div class="grid grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-semibold text-neutral-dark mb-2">Data Preferencial *</label>
+                                    <input type="date" class="w-full px-4 py-3 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep focus:border-transparent bg-white" required/>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-neutral-dark mb-2">Horário Preferencial *</label>
+                                    <select class="w-full px-4 py-3 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-deep focus:border-transparent appearance-none bg-white" required>
+                                        <option value="">Selecione um horário</option>
+                                        <option value="09:00">09:00 - 09:30</option>
+                                        <option value="10:00">10:00 - 10:30</option>
+                                        <option value="11:00">11:00 - 11:30</option>
+                                        <option value="14:00">14:00 - 14:30</option>
+                                        <option value="15:00">15:00 - 15:30</option>
+                                        <option value="16:00">16:00 - 16:30</option>
+                                        <option value="17:00">17:00 - 17:30</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <p class="text-sm text-neutral-medium mt-3">
+                                <i class="fa-solid fa-info-circle text-info-blue"></i>
+                                Entraremos em contato para confirmar a disponibilidade
+                            </p>
+                        </div>
+
+                        <div class="flex items-start space-x-3">
+                            <input type="checkbox" id="terms" class="mt-1 w-5 h-5 text-primary-deep border-neutral-light rounded focus:ring-2 focus:ring-primary-deep" required/>
+                            <label for="terms" class="text-sm text-neutral-medium leading-relaxed">
+                                Concordo com os <a href="#" class="text-primary-deep font-semibold hover:underline">Termos de Uso</a> e <a href="#" class="text-primary-deep font-semibold hover:underline">Política de Privacidade</a>. Autorizo o contato via email e telefone para agendamento e acompanhamento.
+                            </label>
+                        </div>
+
+                        <div class="flex items-start space-x-3">
+                            <input type="checkbox" id="lgpd" class="mt-1 w-5 h-5 text-primary-deep border-neutral-light rounded focus:ring-2 focus:ring-primary-deep" required/>
+                            <label for="lgpd" class="text-sm text-neutral-medium leading-relaxed">
+                                Autorizo o tratamento dos meus dados pessoais de acordo com a LGPD para fins de prestação de serviços jurídicos e comunicação relacionada.
+                            </label>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 bg-primary-deep text-white font-bold text-lg rounded-lg hover:bg-secondary-blue transition-colors flex items-center justify-center space-x-3">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            <span>Confirmar Agendamento</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div id="calendar-integration" class="bg-white rounded-2xl p-10 shadow-lg mt-8">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold text-neutral-dark mb-3">Ou Agende Diretamente pelo Calendário</h2>
+                        <p class="text-neutral-medium">Visualize nossa disponibilidade em tempo real e escolha o melhor horário</p>
+                    </div>
+                    <div class="bg-bg-subtle rounded-xl p-12 text-center border-2 border-dashed border-neutral-light">
+                        <i class="fa-solid fa-calendar-days text-6xl text-neutral-light mb-4"></i>
+                        <p class="text-neutral-medium mb-6">Integração com Cal.com será carregada aqui</p>
+                        <button class="px-6 py-3 bg-info-blue text-white font-semibold rounded-lg hover:opacity-90 transition-opacity">
+                            <i class="fa-solid fa-external-link-alt mr-2"></i>
+                            Abrir Calendário
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-1">
+                <div id="consultation-info" class="bg-white rounded-2xl p-8 shadow-lg sticky top-24">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold text-neutral-dark mb-2">O Que Esperar da Consulta</h3>
+                        <p class="text-neutral-medium text-sm">Saiba como será nossa primeira conversa</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-primary-deep/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-1 text-primary-deep"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-neutral-dark mb-1">Apresentação & Contexto</h4>
+                                <p class="text-sm text-neutral-medium">Nos primeiros 5 minutos, entenderemos sua situação familiar e patrimonial</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-primary-deep/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-2 text-primary-deep"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-neutral-dark mb-1">Análise Preliminar</h4>
+                                <p class="text-sm text-neutral-medium">15 minutos para discutir seus ativos, herdeiros e objetivos específicos</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-primary-deep/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-3 text-primary-deep"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-neutral-dark mb-1">Explicação do Processo</h4>
+                                <p class="text-sm text-neutral-medium">Demonstração das 7 etapas do nosso sistema e tecnologias utilizadas</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-primary-deep/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-4 text-primary-deep"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-neutral-dark mb-1">Perguntas & Próximos Passos</h4>
+                                <p class="text-sm text-neutral-medium">10 minutos para esclarecer dúvidas e definir o plano de ação</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-8 border-t border-neutral-light">
+                        <h4 class="font-bold text-neutral-dark mb-4">Você Receberá por Email:</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-center space-x-3 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">Link da videochamada (Google Meet)</span>
+                            </li>
+                            <li class="flex items-center space-x-3 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">Checklist de documentos necessários</span>
+                            </li>
+                            <li class="flex items-center space-x-3 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">Guia "Primeiros Passos"</span>
+                            </li>
+                            <li class="flex items-center space-x-3 text-sm">
+                                <i class="fa-solid fa-check text-success-green"></i>
+                                <span class="text-neutral-dark">Lembrete 24h antes da consulta</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-8 bg-secondary-pale rounded-xl p-6">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <i class="fa-solid fa-shield-halved text-primary-deep text-2xl"></i>
+                            <h4 class="font-bold text-neutral-dark">100% Confidencial</h4>
+                        </div>
+                        <p class="text-sm text-neutral-medium leading-relaxed">
+                            Todas as informações compartilhadas são protegidas por sigilo profissional e criptografia end-to-end.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="testimonial-card" class="bg-gradient-to-br from-primary-deep to-secondary-blue rounded-2xl p-8 shadow-lg mt-8 text-white">
+                    <div class="flex items-center space-x-1 mb-4">
+                        <i class="fa-solid fa-star text-primary-gold"></i>
+                        <i class="fa-solid fa-star text-primary-gold"></i>
+                        <i class="fa-solid fa-star text-primary-gold"></i>
+                        <i class="fa-solid fa-star text-primary-gold"></i>
+                        <i class="fa-solid fa-star text-primary-gold"></i>
+                    </div>
+                    <p class="text-lg leading-relaxed mb-6">
+                        "A consulta foi extremamente esclarecedora. O advogado explicou todo o processo de forma clara e me ajudou a entender como proteger meus ativos digitais."
+                    </p>
+                    <div class="flex items-center space-x-3">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Cliente" class="w-12 h-12 rounded-full border-2 border-white/20"/>
+                        <div>
+                            <div class="font-bold">Marina Oliveira</div>
+                            <div class="text-sm text-white/70">Empresária, São Paulo</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="contact-options" class="bg-white rounded-2xl p-8 shadow-lg mt-8">
+                    <h4 class="font-bold text-neutral-dark mb-4">Precisa de Ajuda?</h4>
+                    <div class="space-y-4">
+                        <a href="#" class="flex items-center space-x-3 p-4 bg-bg-subtle rounded-lg hover:bg-secondary-pale transition-colors">
+                            <i class="fa-brands fa-whatsapp text-success-green text-2xl"></i>
+                            <div>
+                                <div class="font-semibold text-neutral-dark">WhatsApp</div>
+                                <div class="text-sm text-neutral-medium">(11) 99999-9999</div>
+                            </div>
+                        </a>
+                        <a href="#" class="flex items-center space-x-3 p-4 bg-bg-subtle rounded-lg hover:bg-secondary-pale transition-colors">
+                            <i class="fa-solid fa-envelope text-info-blue text-2xl"></i>
+                            <div>
+                                <div class="font-semibold text-neutral-dark">Email</div>
+                                <div class="text-sm text-neutral-medium">contato@legacyguard.com.br</div>
+                            </div>
+                        </a>
+                        <a href="#" class="flex items-center space-x-3 p-4 bg-bg-subtle rounded-lg hover:bg-secondary-pale transition-colors">
+                            <i class="fa-solid fa-phone text-primary-deep text-2xl"></i>
+                            <div>
+                                <div class="font-semibold text-neutral-dark">Telefone</div>
+                                <div class="text-sm text-neutral-medium">0800 123 4567</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="faq-section" class="bg-white py-16">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center space-x-2 bg-secondary-pale px-4 py-2 rounded-full mb-4">
+                <i class="fa-solid fa-circle-question text-primary-deep"></i>
+                <span class="text-sm font-semibold text-primary-deep uppercase tracking-wider">Perguntas Frequentes</span>
+            </div>
+            <h2 class="text-4xl font-bold text-neutral-dark mb-4">Dúvidas sobre o Agendamento?</h2>
+            <p class="text-xl text-neutral-medium max-w-3xl mx-auto">
+                Respondemos as perguntas mais comuns sobre a consulta inicial
+            </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto space-y-4">
+            <div class="bg-bg-subtle rounded-xl p-6 border border-neutral-light">
+                <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-neutral-dark mb-2">A consulta realmente é gratuita?</h3>
+                        <p class="text-neutral-medium leading-relaxed">
+                            Sim, totalmente gratuita e sem compromisso. O objetivo é entender sua situação e explicar como podemos ajudar. Você só pagará se decidir criar seu testamento conosco.
+                        </p>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-neutral-light ml-4"></i>
+                </div>
+            </div>
+
+            <div class="bg-bg-subtle rounded-xl p-6 border border-neutral-light">
+                <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-neutral-dark mb-2">Preciso ter documentos em mãos?</h3>
+                        <p class="text-neutral-medium leading-relaxed">
+                            Não é necessário para a primeira consulta. Basta ter uma ideia geral do seu patrimônio. Os documentos serão solicitados apenas se você decidir prosseguir com a criação do testamento.
+                        </p>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-neutral-light ml-4"></i>
+                </div>
+            </div>
+
+            <div class="bg-bg-subtle rounded-xl p-6 border border-neutral-light">
+                <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-neutral-dark mb-2">Posso remarcar se tiver um imprevisto?</h3>
+                        <p class="text-neutral-medium leading-relaxed">
+                            Claro! Você pode remarcar até 2 horas antes do horário agendado sem nenhum custo. Basta clicar no link de reagendamento que enviaremos por email.
+                        </p>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-neutral-light ml-4"></i>
+                </div>
+            </div>
+
+            <div class="bg-bg-subtle rounded-xl p-6 border border-neutral-light">
+                <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-neutral-dark mb-2">Qual advogado vai me atender?</h3>
+                        <p class="text-neutral-medium leading-relaxed">
+                            Você será atendido por um dos nossos advogados especializados em direito sucessório, todos com certificação ICP-Brasil e experiência em planejamento patrimonial digital.
+                        </p>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-neutral-light ml-4"></i>
+                </div>
+            </div>
+
+            <div class="bg-bg-subtle rounded-xl p-6 border border-neutral-light">
+                <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-neutral-dark mb-2">A consulta é gravada?</h3>
+                        <p class="text-neutral-medium leading-relaxed">
+                            Não. Esta primeira consulta não é gravada para garantir total liberdade na conversa. Apenas as sessões de validação forense (quando você criar o testamento) são gravadas e criptografadas.
+                        </p>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-neutral-light ml-4"></i>
+                </div>
+            </div>
+
+            <div class="bg-bg-subtle rounded-xl p-6 border border-neutral-light">
+                <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-neutral-dark mb-2">E se eu não tiver tempo para 30 minutos?</h3>
+                        <p class="text-neutral-medium leading-relaxed">
+                            Podemos adaptar! Informe no formulário se prefere uma consulta mais rápida de 15 minutos ou se precisa de mais tempo (até 45 minutos) para casos mais complexos.
+                        </p>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-neutral-light ml-4"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="lawyers-team" class="bg-bg-subtle py-16">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center space-x-2 bg-secondary-pale px-4 py-2 rounded-full mb-4">
+                <i class="fa-solid fa-user-tie text-primary-deep"></i>
+                <span class="text-sm font-semibold text-primary-deep uppercase tracking-wider">Nossa Equipe</span>
+            </div>
+            <h2 class="text-4xl font-bold text-neutral-dark mb-4">Conheça Nossos Especialistas</h2>
+            <p class="text-xl text-neutral-medium max-w-3xl mx-auto">
+                Advogados experientes em direito sucessório e tecnologia blockchain
+            </p>
+        </div>
+
+        <div class="grid grid-cols-4 gap-8">
+            <div class="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-shadow">
+                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Dr. Carlos Silva" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-primary-deep/10"/>
+                <h3 class="text-xl font-bold text-neutral-dark mb-1">Dr. Carlos Silva</h3>
+                <p class="text-sm text-primary-deep font-semibold mb-3">Sócio Fundador</p>
+                <p class="text-sm text-neutral-medium mb-4">OAB/SP 123.456</p>
+                <div class="flex items-center justify-center space-x-1 mb-3">
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <span class="text-sm text-neutral-medium ml-2">4.9</span>
+                </div>
+                <p class="text-xs text-neutral-medium">15 anos de experiência</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-shadow">
+                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Dra. Marina Costa" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-primary-deep/10"/>
+                <h3 class="text-xl font-bold text-neutral-dark mb-1">Dra. Marina Costa</h3>
+                <p class="text-sm text-primary-deep font-semibold mb-3">Especialista em Sucessões</p>
+                <p class="text-sm text-neutral-medium mb-4">OAB/RJ 234.567</p>
+                <div class="flex items-center justify-center space-x-1 mb-3">
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <span class="text-sm text-neutral-medium ml-2">5.0</span>
+                </div>
+                <p class="text-xs text-neutral-medium">12 anos de experiência</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-shadow">
+                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Dr. Roberto Mendes" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-primary-deep/10"/>
+                <h3 class="text-xl font-bold text-neutral-dark mb-1">Dr. Roberto Mendes</h3>
+                <p class="text-sm text-primary-deep font-semibold mb-3">Especialista em Crypto</p>
+                <p class="text-sm text-neutral-medium mb-4">OAB/MG 345.678</p>
+                <div class="flex items-center justify-center space-x-1 mb-3">
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <span class="text-sm text-neutral-medium ml-2">4.8</span>
+                </div>
+                <p class="text-xs text-neutral-medium">8 anos de experiência</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-shadow">
+                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" alt="Dra. Juliana Rocha" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-primary-deep/10"/>
+                <h3 class="text-xl font-bold text-neutral-dark mb-1">Dra. Juliana Rocha</h3>
+                <p class="text-sm text-primary-deep font-semibold mb-3">Especialista em LGPD</p>
+                <p class="text-sm text-neutral-medium mb-4">OAB/RS 456.789</p>
+                <div class="flex items-center justify-center space-x-1 mb-3">
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <i class="fa-solid fa-star text-primary-gold text-sm"></i>
+                    <span class="text-sm text-neutral-medium ml-2">4.9</span>
+                </div>
+                <p class="text-xs text-neutral-medium">10 anos de experiência</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="stats-section" class="bg-white py-16">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="grid grid-cols-4 gap-8">
+            <div class="text-center">
+                <div class="text-5xl font-bold text-primary-deep mb-2">2.847+</div>
+                <div class="text-neutral-medium">Consultas Realizadas</div>
+            </div>
+            <div class="text-center">
+                <div class="text-5xl font-bold text-success-green mb-2">98%</div>
+                <div class="text-neutral-medium">Taxa de Satisfação</div>
+            </div>
+            <div class="text-center">
+                <div class="text-5xl font-bold text-primary-gold mb-2">24h</div>
+                <div class="text-neutral-medium">Tempo Médio de Resposta</div>
+            </div>
+            <div class="text-center">
+                <div class="text-5xl font-bold text-accent-emerald mb-2">15+</div>
+                <div class="text-neutral-medium">Anos de Experiência</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="cta-section" class="bg-gradient-to-br from-primary-deep to-secondary-blue text-white py-16">
+    <div class="max-w-[1440px] mx-auto px-8 text-center">
+        <h2 class="text-4xl font-bold mb-4">Pronto para Proteger Seu Legado?</h2>
+        <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            Agende sua consulta gratuita agora e dê o primeiro passo para garantir que seus bens cheguem a quem você ama
+        </p>
+        <div class="flex items-center justify-center space-x-4">
+            <button class="px-8 py-4 bg-primary-gold text-primary-deep font-bold rounded-lg hover:bg-secondary-gold-light transition-all transform hover:scale-105 flex items-center space-x-2">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Agendar Minha Consulta</span>
+            </button>
+            <button class="px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-lg hover:bg-white/20 transition-colors flex items-center space-x-2">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>Falar no WhatsApp</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<footer id="footer" class="bg-neutral-dark text-white py-16">
+    <div class="max-w-[1440px] mx-auto px-8">
+        <div class="grid grid-cols-4 gap-12 mb-12">
+            <div>
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 bg-primary-gold rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-primary-deep text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold">LegacyGuard</span>
+                </div>
+                <p class="text-white/70 mb-6 leading-relaxed">
+                    Planejamento sucessório digital com tecnologia blockchain e criptografia de nível militar.
+                </p>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary-gold transition-colors">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary-gold transition-colors">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary-gold transition-colors">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary-gold transition-colors">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-lg mb-6">Serviços</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Testamento Digital</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Validação em Vídeo</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Assinatura ICP-Brasil</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Custódia Criptográfica</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Registro Blockchain</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-lg mb-6">Empresa</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Sobre Nós</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Nossa Equipe</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Carreiras</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Imprensa</a></li>
+                    <li><a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Parceiros</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-lg mb-6">Contato</h4>
+                <ul class="space-y-3">
+                    <li class="flex items-center space-x-3 text-white/70">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>contato@legacyguard.com.br</span>
+                    </li>
+                    <li class="flex items-center space-x-3 text-white/70">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>0800 123 4567</span>
+                    </li>
+                    <li class="flex items-center space-x-3 text-white/70">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span>(11) 99999-9999</span>
+                    </li>
+                    <li class="flex items-center space-x-3 text-white/70">
+                        <i class="fa-solid fa-map-marker-alt"></i>
+                        <span>São Paulo, Brasil</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pt-8 border-t border-white/10">
+            <div class="flex items-center justify-between">
+                <div class="text-white/70 text-sm">
+                    © 2026 LegacyGuard. Todos os direitos reservados.
+                </div>
+                <div class="flex items-center space-x-6 text-sm">
+                    <a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Termos de Uso</a>
+                    <a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Política de Privacidade</a>
+                    <a href="#" class="text-white/70 hover:text-primary-gold transition-colors">LGPD</a>
+                    <a href="#" class="text-white/70 hover:text-primary-gold transition-colors">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
