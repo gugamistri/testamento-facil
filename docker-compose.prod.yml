@@ -112,6 +112,11 @@ services:
     labels:
       - "coolify.managed=true"
       - "coolify.type=api"
+      - "traefik.enable=true"
+      - "traefik.http.routers.testamento-api.rule=Host(`api.testamento-facil.com.br`)"
+      - "traefik.http.routers.testamento-api.entrypoints=websecure"
+      - "traefik.http.routers.testamento-api.tls.certresolver=letsencrypt"
+      - "traefik.http.services.testamento-api.loadbalancer.server.port=3001"
 
   # ==========================================
   # Frontend Web (Next.js)
@@ -159,6 +164,11 @@ services:
       - "coolify.managed=true"
       - "coolify.type=web"
       - "coolify.exposedPort=3000"
+      - "traefik.enable=true"
+      - "traefik.http.routers.testamento-web.rule=Host(`testamento-facil.com.br`) || Host(`www.testamento-facil.com.br`)"
+      - "traefik.http.routers.testamento-web.entrypoints=websecure"
+      - "traefik.http.routers.testamento-web.tls.certresolver=letsencrypt"
+      - "traefik.http.services.testamento-web.loadbalancer.server.port=3000"
 
   # ==========================================
   # Database Migrations (One-shot job)
