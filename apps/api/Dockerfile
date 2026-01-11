@@ -1,6 +1,6 @@
 # ============================================
 # Dockerfile para Backend API Hono (Produção)
-# Otimizado para Coolify deployment
+# Otimizado para Coolify deployment com pnpm deploy
 # ============================================
 
 FROM node:20-alpine AS base
@@ -10,40 +10,23 @@ RUN corepack enable && corepack prepare pnpm@9.15.0 --activate && \
     apk add --no-cache openssl libc6-compat
 
 # ============================================
-# Dependencies stage
-# ============================================
-FROM base AS deps
-
-WORKDIR /app
-
-# Copy package files
-COPY package.json pnpm-lock.yaml* ./
-COPY apps/api/package.json ./apps/api/
-COPY packages/shared/package.json ./packages/shared/
-COPY prisma ./prisma/
-COPY pnpm-workspace.yaml ./
-
-# Install dependencies
-ENV PRISMA_SKIP_POSTINSTALL_GENERATE=true
-RUN pnpm install --frozen-lockfile
-
-# ============================================
-# Builder stage
+# Build stage
 # ============================================
 FROM base AS builder
 
 WORKDIR /app
 
-# Copy dependencies
-COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/apps/api/node_modules ./apps/api/node_modules
-COPY --from=deps /app/packages/shared/node_modules ./packages/shared/node_modules
+# Copy workspace configuration and locks
+COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml ./
 
-# Copy Prisma generated client
-COPY --from=deps /app/node_modules/.prisma ./node_modules/.prisma
-COPY --from=deps /app/node_modules/@prisma ./node_modules/@prisma
+# Copy all package manifests
+COPY apps/api/package.json ./apps/api/
+COPY packages/shared/package.json ./packages/shared/
 
-# Copy source code
+# Install all dependencies (including devDeps for building)
+RUN pnpm install --frozen-lockfile
+
+# Copy source code and prisma
 COPY . .
 
 # Generate Prisma client
@@ -52,6 +35,11 @@ RUN DATABASE_URL="postgresql://localhost:5432/dummy" pnpm --filter api exec pris
 # Build the API
 WORKDIR /app/apps/api
 RUN pnpm build
+
+# Use pnpm deploy to create a standalone production bundle
+# This isolates the 'api' package and its production dependencies
+WORKDIR /app
+RUN pnpm --filter api --prod deploy /app-deploy
 
 # ============================================
 # Production runner stage
@@ -63,35 +51,22 @@ WORKDIR /app
 # Set production environment
 ENV NODE_ENV=production
 
-# Install only production dependencies for smaller image
-RUN corepack enable && corepack prepare pnpm@9.15.0 --activate
+# Install openssl for Prisma runtime
+RUN apk add --no-cache openssl
 
 # Create non-root user for security
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 honojs
 
-# Copy built application
+# Copy standalone production bundle from builder
+COPY --from=builder /app-deploy ./
+
+# Copy compiled files from builder (pnpm deploy copies source/manifests only usually)
+# We need to ensure the 'dist' folder is present in the final image
 COPY --from=builder /app/apps/api/dist ./dist
-COPY --from=builder /app/apps/api/package.json ./
-COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
-COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 
 # Copy prisma schema for migrations
 COPY --from=builder /app/prisma ./prisma
-
-# Install production dependencies only
-COPY package.json pnpm-lock.yaml* ./tmp/
-COPY apps/api/package.json ./tmp/apps/api/
-COPY packages/shared/package.json ./tmp/packages/shared/
-COPY pnpm-workspace.yaml ./tmp/
-
-WORKDIR /tmp
-RUN pnpm install --frozen-lockfile --prod
-WORKDIR /app
-
-# Copy production node_modules
-COPY --from=deps /app/node_modules/@hono ./node_modules/@hono
-COPY --from=deps /app/node_modules/hono ./node_modules/hono
 
 # Set correct ownership
 RUN chown -R honojs:nodejs /app
