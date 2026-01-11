@@ -6,12 +6,12 @@ import { ArrowLeft, Calendar, Check, Clock, Video } from 'lucide-react'
 import { useState } from 'react'
 
 const AVAILABLE_SLOTS = [
-    'Maio 15, 2024 às 09:00',
-    'Maio 15, 2024 às 10:30',
-    'Maio 15, 2024 às 14:00',
-    'Maio 16, 2024 às 09:00',
-    'Maio 16, 2024 às 11:00',
-    'Maio 16, 2024 às 16:30',
+    'Janeiro 15, 2026 às 09:00',
+    'Janeiro 15, 2026 às 10:30',
+    'Janeiro 15, 2026 às 14:00',
+    'Janeiro 16, 2026 às 09:00',
+    'Janeiro 16, 2026 às 11:00',
+    'Janeiro 16, 2026 às 16:30',
 ]
 
 export function Step7VideoScheduling() {
@@ -19,9 +19,18 @@ export function Step7VideoScheduling() {
     const [selectedSlot, setSelectedSlot] = useState<string | null>(null)
 
     const handleFinish = () => {
+        console.log('Step7: handleFinish called', { selectedSlot });
         if (selectedSlot) {
-            scheduleVideoSession(selectedSlot)
-            nextStep()
+            try {
+                scheduleVideoSession(selectedSlot)
+                console.log('Step7: Scheduled, moving next');
+                nextStep()
+            } catch (error) {
+                console.error('Step7 Error:', error);
+                alert('Erro ao agendar: ' + (error as Error).message);
+            }
+        } else {
+            console.warn('Step7: No slot selected');
         }
     }
 

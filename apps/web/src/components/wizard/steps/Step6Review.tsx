@@ -4,13 +4,13 @@ import { useWizardStore } from '@/store/useWizardStore'
 import { ArrowLeft, CheckCircle2, FileText, Heart, Home, Landmark, Lock, User } from 'lucide-react'
 
 export function Step6Review() {
-  const { personalData, assets, beneficiaries, prevStep } = useWizardStore()
+  const { personalData, assets, beneficiaries, prevStep, nextStep } = useWizardStore()
 
   const handleFinish = () => {
     // In a real app, this would submit to the backend.
     // For Phase 4, we just show a success state or log it.
     console.log('Wizard Finished:', { personalData, assets, beneficiaries })
-    alert('Informações salvas com sucesso! Prosseguindo para validação por vídeo.')
+    nextStep()
   }
 
   return (

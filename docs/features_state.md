@@ -3637,7 +3637,7 @@ Timeline Example (Visual Flow):
 
  ●━━━ v4: 08/01/2025 - Ajuste de percentuais (Atual)
 │
-●━━━ v3: 15/09/2024 - Adicionado imóvel
+●━━━ v3: 15/02/2026 - Adicionado imóvel
 │
 ●━━━ v2: 03/06/2024 - Beneficiário removido
 │

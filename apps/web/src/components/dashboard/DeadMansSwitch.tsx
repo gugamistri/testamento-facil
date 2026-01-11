@@ -53,7 +53,7 @@ export function DeadMansSwitch() {
 
                         <div className="px-xl py-md bg-background/5 border border-white/10 rounded-2xl">
                             <p className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-1">Próxima Notificação</p>
-                            <p className="text-lg font-bold">15/09/2024</p>
+                            <p className="text-lg font-bold">15/02/2026</p>
                         </div>
                     </div>
                 </div>

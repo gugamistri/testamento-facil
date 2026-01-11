@@ -246,7 +246,7 @@ export const useWizardStore = create<WizardState>()(
         }),
     }),
     {
-      name: 'testamento-wizard-storage',
+      name: 'testamento-wizard-storage-v2',
     }
   )
 )

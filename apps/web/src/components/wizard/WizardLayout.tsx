@@ -2,7 +2,7 @@
 
 import { useWizardStore } from '@/store/useWizardStore'
 import { motion } from 'framer-motion'
-import { ChevronRight, Home, Lock, Shield, User, Video } from 'lucide-react'
+import { ChevronRight, Home, Lock, Shield, User, Video, Check, PenTool } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
@@ -14,49 +14,17 @@ const steps = [
   { id: 5, label: 'Beneficiários', icon: Shield },
   { id: 6, label: 'Revisão', icon: Shield },
   { id: 7, label: 'Agendamento', icon: Video },
+  { id: 8, label: 'Conclusão', icon: Check },
+  { id: 9, label: 'Assinatura', icon: PenTool },
 ]
 
 export function WizardLayout({ children }: { children: React.ReactNode }) {
-  const { currentStep } = useWizardStore()
+  const { currentStep, setStep } = useWizardStore()
 
   return (
-    <div className="min-h-screen bg-background-subtle">
+    <div className="h-full w-full">
       {/* Header */}
-      <header className="bg-background-pure border-b border-neutral-light/30 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-lg sm:px-xl lg:px-2xl h-2xl flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-sm group">
-            <div className="w-8 h-8 bg-brand-primary rounded-badge flex items-center justify-center shadow-button group-hover:scale-105 transition-transform">
-              <span className="text-white font-black text-sm leading-none">T</span>
-            </div>
-            <span className="text-lg font-bold tracking-tight text-neutral-dark">
-              Testamento <span className="text-brand-primary">Fácil</span>
-            </span>
-          </Link>
-
-          <div className="hidden md:flex items-center gap-md text-neutral-medium text-[14px]">
-            <span>
-              Passo {currentStep} de {steps.length}
-            </span>
-            <div className="w-48 h-xs bg-neutral-light/30 rounded-full overflow-hidden">
-              <motion.div
-                className="h-full bg-brand-primary"
-                initial={{ width: 0 }}
-                animate={{ width: `${(currentStep / steps.length) * 100}%` }}
-                transition={{ duration: 0.5 }}
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center gap-md">
-            <button
-              type="button"
-              className="text-[14px] font-medium text-neutral-medium hover:text-neutral-dark transition-colors"
-            >
-              Salvar e Sair
-            </button>
-          </div>
-        </div>
-      </header>
+      {/* Header Removed for Dashboard Integration */}
 
       <main className="max-w-7xl mx-auto px-lg sm:px-xl lg:px-2xl py-xl lg:py-2xl">
         <div className="flex flex-col lg:flex-row gap-xl">
@@ -66,19 +34,24 @@ export function WizardLayout({ children }: { children: React.ReactNode }) {
               {steps.map((step) => {
                 const isActive = step.id === currentStep
                 const isCompleted = step.id < currentStep
+                // Allow navigation to any previous step or current step
+                const isClickable = step.id <= currentStep
 
                 return (
-                  <div
+                  <button
                     key={step.id}
-                    className={`flex items-center gap-md p-md rounded-button transition-all ${isActive
+                    onClick={() => isClickable && setStep(step.id)}
+                    type="button"
+                    disabled={!isClickable}
+                    className={`flex items-center gap-md p-md rounded-button transition-all w-full text-left ${isActive
                       ? 'bg-brand-primary text-white shadow-button'
                       : isCompleted
-                        ? 'text-brand-primary bg-brand-pale/50'
-                        : 'text-neutral-medium hover:bg-neutral-light/10'
+                        ? 'text-brand-primary bg-brand-pale/50 hover:bg-brand-pale/70 cursor-pointer'
+                        : 'text-neutral-medium opacity-60 cursor-not-allowed'
                       }`}
                   >
                     <div
-                      className={`w-8 h-8 rounded-badge flex items-center justify-center ${isActive
+                      className={`w-8 h-8 rounded-badge flex items-center justify-center shrink-0 ${isActive
                         ? 'bg-background/20'
                         : isCompleted
                           ? 'bg-brand-primary/10'
@@ -91,7 +64,7 @@ export function WizardLayout({ children }: { children: React.ReactNode }) {
                     {isCompleted && (
                       <div className="ml-auto w-2 h-2 rounded-full bg-brand-primary" />
                     )}
-                  </div>
+                  </button>
                 )
               })}
             </nav>

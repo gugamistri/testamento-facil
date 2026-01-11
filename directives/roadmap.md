@@ -1291,7 +1291,7 @@ Card 2: Monitoramento Ativo
 
 🟢 "Monitoramento ativo desde 01/03/2023"
 Última consulta de API: Hoje às 03:42
-Próxima confirmação de vida: 15/09/2024 (em 45 dias)
+Próxima confirmação de vida: 15/02/2026 (em 45 dias)
 Botão: "Confirmar Vida Agora" (check-in manual antecipado)
 Card 3: Segurança
 
@@ -1577,7 +1577,7 @@ Card 2: Monitoramento Ativo
 
 🟢 "Monitoramento ativo desde 01/03/2023"
 Última consulta de API: Hoje às 03:42
-Próxima confirmação de vida: 15/09/2024 (em 45 dias)
+Próxima confirmação de vida: 15/02/2026 (em 45 dias)
 Botão: "Confirmar Vida Agora" (check-in manual antecipado)
 Card 3: Segurança
 
