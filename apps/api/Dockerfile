@@ -27,9 +27,6 @@ COPY pnpm-workspace.yaml ./
 ENV PRISMA_SKIP_POSTINSTALL_GENERATE=true
 RUN pnpm install --frozen-lockfile
 
-# Generate Prisma client
-RUN DATABASE_URL="postgresql://localhost:5432/dummy" pnpm exec prisma generate --schema=./prisma/schema.prisma
-
 # ============================================
 # Builder stage
 # ============================================
@@ -48,6 +45,9 @@ COPY --from=deps /app/node_modules/@prisma ./node_modules/@prisma
 
 # Copy source code
 COPY . .
+
+# Generate Prisma client
+RUN DATABASE_URL="postgresql://localhost:5432/dummy" pnpm --filter api exec prisma generate
 
 # Build the API
 WORKDIR /app/apps/api
