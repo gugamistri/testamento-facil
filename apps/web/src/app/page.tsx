@@ -3,11 +3,14 @@
 import { FAQSection } from '@/components/landing/faq-section'
 import { HeroSection } from '@/components/landing/hero-section'
 import { SavingsCalculator } from '@/components/landing/savings-calculator'
+import { TestimonialsSection } from '@/components/landing/testimonials-section'
+import { TrustBadges } from '@/components/landing/trust-badges'
 import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -166,6 +169,7 @@ export default function Home() {
       </AnimatePresence>
 
       <HeroSection />
+      <TrustBadges />
 
       {/* Sticky Bottom Bar (Mobile) */}
       <div className="md:hidden fixed bottom-xl inset-x-lg z-50 pointer-events-none">
@@ -190,6 +194,7 @@ export default function Home() {
       </div>
 
       <SavingsCalculator />
+      <TestimonialsSection />
       <FAQSection />
 
       {/* Footer */}

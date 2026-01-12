@@ -1,0 +1,69 @@
+'use client'
+
+import { motion } from 'framer-motion'
+import { Award, Database, Lock, Scale, Shield } from 'lucide-react'
+
+const badges = [
+    {
+        id: 1,
+        label: 'Certificado por',
+        name: 'ICP-Brasil',
+        icon: Award,
+        iconColor: 'text-secondary',
+    },
+    {
+        id: 2,
+        label: 'Blockchain',
+        name: 'Polygon Network',
+        icon: Database,
+        iconColor: 'text-accent',
+    },
+    {
+        id: 3,
+        label: 'Criptografia',
+        name: 'AES-256-GCM',
+        icon: Lock,
+        iconColor: 'text-accent',
+    },
+    {
+        id: 4,
+        label: 'Conformidade',
+        name: 'LGPD Compliant',
+        icon: Scale,
+        iconColor: 'text-primary',
+    },
+    {
+        id: 5,
+        label: 'Armazenamento',
+        name: 'AWS KMS',
+        icon: Shield,
+        iconColor: 'text-functional-warning',
+    },
+]
+
+export function TrustBadges() {
+    return (
+        <section className="py-xl px-lg bg-card border-y border-border">
+            <div className="max-w-7xl mx-auto">
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    className="flex flex-wrap items-center justify-between gap-xl"
+                >
+                    {badges.map((badge) => (
+                        <div key={badge.id} className="flex flex-col items-center text-center">
+                            <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-xs">
+                                {badge.label}
+                            </p>
+                            <div className="flex items-center gap-xs">
+                                <badge.icon className={`w-5 h-5 ${badge.iconColor}`} />
+                                <span className="text-sm font-bold text-foreground">{badge.name}</span>
+                            </div>
+                        </div>
+                    ))}
+                </motion.div>
+            </div>
+        </section>
+    )
+}
