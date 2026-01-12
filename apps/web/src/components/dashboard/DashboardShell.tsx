@@ -6,18 +6,16 @@ import {
     FileText,
     Users,
     Calendar,
-    Activity,
     Settings,
     Menu,
-    Bell,
     CreditCard,
-    FileCheck,
     FolderOpen
 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useState } from 'react'
 import { cn } from '@/lib/utils'
+import { NotificationDropdown } from './NotificationDropdown'
 
 export function DashboardShell({ children }: { children: React.ReactNode }) {
     const { user } = useUser()
@@ -43,8 +41,6 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
                     <NavItem icon={<FolderOpen className="w-5 h-5" />} label="Documentos" href="/dashboard/documents" />
                     <NavItem icon={<Calendar className="w-5 h-5" />} label="Consultas" href="/dashboard/consultations" />
                     <NavItem icon={<CreditCard className="w-5 h-5" />} label="Pagamentos" href="/dashboard/billing" />
-                    <NavItem icon={<Bell className="w-5 h-5" />} label="Notificações" href="/dashboard/notifications" />
-                    <NavItem icon={<Activity className="w-5 h-5" />} label="Audit Log" href="/dashboard/audit" />
                 </nav>
 
                 <div className="pt-xl border-t border-neutral-light/20 space-y-sm">
@@ -101,10 +97,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
                 {/* Top Bar - Desktop */}
                 <header className="hidden lg:flex h-20 bg-background/80 backdrop-blur-md border-b border-neutral-light/20 px-2xl items-center justify-end sticky top-0 z-40">
                     <div className="flex items-center gap-xl">
-                        <div className="relative">
-                            <Bell className="w-5 h-5 text-neutral-medium hover:text-neutral-dark cursor-pointer transition-colors" />
-                            <div className="absolute -top-1 -right-1 w-2 h-2 bg-brand-primary rounded-full border-2 border-white" />
-                        </div>
+                        <NotificationDropdown />
                         <div className="h-6 w-px bg-neutral-light/30" />
                         <div className="flex items-center gap-sm">
                             <span className="text-xs font-semibold text-neutral-dark">Ajuda & Suporte</span>

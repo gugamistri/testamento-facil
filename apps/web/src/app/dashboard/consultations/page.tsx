@@ -128,7 +128,7 @@ export default function ConsultationsPage() {
                 </div>
             </div>
 
-            <main className="max-w-4xl mx-auto py-8">
+            <main className="max-w-4xl py-8">
                 {/* Progress */}
                 <div className="mb-8">
                     <div className="flex items-center justify-between mb-4">
