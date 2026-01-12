@@ -192,8 +192,8 @@ export default function Home() {
         </motion.div>
       </div>
 
-      <SavingsCalculator />
       <TestimonialsSection />
+      <SavingsCalculator />
       <FAQSection />
 
       {/* Footer */}
