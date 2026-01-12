@@ -118,10 +118,10 @@ export function DigitalVault() {
                             O monitoramento de óbito agora consultará as bases do governo a cada 24h.
                         </p>
                         <div className="flex gap-md pt-md">
-                            <button type="button" className="px-xl h-12 bg-background text-neutral-dark rounded-full font-black text-xs uppercase tracking-widest hover:bg-brand-primary hover:text-white transition-all shadow-lg shadow-black/20">
+                            <button type="button" className="px-xl h-12 bg-brand-primary text-white rounded-full font-black text-xs uppercase tracking-widest hover:bg-brand-hover transition-all shadow-lg shadow-black/20">
                                 Verificar Integridade
                             </button>
-                            <button type="button" className="px-xl h-12 bg-background/10 text-white rounded-full font-black text-xs uppercase tracking-widest hover:bg-background/20 transition-all border border-white/10">
+                            <button type="button" className="px-xl h-12 bg-white/10 text-white rounded-full font-black text-xs uppercase tracking-widest hover:bg-white/20 transition-all border border-white/20">
                                 Histórico de Acesso
                             </button>
                         </div>
