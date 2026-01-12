@@ -55,11 +55,6 @@ services:
       - "coolify.managed=true"
       - "coolify.type=web"
       - "coolify.exposedPort=3000"
-      - "traefik.enable=true"
-      - "traefik.http.routers.testamento-web.rule=Host(`testamento-facil.com.br`) || Host(`www.testamento-facil.com.br`)"
-      - "traefik.http.routers.testamento-web.entrypoints=websecure"
-      - "traefik.http.routers.testamento-web.tls.certresolver=letsencrypt"
-      - "traefik.http.services.testamento-web.loadbalancer.server.port=3000"
 
 # ==========================================
 # Networks - Using Coolify's default network
