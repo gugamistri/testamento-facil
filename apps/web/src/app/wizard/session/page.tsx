@@ -165,7 +165,7 @@ export default function VideoSessionPage() {
                     )}
                     <p className="text-[10px] text-white/30 text-center flex items-center justify-center gap-xs">
                         <Shield className="w-3 h-3" />
-                        Criptografia Forense Ativa AES-256
+                        Gravação protegida com segurança máxima
                     </p>
                 </div>
             </aside>

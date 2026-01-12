@@ -211,8 +211,8 @@ export default function DocumentsPage() {
                                     type="button"
                                     onClick={() => setSelectedCategory(cat.id)}
                                     className={`w-full flex items-center justify-between px-md py-sm rounded-lg transition-colors ${selectedCategory === cat.id
-                                            ? 'bg-brand-primary text-white'
-                                            : 'hover:bg-background-subtle text-neutral-dark'
+                                        ? 'bg-brand-primary text-white'
+                                        : 'hover:bg-background-subtle text-neutral-dark'
                                         }`}
                                 >
                                     <span className="font-medium">{cat.label}</span>
@@ -237,11 +237,11 @@ export default function DocumentsPage() {
                                 <div className="text-sm text-neutral-medium space-y-xs">
                                     <div className="flex items-start gap-xs">
                                         <Check className="w-3 h-3 text-functional-success mt-0.5 flex-shrink-0" />
-                                        <span>Criptografia AES-256-GCM</span>
+                                        <span>Proteção de nível bancário</span>
                                     </div>
                                     <div className="flex items-start gap-xs">
                                         <Check className="w-3 h-3 text-functional-success mt-0.5 flex-shrink-0" />
-                                        <span>Hash SHA-256 para integridade</span>
+                                        <span>Verificação automática de integridade</span>
                                     </div>
                                     <div className="flex items-start gap-xs">
                                         <Check className="w-3 h-3 text-functional-success mt-0.5 flex-shrink-0" />
@@ -347,10 +347,10 @@ export default function DocumentsPage() {
                                         {/* Status Badge */}
                                         <span
                                             className={`px-sm py-2xs rounded text-xs font-semibold ${doc.status === 'signed'
-                                                    ? 'bg-functional-success/10 text-functional-success'
-                                                    : doc.status === 'verified'
-                                                        ? 'bg-functional-info/10 text-functional-info'
-                                                        : 'bg-functional-warning/10 text-functional-warning'
+                                                ? 'bg-functional-success/10 text-functional-success'
+                                                : doc.status === 'verified'
+                                                    ? 'bg-functional-info/10 text-functional-info'
+                                                    : 'bg-functional-warning/10 text-functional-warning'
                                                 }`}
                                         >
                                             {doc.status === 'signed'

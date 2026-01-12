@@ -12,11 +12,11 @@ interface EnvelopingProcessProps {
 export function EnvelopingProcess({ onComplete }: EnvelopingProcessProps) {
     const [stage, setStage] = useState(0)
     const stages = [
-        { icon: <FileCheck />, label: 'Consolidando Documento Assinado', sub: 'PDF A1/A3 verificado' },
-        { icon: <Cpu />, label: 'Gerando Hash SHA-256', sub: 'Integridade forense ativa' },
-        { icon: <Key />, label: 'Iniciando Shamir Secret Sharing', sub: 'Fragmentando chave em 3 partes' },
-        { icon: <Globe />, label: 'Distribuindo Fragmentos', sub: 'AWS KMS + OAB Escrow + Monitor' },
-        { icon: <Database />, label: 'Eternizando Registro Blockchain', sub: 'Polygon Network Handshake' },
+        { icon: <FileCheck />, label: 'Consolidando Documento Assinado', sub: 'Verificação completa' },
+        { icon: <Cpu />, label: 'Criando Selo de Autenticidade', sub: 'Integridade garantida' },
+        { icon: <Key />, label: 'Ativando Proteção Dividida', sub: 'Dividindo em 3 partes seguras' },
+        { icon: <Globe />, label: 'Distribuindo para Custódia', sub: 'Cofre + Advocacia + Monitor' },
+        { icon: <Database />, label: 'Finalizando Registro Permanente', sub: 'Registro imutável ativado' },
     ]
 
     useEffect(() => {
@@ -92,7 +92,7 @@ export function EnvelopingProcess({ onComplete }: EnvelopingProcessProps) {
                 {/* Text Flow */}
                 <div className="text-center space-y-md">
                     <h2 className="text-2xl font-black uppercase tracking-[0.2em] italic">
-                        Envelopamento Forense
+                        Ativando Proteção
                     </h2>
 
                     <div className="h-20 flex flex-col items-center justify-center">
@@ -122,7 +122,7 @@ export function EnvelopingProcess({ onComplete }: EnvelopingProcessProps) {
                 </div>
 
                 <p className="text-center text-[10px] text-white/20 mt-2xl font-black uppercase tracking-[0.3em]">
-                    Nivel de Criptografia: AES-256-GCM
+                    Segurança de Nível Bancário Ativa
                 </p>
             </div>
         </div>

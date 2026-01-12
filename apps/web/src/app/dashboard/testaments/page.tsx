@@ -53,7 +53,7 @@ const documents = [
     {
         id: 3,
         name: 'Vídeo de Validação Forense',
-        description: 'Criptografado AES-256 • 1080p',
+        description: 'Protegido • Alta Qualidade',
         size: '487 MB',
         type: 'mp4',
         icon: Video,
@@ -324,8 +324,8 @@ export default function TestamentsPage() {
                             <div>
                                 <p className="font-semibold text-neutral-dark mb-xs">Segurança Total</p>
                                 <p className="text-sm text-neutral-medium">
-                                    Seu testamento está protegido por criptografia AES-256, assinatura ICP-Brasil e
-                                    registro imutável em blockchain.
+                                    Seu testamento está protegido por segurança de nível bancário, assinatura digital oficial e
+                                    registro permanente imutável.
                                 </p>
                             </div>
                         </div>
