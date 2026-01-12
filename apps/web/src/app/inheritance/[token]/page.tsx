@@ -1,10 +1,11 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { Shield, User, FileText, Lock, Eye, EyeOff, ExternalLink, AlertTriangle, Check, Phone, Mail, Home, Bitcoin, Globe, HardDrive, Calendar, Download, MessageCircle, Video } from 'lucide-react'
+import { Shield, User, FileText, Lock, Eye, EyeOff, ExternalLink, AlertTriangle, Check, Phone, Mail, Home, Bitcoin, Globe, HardDrive, Calendar, Download, MessageCircle, Video, ShieldCheck, Clock, Building, Landmark, PiggyBank, TrendingUp } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useParams } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 
 type AuthStep = 'CPF' | 'CODE' | 'AUTHENTICATED'
@@ -19,10 +20,40 @@ interface DigitalAsset {
     value?: string
 }
 
-const mockAssets = [
-    { id: '1', icon: Home, name: 'Apartamento Avenida Paulista, 1000', type: 'Imóvel', value: 'Matrícula: 123.456' },
-    { id: '2', icon: Bitcoin, name: 'Carteira Bitcoin (Ledger)', type: 'Criptomoeda', value: '2.5 BTC (instruções no cofre digital)' },
-    { id: '3', icon: FileText, name: 'Conta Banco Itaú', type: 'Conta Bancária', value: 'Ag 0001 • Conta 12345-6' },
+interface RealEstateAsset {
+    id: string
+    icon: typeof Home
+    name: string
+    address: string
+    status: 'quitado' | 'alugado' | 'financiado'
+    area: string
+    details: string
+    totalValue: string
+    yourShare: string
+    rent?: string
+}
+
+interface FinancialAsset {
+    id: string
+    icon: typeof Landmark
+    name: string
+    institution: string
+    details: string
+    totalValue: string
+    yourShare: string
+    extra?: string
+}
+
+const mockRealEstate: RealEstateAsset[] = [
+    { id: '1', icon: Home, name: 'Apartamento • Jardins, São Paulo', address: 'Rua Augusta, 2500 - Apto 1504', status: 'quitado', area: '185m²', details: '3 quartos', totalValue: 'R$ 1.850.000', yourShare: 'R$ 601.250' },
+    { id: '2', icon: Building, name: 'Galpão Comercial • Osasco', address: 'Av. dos Autonomistas, 4500', status: 'alugado', area: '850m²', details: 'Renda: R$ 12.000/mês', totalValue: 'R$ 950.000', yourShare: 'R$ 308.750', rent: 'R$ 12.000/mês' },
+    { id: '3', icon: Home, name: 'Casa de Praia • Guarujá', address: 'Praia da Enseada - Condomínio Riviera', status: 'quitado', area: '220m²', details: '4 quartos', totalValue: 'R$ 1.200.000', yourShare: 'R$ 390.000' }
+]
+
+const mockFinancials: FinancialAsset[] = [
+    { id: '1', icon: PiggyBank, name: 'CDB Banco Itaú', institution: 'Ag: 0123 • Conta: 45678-9', details: 'Vencimento: 15/12/2027', totalValue: 'R$ 450.000', yourShare: 'R$ 146.250', extra: '110% CDI' },
+    { id: '2', icon: TrendingUp, name: 'Ações B3', institution: 'XP Investimentos', details: 'PETR4, VALE3, ITUB4, BBDC4', totalValue: 'R$ 380.000', yourShare: 'R$ 123.500', extra: 'Diversificado' },
+    { id: '3', icon: Landmark, name: 'Tesouro Direto', institution: 'Tesouro IPCA+ 2035', details: 'IPCA + 6,15% a.a.', totalValue: 'R$ 670.000', yourShare: 'R$ 217.750', extra: 'Venc. 15/05/2035' }
 ]
 
 const mockDigitalAssets: DigitalAsset[] = [
@@ -30,6 +61,18 @@ const mockDigitalAssets: DigitalAsset[] = [
     { id: '2', type: 'password', name: 'Gmail - joao.silva@gmail.com', details: 'Senha de acesso', revealed: false, value: 'S3nh@Segur@2024!' },
     { id: '3', type: 'domain', name: 'joaosilva.com.br', details: 'Registro.br', revealed: false, value: 'Login: joao@email.com • Senha: D0m1n10!2024' },
     { id: '4', type: 'storage', name: 'Google Drive', details: '150GB de arquivos', revealed: false, value: 'Mesmo acesso do Gmail' },
+]
+
+const validationLayers = [
+    { id: 1, label: 'Camada 1', description: 'Confirmação via Registros Oficiais' },
+    { id: 2, label: 'Camada 2', description: 'Validação cruzada CRC' },
+    { id: 3, label: 'Camada 3', description: 'Certidão de óbito verificada' },
+    { id: 4, label: 'Camada 4', description: 'Revisão jurídica aprovada' }
+]
+
+const otherBeneficiaries = [
+    { id: '1', name: 'Pedro Santos', relation: 'Filho • Herdeiro Necessário', percentage: '32.5%', value: 'R$ 1.625.000' },
+    { id: '2', name: 'Ana Santos Costa', relation: 'Cônjuge • Meação', percentage: '35.0%', value: 'R$ 1.750.000' }
 ]
 
 export default function InheritancePortalPage() {
@@ -40,15 +83,38 @@ export default function InheritancePortalPage() {
     const [activeTab, setActiveTab] = useState<ContentTab>('overview')
     const [digitalAssets, setDigitalAssets] = useState<DigitalAsset[]>(mockDigitalAssets)
     const [revealTimeouts, setRevealTimeouts] = useState<Record<string, number>>({})
+    const [sessionTimer, setSessionTimer] = useState(15 * 60) // 15 minutes in seconds
 
     const deceasedName = 'João Carlos Silva Santos'
     const deathDate = '08/01/2026'
-    const openingDate = '11/01/2026'
-    const percentage = 30
-    const estimatedValue = 'R$ 450.000'
+    const openingDate = '10/01/2026'
+    const percentage = 32.5
+    const estimatedValue = 'R$ 1.625.000'
+    const legitimaValue = 'R$ 812.500'
+    const disponivelValue = 'R$ 812.500'
+
+    // Session timer countdown
+    useEffect(() => {
+        if (authStep === 'AUTHENTICATED' && sessionTimer > 0) {
+            const interval = setInterval(() => {
+                setSessionTimer(prev => prev - 1)
+            }, 1000)
+            return () => clearInterval(interval)
+        }
+    }, [authStep, sessionTimer])
+
+    const formatTime = (seconds: number) => {
+        const mins = Math.floor(seconds / 60)
+        const secs = seconds % 60
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
+    }
+
+    const extendSession = () => {
+        setSessionTimer(15 * 60)
+    }
 
     const handleCpfSubmit = () => {
-        if (cpfInput.length >= 11) {
+        if (cpfInput.length >= 4) {
             setAuthStep('CODE')
         }
     }
@@ -175,7 +241,72 @@ export default function InheritancePortalPage() {
                 </div>
             </header>
 
+            {/* Security Banner */}
+            <div className="bg-gradient-to-r from-accent-emerald to-functional-success text-white py-md px-lg sm:px-2xl">
+                <div className="max-w-5xl mx-auto flex items-center justify-between flex-wrap gap-md">
+                    <div className="flex items-center gap-md">
+                        <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                            <ShieldCheck className="w-5 h-5" />
+                        </div>
+                        <div>
+                            <p className="font-semibold text-sm">Sessão Segura Ativa</p>
+                            <p className="text-xs text-white/80">Autenticação 2FA verificada • IP: 189.***.***.142 • São Paulo, BR</p>
+                        </div>
+                    </div>
+                    <div className="flex items-center gap-lg">
+                        <div className="flex items-center gap-sm text-sm">
+                            <Clock className="w-4 h-4" />
+                            <span className="text-white/80">Expira em:</span>
+                            <span className="font-bold">{formatTime(sessionTimer)}</span>
+                        </div>
+                        <button
+                            type="button"
+                            onClick={extendSession}
+                            className="px-lg py-sm bg-white/20 hover:bg-white/30 rounded-xl text-sm font-semibold transition-colors"
+                        >
+                            Estender Sessão
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <main className="max-w-5xl mx-auto px-lg sm:px-2xl py-2xl">
+                {/* Testament Unsealed Notice */}
+                <div className="bg-background rounded-[32px] border border-neutral-light/20 p-xl mb-2xl">
+                    <div className="flex items-start gap-xl flex-wrap lg:flex-nowrap">
+                        <div className="w-16 h-16 bg-brand-gold/10 rounded-2xl flex items-center justify-center shrink-0">
+                            <FileText className="w-8 h-8 text-brand-gold" />
+                        </div>
+                        <div className="flex-1">
+                            <h1 className="text-2xl font-bold text-neutral-dark mb-sm">Testamento Aberto e Validado</h1>
+                            <p className="text-neutral-medium mb-lg">
+                                O testamento de <strong className="text-neutral-dark">{deceasedName}</strong> (CPF: ***.***.789-**) foi oficialmente aberto em <strong>{openingDate}</strong> após validação em 4 camadas de segurança.
+                            </p>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-md">
+                                {validationLayers.map((layer) => (
+                                    <div key={layer.id} className="bg-background-subtle rounded-xl p-md">
+                                        <div className="flex items-center gap-sm mb-xs">
+                                            <Check className="w-4 h-4 text-functional-success" />
+                                            <span className="text-xs font-bold text-neutral-dark">{layer.label}</span>
+                                        </div>
+                                        <p className="text-[10px] text-neutral-medium">{layer.description}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-sm shrink-0">
+                            <button type="button" className="btn-primary flex items-center gap-sm">
+                                <Phone className="w-4 h-4" />
+                                Contatar Advogado
+                            </button>
+                            <button type="button" className="btn-secondary flex items-center gap-sm">
+                                <FileText className="w-4 h-4" />
+                                Ver Testamento
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Condolences Banner */}
                 <div className="bg-neutral-dark rounded-2xl p-lg mb-2xl text-white">
                     <p className="text-sm opacity-80">
@@ -300,21 +431,75 @@ export default function InheritancePortalPage() {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
+                            className="space-y-xl"
                         >
+                            {/* Real Estate Section */}
                             <div className="bg-background rounded-[32px] border border-neutral-light/20 p-xl">
-                                <h2 className="text-xl font-bold text-neutral-dark mb-lg">Bens Designados a Você</h2>
+                                <h2 className="text-xl font-bold text-neutral-dark mb-lg">Imóveis</h2>
                                 <div className="space-y-md">
-                                    {mockAssets.map((asset) => {
+                                    {mockRealEstate.map((asset) => {
                                         const Icon = asset.icon
                                         return (
-                                            <div key={asset.id} className="flex items-start gap-lg p-lg bg-background-subtle rounded-2xl">
-                                                <div className="w-12 h-12 bg-brand-pale rounded-xl flex items-center justify-center">
-                                                    <Icon className="w-6 h-6 text-brand-primary" />
+                                            <div key={asset.id} className="p-lg bg-background-subtle rounded-2xl">
+                                                <div className="flex items-start gap-lg">
+                                                    <div className="w-14 h-14 bg-brand-pale rounded-xl flex items-center justify-center shrink-0">
+                                                        <Icon className="w-7 h-7 text-brand-primary" />
+                                                    </div>
+                                                    <div className="flex-1">
+                                                        <div className="flex items-start justify-between">
+                                                            <div>
+                                                                <p className="font-bold text-neutral-dark">{asset.name}</p>
+                                                                <p className="text-sm text-neutral-medium">{asset.address}</p>
+                                                                <div className="flex items-center gap-md mt-sm">
+                                                                    <span className={cn(
+                                                                        "text-xs px-2 py-1 rounded",
+                                                                        asset.status === 'quitado' && "bg-functional-success/10 text-functional-success",
+                                                                        asset.status === 'alugado' && "bg-functional-warning/10 text-functional-warning",
+                                                                        asset.status === 'financiado' && "bg-functional-error/10 text-functional-error"
+                                                                    )}>
+                                                                        {asset.status.charAt(0).toUpperCase() + asset.status.slice(1)}
+                                                                    </span>
+                                                                    <span className="text-xs text-neutral-medium">{asset.area} • {asset.details}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="text-right">
+                                                                <p className="text-lg font-bold text-neutral-dark">{asset.totalValue}</p>
+                                                                <p className="text-sm text-brand-primary">Sua parte: {asset.yourShare}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div className="flex-1">
-                                                    <p className="font-bold text-neutral-dark">{asset.name}</p>
-                                                    <p className="text-sm text-neutral-medium">{asset.type}</p>
-                                                    <p className="text-xs text-brand-primary mt-xs">{asset.value}</p>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+
+                            {/* Financial Assets Section */}
+                            <div className="bg-background rounded-[32px] border border-neutral-light/20 p-xl">
+                                <h2 className="text-xl font-bold text-neutral-dark mb-lg">Investimentos Financeiros</h2>
+                                <div className="space-y-md">
+                                    {mockFinancials.map((asset) => {
+                                        const Icon = asset.icon
+                                        return (
+                                            <div key={asset.id} className="p-lg bg-background-subtle rounded-2xl">
+                                                <div className="flex items-center justify-between">
+                                                    <div className="flex items-center gap-lg">
+                                                        <div className="w-12 h-12 bg-brand-gold/10 rounded-xl flex items-center justify-center">
+                                                            <Icon className="w-6 h-6 text-brand-gold" />
+                                                        </div>
+                                                        <div>
+                                                            <p className="font-bold text-neutral-dark">{asset.name}</p>
+                                                            <p className="text-sm text-neutral-medium">{asset.institution}</p>
+                                                            {asset.extra && (
+                                                                <p className="text-xs text-brand-primary mt-xs">{asset.details} • {asset.extra}</p>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                    <div className="text-right">
+                                                        <p className="text-lg font-bold text-neutral-dark">{asset.totalValue}</p>
+                                                        <p className="text-sm text-brand-primary">Sua parte: {asset.yourShare}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         )
