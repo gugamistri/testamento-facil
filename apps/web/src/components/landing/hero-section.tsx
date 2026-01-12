@@ -2,16 +2,9 @@
 
 import { SignInButton, SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs'
 import { motion } from 'framer-motion'
-import { ArrowRight, Award, Lock, Shield, Users } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-
-const trustLogos = [
-  { name: 'ICP-Brasil', icon: Shield, label: 'Validade Oficial' },
-  { name: 'OAB Parceira', icon: Award, label: 'Suporte Jurídico' },
-  { name: 'AWS Shield', icon: Lock, label: 'Segurança Total' },
-  { name: '3k+ Protegidos', icon: Users, label: 'Clientes Ativos' },
-]
 
 export function HeroSection() {
   return (
@@ -59,26 +52,6 @@ export function HeroSection() {
                   </Link>
                 </SignedIn>
               </div>
-
-              {/* Trust Indicators */}
-              <motion.div
-                className="mt-2xl flex flex-wrap justify-center lg:justify-start gap-xl"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-              >
-                {trustLogos.map((logo) => (
-                  <div key={logo.label} className="flex flex-col items-center lg:items-start group">
-                    <div className="flex items-center gap-xs text-brand-primary mb-2xs">
-                      <logo.icon className="w-5 h-5" />
-                      <span className="text-[12px] font-bold uppercase tracking-widest text-neutral-medium/70">
-                        {logo.name}
-                      </span>
-                    </div>
-                    <p className="text-[14px] font-semibold text-neutral-dark">{logo.label}</p>
-                  </div>
-                ))}
-              </motion.div>
             </motion.div>
           </div>
 

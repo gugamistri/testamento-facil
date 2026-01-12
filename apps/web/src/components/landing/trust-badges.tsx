@@ -9,28 +9,28 @@ const badges = [
         label: 'Certificado por',
         name: 'ICP-Brasil',
         icon: Award,
-        iconColor: 'text-secondary',
+        iconColor: 'text-brand-gold',
     },
     {
         id: 2,
         label: 'Blockchain',
         name: 'Polygon Network',
         icon: Database,
-        iconColor: 'text-accent',
+        iconColor: 'text-accent-emerald',
     },
     {
         id: 3,
         label: 'Criptografia',
         name: 'AES-256-GCM',
         icon: Lock,
-        iconColor: 'text-accent',
+        iconColor: 'text-accent-emerald',
     },
     {
         id: 4,
         label: 'Conformidade',
         name: 'LGPD Compliant',
         icon: Scale,
-        iconColor: 'text-primary',
+        iconColor: 'text-brand-primary',
     },
     {
         id: 5,
@@ -43,7 +43,7 @@ const badges = [
 
 export function TrustBadges() {
     return (
-        <section className="py-xl px-lg bg-card border-y border-border">
+        <section className="py-xl px-lg bg-background-pure border-y border-neutral-light">
             <div className="max-w-7xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0 }}
@@ -53,12 +53,12 @@ export function TrustBadges() {
                 >
                     {badges.map((badge) => (
                         <div key={badge.id} className="flex flex-col items-center text-center">
-                            <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-xs">
+                            <p className="text-xs font-medium text-neutral-medium uppercase tracking-wider mb-xs">
                                 {badge.label}
                             </p>
                             <div className="flex items-center gap-xs">
                                 <badge.icon className={`w-5 h-5 ${badge.iconColor}`} />
-                                <span className="text-sm font-bold text-foreground">{badge.name}</span>
+                                <span className="text-sm font-bold text-neutral-dark">{badge.name}</span>
                             </div>
                         </div>
                     ))}

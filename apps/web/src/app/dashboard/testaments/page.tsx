@@ -47,8 +47,8 @@ const documents = [
         size: '156 KB',
         type: 'pdf',
         icon: ShieldCheck,
-        iconBg: 'bg-accent/10',
-        iconColor: 'text-accent',
+        iconBg: 'bg-accent-emerald/10',
+        iconColor: 'text-accent-emerald',
     },
     {
         id: 3,
@@ -80,13 +80,13 @@ export default function TestamentsPage() {
             <div className="space-y-xl">
                 <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-2xl font-bold text-foreground">Meus Testamentos</h1>
-                        <p className="text-muted-foreground">Gerencie suas versões e documentos legais</p>
+                        <h1 className="text-2xl font-bold text-neutral-dark">Meus Testamentos</h1>
+                        <p className="text-neutral-medium">Gerencie suas versões e documentos legais</p>
                     </div>
                     <Link href="/dashboard/wizard">
                         <button
                             type="button"
-                            className="px-lg py-md bg-primary text-primary-foreground rounded-button hover:bg-primary/90 transition-colors flex items-center gap-sm font-semibold"
+                            className="px-lg py-md bg-brand-primary text-white rounded-button hover:bg-brand-hover transition-colors flex items-center gap-sm font-semibold"
                         >
                             <Plus className="w-5 h-5" />
                             Criar Testamento
@@ -94,19 +94,19 @@ export default function TestamentsPage() {
                     </Link>
                 </div>
 
-                <div className="border border-border rounded-card p-3xl flex flex-col items-center justify-center text-center bg-card">
-                    <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-lg">
-                        <FileText className="w-8 h-8 text-muted-foreground" />
+                <div className="border border-neutral-light rounded-card p-3xl flex flex-col items-center justify-center text-center bg-background-pure">
+                    <div className="w-16 h-16 bg-background-subtle rounded-full flex items-center justify-center mb-lg">
+                        <FileText className="w-8 h-8 text-neutral-medium" />
                     </div>
-                    <h3 className="text-lg font-bold text-foreground mb-sm">Nenhum Testamento Criado</h3>
-                    <p className="text-muted-foreground max-w-sm mb-xl">
+                    <h3 className="text-lg font-bold text-neutral-dark mb-sm">Nenhum Testamento Criado</h3>
+                    <p className="text-neutral-medium max-w-sm mb-xl">
                         Comece a proteger seu legado criando seu primeiro testamento digital com validade
                         jurídica.
                     </p>
                     <Link href="/dashboard/wizard">
                         <button
                             type="button"
-                            className="px-xl py-md bg-primary text-primary-foreground rounded-button hover:bg-primary/90 transition-colors font-semibold"
+                            className="px-xl py-md bg-brand-primary text-white rounded-button hover:bg-brand-hover transition-colors font-semibold"
                         >
                             Começar Agora
                         </button>
@@ -121,13 +121,13 @@ export default function TestamentsPage() {
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-2xl font-bold text-foreground">Meus Testamentos</h1>
-                    <p className="text-muted-foreground">Gerencie suas versões e documentos legais</p>
+                    <h1 className="text-2xl font-bold text-neutral-dark">Meus Testamentos</h1>
+                    <p className="text-neutral-medium">Gerencie suas versões e documentos legais</p>
                 </div>
                 <Link href="/dashboard/wizard">
                     <button
                         type="button"
-                        className="px-lg py-md bg-primary text-primary-foreground rounded-button hover:bg-primary/90 transition-colors flex items-center gap-sm font-semibold"
+                        className="px-lg py-md bg-brand-primary text-white rounded-button hover:bg-brand-hover transition-colors flex items-center gap-sm font-semibold"
                     >
                         <Edit3 className="w-5 h-5" />
                         Editar Testamento
@@ -136,14 +136,14 @@ export default function TestamentsPage() {
             </div>
 
             {/* Testament Status Card */}
-            <div className="bg-gradient-to-br from-primary to-primary/80 rounded-card p-xl text-white">
+            <div className="bg-gradient-to-br from-brand-primary to-brand-hover rounded-card p-xl text-white">
                 <div className="flex items-start justify-between">
                     <div className="flex items-start gap-lg">
                         <div className="w-16 h-16 bg-white/20 rounded-card flex items-center justify-center flex-shrink-0">
                             <FileText className="w-8 h-8 text-white" />
                         </div>
                         <div>
-                            <h2 className="text-2xl font-bold mb-xs">Testamento Ativo e Validado</h2>
+                            <h2 className="text-2xl font-bold mb-xs text-white">Testamento Ativo e Validado</h2>
                             <p className="text-white/80 mb-lg">
                                 Criado em {mockTestament.createdAt} • Versão {mockTestament.version}
                             </p>
@@ -151,8 +151,8 @@ export default function TestamentsPage() {
                                 {mockTestament.validationLayers.map((layer) => (
                                     <div key={layer.id} className="bg-white/10 rounded-lg p-md">
                                         <div className="flex items-center gap-xs mb-xs">
-                                            <CheckCircle2 className="w-4 h-4 text-accent-emerald" />
-                                            <span className="text-xs font-semibold">Camada {layer.id}</span>
+                                            <CheckCircle2 className="w-4 h-4 text-functional-success" />
+                                            <span className="text-xs font-semibold text-white">Camada {layer.id}</span>
                                         </div>
                                         <p className="text-xs text-white/70">{layer.name}</p>
                                     </div>
@@ -163,7 +163,7 @@ export default function TestamentsPage() {
                     <div className="hidden md:flex flex-col gap-sm">
                         <button
                             type="button"
-                            className="px-lg py-sm bg-white text-primary font-semibold rounded-button hover:bg-white/90 transition-colors flex items-center gap-xs"
+                            className="px-lg py-sm bg-white text-brand-primary font-semibold rounded-button hover:bg-white/90 transition-colors flex items-center gap-xs"
                         >
                             <Download className="w-4 h-4" />
                             Baixar PDF
@@ -182,9 +182,9 @@ export default function TestamentsPage() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-xl">
                 {/* Documents Section */}
                 <div className="lg:col-span-2 space-y-xl">
-                    <div className="bg-card rounded-card p-xl border border-border">
-                        <h3 className="text-xl font-bold text-foreground mb-lg flex items-center gap-sm">
-                            <Download className="w-5 h-5 text-secondary" />
+                    <div className="bg-background-pure rounded-card p-xl border border-neutral-light">
+                        <h3 className="text-xl font-bold text-neutral-dark mb-lg flex items-center gap-sm">
+                            <Download className="w-5 h-5 text-brand-gold" />
                             Documentos para Download
                         </h3>
 
@@ -192,7 +192,7 @@ export default function TestamentsPage() {
                             {documents.map((doc) => (
                                 <div
                                     key={doc.id}
-                                    className="flex items-center justify-between p-lg bg-muted rounded-lg hover:bg-muted/80 transition-colors"
+                                    className="flex items-center justify-between p-lg bg-background-subtle rounded-lg hover:bg-background-section transition-colors"
                                 >
                                     <div className="flex items-center gap-lg">
                                         <div
@@ -201,15 +201,15 @@ export default function TestamentsPage() {
                                             <doc.icon className={`w-6 h-6 ${doc.iconColor}`} />
                                         </div>
                                         <div>
-                                            <p className="font-semibold text-foreground">{doc.name}</p>
-                                            <p className="text-sm text-muted-foreground">
+                                            <p className="font-semibold text-neutral-dark">{doc.name}</p>
+                                            <p className="text-sm text-neutral-medium">
                                                 {doc.description} • {doc.size}
                                             </p>
                                         </div>
                                     </div>
                                     <button
                                         type="button"
-                                        className="px-lg py-sm bg-primary text-primary-foreground font-semibold rounded-button hover:bg-primary/90 transition-colors flex items-center gap-xs"
+                                        className="px-lg py-sm bg-brand-primary text-white font-semibold rounded-button hover:bg-brand-hover transition-colors flex items-center gap-xs"
                                     >
                                         <Download className="w-4 h-4" />
                                         Baixar
@@ -220,19 +220,19 @@ export default function TestamentsPage() {
                     </div>
 
                     {/* Quick Actions - Mobile */}
-                    <div className="lg:hidden bg-card rounded-card p-xl border border-border">
-                        <h3 className="text-xl font-bold text-foreground mb-lg">Ações Rápidas</h3>
+                    <div className="lg:hidden bg-background-pure rounded-card p-xl border border-neutral-light">
+                        <h3 className="text-xl font-bold text-neutral-dark mb-lg">Ações Rápidas</h3>
                         <div className="space-y-md">
                             <button
                                 type="button"
-                                className="w-full px-lg py-md bg-primary text-primary-foreground font-semibold rounded-button hover:bg-primary/90 transition-colors flex items-center justify-center gap-sm"
+                                className="w-full px-lg py-md bg-brand-primary text-white font-semibold rounded-button hover:bg-brand-hover transition-colors flex items-center justify-center gap-sm"
                             >
                                 <Download className="w-5 h-5" />
                                 Baixar Testamento
                             </button>
                             <button
                                 type="button"
-                                className="w-full px-lg py-md border-2 border-primary text-primary font-semibold rounded-button hover:bg-primary/10 transition-colors flex items-center justify-center gap-sm"
+                                className="w-full px-lg py-md border-2 border-brand-primary text-brand-primary font-semibold rounded-button hover:bg-brand-pale transition-colors flex items-center justify-center gap-sm"
                             >
                                 <ExternalLink className="w-5 h-5" />
                                 Verificar Blockchain
@@ -240,7 +240,7 @@ export default function TestamentsPage() {
                             <Link href="/schedule" className="block">
                                 <button
                                     type="button"
-                                    className="w-full px-lg py-md border-2 border-border text-foreground font-semibold rounded-button hover:bg-muted transition-colors flex items-center justify-center gap-sm"
+                                    className="w-full px-lg py-md border-2 border-neutral-light text-neutral-dark font-semibold rounded-button hover:bg-background-subtle transition-colors flex items-center justify-center gap-sm"
                                 >
                                     <Calendar className="w-5 h-5" />
                                     Agendar Consultoria
@@ -253,9 +253,9 @@ export default function TestamentsPage() {
                 {/* Sidebar */}
                 <div className="space-y-xl">
                     {/* Version History */}
-                    <div className="bg-card rounded-card p-xl border border-border">
-                        <h3 className="text-xl font-bold text-foreground mb-lg flex items-center gap-sm">
-                            <History className="w-5 h-5 text-secondary" />
+                    <div className="bg-background-pure rounded-card p-xl border border-neutral-light">
+                        <h3 className="text-xl font-bold text-neutral-dark mb-lg flex items-center gap-sm">
+                            <History className="w-5 h-5 text-brand-gold" />
                             Histórico de Versões
                         </h3>
 
@@ -264,20 +264,20 @@ export default function TestamentsPage() {
                                 <div
                                     key={version.id}
                                     className={`p-lg rounded-lg border ${version.status === 'current'
-                                            ? 'border-accent bg-accent/5'
-                                            : 'border-border bg-muted'
+                                        ? 'border-accent-emerald bg-accent-emerald/5'
+                                        : 'border-neutral-light bg-background-subtle'
                                         }`}
                                 >
                                     <div className="flex items-center justify-between mb-xs">
-                                        <span className="font-semibold text-foreground">v{version.version}</span>
+                                        <span className="font-semibold text-neutral-dark">v{version.version}</span>
                                         {version.status === 'current' && (
-                                            <span className="text-xs px-sm py-2xs bg-accent/10 text-accent rounded font-semibold">
+                                            <span className="text-xs px-sm py-2xs bg-accent-emerald/10 text-accent-emerald rounded font-semibold">
                                                 Atual
                                             </span>
                                         )}
                                     </div>
-                                    <p className="text-sm text-muted-foreground mb-xs">{version.description}</p>
-                                    <div className="flex items-center gap-xs text-xs text-muted-foreground">
+                                    <p className="text-sm text-neutral-medium mb-xs">{version.description}</p>
+                                    <div className="flex items-center gap-xs text-xs text-neutral-medium">
                                         <Clock className="w-3 h-3" />
                                         {version.date}
                                     </div>
@@ -285,19 +285,19 @@ export default function TestamentsPage() {
                             ))}
                         </div>
 
-                        <p className="text-sm text-muted-foreground mt-lg text-center">
+                        <p className="text-sm text-neutral-medium mt-lg text-center">
                             Versões anteriores aparecerão aqui após edições
                         </p>
                     </div>
 
                     {/* Quick Actions - Desktop */}
-                    <div className="hidden lg:block bg-card rounded-card p-xl border border-border">
-                        <h3 className="text-xl font-bold text-foreground mb-lg">Ações Rápidas</h3>
+                    <div className="hidden lg:block bg-background-pure rounded-card p-xl border border-neutral-light">
+                        <h3 className="text-xl font-bold text-neutral-dark mb-lg">Ações Rápidas</h3>
                         <div className="space-y-md">
                             <Link href="/dashboard/wizard" className="block">
                                 <button
                                     type="button"
-                                    className="w-full px-lg py-md border-2 border-primary text-primary font-semibold rounded-button hover:bg-primary/10 transition-colors flex items-center justify-center gap-sm"
+                                    className="w-full px-lg py-md border-2 border-brand-primary text-brand-primary font-semibold rounded-button hover:bg-brand-pale transition-colors flex items-center justify-center gap-sm"
                                 >
                                     <Edit3 className="w-5 h-5" />
                                     Editar Testamento
@@ -306,7 +306,7 @@ export default function TestamentsPage() {
                             <Link href="/schedule" className="block">
                                 <button
                                     type="button"
-                                    className="w-full px-lg py-md border-2 border-border text-foreground font-semibold rounded-button hover:bg-muted transition-colors flex items-center justify-center gap-sm"
+                                    className="w-full px-lg py-md border-2 border-neutral-light text-neutral-dark font-semibold rounded-button hover:bg-background-subtle transition-colors flex items-center justify-center gap-sm"
                                 >
                                     <Calendar className="w-5 h-5" />
                                     Agendar Consultoria
@@ -316,14 +316,14 @@ export default function TestamentsPage() {
                     </div>
 
                     {/* Security Badge */}
-                    <div className="bg-accent/5 border border-accent/20 rounded-card p-lg">
+                    <div className="bg-accent-emerald/5 border border-accent-emerald/20 rounded-card p-lg">
                         <div className="flex items-start gap-md">
-                            <div className="w-10 h-10 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <ShieldCheck className="w-5 h-5 text-accent" />
+                            <div className="w-10 h-10 bg-accent-emerald/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <ShieldCheck className="w-5 h-5 text-accent-emerald" />
                             </div>
                             <div>
-                                <p className="font-semibold text-foreground mb-xs">Segurança Total</p>
-                                <p className="text-sm text-muted-foreground">
+                                <p className="font-semibold text-neutral-dark mb-xs">Segurança Total</p>
+                                <p className="text-sm text-neutral-medium">
                                     Seu testamento está protegido por criptografia AES-256, assinatura ICP-Brasil e
                                     registro imutável em blockchain.
                                 </p>
