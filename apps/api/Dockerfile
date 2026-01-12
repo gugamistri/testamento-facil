@@ -51,8 +51,8 @@ WORKDIR /app
 # Set production environment
 ENV NODE_ENV=production
 
-# Install openssl for Prisma runtime
-RUN apk add --no-cache openssl
+# Install openssl for Prisma runtime and wget for healthcheck
+RUN apk add --no-cache openssl wget
 
 # Create non-root user for security
 RUN addgroup --system --gid 1001 nodejs && \

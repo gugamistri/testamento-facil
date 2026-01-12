@@ -32,8 +32,6 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-testamento_prod}
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    networks:
-      - testamento-network
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-testamento} -d ${POSTGRES_DB:-testamento_prod}" ]
       interval: 10s
@@ -57,8 +55,6 @@ services:
     command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-redis_prod_password}
     volumes:
       - redis_data:/data
-    networks:
-      - testamento-network
     healthcheck:
       test: [ "CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-redis_prod_password}", "ping" ]
       interval: 10s
@@ -90,8 +86,6 @@ services:
       CLERK_WEBHOOK_SECRET: ${CLERK_WEBHOOK_SECRET}
     ports:
       - "${API_PORT:-3001}:3001"
-    networks:
-      - testamento-network
     depends_on:
       postgres:
         condition: service_healthy
@@ -101,8 +95,8 @@ services:
       test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001/health" ]
       interval: 30s
       timeout: 10s
-      retries: 3
-      start_period: 40s
+      retries: 5
+      start_period: 90s
     deploy:
       resources:
         limits:
@@ -143,17 +137,15 @@ services:
       API_URL: http://api:3001
     ports:
       - "${WEB_PORT:-3000}:3000"
-    networks:
-      - testamento-network
     depends_on:
       api:
-        condition: service_healthy
+        condition: service_started
     healthcheck:
       test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000" ]
       interval: 30s
       timeout: 10s
-      retries: 3
-      start_period: 60s
+      retries: 5
+      start_period: 90s
     deploy:
       resources:
         limits:
@@ -188,7 +180,4 @@ volumes:
 # ==========================================
 # Networks
 # ==========================================
-networks:
-  testamento-network:
-    driver: bridge
-    name: testamento-network
+# Using Coolify's default network for service discovery
