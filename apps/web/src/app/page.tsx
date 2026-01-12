@@ -24,8 +24,8 @@ export default function Home() {
       {/* Navigation Header */}
       <header
         className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${isScrolled
-            ? 'bg-background-pure/80 backdrop-blur-md border-b border-neutral-light/30 py-md shadow-card'
-            : 'bg-transparent py-lg'
+          ? 'bg-background-pure/80 backdrop-blur-md border-b border-neutral-light/30 py-md shadow-card'
+          : 'bg-transparent py-lg'
           }`}
       >
         <div className="max-w-7xl mx-auto px-lg sm:px-xl lg:px-2xl">
@@ -52,6 +52,12 @@ export default function Home() {
                 className="text-[15px] font-medium text-neutral-medium hover:text-brand-primary transition-colors"
               >
                 Dúvidas
+              </Link>
+              <Link
+                href="/sign-in"
+                className="text-[15px] font-medium text-neutral-medium hover:text-brand-primary transition-colors"
+              >
+                Acesso Profissional
               </Link>
               <div className="h-xs w-px bg-neutral-light" />
 
@@ -117,6 +123,13 @@ export default function Home() {
                 className="text-[18px] font-medium text-neutral-dark py-sm border-b border-background-subtle"
               >
                 Dúvidas
+              </Link>
+              <Link
+                onClick={() => setMobileMenuOpen(false)}
+                href="/sign-in"
+                className="text-[18px] font-medium text-neutral-dark py-sm border-b border-background-subtle"
+              >
+                Acesso Profissional
               </Link>
               <SignedOut>
                 <SignInButton mode="modal">
@@ -235,6 +248,23 @@ export default function Home() {
                 <li>
                   <Link href="#" className="hover:text-brand-gold transition-colors">
                     Fale Conosco
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-white font-bold mb-lg uppercase text-[12px] tracking-widest">
+                Para Profissionais
+              </h4>
+              <ul className="space-y-md text-[14px]">
+                <li>
+                  <Link href="/sign-in" className="hover:text-brand-gold transition-colors">
+                    Área do Advogado
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/sign-in" className="hover:text-brand-gold transition-colors">
+                    Portal de Parceiros
                   </Link>
                 </li>
               </ul>

@@ -8,6 +8,60 @@ You operate within a 3-layer architecture that separates concerns to maximize re
 **Testamento Digital:** Democratizing estate planning in Brazil—80% cheaper than notaries, with military-grade security for physical and digital assets.
 Read the product brief at `directives/product_brief.md`.
 
+---
+
+## Mandatory Directive Loading
+
+Before writing or modifying ANY code, you MUST read the relevant directives from the list below.
+
+### Always Read First (Core)
+| Directive | When to Read | Purpose |
+|-----------|--------------|---------|
+| `directives/tech_stack.md` | Every session | Tech stack, frameworks, project structure |
+| `directives/design_system.md` | Any UI work | Colors, typography, components, tokens |
+| `directives/testing_policy.md` | Before any commit | Test requirements, coverage |
+
+### Frontend Work
+| Directive | When to Read | Purpose |
+|-----------|--------------|---------|
+| `directives/frontend_standards.md` | Any React/Next.js code | Component patterns, naming conventions |
+| `directives/ui_layouts.md` | Creating pages/layouts | Layout rules, admin shell components |
+| `directives/data_fetching.md` | API calls from frontend | TanStack Query patterns |
+
+### Backend Work
+| Directive | When to Read | Purpose |
+|-----------|--------------|---------|
+| `directives/api_standards.md` | Any API endpoint | REST patterns, response codes |
+| `directives/crud_patterns.md` | Database operations | Prisma patterns |
+
+### Pre-Flight Checklist
+
+Before starting any task, confirm:
+
+- [ ] I have read `tech_stack.md` for project structure
+- [ ] I have read the relevant domain-specific directives
+- [ ] I understand the testing requirements from `testing_policy.md`
+- [ ] For UI work: I have reviewed `design_system.md` color tokens and components
+
+### Critical Rules from Directives
+
+**Design System (MUST FOLLOW):**
+- Use semantic tokens (`text-foreground`, `bg-background`) NOT raw Tailwind (`text-gray-900`, `bg-white`)
+- Use Inter/Crimson Pro/JetBrains Mono fonts as specified
+- Follow button heights (52dp), corner radius (10dp), spacing system
+
+**Frontend Standards (MUST FOLLOW):**
+- Named exports only (no `export default`)
+- Props: `onXxx` for callbacks, `isXxx/hasXxx` for booleans
+- Internal handlers: `handleXxx` prefix
+- Use `cn()` utility for conditional classes
+
+**Testing Policy (MUST FOLLOW):**
+- All execution scripts need tests in `tests/scripts/`
+- Code is not "Done" until all tests pass
+
+---
+
 ## The 3-Layer Architecture
 
 **Layer 1: Directive (What to do)**
