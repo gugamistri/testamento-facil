@@ -1,43 +1,48 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Info, Lock, Zap, EyeOff, Heart } from 'lucide-react'
+import { Clock, Banknote, Users, FileStack, ShieldCheck } from 'lucide-react'
 
 const problems = [
     {
-        icon: Info,
-        title: 'O "Vazio" de Informação',
-        description: 'Herdeiros frequentemente não sabem quais contas, ativos ou desejos o falecido possuía, gerando caos e perda de patrimônio.',
+        icon: Clock,
+        title: '2 a 5 Anos de Espera',
+        description: 'Esse é o tempo médio de um inventário no Brasil. Enquanto isso, sua família fica sem acesso aos bens.',
+        stat: '2-5 anos',
         color: 'text-brand-primary',
         bg: 'bg-brand-pale'
     },
     {
-        icon: Lock,
-        title: 'Senhas e Acessos Perdidos',
-        description: 'Contas bancárias, fotos, documentos importantes... Quando ninguém sabe as senhas, tudo pode se perder para sempre.',
+        icon: Banknote,
+        title: '15% do Patrimônio',
+        description: 'É quanto vai embora em taxas, honorários e custas judiciais. Dinheiro que poderia ficar com quem você ama.',
+        stat: 'R$ 50mil+',
         color: 'text-brand-gold',
         bg: 'bg-brand-gold/10'
     },
     {
-        icon: Zap,
-        title: 'Burocracia Reativa',
-        description: 'O modelo tradicional depende de os herdeiros iniciarem o processo. Nós somos proativos e agimos no momento certo.',
-        color: 'text-functional-success',
-        bg: 'bg-functional-success/10'
+        icon: Users,
+        title: '60% das Famílias',
+        description: 'Enfrentam conflitos durante o processo de inventário. Brigas que poderiam ser evitadas com clareza.',
+        stat: '6 em 10',
+        color: 'text-functional-error',
+        bg: 'bg-functional-error/10'
     },
     {
-        icon: EyeOff,
-        title: 'Falta de Privacidade',
-        description: 'Testamentos tradicionais expõem detalhes antes da hora. Nosso sistema garante o anonimato total enquanto você estiver em vida.',
+        icon: FileStack,
+        title: 'Dezenas de Documentos',
+        description: 'Filas em cartórios, audiências intermináveis, burocracia que não acaba. Tudo isso em um momento difícil.',
+        stat: '30+ docs',
         color: 'text-accent-purple',
         bg: 'bg-accent-purple/10'
     },
     {
-        icon: Heart,
-        title: 'Insegurança Emocional',
-        description: 'Eliminamos o medo de que "ninguém saiba o que fazer" quando você faltar, garantindo paz para quem você ama.',
-        color: 'text-functional-error',
-        bg: 'bg-functional-error/10'
+        icon: ShieldCheck,
+        title: 'Senhas Perdidas',
+        description: 'Contas bancárias, fotos, investimentos... Sem as senhas certas, tudo pode se perder para sempre.',
+        stat: '∞ perdido',
+        color: 'text-functional-success',
+        bg: 'bg-functional-success/10'
     }
 ]
 
@@ -55,11 +60,11 @@ export function ProblemSection() {
                         Por que existimos?
                     </span >
                     <h2 className="text-3xl md:text-5xl font-extrabold text-neutral-dark tracking-tight mb-lg">
-                        O sistema tradicional de herança <br className="hidden md:block" />
+                        O sistema tradicional de inventário <br className="hidden md:block" />
                         está quebrado.
                     </h2>
                     <p className="text-lg text-neutral-medium max-w-2xl mx-auto">
-                        A morte não deve ser um trauma burocrático. Protegemos o que é seu e garantimos que chegue nas mãos certas sem atrito.
+                        Organizamos tudo agora, enquanto você está no controle, para que seus entes queridos tenham um caminho claro quando precisarem.
                     </p>
                 </motion.div>
 

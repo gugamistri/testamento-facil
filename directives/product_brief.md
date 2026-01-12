@@ -19,10 +19,10 @@ Secundário: Expatriados (ativos em múltiplos países) e pessoas que desejam ge
 Comportamento: Valorizam a discrição, buscam "paz de espírito" e confiam em soluções tecnológicas para gestão de vida.
 
 USP (Unique Selling Proposition)
-Gestão Ativa de Desfecho: Não é um papel parado; é um sistema que monitora e age no momento do óbito.
-Protocolo de Entrega Inteligente: Distribuição fragmentada de segredos (Shamir's Secret Sharing) que só se recompõe após a confirmação do óbito.
-Anonimato em Vida: O conteúdo do legado é invisível até para a plataforma (Zero-Knowledge).
-Conforto Sucessório: Substituímos o inventário traumático por uma trilha guiada de continuidade para os herdeiros.
+Adeus à Burocracia: Enquanto outros passam 2 anos em cartórios e tribunais, sua família resolve tudo em semanas.
+Sem Conflitos Familiares: Cada pessoa sabe exatamente o que lhe pertence. Menos discussão, mais união.
+Privacidade Garantida: Ninguém sabe o que você tem até você decidir. Nem nós.
+Economia Real: Economize até R$ 50.000 em honorários, taxas e idas ao cartório.
 
 ## **Target Platforms**
 
