@@ -43,7 +43,7 @@ function SecurityLayerCard({ icon, title, description, status, fragments }: Secu
                                 />
                             ))}
                             <span className="text-[10px] font-black text-neutral-medium ml-2 uppercase tracking-tighter">
-                                {fragments}/3 FRAGMENTOS
+                                {fragments}/3 PARTES
                             </span>
                         </div>
                     )}
@@ -72,8 +72,8 @@ export function DigitalVault() {
                             100% Protegido
                         </div>
                     </div>
-                    <h2 className="text-[28px] font-bold text-neutral-dark">Cofre Digital de Segurança</h2>
-                    <p className="text-neutral-medium text-[15px]">Seu patrimônio está protegido por camadas de criptografia e validade jurídica descentralizada.</p>
+                    <h2 className="text-[28px] font-bold text-neutral-dark">Seu Cofre Pessoal</h2>
+                    <p className="text-neutral-medium text-[15px]">Seu patrimônio está protegido por múltiplas camadas de segurança e validade legal garantida.</p>
                 </div>
                 <button type="button" className="text-sm font-bold text-brand-primary hover:underline flex items-center gap-xs">
                     Como funciona a segurança?
@@ -84,21 +84,21 @@ export function DigitalVault() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-xl">
                 <SecurityLayerCard
                     icon={<Share2 className="w-7 h-7" />}
-                    title="Shamir Secret Sharing"
-                    description="Sua chave privada foi fragmentada em 3 partes e distribuída geograficamente. 2 partes são necessárias para acesso."
+                    title="Acesso Dividido"
+                    description="Sua proteção foi dividida em 3 partes independentes. Isso garante que ninguém pode acessar sozinho."
                     status="active"
                     fragments={3}
                 />
                 <SecurityLayerCard
                     icon={<Binary className="w-7 h-7" />}
-                    title="Registro em Blockchain"
-                    description="O hash do seu documento está eternizado na rede Polygon. Qualquer alteração invalidará o registro público."
+                    title="Registro Permanente"
+                    description="Seu documento está registrado de forma que não pode ser alterado. Qualquer mudança é detectada automaticamente."
                     status="active"
                 />
                 <SecurityLayerCard
                     icon={<ScrollText className="w-7 h-7" />}
-                    title="Escrow Jurídico"
-                    description="Registro oficial em fiel depositário (OAB). Garante acesso aos herdeiros mesmo em caso de falência da plataforma."
+                    title="Proteção Garantida"
+                    description="Registro em cartório e escritório de advocacia. Seus entes queridos terão acesso garantido, sempre."
                     status="active"
                 />
             </div>
@@ -111,11 +111,11 @@ export function DigitalVault() {
                             <div className="w-10 h-10 bg-background/10 rounded-xl flex items-center justify-center backdrop-blur-md border border-white/10">
                                 <Lock className="w-5 h-5 text-brand-gold" />
                             </div>
-                            <h3 className="text-xl font-bold italic tracking-tight">Status do Envelopamento</h3>
+                            <h3 className="text-xl font-bold italic tracking-tight">Status da Proteção</h3>
                         </div>
                         <p className="text-white/60 text-sm leading-relaxed max-w-md">
-                            Seus arquivos (PDF assinado e Prova Forense) foram envelopados com criptografia <strong>AES-256-GCM</strong>.
-                            O monitoramento de óbito agora consultará as bases do governo a cada 24h.
+                            Seus arquivos estão protegidos com <strong>segurança de nível bancário</strong>.
+                            Monitoramos os registros oficiais automaticamente para garantir que tudo funcione quando for necessário.
                         </p>
                         <div className="flex gap-md pt-md">
                             <button type="button" className="px-xl h-12 bg-brand-primary text-white rounded-full font-black text-xs uppercase tracking-widest hover:bg-brand-hover transition-all shadow-lg shadow-black/20">
