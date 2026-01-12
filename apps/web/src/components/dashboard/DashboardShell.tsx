@@ -16,6 +16,7 @@ import { usePathname } from 'next/navigation'
 import React, { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { NotificationDropdown } from './NotificationDropdown'
+import Image from 'next/image'
 
 export function DashboardShell({ children }: { children: React.ReactNode }) {
     const { user } = useUser()
@@ -26,12 +27,13 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
             {/* Sidebar - Desktop */}
             <aside className="hidden lg:flex flex-col w-72 h-screen bg-background border-r border-neutral-light/20 fixed left-0 top-0 p-xl">
                 <div className="flex items-center gap-sm mb-2xl px-md">
-                    <div className="w-8 h-8 bg-brand-primary rounded-badge flex items-center justify-center">
-                        <span className="text-white font-black text-xs">T</span>
-                    </div>
-                    <span className="font-bold text-lg text-neutral-dark tracking-tight">
-                        Testamento <span className="text-brand-primary">Fácil</span>
-                    </span>
+                    <Image
+                        src="/images/logo_testamento-facil.png"
+                        alt="Testamento Fácil"
+                        width={180}
+                        height={40}
+                        className="h-10 w-auto"
+                    />
                 </div>
 
                 <nav className="flex-1 space-y-sm overflow-y-auto pr-2">
@@ -62,10 +64,13 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
                 {/* Mobile Header */}
                 <header className="lg:hidden h-16 bg-background border-b border-neutral-light/20 px-lg flex items-center justify-between sticky top-0 z-40">
                     <div className="flex items-center gap-sm">
-                        <div className="w-6 h-6 bg-brand-primary rounded-badge flex items-center justify-center">
-                            <span className="text-white font-black text-[10px]">T</span>
-                        </div>
-                        <span className="font-bold text-sm text-neutral-dark">Testamento Fácil</span>
+                        <Image
+                            src="/images/logo_testamento-facil.png"
+                            alt="Testamento Fácil"
+                            width={140}
+                            height={32}
+                            className="h-8 w-auto"
+                        />
                     </div>
                     <button type="button" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
                         <Menu className="w-6 h-6 text-neutral-dark" />
