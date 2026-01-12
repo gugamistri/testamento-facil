@@ -1,0 +1,66 @@
+# ============================================
+# Docker Compose para Produção - Testamento Fácil
+# VERSÃO FRONTEND-ONLY para deploy rápido no Coolify
+# ============================================
+#
+# Uso no Coolify:
+#   1. Configure as variáveis de ambiente no Coolify
+#   2. Use este arquivo para deploy apenas do frontend
+#
+# Variáveis obrigatórias:
+#   - CLERK_SECRET_KEY
+#   - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+#
+# ============================================
+
+name: testamento-facil
+
+services:
+  # ==========================================
+  # Frontend Web (Next.js)
+  # ==========================================
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:?NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY is required}
+        - NEXT_PUBLIC_CLERK_SIGN_IN_URL=${NEXT_PUBLIC_CLERK_SIGN_IN_URL:-/sign-in}
+        - NEXT_PUBLIC_CLERK_SIGN_UP_URL=${NEXT_PUBLIC_CLERK_SIGN_UP_URL:-/sign-up}
+        - NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=${NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL:-/dashboard}
+        - NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=${NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL:-/dashboard}
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-}
+    container_name: testamento-web
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOSTNAME: "0.0.0.0"
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY:?CLERK_SECRET_KEY is required}
+    ports:
+      - "${WEB_PORT:-3000}:3000"
+    healthcheck:
+      test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+    labels:
+      - "coolify.managed=true"
+      - "coolify.type=web"
+      - "coolify.exposedPort=3000"
+      - "traefik.enable=true"
+      - "traefik.http.routers.testamento-web.rule=Host(`testamento-facil.com.br`) || Host(`www.testamento-facil.com.br`)"
+      - "traefik.http.routers.testamento-web.entrypoints=websecure"
+      - "traefik.http.routers.testamento-web.tls.certresolver=letsencrypt"
+      - "traefik.http.services.testamento-web.loadbalancer.server.port=3000"
+
+# ==========================================
+# Networks - Using Coolify's default network
+# ==========================================
