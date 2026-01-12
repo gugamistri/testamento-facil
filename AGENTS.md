@@ -5,7 +5,7 @@
 You operate within a 3-layer architecture that separates concerns to maximize reliability. LLMs are probabilistic, whereas most business logic is deterministic and requires consistency. This system fixes that mismatch.
 
 ## Product Brief
-**Testamento Digital:** Democratizing estate planning in Brazil—80% cheaper than notaries, with military-grade security for physical and digital assets.
+**Testamento Digital:** Legacy Management and Asset Continuity platform.
 Read the product brief at `directives/product_brief.md`.
 
 ---

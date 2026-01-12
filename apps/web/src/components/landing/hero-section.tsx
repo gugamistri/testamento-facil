@@ -26,7 +26,7 @@ export function HeroSection() {
                 <span className="text-brand-primary">do seu Legado</span>
               </h1>
               <p className="mt-lg text-[17px] leading-[28px] text-neutral-medium sm:text-[20px] sm:leading-[32px] max-w-2xl mx-auto lg:mx-0">
-                Unimos monitoramento proativo de APIs, segurança militar e protocolos inteligentes para garantir que sua vontade seja executada e seus herdeiros fiquem seguros.
+                Cuidamos de tudo automaticamente. Quando chegar a hora, seus entes queridos receberão acesso seguro a tudo que você preparou para eles.
               </p>
 
               <div className="mt-xl flex flex-col sm:flex-row gap-md justify-center lg:justify-start">
@@ -38,7 +38,7 @@ export function HeroSection() {
                     </button>
                   </SignUpButton>
                   <Link href="#tech" className="btn-secondary">
-                    Como funciona a tecnologia
+                    Entenda Como Funciona
                   </Link>
                 </SignedOut>
                 <SignedIn>

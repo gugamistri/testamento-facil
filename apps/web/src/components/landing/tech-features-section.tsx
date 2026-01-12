@@ -6,27 +6,27 @@ import { Shield, Radio, Share2, Binary, Database } from 'lucide-react'
 const features = [
     {
         icon: Radio,
-        title: 'Gestão Ativa (Dead Man’s Switch)',
-        description: 'Monitoramos em tempo real as APIs de cartórios (Arpen) e registros civis. O sistema age proativamente no momento da confirmação.',
-        highlight: 'Monitoramento 24/7'
+        title: 'Ação Automática no Momento Certo',
+        description: 'Verificamos regularmente registros oficiais. Quando identificamos seu falecimento, iniciamos automaticamente o processo de entrega aos seus herdeiros.',
+        highlight: 'Funciona Sempre'
     },
     {
         icon: Share2,
-        title: 'Protocolo Shamir (Secret Sharing)',
-        description: 'Sua chave de acesso é fragmentada e distribuída entre herdeiros. Ela só pode ser recomposta após a validação do óbito.',
-        highlight: 'Segurança Militar'
+        title: 'Acesso Dividido e Seguro',
+        description: 'Nenhuma pessoa sozinha pode abrir seu cofre. Seus herdeiros precisam se reunir para acessar, garantindo que tudo aconteça da forma correta.',
+        highlight: 'Nível Máximo de Proteção'
     },
     {
         icon: Shield,
-        title: 'Privacidade Zero-Knowledge',
-        description: 'Nem nós podemos ver o conteúdo do seu legado. Tudo é criptografado localmente antes de ser enviado ao cofre.',
-        highlight: 'Anonimato em Vida'
+        title: 'Privacidade Total, Mesmo Para Nós',
+        description: 'Nem nossa equipe consegue ver o que você guardou. Tudo é protegido por uma senha que só você conhece.',
+        highlight: 'Privacidade Garantida'
     },
     {
         icon: Binary,
-        title: 'Escritura Digital em Blockchain',
-        description: 'O registro do seu testamento é imutável e descentralizado na rede Polygon, garantindo validade jurídica eterna.',
-        highlight: 'Polygon Network'
+        title: 'Registro Permanente e À Prova de Fraudes',
+        description: 'Seu testamento é registrado de forma que ninguém pode alterar ou apagar. É como um cartório digital eterno.',
+        highlight: 'Registro Eterno'
     }
 ]
 
@@ -42,14 +42,14 @@ export function TechFeaturesSection() {
                             viewport={{ once: true }}
                         >
                             <span className="text-xs font-black uppercase tracking-[0.2em] text-brand-primary mb-md block">
-                                Tecnologia de Ponta
+                                Segurança e Tranquilidade
                             </span>
                             <h2 className="text-3xl md:text-5xl font-extrabold text-neutral-dark tracking-tight mb-lg">
-                                Protocolos de segurança que <br />
-                                protegem gerações.
+                                A proteção que você merece, <br />
+                                sem complicação.
                             </h2>
                             <p className="text-lg text-neutral-medium mb-2xl max-w-xl">
-                                Não somos apenas um documento jurídico digital. Somos um sistema de execução robusto que utiliza o que há de mais moderno em criptografia e monitoramento de dados.
+                                Um sistema confiável que cuida de tudo para você, com a segurança que seu patrimônio merece.
                             </p>
 
                             <div className="space-y-xl">
@@ -88,9 +88,9 @@ export function TechFeaturesSection() {
                                 <div className="w-32 h-32 bg-brand-primary/20 rounded-full blur-3xl absolute animate-pulse" />
 
                                 <Database className="w-24 h-24 text-brand-gold mb-xl relative z-10" />
-                                <h3 className="text-2xl font-bold mb-md relative z-10 italic text-white">O Cofre de Ativos Invisíveis</h3>
+                                <h3 className="text-2xl font-bold mb-md relative z-10 italic text-white">Seu Cofre Pessoal Protegido</h3>
                                 <p className="text-center text-white/60 text-sm max-w-xs relative z-10">
-                                    AES-256-GCM Encryption • Poly1305 Auth • Zero-Knowledge Architecture
+                                    Proteção de nível bancário • Acesso exclusivo • Privacidade total
                                 </p>
                             </div>
 
@@ -104,8 +104,8 @@ export function TechFeaturesSection() {
                                     <Shield className="w-5 h-5 text-functional-success" />
                                 </div>
                                 <div>
-                                    <p className="text-[10px] font-black text-neutral-medium uppercase">API Arpen</p>
-                                    <p className="text-sm font-bold text-neutral-dark">Monitor Conectado</p>
+                                    <p className="text-[10px] font-black text-neutral-medium uppercase">Verificação Oficial</p>
+                                    <p className="text-sm font-bold text-neutral-dark">Conectado aos Cartórios</p>
                                 </div>
                             </motion.div>
                         </motion.div>

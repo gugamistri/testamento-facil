@@ -198,16 +198,16 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-xl max-w-4xl mx-auto">
             <div className="bg-background rounded-[40px] border border-neutral-light/30 p-2xl text-left hover:border-brand-primary/50 transition-all shadow-sm">
-              <h3 className="text-xl font-bold text-neutral-dark mb-sm">SaaS de Continuidade</h3>
+              <h3 className="text-xl font-bold text-neutral-dark mb-sm">Plano Anual de Proteção</h3>
               <div className="flex items-baseline gap-xs mb-lg">
                 <span className="text-4xl font-black text-brand-primary">R$ 1.000</span>
                 <span className="text-neutral-medium">/ano</span>
               </div>
               <ul className="space-y-md mb-2xl">
                 {[
-                  'Monitoramento Ativo via API (Arpen)',
-                  'Custódia de Ativos Invisíveis',
-                  'Protocolo de Notificação via WhatsApp',
+                  'Monitoramento Automático de Registros Oficiais',
+                  'Guarda Segura de Senhas e Documentos',
+                  'Avisos para seus herdeiros via WhatsApp',
                   'Suporte Jurídico Mensal'
                 ].map(item => (
                   <li key={item} className="flex items-center gap-sm text-sm text-neutral-dark">
@@ -226,17 +226,17 @@ export default function Home() {
               <div className="bg-brand-gold text-neutral-dark text-[10px] font-black uppercase px-md py-1 rounded-full w-fit mb-sm relative z-10">
                 Popular & Prático
               </div>
-              <h3 className="text-xl font-bold mb-sm relative z-10 text-white">Taxa de Setup Inicial</h3>
+              <h3 className="text-xl font-bold mb-sm relative z-10 text-white">Taxa de Configuração Inicial</h3>
               <div className="flex items-baseline gap-xs mb-lg relative z-10">
                 <span className="text-4xl font-black text-brand-goldLight">R$ 1.500</span>
                 <span className="text-white/70">taxa única</span>
               </div>
               <ul className="space-y-md mb-2xl relative z-10">
                 {[
-                  'Estruturação Completa do Inventário',
+                  'Organização Completa do seu Patrimônio',
                   'Validação Jurídica Inicial',
-                  'Configuração Shamir Secret Sharing',
-                  'Onboarding Personalizado'
+                  'Configuração do Sistema de Proteção',
+                  'Acompanhamento Personalizado'
                 ].map(item => (
                   <li key={item} className="flex items-center gap-sm text-sm opacity-90">
                     <Check className="w-4 h-4 text-brand-goldLight" />

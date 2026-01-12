@@ -17,10 +17,10 @@ export function PreviewSection() {
                         Segurança Visível
                     </span>
                     <h2 className="text-3xl md:text-5xl font-extrabold text-neutral-dark tracking-tight mb-lg">
-                        O Dashboard da Tranquilidade.
+                        O Painel da Tranquilidade.
                     </h2>
                     <p className="text-lg text-neutral-medium max-w-2xl mx-auto">
-                        Acompanhe em tempo real o status dos seus protocolos de continuidade e o monitoramento do seu legado.
+                        Veja sempre que tudo está funcionando. Um painel simples para acompanhar a proteção do seu legado.
                     </p>
                 </motion.div>
 
@@ -68,7 +68,7 @@ export function PreviewSection() {
                                 </div>
                             </div>
                             <div className="text-2xl font-bold text-neutral-dark">03 Herdeiros</div>
-                            <div className="text-[10px] text-neutral-medium uppercase tracking-widest font-black mt-xs">Protocolos de Escrow Validados</div>
+                            <div className="text-[10px] text-neutral-medium uppercase tracking-widest font-black mt-xs">Acessos Configurados</div>
                         </div>
 
                         <div className="bg-background-subtle rounded-3xl p-lg text-left">
@@ -80,17 +80,17 @@ export function PreviewSection() {
                                     PROTEGIDO
                                 </span>
                             </div>
-                            <div className="text-2xl font-bold text-neutral-dark">AES-256-GCM</div>
-                            <div className="text-[10px] text-neutral-medium uppercase tracking-widest font-black mt-xs">Status do Envelopamento Digital</div>
+                            <div className="text-2xl font-bold text-neutral-dark">Protegido</div>
+                            <div className="text-[10px] text-neutral-medium uppercase tracking-widest font-black mt-xs">Segurança do Cofre</div>
                         </div>
                     </div>
 
                     <div className="bg-neutral-dark rounded-[32px] p-2xl text-left text-white relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-primary/10 to-transparent pointer-events-none" />
-                        <h4 className="text-xl font-bold mb-md">Última Auditoria Forense</h4>
+                        <h4 className="text-xl font-bold mb-md text-white">Última Verificação de Segurança</h4>
                         <p className="text-white/60 text-sm max-w-xl">
-                            O hash do seu testamento foi verificado com sucesso na rede Polygon.
-                            Qualquer alteração em seus ativos disparará o protocolo de re-validação imediata.
+                            Verificamos que seu testamento está seguro e não foi alterado.
+                            Qualquer mudança dispara um alerta imediato.
                         </p>
                     </div>
                 </motion.div>

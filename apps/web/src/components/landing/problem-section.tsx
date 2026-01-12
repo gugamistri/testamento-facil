@@ -13,8 +13,8 @@ const problems = [
     },
     {
         icon: Lock,
-        title: 'Perda de Ativos Digitais',
-        description: 'Milhões em criptoativos e memórias são perdidos para sempre por falta de um protocolo seguro de transmissão de chaves.',
+        title: 'Senhas e Acessos Perdidos',
+        description: 'Contas bancárias, fotos, documentos importantes... Quando ninguém sabe as senhas, tudo pode se perder para sempre.',
         color: 'text-brand-gold',
         bg: 'bg-brand-gold/10'
     },
