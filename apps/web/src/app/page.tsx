@@ -2,12 +2,15 @@
 
 import { FAQSection } from '@/components/landing/faq-section'
 import { HeroSection } from '@/components/landing/hero-section'
+import { ProblemSection } from '@/components/landing/problem-section'
+import { TechFeaturesSection } from '@/components/landing/tech-features-section'
+import { PreviewSection } from '@/components/landing/preview-section'
 import { SavingsCalculator } from '@/components/landing/savings-calculator'
 import { TestimonialsSection } from '@/components/landing/testimonials-section'
 import { TrustBadges } from '@/components/landing/trust-badges'
 import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowRight, Menu, X } from 'lucide-react'
+import { ArrowRight, Menu, X, Shield, Lock, Radio, Check } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
@@ -44,22 +47,22 @@ export default function Home() {
             {/* Desktop Nav */}
             <nav className="hidden md:flex items-center gap-xl">
               <Link
+                href="#tech"
+                className="text-[15px] font-medium text-neutral-medium hover:text-brand-primary transition-colors"
+              >
+                Tecnologia
+              </Link>
+              <Link
                 href="#calculator"
                 className="text-[15px] font-medium text-neutral-medium hover:text-brand-primary transition-colors"
               >
-                Calculadora
+                Economia
               </Link>
               <Link
-                href="#faq"
+                href="#pricing"
                 className="text-[15px] font-medium text-neutral-medium hover:text-brand-primary transition-colors"
               >
-                Dúvidas
-              </Link>
-              <Link
-                href="/sign-in"
-                className="text-[15px] font-medium text-neutral-medium hover:text-brand-primary transition-colors"
-              >
-                Acesso Profissional
+                Planos
               </Link>
               <div className="h-xs w-px bg-neutral-light" />
 
@@ -74,7 +77,7 @@ export default function Home() {
                 </SignInButton>
                 <SignUpButton mode="modal">
                   <button type="button" className="btn-primary !h-[44px] !px-lg !text-[14px]">
-                    Começar Agora
+                    Começar Gratuitamente
                   </button>
                 </SignUpButton>
               </SignedOut>
@@ -114,24 +117,24 @@ export default function Home() {
             <nav className="flex flex-col gap-lg">
               <Link
                 onClick={() => setMobileMenuOpen(false)}
+                href="#tech"
+                className="text-[18px] font-medium text-neutral-dark py-sm border-b border-background-subtle"
+              >
+                Tecnologia
+              </Link>
+              <Link
+                onClick={() => setMobileMenuOpen(false)}
                 href="#calculator"
                 className="text-[18px] font-medium text-neutral-dark py-sm border-b border-background-subtle"
               >
-                Calculadora
+                Economia
               </Link>
               <Link
                 onClick={() => setMobileMenuOpen(false)}
-                href="#faq"
+                href="#pricing"
                 className="text-[18px] font-medium text-neutral-dark py-sm border-b border-background-subtle"
               >
-                Dúvidas
-              </Link>
-              <Link
-                onClick={() => setMobileMenuOpen(false)}
-                href="/sign-in"
-                className="text-[18px] font-medium text-neutral-dark py-sm border-b border-background-subtle"
-              >
-                Acesso Profissional
+                Planos
               </Link>
               <SignedOut>
                 <SignInButton mode="modal">
@@ -149,7 +152,7 @@ export default function Home() {
                     type="button"
                     className="btn-primary w-full"
                   >
-                    Começar Agora
+                    Começar Gratuitamente
                   </button>
                 </SignUpButton>
               </SignedOut>
@@ -169,6 +172,85 @@ export default function Home() {
 
       <HeroSection />
       <TrustBadges />
+      <ProblemSection />
+      <TechFeaturesSection />
+      <PreviewSection />
+
+      {/* Pricing Section */}
+      <section id="pricing" className="py-3xl bg-background-pure">
+        <div className="max-w-7xl mx-auto px-lg sm:px-xl lg:px-2xl text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-3xl"
+          >
+            <span className="text-xs font-black uppercase tracking-[0.2em] text-brand-primary mb-md block">
+              Investimento no seu Legado
+            </span>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-neutral-dark tracking-tight mb-lg">
+              Um plano para a vida inteira.
+            </h2>
+            <p className="text-lg text-neutral-medium max-w-2xl mx-auto">
+              Preços transparentes para garantir que sua vontade seja executada sem falhas.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-xl max-w-4xl mx-auto">
+            <div className="bg-background rounded-[40px] border border-neutral-light/30 p-2xl text-left hover:border-brand-primary/50 transition-all shadow-sm">
+              <h3 className="text-xl font-bold text-neutral-dark mb-sm">SaaS de Continuidade</h3>
+              <div className="flex items-baseline gap-xs mb-lg">
+                <span className="text-4xl font-black text-brand-primary">R$ 1.000</span>
+                <span className="text-neutral-medium">/ano</span>
+              </div>
+              <ul className="space-y-md mb-2xl">
+                {[
+                  'Monitoramento Ativo via API (Arpen)',
+                  'Custódia de Ativos Invisíveis',
+                  'Protocolo de Notificação via WhatsApp',
+                  'Suporte Jurídico Mensal'
+                ].map(item => (
+                  <li key={item} className="flex items-center gap-sm text-sm text-neutral-dark">
+                    <Check className="w-4 h-4 text-functional-success" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <SignUpButton mode="modal">
+                <button className="btn-primary w-full">Garantir Continuidade</button>
+              </SignUpButton>
+            </div>
+
+            <div className="bg-brand-primary rounded-[40px] p-2xl text-left text-white shadow-xl relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
+              <div className="bg-brand-gold text-neutral-dark text-[10px] font-black uppercase px-md py-1 rounded-full w-fit mb-sm relative z-10">
+                Popular & Prático
+              </div>
+              <h3 className="text-xl font-bold mb-sm relative z-10 text-white">Taxa de Setup Inicial</h3>
+              <div className="flex items-baseline gap-xs mb-lg relative z-10">
+                <span className="text-4xl font-black text-brand-goldLight">R$ 1.500</span>
+                <span className="text-white/70">taxa única</span>
+              </div>
+              <ul className="space-y-md mb-2xl relative z-10">
+                {[
+                  'Estruturação Completa do Inventário',
+                  'Validação Jurídica Inicial',
+                  'Configuração Shamir Secret Sharing',
+                  'Onboarding Personalizado'
+                ].map(item => (
+                  <li key={item} className="flex items-center gap-sm text-sm opacity-90">
+                    <Check className="w-4 h-4 text-brand-goldLight" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <SignUpButton mode="modal">
+                <button className="bg-white text-brand-primary w-full py-md rounded-button font-bold hover:bg-neutral-light transition-all">Começar Estruturação</button>
+              </SignUpButton>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Sticky Bottom Bar (Mobile) */}
       <div className="md:hidden fixed bottom-xl inset-x-lg z-50 pointer-events-none">
@@ -185,7 +267,7 @@ export default function Home() {
           </div>
           <SignUpButton mode="modal">
             <button type="button" className="btn-premium !h-[48px] !px-xl">
-              Criar Testamento
+              Garantir Legado
               <ArrowRight className="w-4 h-4 ml-xs" />
             </button>
           </SignUpButton>

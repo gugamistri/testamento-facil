@@ -22,28 +22,27 @@ export function HeroSection() {
               transition={{ duration: 0.5 }}
             >
               <h1 className="text-[32px] leading-[40px] font-extrabold text-neutral-dark sm:text-[48px] sm:leading-[56px] lg:text-[60px] lg:leading-[68px] tracking-tight">
-                <span className="block">Seu patrimônio não precisa</span>
-                <span className="text-brand-primary">se perder com você</span>
+                <span className="block">Garanta a Continuidade</span>
+                <span className="text-brand-primary">do seu Legado</span>
               </h1>
               <p className="mt-lg text-[17px] leading-[28px] text-neutral-medium sm:text-[20px] sm:leading-[32px] max-w-2xl mx-auto lg:mx-0">
-                A forma mais moderna, segura e econômica de planejar sua sucessão. Validade jurídica
-                total com 80% menos burocracia.
+                Unimos monitoramento proativo de APIs, segurança militar e protocolos inteligentes para garantir que sua vontade seja executada e seus herdeiros fiquem seguros.
               </p>
 
               <div className="mt-xl flex flex-col sm:flex-row gap-md justify-center lg:justify-start">
                 <SignedOut>
                   <SignUpButton mode="modal">
                     <button type="button" className="btn-premium group">
-                      Começar Agora
+                      Começar Gratuitamente
                       <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </button>
                   </SignUpButton>
-                  <Link href="/schedule" className="btn-secondary">
-                    Agendar Consultoria Gratuita
+                  <Link href="#tech" className="btn-secondary">
+                    Como funciona a tecnologia
                   </Link>
                 </SignedOut>
                 <SignedIn>
-                  <Link href="/wizard" className="btn-primary">
+                  <Link href="/dashboard" className="btn-primary">
                     Acessar meu Painel
                     <ArrowRight className="w-5 h-5" />
                   </Link>

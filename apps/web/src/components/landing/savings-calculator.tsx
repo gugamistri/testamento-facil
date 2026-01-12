@@ -34,7 +34,7 @@ export function SavingsCalculator() {
   const calculateEconomy = () => {
     const estimatedWealth = wealthSteps[wealth].value
     const traditional = estimatedWealth * 0.01 + 3000
-    const digital = 1500
+    const digital = 2500 // R$ 1.500 (Setup) + R$ 1.000 (1º Ano)
     return { traditional, digital, savings: traditional - digital }
   }
 
@@ -83,8 +83,8 @@ export function SavingsCalculator() {
                         type="button"
                         onClick={() => setWealth(index)}
                         className={`w-full flex items-center justify-between p-lg rounded-input border-2 transition-all ${wealth === index
-                            ? 'border-brand-primary bg-brand-pale'
-                            : 'border-neutral-light/50 hover:border-brand-primary/30'
+                          ? 'border-brand-primary bg-brand-pale'
+                          : 'border-neutral-light/50 hover:border-brand-primary/30'
                           }`}
                       >
                         <span className="font-medium text-neutral-dark">{ws.label}</span>
@@ -116,8 +116,8 @@ export function SavingsCalculator() {
                         type="button"
                         onClick={() => toggleAsset(asset.id)}
                         className={`p-lg rounded-card border-2 flex flex-col items-center gap-sm transition-all ${selectedAssets.includes(asset.id)
-                            ? 'border-brand-primary bg-brand-pale text-brand-primary'
-                            : 'border-neutral-light/50 hover:border-brand-primary/30 text-neutral-medium'
+                          ? 'border-brand-primary bg-brand-pale text-brand-primary'
+                          : 'border-neutral-light/50 hover:border-brand-primary/30 text-neutral-medium'
                           }`}
                       >
                         <asset.icon className="w-8 h-8" />
