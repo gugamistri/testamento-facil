@@ -33,13 +33,12 @@ export default function Home() {
       >
         <div className="max-w-7xl mx-auto px-lg sm:px-xl lg:px-2xl">
           <div className="flex justify-between items-center">
-            <Link href="/" className="flex items-center gap-sm group">
-              <div className="w-10 h-10 bg-brand-primary rounded-badge flex items-center justify-center shadow-button group-hover:scale-105 transition-transform">
-                <span className="text-white font-black text-xl leading-none">T</span>
-              </div>
-              <span className="text-xl font-bold tracking-tight text-neutral-dark">
-                Testamento <span className="text-brand-primary">Fácil</span>
-              </span>
+            <Link href="/" className="flex items-center group">
+              <img
+                src="/images/logo_testamento-facil.png"
+                alt="Testamento Fácil"
+                className="h-10 w-auto group-hover:scale-105 transition-transform"
+              />
             </Link>
 
             {/* Desktop Nav */}
@@ -202,11 +201,12 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-2xl mb-2xl">
             <div className="md:col-span-2">
-              <div className="flex items-center gap-sm mb-lg">
-                <div className="w-8 h-8 bg-brand-primary rounded-badge flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">T</span>
-                </div>
-                <span className="text-xl font-bold text-white">Testamento Fácil</span>
+              <div className="mb-lg">
+                <img
+                  src="/images/logo_testamento-facil.png"
+                  alt="Testamento Fácil"
+                  className="h-10 w-auto brightness-0 invert"
+                />
               </div>
               <p className="max-w-xs text-[14px] leading-relaxed text-neutral-medium">
                 Transformando o planejamento sucessório em algo simples, seguro e acessível para
