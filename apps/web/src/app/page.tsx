@@ -2,6 +2,7 @@
 
 import { FAQSection } from '@/components/landing/faq-section'
 import { HeroSection } from '@/components/landing/hero-section'
+import { LegalJourneySection } from '@/components/landing/legal-journey-section'
 import { ProblemSection } from '@/components/landing/problem-section'
 import { TechFeaturesSection } from '@/components/landing/tech-features-section'
 import { PreviewSection } from '@/components/landing/preview-section'
@@ -175,6 +176,7 @@ export default function Home() {
       <ProblemSection />
       <TechFeaturesSection />
       <PreviewSection />
+      <LegalJourneySection />
 
       {/* Pricing Section */}
       <section id="pricing" className="py-3xl bg-background-pure">
@@ -189,66 +191,103 @@ export default function Home() {
               Investimento no seu Legado
             </span>
             <h2 className="text-3xl md:text-5xl font-extrabold text-neutral-dark tracking-tight mb-lg">
-              Um plano para a vida inteira.
+              Um plano para cada necessidade.
             </h2>
             <p className="text-lg text-neutral-medium max-w-2xl mx-auto">
-              Preços transparentes para garantir que sua vontade seja executada sem falhas.
+              Escolha o plano ideal de acordo com a complexidade do seu patrimônio e número de beneficiários.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-xl max-w-4xl mx-auto">
-            <div className="bg-background rounded-[40px] border border-neutral-light/30 p-2xl text-left hover:border-brand-primary/50 transition-all shadow-sm">
-              <h3 className="text-xl font-bold text-neutral-dark mb-sm">Plano Anual de Proteção</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-lg max-w-6xl mx-auto">
+            {/* Plano Pessoal */}
+            <div className="bg-background rounded-[32px] border border-neutral-light/30 p-xl text-left hover:border-brand-primary/50 transition-all shadow-sm">
+              <h3 className="text-lg font-bold text-neutral-dark mb-xs">Pessoal</h3>
+              <p className="text-xs text-neutral-medium mb-lg">Ideal para quem possui poucos bens e até 3 beneficiários.</p>
               <div className="flex items-baseline gap-xs mb-lg">
-                <span className="text-4xl font-black text-brand-primary">R$ 1.000</span>
-                <span className="text-neutral-medium">/ano</span>
+                <span className="text-3xl font-black text-brand-primary">R$ 800</span>
+                <span className="text-neutral-medium text-sm">/ano</span>
               </div>
-              <ul className="space-y-md mb-2xl">
+              <ul className="space-y-sm mb-xl">
                 {[
-                  'Monitoramento Automático de Registros Oficiais',
-                  'Guarda Segura de Senhas e Documentos',
-                  'Avisos para seus herdeiros via WhatsApp',
-                  'Suporte Jurídico Mensal'
+                  'Até 3 beneficiários',
+                  'Cofre de senhas e documentos',
+                  'Monitoramento automático',
+                  'Suporte por e-mail'
                 ].map(item => (
                   <li key={item} className="flex items-center gap-sm text-sm text-neutral-dark">
-                    <Check className="w-4 h-4 text-functional-success" />
+                    <Check className="w-4 h-4 text-functional-success shrink-0" />
                     {item}
                   </li>
                 ))}
               </ul>
               <SignUpButton mode="modal">
-                <button className="btn-primary w-full">Garantir Continuidade</button>
+                <button className="btn-secondary w-full !h-[44px]">Começar</button>
               </SignUpButton>
             </div>
 
-            <div className="bg-brand-primary rounded-[40px] p-2xl text-left text-white shadow-xl relative overflow-hidden group">
+            {/* Plano Patrimonial - Destacado */}
+            <div className="bg-brand-primary rounded-[32px] p-xl text-left text-white shadow-xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
               <div className="bg-brand-gold text-neutral-dark text-[10px] font-black uppercase px-md py-1 rounded-full w-fit mb-sm relative z-10">
-                Popular & Prático
+                Mais Popular
               </div>
-              <h3 className="text-xl font-bold mb-sm relative z-10 text-white">Taxa de Configuração Inicial</h3>
+              <h3 className="text-lg font-bold mb-xs relative z-10 text-white">Patrimonial</h3>
+              <p className="text-xs text-white/70 mb-lg relative z-10">Para quem possui imóveis, investimentos e múltiplos beneficiários.</p>
               <div className="flex items-baseline gap-xs mb-lg relative z-10">
-                <span className="text-4xl font-black text-brand-goldLight">R$ 1.500</span>
-                <span className="text-white/70">taxa única</span>
+                <span className="text-3xl font-black text-brand-goldLight">R$ 1.500</span>
+                <span className="text-white/70 text-sm">/ano</span>
               </div>
-              <ul className="space-y-md mb-2xl relative z-10">
+              <ul className="space-y-sm mb-xl relative z-10">
                 {[
-                  'Organização Completa do seu Patrimônio',
-                  'Validação Jurídica Inicial',
-                  'Configuração do Sistema de Proteção',
-                  'Acompanhamento Personalizado'
+                  'Até 10 beneficiários',
+                  'Inventário completo de bens',
+                  'Vídeo de validação forense',
+                  'Suporte jurídico mensal',
+                  'Notificação via WhatsApp'
                 ].map(item => (
-                  <li key={item} className="flex items-center gap-sm text-sm opacity-90">
-                    <Check className="w-4 h-4 text-brand-goldLight" />
+                  <li key={item} className="flex items-center gap-sm text-sm text-white/90">
+                    <Check className="w-4 h-4 text-brand-goldLight shrink-0" />
                     {item}
                   </li>
                 ))}
               </ul>
               <SignUpButton mode="modal">
-                <button className="bg-white text-brand-primary w-full py-md rounded-button font-bold hover:bg-neutral-light transition-all">Começar Estruturação</button>
+                <button className="bg-white text-brand-primary w-full py-md rounded-button font-bold hover:bg-neutral-light transition-all">Escolher Plano</button>
+              </SignUpButton>
+            </div>
+
+            {/* Plano Empresarial */}
+            <div className="bg-neutral-dark rounded-[32px] p-xl text-left text-white shadow-xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-brand-primary/10 to-transparent pointer-events-none" />
+              <h3 className="text-lg font-bold mb-xs relative z-10 text-white">Empresarial</h3>
+              <p className="text-xs text-white/60 mb-lg relative z-10">Para holdings, quotas societárias e sucessão empresarial complexa.</p>
+              <div className="flex items-baseline gap-xs mb-lg relative z-10">
+                <span className="text-3xl font-black text-brand-gold">R$ 3.000</span>
+                <span className="text-white/60 text-sm">/ano</span>
+              </div>
+              <ul className="space-y-sm mb-xl relative z-10">
+                {[
+                  'Beneficiários ilimitados',
+                  'Assessoria jurídica dedicada',
+                  'Gestão de quotas e ações',
+                  'Integração com contador',
+                  'SLA de atendimento prioritário'
+                ].map(item => (
+                  <li key={item} className="flex items-center gap-sm text-sm text-white/80">
+                    <Check className="w-4 h-4 text-brand-gold shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <SignUpButton mode="modal">
+                <button className="bg-brand-gold text-neutral-dark w-full py-md rounded-button font-bold hover:brightness-110 transition-all">Falar com Consultor</button>
               </SignUpButton>
             </div>
           </div>
+
+          <p className="text-sm text-neutral-medium mt-xl">
+            Todos os planos incluem taxa de configuração inicial de <strong>R$ 500 a R$ 2.000</strong>, dependendo da complexidade.
+          </p>
         </div>
       </section>
 
