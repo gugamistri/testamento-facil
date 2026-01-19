@@ -47,6 +47,16 @@ export function DashboardShell({ children, role = 'CLIENT' }: DashboardShellProp
                     />
                 </div>
 
+                {/* ADMIN ROLE SWITCHER */}
+                {(role === 'ADMIN' || user?.primaryEmailAddress?.emailAddress === 'gmistrinelli@gmail.com') && (
+                    <div className="mb-lg px-2">
+                        <label className="text-[10px] font-black uppercase tracking-widest text-neutral-medium block mb-2">
+                            Modo de Visualização (Admin)
+                        </label>
+                        <AdminRoleSwitcher currentRole={role} />
+                    </div>
+                )}
+
                 <nav className="flex-1 space-y-sm overflow-y-auto pr-2">
                     {navItems.map((item) => (
                         <NavItem
@@ -153,6 +163,7 @@ export function DashboardShell({ children, role = 'CLIENT' }: DashboardShellProp
     )
 }
 
+
 function NavItem({ icon, label, href, exact = false, onClick }: { icon: React.ReactNode, label: string, href: string, exact?: boolean, onClick?: () => void }) {
     const pathname = usePathname()
     const isActive = exact ? pathname === href : pathname.startsWith(href)
@@ -167,5 +178,40 @@ function NavItem({ icon, label, href, exact = false, onClick }: { icon: React.Re
                 <span className="text-sm font-bold tracking-tight">{label}</span>
             </div>
         </Link>
+    )
+}
+
+import { updateUserRole } from '@/actions/dev-tools'
+import { useClerk } from '@clerk/nextjs'
+
+function AdminRoleSwitcher({ currentRole }: { currentRole: string }) {
+    const { session } = useClerk()
+    const [isLoading, setIsLoading] = React.useState(false)
+
+    const handleRoleChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newRole = e.target.value as 'CLIENT' | 'LAWYER' | 'PARTNER' | 'ADMIN'
+        setIsLoading(true)
+        try {
+            await updateUserRole(newRole)
+            await session?.touch()
+            window.location.reload()
+        } catch (error) {
+            console.error('Failed to switch role', error)
+            setIsLoading(false)
+        }
+    }
+
+    return (
+        <select
+            disabled={isLoading}
+            value={currentRole}
+            onChange={handleRoleChange}
+            className="w-full text-xs font-bold bg-background-subtle border border-neutral-light/20 rounded-lg p-2 text-neutral-dark focus:ring-2 focus:ring-brand-primary outline-none"
+        >
+            <option value="ADMIN">👑 Administrador</option>
+            <option value="CLIENT">👤 Cliente</option>
+            <option value="LAWYER">⚖️ Advogado</option>
+            <option value="PARTNER">🤝 Parceiro</option>
+        </select>
     )
 }
