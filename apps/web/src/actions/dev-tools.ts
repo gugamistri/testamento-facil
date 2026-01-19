@@ -20,10 +20,12 @@ export async function updateUserRole(role: 'CLIENT' | 'LAWYER' | 'PARTNER' | 'AD
     })
 
     // Revalidate to ensure UI updates
-    revalidatePath('/')
-    revalidatePath('/dashboard')
-    revalidatePath('/lawyer')
-    revalidatePath('/partner')
+    // Revalidate everything to ensure the role change propagates
+    revalidatePath('/', 'layout')
+    revalidatePath('/dashboard', 'layout')
+    revalidatePath('/lawyer', 'layout')
+    revalidatePath('/partner', 'layout')
+    revalidatePath('/admin', 'layout')
 
     return { success: true, role }
 }

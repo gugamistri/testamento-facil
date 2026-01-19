@@ -199,7 +199,14 @@ function AdminRoleSwitcher({ currentRole }: { currentRole: string }) {
         try {
             await updateUserRole(newRole)
             await session?.touch()
-            window.location.reload()
+
+            // Redirect to the appropriate home for the new role
+            const target = newRole === 'LAWYER' ? '/lawyer'
+                : newRole === 'PARTNER' ? '/partner'
+                    : newRole === 'ADMIN' ? '/admin'
+                        : '/dashboard'
+
+            window.location.href = target
         } catch (error) {
             console.error('Failed to switch role', error)
             setIsLoading(false)
