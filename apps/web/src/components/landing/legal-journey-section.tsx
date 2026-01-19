@@ -7,52 +7,52 @@ const steps = [
     {
         icon: Fingerprint,
         step: '01',
-        title: 'Registro de Intenção',
-        description: 'Ao criar sua conta, registramos data, hora e seu consentimento. Esse é o primeiro passo para provar que a decisão foi sua, livre e consciente.',
-        highlight: 'Dossiê de Intenção'
+        title: 'Manifestação Simples',
+        description: 'Em poucos minutos, você registra sua vontade de forma clara e consciente. Sem filas ou burocracia desnecessária.',
+        highlight: 'Fácil e Rápido'
     },
     {
         icon: FileCheck,
         step: '02',
-        title: 'Validação Forense',
-        description: 'Você grava um vídeo curto confirmando sua vontade. Isso cria uma prova irrefutável de sanidade e autenticidade, aceita pelo Judiciário.',
-        highlight: 'Prova de Sanidade'
+        title: 'Validação por Especialista',
+        description: 'Um advogado parceiro valida sua identidade e vontade através de uma conversa curta e segura, garantindo que tudo esteja correto.',
+        highlight: 'Segurança Jurídica'
     },
     {
         icon: ShieldCheck,
         step: '03',
-        title: 'Custódia Ativa',
-        description: 'Seu testamento se torna um ativo jurídico vivo: protegido, monitorado e pronto para ser executado automaticamente quando necessário.',
-        highlight: 'Ativo Jurídico Vivo'
+        title: 'Proteção Permanente',
+        description: 'Sua vontade é guardada em um ambiente seguro e monitorado, onde cada detalhe é protegido contra qualquer alteração.',
+        highlight: 'Sigilo Absoluto'
     },
     {
         icon: Scale,
         step: '04',
-        title: 'Execução Garantida',
-        description: 'Quando chegar a hora, seus herdeiros recebem acesso de forma segura e documentada, com validade legal reconhecida.',
-        highlight: 'Validade Legal'
+        title: 'Cuidado com a Família',
+        description: 'Quando for necessário, sua família terá acesso a tudo de maneira organizada e sem conflitos, respeitando seu desejo.',
+        highlight: 'Paz de Espírito'
     }
 ]
 
 export function LegalJourneySection() {
     return (
-        <section className="py-3xl bg-background-subtle">
-            <div className="max-w-7xl mx-auto px-lg sm:px-xl lg:px-2xl">
+        <section className="py-3xl bg-background-section">
+            <div className="max-w-7xl mx-auto px-lg sm:px-xl lg:px-2xl relative">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="text-center mb-3xl"
                 >
-                    <span className="text-xs font-black uppercase tracking-[0.2em] text-brand-primary mb-md block">
-                        Infraestrutura de Soberania Pessoal
+                    <span className="text-xs font-black uppercase tracking-[0.2em] text-accent-purple mb-md block">
+                        Cuidado em Cada Detalhe
                     </span>
                     <h2 className="text-3xl md:text-5xl font-extrabold text-neutral-dark tracking-tight mb-lg">
-                        Sua vontade vira lei. <br className="hidden md:block" />
-                        Com validade jurídica.
+                        Sua vontade respeitada. <br className="hidden md:block" />
+                        Com total segurança.
                     </h2>
                     <p className="text-lg text-neutral-medium max-w-2xl mx-auto">
-                        Cada etapa do processo gera documentação legal que protege você, sua família e garante que o Judiciário reconheça sua vontade.
+                        Criamos um caminho simples para que suas decisões sejam incontestáveis e sua família esteja sempre protegida.
                     </p>
                 </motion.div>
 
@@ -64,18 +64,18 @@ export function LegalJourneySection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1 }}
-                            className="bg-background-pure rounded-card p-xl border border-neutral-light/20 relative group hover:border-brand-primary/30 transition-all"
+                            className="bg-white/5 backdrop-blur-xl rounded-card p-xl border border-white/5 relative group hover:border-brand-primary/30 transition-all duration-500 overflow-hidden"
                         >
-                            <div className="absolute top-xl right-xl text-6xl font-black text-neutral-light/20 group-hover:text-brand-primary/10 transition-colors">
+                            <div className="absolute top-xl right-xl text-6xl font-black text-white/5 group-hover:text-brand-primary/20 transition-colors">
                                 {item.step}
                             </div>
-                            <div className="w-14 h-14 bg-brand-pale rounded-2xl flex items-center justify-center mb-lg group-hover:bg-brand-primary transition-all">
-                                <item.icon className="w-7 h-7 text-brand-primary group-hover:text-white" />
+                            <div className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mb-lg group-hover:bg-brand-primary group-hover:shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all">
+                                <item.icon className="w-7 h-7 text-brand-primary group-hover:text-background-pure" />
                             </div>
-                            <span className="px-2 py-0.5 bg-brand-gold/10 text-brand-gold text-[10px] font-black uppercase rounded-full mb-md inline-block">
+                            <span className="px-2 py-0.5 bg-brand-primary/10 text-brand-primary text-[10px] font-black uppercase rounded-full mb-md inline-block border border-brand-primary/20">
                                 {item.highlight}
                             </span>
-                            <h3 className="text-xl font-bold text-neutral-dark mb-md">{item.title}</h3>
+                            <h3 className="text-xl font-bold text-neutral-dark mb-md group-hover:translate-x-1 transition-transform">{item.title}</h3>
                             <p className="text-neutral-medium text-sm leading-relaxed">
                                 {item.description}
                             </p>
@@ -87,16 +87,16 @@ export function LegalJourneySection() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mt-2xl bg-accent-emerald/5 border border-accent-emerald/20 rounded-card p-xl flex flex-col md:flex-row items-center gap-lg"
+                    className="mt-2xl glass-panel flex flex-col md:flex-row items-center gap-lg border-brand-primary/10"
                 >
-                    <div className="w-16 h-16 bg-accent-emerald/20 rounded-2xl flex items-center justify-center shrink-0">
-                        <Scale className="w-8 h-8 text-accent-emerald" />
+                    <div className="w-16 h-16 bg-brand-primary/10 border border-brand-primary/20 rounded-2xl flex items-center justify-center shrink-0">
+                        <Scale className="w-8 h-8 text-brand-primary" />
                     </div>
                     <div className="text-center md:text-left">
-                        <h4 className="font-bold text-neutral-dark mb-xs">Reconhecido pelo Judiciário Brasileiro</h4>
-                        <p className="text-sm text-neutral-medium">
-                            Nosso processo segue as normas do Código Civil, da LGPD e das resoluções do CNJ sobre documentos digitais.
-                            A combinação de assinatura ICP-Brasil, vídeo de validação e registro imutável cria uma prova legal robusta.
+                        <h4 className="font-bold text-neutral-dark mb-xs tracking-tight">Segurança Jurídica Integral</h4>
+                        <p className="text-[13px] text-neutral-medium leading-relaxed">
+                            Nosso processo foi desenhado por especialistas para garantir total conformidade com a legislação brasileira.
+                            Combinamos tecnologia e acompanhamento jurídico para que seu desejo seja cumprido exatamente como você planejou.
                         </p>
                     </div>
                 </motion.div>

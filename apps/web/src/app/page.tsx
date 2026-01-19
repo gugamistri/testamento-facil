@@ -16,69 +16,99 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 
+import { useSearchParams } from 'next/navigation'
+
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const searchParams = useSearchParams()
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50)
     window.addEventListener('scroll', handleScroll)
+
+    // Referral Tracking Logic
+    const refCode = searchParams.get('ref')
+    if (refCode) {
+      // Set cookie for 30 days
+      const d = new Date()
+      d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000))
+      document.cookie = `referral_code=${refCode};expires=${d.toUTCString()};path=/`
+    }
+
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [searchParams])
 
   return (
-    <main className="min-h-screen bg-background-pure">
+    <main className="min-h-screen bg-background-pure dark text-text-primary">
       {/* Navigation Header */}
       <header
-        className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${isScrolled
-          ? 'bg-background-pure/80 backdrop-blur-md border-b border-neutral-light/30 py-md shadow-card'
+        className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-700 ${isScrolled
+          ? 'bg-background-pure/40 backdrop-blur-3xl border-b border-white/5 py-md shadow-2xl'
           : 'bg-transparent py-lg'
           }`}
       >
         <div className="max-w-7xl mx-auto px-lg sm:px-xl lg:px-2xl">
           <div className="flex justify-between items-center">
-            <Link href="/" className="flex items-center group">
-              <img
-                src="/images/logo_testamento-facil.png"
-                alt="Testamento Fácil"
-                className="h-10 w-auto group-hover:scale-105 transition-transform"
-              />
+            <Link href="/" className="flex items-center gap-xs group">
+              <div className="w-8 h-8 bg-brand-primary rounded-lg flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.3)] group-hover:scale-110 transition-transform">
+                <Shield className="w-4 h-4 text-background-pure" />
+              </div>
+              <span className="text-xl font-extrabold text-white tracking-tighter uppercase">
+                Testamento<span className="text-brand-primary">Fácil</span>
+              </span>
             </Link>
 
             {/* Desktop Nav */}
             <nav className="hidden md:flex items-center gap-xl">
               <Link
                 href="#tech"
-                className="text-[15px] font-medium text-neutral-medium hover:text-brand-primary transition-colors"
+                className="text-[13px] font-black uppercase tracking-widest text-white/40 hover:text-brand-primary transition-all"
               >
-                Tecnologia
-              </Link>
-              <Link
-                href="#calculator"
-                className="text-[15px] font-medium text-neutral-medium hover:text-brand-primary transition-colors"
-              >
-                Economia
+                Cofre Forense
               </Link>
               <Link
                 href="#pricing"
-                className="text-[15px] font-medium text-neutral-medium hover:text-brand-primary transition-colors"
+                className="text-[13px] font-black uppercase tracking-widest text-white/40 hover:text-brand-primary transition-all"
               >
                 Planos
               </Link>
-              <div className="h-xs w-px bg-neutral-light" />
+
+              <div className="h-4 w-px bg-white/10" />
+
+              <span className="text-[10px] uppercase font-black tracking-widest text-white/30 cursor-default">
+                Profissional:
+              </span>
+              <div className="flex gap-lg">
+                <Link
+                  href="/sign-in"
+                  className="text-[13px] font-black uppercase tracking-widest text-white/60 hover:text-white transition-all flex items-center gap-1"
+                >
+                  <Lock className="w-3 h-3" />
+                  Advogados
+                </Link>
+                <Link
+                  href="/partner"
+                  className="text-[13px] font-black uppercase tracking-widest text-white/60 hover:text-white transition-all"
+                >
+                  Parceiros
+                </Link>
+              </div>
+
+              <div className="h-4 w-px bg-white/10" />
 
               <SignedOut>
                 <SignInButton mode="modal">
                   <button
                     type="button"
-                    className="text-[15px] font-semibold text-neutral-dark hover:text-brand-primary transition-colors"
+                    className="text-[13px] font-black uppercase tracking-widest text-brand-primary hover:text-brand-hover transition-all"
                   >
                     Entrar
                   </button>
                 </SignInButton>
                 <SignUpButton mode="modal">
-                  <button type="button" className="btn-primary !h-[44px] !px-lg !text-[14px]">
-                    Começar Gratuitamente
+                  <button type="button" className="btn-primary !h-[44px] !px-lg !text-[11px] font-black uppercase tracking-[0.1em]">
+                    Criar Testamento
                   </button>
                 </SignUpButton>
               </SignedOut>
@@ -86,9 +116,9 @@ export default function Home() {
               <SignedIn>
                 <Link
                   href="/dashboard"
-                  className="text-[15px] font-bold text-brand-primary hover:text-brand-hover"
+                  className="text-[13px] font-black uppercase tracking-widest text-brand-primary hover:text-brand-hover"
                 >
-                  Meu Painel
+                  Dashboard Ativo
                 </Link>
                 <UserButton afterSignOutUrl="/" />
               </SignedIn>
@@ -97,7 +127,7 @@ export default function Home() {
             {/* Mobile Toggle */}
             <button
               type="button"
-              className="md:hidden p-xs text-neutral-dark"
+              className="md:hidden p-xs text-white"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -113,47 +143,49 @@ export default function Home() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-x-0 top-[70px] bg-background-pure border-b border-neutral-light z-50 p-xl shadow-elevation md:hidden"
+            className="fixed inset-x-0 top-[70px] bg-background-pure/95 backdrop-blur-2xl border-b border-white/10 z-50 p-xl shadow-2xl md:hidden"
           >
             <nav className="flex flex-col gap-lg">
               <Link
                 onClick={() => setMobileMenuOpen(false)}
                 href="#tech"
-                className="text-[18px] font-medium text-neutral-dark py-sm border-b border-background-subtle"
+                className="text-[14px] font-black uppercase tracking-widest text-white/60 py-sm border-b border-white/5"
               >
-                Tecnologia
+                Cofre Forense
               </Link>
               <Link
                 onClick={() => setMobileMenuOpen(false)}
-                href="#calculator"
-                className="text-[18px] font-medium text-neutral-dark py-sm border-b border-background-subtle"
+                href="/sign-in"
+                className="text-[14px] font-black uppercase tracking-widest text-accent-purple py-sm border-b border-white/5 flex items-center gap-2"
               >
-                Economia
+                <Lock className="w-4 h-4" />
+                Área do Advogado
               </Link>
               <Link
                 onClick={() => setMobileMenuOpen(false)}
-                href="#pricing"
-                className="text-[18px] font-medium text-neutral-dark py-sm border-b border-background-subtle"
+                href="/partner"
+                className="text-[14px] font-black uppercase tracking-widest text-brand-gold py-sm border-b border-white/5"
               >
-                Planos
+                Seja Parceiro
               </Link>
+
               <SignedOut>
                 <SignInButton mode="modal">
                   <button
                     onClick={() => setMobileMenuOpen(false)}
                     type="button"
-                    className="w-full text-center py-sm font-semibold text-neutral-dark"
+                    className="w-full text-center py-sm font-black uppercase tracking-widest text-white/60"
                   >
-                    Entrar
+                    Entrar na Conta
                   </button>
                 </SignInButton>
                 <SignUpButton mode="modal">
                   <button
                     onClick={() => setMobileMenuOpen(false)}
                     type="button"
-                    className="btn-primary w-full"
+                    className="btn-primary w-full h-14 font-black uppercase tracking-widest text-xs"
                   >
-                    Começar Gratuitamente
+                    Criar Testamento
                   </button>
                 </SignUpButton>
               </SignedOut>
@@ -163,7 +195,7 @@ export default function Home() {
                   href="/dashboard"
                   className="w-full bg-brand-pale text-brand-primary py-lg rounded-button font-bold text-center"
                 >
-                  Meu Painel
+                  Acessar Painel
                 </Link>
               </SignedIn>
             </nav>
@@ -200,11 +232,11 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-lg max-w-6xl mx-auto">
             {/* Plano Pessoal */}
-            <div className="bg-background rounded-[32px] border border-neutral-light/30 p-xl text-left hover:border-brand-primary/50 transition-all shadow-sm">
-              <h3 className="text-lg font-bold text-neutral-dark mb-xs">Pessoal</h3>
-              <p className="text-xs text-neutral-medium mb-lg">Ideal para quem possui poucos bens e até 3 beneficiários.</p>
+            <div className="glass-panel text-left hover:border-brand-primary/50 transition-all group">
+              <h3 className="text-xl font-bold text-neutral-dark mb-xs">Pessoal</h3>
+              <p className="text-sm text-neutral-medium mb-lg">Ideal para quem possui poucos bens e até 3 beneficiários.</p>
               <div className="flex items-baseline gap-xs mb-lg">
-                <span className="text-3xl font-black text-brand-primary">R$ 800</span>
+                <span className="text-4xl font-black text-brand-primary">R$ 800</span>
                 <span className="text-neutral-medium text-sm">/ano</span>
               </div>
               <ul className="space-y-sm mb-xl">
@@ -214,28 +246,28 @@ export default function Home() {
                   'Monitoramento automático',
                   'Suporte por e-mail'
                 ].map(item => (
-                  <li key={item} className="flex items-center gap-sm text-sm text-neutral-dark">
+                  <li key={item} className="flex items-center gap-sm text-sm text-neutral-dark/80">
                     <Check className="w-4 h-4 text-functional-success shrink-0" />
                     {item}
                   </li>
                 ))}
               </ul>
               <SignUpButton mode="modal">
-                <button className="btn-secondary w-full !h-[44px]">Começar</button>
+                <button className="btn-secondary w-full">Começar</button>
               </SignUpButton>
             </div>
 
             {/* Plano Patrimonial - Destacado */}
-            <div className="bg-brand-primary rounded-[32px] p-xl text-left text-white shadow-xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
-              <div className="bg-brand-gold text-neutral-dark text-[10px] font-black uppercase px-md py-1 rounded-full w-fit mb-sm relative z-10">
+            <div className="bg-brand-primary rounded-[32px] p-xl text-left text-background-pure shadow-2xl relative overflow-hidden transform scale-105 z-10 border border-brand-goldLight/20">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none" />
+              <div className="bg-white/90 text-brand-primary text-[10px] font-black uppercase px-md py-1 rounded-full w-fit mb-sm relative z-10">
                 Mais Popular
               </div>
-              <h3 className="text-lg font-bold mb-xs relative z-10 text-white">Patrimonial</h3>
-              <p className="text-xs text-white/70 mb-lg relative z-10">Para quem possui imóveis, investimentos e múltiplos beneficiários.</p>
+              <h3 className="text-xl font-bold mb-xs relative z-10">Patrimonial</h3>
+              <p className="text-sm text-background-pure/70 mb-lg relative z-10">Para quem possui imóveis, investimentos e múltiplos beneficiários.</p>
               <div className="flex items-baseline gap-xs mb-lg relative z-10">
-                <span className="text-3xl font-black text-brand-goldLight">R$ 1.500</span>
-                <span className="text-white/70 text-sm">/ano</span>
+                <span className="text-4xl font-black text-white">R$ 1.500</span>
+                <span className="text-background-pure/70 text-sm">/ano</span>
               </div>
               <ul className="space-y-sm mb-xl relative z-10">
                 {[
@@ -245,27 +277,26 @@ export default function Home() {
                   'Suporte jurídico mensal',
                   'Notificação via WhatsApp'
                 ].map(item => (
-                  <li key={item} className="flex items-center gap-sm text-sm text-white/90">
-                    <Check className="w-4 h-4 text-brand-goldLight shrink-0" />
+                  <li key={item} className="flex items-center gap-sm text-sm text-background-pure/90">
+                    <Check className="w-4 h-4 text-white shrink-0" />
                     {item}
                   </li>
                 ))}
               </ul>
               <SignUpButton mode="modal">
-                <button className="bg-white text-brand-primary w-full py-md rounded-button font-bold hover:bg-neutral-light transition-all">Escolher Plano</button>
+                <button className="bg-white text-brand-primary w-full py-md rounded-button font-bold hover:brightness-110 transition-all shadow-xl">Escolher Plano</button>
               </SignUpButton>
             </div>
 
             {/* Plano Empresarial */}
-            <div className="bg-neutral-dark rounded-[32px] p-xl text-left text-white shadow-xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-brand-primary/10 to-transparent pointer-events-none" />
-              <h3 className="text-lg font-bold mb-xs relative z-10 text-white">Empresarial</h3>
-              <p className="text-xs text-white/60 mb-lg relative z-10">Para holdings, quotas societárias e sucessão empresarial complexa.</p>
-              <div className="flex items-baseline gap-xs mb-lg relative z-10">
-                <span className="text-3xl font-black text-brand-gold">R$ 3.000</span>
-                <span className="text-white/60 text-sm">/ano</span>
+            <div className="glass-panel text-left hover:border-accent-purple/50 transition-all group">
+              <h3 className="text-xl font-bold text-neutral-dark mb-xs">Empresarial</h3>
+              <p className="text-sm text-neutral-medium mb-lg">Para holdings, quotas societárias e sucessão empresarial.</p>
+              <div className="flex items-baseline gap-xs mb-lg">
+                <span className="text-4xl font-black text-accent-purple">R$ 3.000</span>
+                <span className="text-neutral-medium text-sm">/ano</span>
               </div>
-              <ul className="space-y-sm mb-xl relative z-10">
+              <ul className="space-y-sm mb-xl">
                 {[
                   'Beneficiários ilimitados',
                   'Assessoria jurídica dedicada',
@@ -273,14 +304,14 @@ export default function Home() {
                   'Integração com contador',
                   'SLA de atendimento prioritário'
                 ].map(item => (
-                  <li key={item} className="flex items-center gap-sm text-sm text-white/80">
-                    <Check className="w-4 h-4 text-brand-gold shrink-0" />
+                  <li key={item} className="flex items-center gap-sm text-sm text-neutral-dark/80">
+                    <Check className="w-4 h-4 text-accent-purple shrink-0" />
                     {item}
                   </li>
                 ))}
               </ul>
               <SignUpButton mode="modal">
-                <button className="bg-brand-gold text-neutral-dark w-full py-md rounded-button font-bold hover:brightness-110 transition-all">Falar com Consultor</button>
+                <button className="btn-premium w-full">Falar com Consultor</button>
               </SignUpButton>
             </div>
           </div>
@@ -318,92 +349,75 @@ export default function Home() {
       <FAQSection />
 
       {/* Footer */}
-      <footer className="bg-background-dark text-neutral-light py-3xl px-lg">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-2xl mb-2xl">
+      <footer className="bg-background-dark/80 backdrop-blur-xl border-t border-white/5 py-4xl">
+        <div className="max-w-7xl mx-auto px-lg sm:px-xl lg:px-2xl text-left">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-2xl mb-3xl">
             <div className="md:col-span-2">
-              <div className="mb-lg">
-                <img
-                  src="/images/logo_testamento-facil.png"
-                  alt="Testamento Fácil"
-                  className="h-10 w-auto brightness-0 invert"
-                />
+              <div className="flex items-center gap-xs mb-xl">
+                <div className="w-8 h-8 bg-brand-primary rounded-lg flex items-center justify-center">
+                  <Shield className="w-4 h-4 text-background-pure" />
+                </div>
+                <span className="text-xl font-extrabold text-white tracking-tighter uppercase">
+                  Testamento<span className="text-brand-primary">Fácil</span>
+                </span>
               </div>
-              <p className="max-w-xs text-[14px] leading-relaxed text-neutral-medium">
-                Transformando o planejamento sucessório em algo simples, seguro e acessível para
-                todos os brasileiros através da tecnologia.
+              <p className="max-w-xs text-[13px] leading-relaxed text-white/40 font-medium">
+                Soberania Digital e Custódia Forense. Protegendo legados com infraestrutura de nível bancário e validade jurídica absoluta através de protocolos Testamento Fácil™.
               </p>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-lg uppercase text-[12px] tracking-widest">
-                Produto
+              <h4 className="text-white font-black mb-lg uppercase text-[10px] tracking-widest opacity-60">
+                Protocolos
               </h4>
-              <ul className="space-y-md text-[14px]">
+              <ul className="space-y-md text-[13px] font-bold">
                 <li>
-                  <Link href="#calculator" className="hover:text-brand-gold transition-colors">
-                    Calculadora
+                  <Link href="#calculator" className="text-white/40 hover:text-brand-primary transition-colors">
+                    Simulador Forense
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-brand-gold transition-colors">
-                    Segurança
+                  <Link href="#features" className="text-white/40 hover:text-brand-primary transition-colors">
+                    Segurança de Custódia
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-brand-gold transition-colors">
-                    Preços
+                  <Link href="#pricing" className="text-white/40 hover:text-brand-primary transition-colors">
+                    Planos de Soberania
                   </Link>
                 </li>
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-lg uppercase text-[12px] tracking-widest">
-                Suporte
+              <h4 className="text-white font-black mb-lg uppercase text-[10px] tracking-widest opacity-60">
+                Infraestrutura
               </h4>
-              <ul className="space-y-md text-[14px]">
+              <ul className="space-y-md text-[13px] font-bold">
                 <li>
-                  <Link href="#faq" className="hover:text-brand-gold transition-colors">
-                    Dúvidas Frequentes
+                  <Link href="#faq" className="text-white/40 hover:text-brand-primary transition-colors">
+                    Central de Helpdesk
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-brand-gold transition-colors">
-                    Consultoria
+                  <Link href="#" className="text-white/40 hover:text-brand-primary transition-colors">
+                    Documentação Legal
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-brand-gold transition-colors">
-                    Fale Conosco
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-bold mb-lg uppercase text-[12px] tracking-widest">
-                Para Profissionais
-              </h4>
-              <ul className="space-y-md text-[14px]">
-                <li>
-                  <Link href="/sign-in" className="hover:text-brand-gold transition-colors">
-                    Área do Advogado
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/sign-in" className="hover:text-brand-gold transition-colors">
-                    Portal de Parceiros
+                  <Link href="/sign-in" className="text-white/40 hover:text-accent-purple transition-colors">
+                    Acesso do Advogado
                   </Link>
                 </li>
               </ul>
             </div>
           </div>
-          <div className="pt-xl border-t border-neutral-dark flex flex-col md:flex-row justify-between items-center gap-lg text-[12px] text-neutral-medium">
-            <p>© 2026 Testamento Fácil. Registrado na OAB/SP e em conformidade com a LGPD.</p>
+          <div className="pt-xl border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-lg text-[10px] text-white/20 font-black uppercase tracking-widest">
+            <p>© 2026 TESTAMENTO FÁCIL. REGISTRADO NA OAB/SP E EM CONFORMIDADE COM LGPD & ISO 27001.</p>
             <div className="flex gap-xl">
               <Link href="#" className="hover:text-white transition-colors">
-                Termos de Uso
+                Termos Operacionais
               </Link>
               <Link href="#" className="hover:text-white transition-colors">
-                Privacidade
+                Privacidade de Dados
               </Link>
             </div>
           </div>

@@ -43,22 +43,22 @@ const badges = [
 
 export function TrustBadges() {
     return (
-        <section className="py-xl px-lg bg-background-pure border-y border-neutral-light">
+        <section className="py-xl px-lg bg-background-section/30 backdrop-blur-sm border-y border-white/5">
             <div className="max-w-7xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    className="flex flex-wrap items-center justify-between gap-xl"
+                    className="flex flex-wrap items-center justify-center gap-x-2xl gap-y-xl opacity-60 hover:opacity-100 transition-opacity duration-700"
                 >
                     {badges.map((badge) => (
-                        <div key={badge.id} className="flex flex-col items-center text-center">
-                            <p className="text-xs font-medium text-neutral-medium uppercase tracking-wider mb-xs">
-                                {badge.label}
-                            </p>
-                            <div className="flex items-center gap-xs">
-                                <badge.icon className={`w-5 h-5 ${badge.iconColor}`} />
-                                <span className="text-sm font-bold text-neutral-dark">{badge.name}</span>
+                        <div key={badge.id} className="flex items-center gap-xs">
+                            <badge.icon className={`w-5 h-5 ${badge.iconColor}`} />
+                            <div className="flex flex-col items-start leading-tight text-left">
+                                <span className="text-[10px] font-black text-white/40 uppercase tracking-tighter">
+                                    {badge.label}
+                                </span>
+                                <span className="text-xs font-bold text-neutral-dark">{badge.name}</span>
                             </div>
                         </div>
                     ))}

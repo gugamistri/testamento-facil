@@ -1,0 +1,1205 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-01-19T19:16:22.311Z",
+  "stack": {
+    "primaryLanguage": "typescript",
+    "languages": [
+      "javascript",
+      "typescript",
+      "python"
+    ],
+    "frameworks": [],
+    "buildTools": [
+      "docker-compose",
+      "pnpm-workspace"
+    ],
+    "testFrameworks": [],
+    "packageManager": "pnpm",
+    "isMonorepo": true,
+    "hasDocker": true,
+    "hasCI": false
+  },
+  "structure": {
+    "totalFiles": 131,
+    "topDirectories": [
+      {
+        "name": "AGENTS.md",
+        "fileCount": 1
+      },
+      {
+        "name": "apps",
+        "fileCount": 73
+      },
+      {
+        "name": "biome.json",
+        "fileCount": 1
+      },
+      {
+        "name": "directives",
+        "fileCount": 19
+      },
+      {
+        "name": "docker-compose.frontend.yml",
+        "fileCount": 1
+      },
+      {
+        "name": "docker-compose.prod.yml",
+        "fileCount": 1
+      },
+      {
+        "name": "docker-compose.yml",
+        "fileCount": 1
+      },
+      {
+        "name": "docs",
+        "fileCount": 22
+      },
+      {
+        "name": "execution",
+        "fileCount": 1
+      },
+      {
+        "name": "package.json",
+        "fileCount": 1
+      },
+      {
+        "name": "packages",
+        "fileCount": 6
+      },
+      {
+        "name": "pnpm-lock.yaml",
+        "fileCount": 1
+      },
+      {
+        "name": "pnpm-workspace.yaml",
+        "fileCount": 1
+      },
+      {
+        "name": "prisma",
+        "fileCount": 1
+      },
+      {
+        "name": "tsconfig.json",
+        "fileCount": 1
+      }
+    ],
+    "languageDistribution": [
+      {
+        "extension": ".tsx",
+        "count": 52
+      },
+      {
+        "extension": ".md",
+        "count": 28
+      },
+      {
+        "extension": ".html",
+        "count": 14
+      },
+      {
+        "extension": ".ts",
+        "count": 13
+      },
+      {
+        "extension": ".json",
+        "count": 9
+      },
+      {
+        "extension": ".yml",
+        "count": 3
+      },
+      {
+        "extension": ".png",
+        "count": 3
+      },
+      {
+        "extension": ".yaml",
+        "count": 2
+      },
+      {
+        "extension": ".prisma",
+        "count": 1
+      },
+      {
+        "extension": ".py",
+        "count": 1
+      }
+    ]
+  },
+  "architecture": {
+    "layers": [
+      {
+        "name": "Utils",
+        "description": "Shared utilities and helpers",
+        "directories": [
+          "packages/shared/src",
+          "packages/shared/src/types",
+          "packages/shared/src/roles",
+          "apps/web/src/lib"
+        ],
+        "symbolCount": 15,
+        "dependsOn": []
+      },
+      {
+        "name": "Models",
+        "description": "Data structures and domain objects",
+        "directories": [
+          "packages/shared/src/schemas"
+        ],
+        "symbolCount": 1,
+        "dependsOn": []
+      },
+      {
+        "name": "Components",
+        "description": "UI components and views",
+        "directories": [
+          "apps/web/src/app",
+          "apps/web/src/components/wizard",
+          "apps/web/src/components/ui",
+          "apps/web/src/components/landing",
+          "apps/web/src/components/dashboard",
+          "apps/web/src/components/auth",
+          "apps/web/src/app/wizard",
+          "apps/web/src/app/verify",
+          "apps/web/src/app/schedule",
+          "apps/web/src/app/dashboard",
+          "apps/web/src/app/admin",
+          "apps/web/src/components/wizard/steps",
+          "apps/web/src/app/wizard/session",
+          "apps/web/src/app/sign-up/[[...sign-up]]",
+          "apps/web/src/app/sign-in/[[...sign-in]]",
+          "apps/web/src/app/inheritance/[token]",
+          "apps/web/src/app/dashboard/wizard",
+          "apps/web/src/app/dashboard/testaments",
+          "apps/web/src/app/dashboard/settings",
+          "apps/web/src/app/dashboard/notifications",
+          "apps/web/src/app/dashboard/news",
+          "apps/web/src/app/dashboard/life-log",
+          "apps/web/src/app/dashboard/documents",
+          "apps/web/src/app/dashboard/consultations",
+          "apps/web/src/app/dashboard/billing",
+          "apps/web/src/app/dashboard/beneficiaries",
+          "apps/web/src/app/dashboard/audit",
+          "apps/web/src/app/check-in/[token]"
+        ],
+        "symbolCount": 100,
+        "dependsOn": []
+      },
+      {
+        "name": "Repositories",
+        "description": "Data access and persistence",
+        "directories": [
+          "apps/web/src/components/wizard/steps"
+        ],
+        "symbolCount": 3,
+        "dependsOn": []
+      }
+    ],
+    "patterns": [],
+    "entryPoints": [
+      "packages/shared/src/index.ts",
+      "apps/api/src/index.ts",
+      "packages/shared/src/types/index.ts",
+      "packages/shared/src/schemas/index.ts",
+      "packages/shared/src/roles/index.ts"
+    ]
+  },
+  "symbols": {
+    "classes": [],
+    "interfaces": [
+      {
+        "name": "ApiResponse",
+        "kind": "interface",
+        "file": "packages/shared/src/types/index.ts",
+        "line": 11,
+        "exported": true
+      },
+      {
+        "name": "Beneficiary",
+        "kind": "interface",
+        "file": "apps/web/src/store/useWizardStore.ts",
+        "line": 38,
+        "exported": true
+      },
+      {
+        "name": "DigitalAsset",
+        "kind": "interface",
+        "file": "apps/web/src/store/useWizardStore.ts",
+        "line": 31,
+        "exported": true
+      },
+      {
+        "name": "FinancialAsset",
+        "kind": "interface",
+        "file": "apps/web/src/store/useWizardStore.ts",
+        "line": 24,
+        "exported": true
+      },
+      {
+        "name": "HealthCheckResponse",
+        "kind": "interface",
+        "file": "packages/shared/src/types/index.ts",
+        "line": 21,
+        "exported": true
+      },
+      {
+        "name": "PersonalData",
+        "kind": "interface",
+        "file": "apps/web/src/store/useWizardStore.ts",
+        "line": 6,
+        "exported": true
+      },
+      {
+        "name": "RealEstateAsset",
+        "kind": "interface",
+        "file": "apps/web/src/store/useWizardStore.ts",
+        "line": 15,
+        "exported": true
+      },
+      {
+        "name": "User",
+        "kind": "interface",
+        "file": "packages/shared/src/types/index.ts",
+        "line": 2,
+        "exported": true
+      },
+      {
+        "name": "Beneficiary",
+        "kind": "interface",
+        "file": "apps/web/src/app/dashboard/beneficiaries/page.tsx",
+        "line": 9,
+        "exported": false
+      },
+      {
+        "name": "CustomJwtSessionClaims",
+        "kind": "interface",
+        "file": "apps/web/src/types/clerk.d.ts",
+        "line": 4,
+        "exported": false
+      },
+      {
+        "name": "DigitalAsset",
+        "kind": "interface",
+        "file": "apps/web/src/app/inheritance/[token]/page.tsx",
+        "line": 14,
+        "exported": false
+      },
+      {
+        "name": "EnvelopingProcessProps",
+        "kind": "interface",
+        "file": "apps/web/src/components/dashboard/EnvelopingProcess.tsx",
+        "line": 8,
+        "exported": false
+      },
+      {
+        "name": "FinancialAsset",
+        "kind": "interface",
+        "file": "apps/web/src/app/inheritance/[token]/page.tsx",
+        "line": 36,
+        "exported": false
+      },
+      {
+        "name": "FormData",
+        "kind": "interface",
+        "file": "apps/web/src/app/dashboard/consultations/page.tsx",
+        "line": 17,
+        "exported": false
+      },
+      {
+        "name": "InputProps",
+        "kind": "interface",
+        "file": "apps/web/src/components/ui/form-elements.tsx",
+        "line": 11,
+        "exported": false
+      },
+      {
+        "name": "LifeLogEntry",
+        "kind": "interface",
+        "file": "apps/web/src/app/dashboard/life-log/page.tsx",
+        "line": 9,
+        "exported": false
+      },
+      {
+        "name": "RealEstateAsset",
+        "kind": "interface",
+        "file": "apps/web/src/app/inheritance/[token]/page.tsx",
+        "line": 23,
+        "exported": false
+      },
+      {
+        "name": "RoleGateProps",
+        "kind": "interface",
+        "file": "apps/web/src/components/auth/RoleGate.tsx",
+        "line": 6,
+        "exported": false
+      },
+      {
+        "name": "SecurityLayerProps",
+        "kind": "interface",
+        "file": "apps/web/src/components/dashboard/DigitalVault.tsx",
+        "line": 7,
+        "exported": false
+      },
+      {
+        "name": "SelectProps",
+        "kind": "interface",
+        "file": "apps/web/src/components/ui/form-elements.tsx",
+        "line": 49,
+        "exported": false
+      },
+      {
+        "name": "TimeSlot",
+        "kind": "interface",
+        "file": "apps/web/src/app/dashboard/consultations/page.tsx",
+        "line": 11,
+        "exported": false
+      },
+      {
+        "name": "VerificationResult",
+        "kind": "interface",
+        "file": "apps/web/src/app/verify/page.tsx",
+        "line": 11,
+        "exported": false
+      },
+      {
+        "name": "WizardState",
+        "kind": "interface",
+        "file": "apps/web/src/store/useWizardStore.ts",
+        "line": 46,
+        "exported": false
+      }
+    ],
+    "functions": [
+      {
+        "name": "checkAllowedRoles",
+        "kind": "function",
+        "file": "apps/web/src/lib/auth.ts",
+        "line": 35,
+        "exported": true
+      },
+      {
+        "name": "checkRole",
+        "kind": "function",
+        "file": "apps/web/src/lib/auth.ts",
+        "line": 29,
+        "exported": true
+      },
+      {
+        "name": "cn",
+        "kind": "function",
+        "file": "apps/web/src/lib/utils.ts",
+        "line": 4,
+        "exported": true
+      },
+      {
+        "name": "DashboardShell",
+        "kind": "function",
+        "file": "apps/web/src/components/dashboard/DashboardShell.tsx",
+        "line": 21,
+        "exported": true
+      },
+      {
+        "name": "DeadMansSwitch",
+        "kind": "function",
+        "file": "apps/web/src/components/dashboard/DeadMansSwitch.tsx",
+        "line": 9,
+        "exported": true
+      },
+      {
+        "name": "DigitalVault",
+        "kind": "function",
+        "file": "apps/web/src/components/dashboard/DigitalVault.tsx",
+        "line": 61,
+        "exported": true
+      },
+      {
+        "name": "EnvelopingProcess",
+        "kind": "function",
+        "file": "apps/web/src/components/dashboard/EnvelopingProcess.tsx",
+        "line": 12,
+        "exported": true
+      },
+      {
+        "name": "FAQSection",
+        "kind": "function",
+        "file": "apps/web/src/components/landing/faq-section.tsx",
+        "line": 34,
+        "exported": true
+      },
+      {
+        "name": "getCurrentUserWithRole",
+        "kind": "function",
+        "file": "apps/web/src/lib/auth.ts",
+        "line": 6,
+        "exported": true
+      },
+      {
+        "name": "getUserRole",
+        "kind": "function",
+        "file": "apps/web/src/lib/auth.ts",
+        "line": 23,
+        "exported": true
+      },
+      {
+        "name": "hasPermission",
+        "kind": "function",
+        "file": "packages/shared/src/roles/index.ts",
+        "line": 37,
+        "exported": true
+      },
+      {
+        "name": "hasRoleLevel",
+        "kind": "function",
+        "file": "packages/shared/src/roles/index.ts",
+        "line": 43,
+        "exported": true
+      },
+      {
+        "name": "HeroSection",
+        "kind": "function",
+        "file": "apps/web/src/components/landing/hero-section.tsx",
+        "line": 9,
+        "exported": true
+      },
+      {
+        "name": "isAllowedRole",
+        "kind": "function",
+        "file": "packages/shared/src/roles/index.ts",
+        "line": 48,
+        "exported": true
+      },
+      {
+        "name": "LegalJourneySection",
+        "kind": "function",
+        "file": "apps/web/src/components/landing/legal-journey-section.tsx",
+        "line": 37,
+        "exported": true
+      },
+      {
+        "name": "MonitoringStatus",
+        "kind": "function",
+        "file": "apps/web/src/components/dashboard/MonitoringStatus.tsx",
+        "line": 8,
+        "exported": true
+      },
+      {
+        "name": "NotificationDropdown",
+        "kind": "function",
+        "file": "apps/web/src/components/dashboard/NotificationDropdown.tsx",
+        "line": 53,
+        "exported": true
+      },
+      {
+        "name": "PreviewSection",
+        "kind": "function",
+        "file": "apps/web/src/components/landing/preview-section.tsx",
+        "line": 6,
+        "exported": true
+      },
+      {
+        "name": "ProblemSection",
+        "kind": "function",
+        "file": "apps/web/src/components/landing/problem-section.tsx",
+        "line": 49,
+        "exported": true
+      },
+      {
+        "name": "requireAdmin",
+        "kind": "function",
+        "file": "apps/web/src/lib/auth.ts",
+        "line": 41,
+        "exported": true
+      },
+      {
+        "name": "requireLawyer",
+        "kind": "function",
+        "file": "apps/web/src/lib/auth.ts",
+        "line": 49,
+        "exported": true
+      },
+      {
+        "name": "requireRole",
+        "kind": "function",
+        "file": "apps/web/src/components/auth/RoleGate.tsx",
+        "line": 25,
+        "exported": true
+      },
+      {
+        "name": "RoleGate",
+        "kind": "function",
+        "file": "apps/web/src/components/auth/RoleGate.tsx",
+        "line": 13,
+        "exported": true
+      },
+      {
+        "name": "SavingsCalculator",
+        "kind": "function",
+        "file": "apps/web/src/components/landing/savings-calculator.tsx",
+        "line": 22,
+        "exported": true
+      },
+      {
+        "name": "scrape_with_vision",
+        "kind": "function",
+        "file": "execution/scrape_single_site.py",
+        "line": 6,
+        "exported": true
+      },
+      {
+        "name": "SecurityIncident",
+        "kind": "function",
+        "file": "apps/web/src/components/dashboard/SecurityIncident.tsx",
+        "line": 8,
+        "exported": true
+      },
+      {
+        "name": "Step1PersonalData",
+        "kind": "function",
+        "file": "apps/web/src/components/wizard/steps/Step1PersonalData.tsx",
+        "line": 21,
+        "exported": true
+      },
+      {
+        "name": "Step2RealEstate",
+        "kind": "function",
+        "file": "apps/web/src/components/wizard/steps/Step2RealEstate.tsx",
+        "line": 21,
+        "exported": true
+      },
+      {
+        "name": "Step3FinancialAssets",
+        "kind": "function",
+        "file": "apps/web/src/components/wizard/steps/Step3FinancialAssets.tsx",
+        "line": 19,
+        "exported": true
+      },
+      {
+        "name": "Step4DigitalAssets",
+        "kind": "function",
+        "file": "apps/web/src/components/wizard/steps/Step4DigitalAssets.tsx",
+        "line": 19,
+        "exported": true
+      },
+      {
+        "name": "Step5Beneficiaries",
+        "kind": "function",
+        "file": "apps/web/src/components/wizard/steps/Step5Beneficiaries.tsx",
+        "line": 20,
+        "exported": true
+      },
+      {
+        "name": "Step6Review",
+        "kind": "function",
+        "file": "apps/web/src/components/wizard/steps/Step6Review.tsx",
+        "line": 6,
+        "exported": true
+      },
+      {
+        "name": "Step7VideoScheduling",
+        "kind": "function",
+        "file": "apps/web/src/components/wizard/steps/Step7VideoScheduling.tsx",
+        "line": 17,
+        "exported": true
+      },
+      {
+        "name": "Step9DigitalSignature",
+        "kind": "function",
+        "file": "apps/web/src/components/wizard/steps/Step9DigitalSignature.tsx",
+        "line": 9,
+        "exported": true
+      },
+      {
+        "name": "TechFeaturesSection",
+        "kind": "function",
+        "file": "apps/web/src/components/landing/tech-features-section.tsx",
+        "line": 33,
+        "exported": true
+      },
+      {
+        "name": "TestimonialsSection",
+        "kind": "function",
+        "file": "apps/web/src/components/landing/testimonials-section.tsx",
+        "line": 42,
+        "exported": true
+      },
+      {
+        "name": "TrustBadges",
+        "kind": "function",
+        "file": "apps/web/src/components/landing/trust-badges.tsx",
+        "line": 44,
+        "exported": true
+      },
+      {
+        "name": "useHasRole",
+        "kind": "function",
+        "file": "apps/web/src/components/auth/RoleGate.tsx",
+        "line": 35,
+        "exported": true
+      },
+      {
+        "name": "WizardLayout",
+        "kind": "function",
+        "file": "apps/web/src/components/wizard/WizardLayout.tsx",
+        "line": 21,
+        "exported": true
+      },
+      {
+        "name": "ActionCard",
+        "kind": "function",
+        "file": "apps/web/src/app/admin/page.tsx",
+        "line": 71,
+        "exported": false
+      },
+      {
+        "name": "calculateEconomy",
+        "kind": "function",
+        "file": "apps/web/src/components/landing/savings-calculator.tsx",
+        "line": 34,
+        "exported": false
+      },
+      {
+        "name": "cn",
+        "kind": "function",
+        "file": "apps/web/src/components/ui/form-elements.tsx",
+        "line": 7,
+        "exported": false
+      },
+      {
+        "name": "extendSession",
+        "kind": "function",
+        "file": "apps/web/src/app/inheritance/[token]/page.tsx",
+        "line": 112,
+        "exported": false
+      },
+      {
+        "name": "formatDate",
+        "kind": "function",
+        "file": "apps/web/src/app/dashboard/consultations/page.tsx",
+        "line": 106,
+        "exported": false
+      },
+      {
+        "name": "formatTime",
+        "kind": "function",
+        "file": "apps/web/src/app/wizard/session/page.tsx",
+        "line": 50,
+        "exported": false
+      },
+      {
+        "name": "formatTime",
+        "kind": "function",
+        "file": "apps/web/src/app/inheritance/[token]/page.tsx",
+        "line": 106,
+        "exported": false
+      },
+      {
+        "name": "getDaysInMonth",
+        "kind": "function",
+        "file": "apps/web/src/app/dashboard/consultations/page.tsx",
+        "line": 62,
+        "exported": false
+      },
+      {
+        "name": "getTimeSlotsForDate",
+        "kind": "function",
+        "file": "apps/web/src/app/dashboard/consultations/page.tsx",
+        "line": 89,
+        "exported": false
+      },
+      {
+        "name": "handleAddBeneficiary",
+        "kind": "function",
+        "file": "apps/web/src/app/dashboard/beneficiaries/page.tsx",
+        "line": 83,
+        "exported": false
+      },
+      {
+        "name": "handleClickOutside",
+        "kind": "function",
+        "file": "apps/web/src/components/dashboard/NotificationDropdown.tsx",
+        "line": 61,
+        "exported": false
+      }
+    ],
+    "types": [
+      {
+        "name": "MaritalStatus",
+        "kind": "type",
+        "file": "apps/web/src/store/useWizardStore.ts",
+        "line": 4,
+        "exported": true
+      },
+      {
+        "name": "Role",
+        "kind": "type",
+        "file": "packages/shared/src/roles/index.ts",
+        "line": 5,
+        "exported": true
+      },
+      {
+        "name": "UserInput",
+        "kind": "type",
+        "file": "packages/shared/src/schemas/index.ts",
+        "line": 12,
+        "exported": true
+      },
+      {
+        "name": "AuthStep",
+        "kind": "type",
+        "file": "apps/web/src/app/inheritance/[token]/page.tsx",
+        "line": 11,
+        "exported": false
+      },
+      {
+        "name": "BeneficiaryValues",
+        "kind": "type",
+        "file": "apps/web/src/components/wizard/steps/Step5Beneficiaries.tsx",
+        "line": 18,
+        "exported": false
+      },
+      {
+        "name": "CheckInStep",
+        "kind": "type",
+        "file": "apps/web/src/app/check-in/[token]/page.tsx",
+        "line": 9,
+        "exported": false
+      },
+      {
+        "name": "ContentTab",
+        "kind": "type",
+        "file": "apps/web/src/app/inheritance/[token]/page.tsx",
+        "line": 12,
+        "exported": false
+      },
+      {
+        "name": "DigitalValues",
+        "kind": "type",
+        "file": "apps/web/src/components/wizard/steps/Step4DigitalAssets.tsx",
+        "line": 17,
+        "exported": false
+      },
+      {
+        "name": "FinancialValues",
+        "kind": "type",
+        "file": "apps/web/src/components/wizard/steps/Step3FinancialAssets.tsx",
+        "line": 17,
+        "exported": false
+      },
+      {
+        "name": "PersonalDataValues",
+        "kind": "type",
+        "file": "apps/web/src/components/wizard/steps/Step1PersonalData.tsx",
+        "line": 19,
+        "exported": false
+      },
+      {
+        "name": "RealEstateValues",
+        "kind": "type",
+        "file": "apps/web/src/components/wizard/steps/Step2RealEstate.tsx",
+        "line": 19,
+        "exported": false
+      },
+      {
+        "name": "ScheduleStep",
+        "kind": "type",
+        "file": "apps/web/src/app/dashboard/consultations/page.tsx",
+        "line": 9,
+        "exported": false
+      },
+      {
+        "name": "SessionState",
+        "kind": "type",
+        "file": "apps/web/src/app/wizard/session/page.tsx",
+        "line": 9,
+        "exported": false
+      },
+      {
+        "name": "SettingsTab",
+        "kind": "type",
+        "file": "apps/web/src/app/dashboard/settings/page.tsx",
+        "line": 8,
+        "exported": false
+      },
+      {
+        "name": "SignatureState",
+        "kind": "type",
+        "file": "apps/web/src/components/wizard/steps/Step9DigitalSignature.tsx",
+        "line": 7,
+        "exported": false
+      },
+      {
+        "name": "VerificationStatus",
+        "kind": "type",
+        "file": "apps/web/src/app/verify/page.tsx",
+        "line": 9,
+        "exported": false
+      }
+    ],
+    "enums": []
+  },
+  "publicAPI": [
+    {
+      "name": "ApiResponse",
+      "kind": "interface",
+      "file": "packages/shared/src/types/index.ts",
+      "line": 11,
+      "exported": true
+    },
+    {
+      "name": "Beneficiary",
+      "kind": "interface",
+      "file": "apps/web/src/store/useWizardStore.ts",
+      "line": 38,
+      "exported": true
+    },
+    {
+      "name": "checkAllowedRoles",
+      "kind": "function",
+      "file": "apps/web/src/lib/auth.ts",
+      "line": 35,
+      "exported": true
+    },
+    {
+      "name": "checkRole",
+      "kind": "function",
+      "file": "apps/web/src/lib/auth.ts",
+      "line": 29,
+      "exported": true
+    },
+    {
+      "name": "cn",
+      "kind": "function",
+      "file": "apps/web/src/lib/utils.ts",
+      "line": 4,
+      "exported": true
+    },
+    {
+      "name": "DashboardShell",
+      "kind": "function",
+      "file": "apps/web/src/components/dashboard/DashboardShell.tsx",
+      "line": 21,
+      "exported": true
+    },
+    {
+      "name": "DeadMansSwitch",
+      "kind": "function",
+      "file": "apps/web/src/components/dashboard/DeadMansSwitch.tsx",
+      "line": 9,
+      "exported": true
+    },
+    {
+      "name": "DigitalAsset",
+      "kind": "interface",
+      "file": "apps/web/src/store/useWizardStore.ts",
+      "line": 31,
+      "exported": true
+    },
+    {
+      "name": "DigitalVault",
+      "kind": "function",
+      "file": "apps/web/src/components/dashboard/DigitalVault.tsx",
+      "line": 61,
+      "exported": true
+    },
+    {
+      "name": "EnvelopingProcess",
+      "kind": "function",
+      "file": "apps/web/src/components/dashboard/EnvelopingProcess.tsx",
+      "line": 12,
+      "exported": true
+    },
+    {
+      "name": "FAQSection",
+      "kind": "function",
+      "file": "apps/web/src/components/landing/faq-section.tsx",
+      "line": 34,
+      "exported": true
+    },
+    {
+      "name": "FinancialAsset",
+      "kind": "interface",
+      "file": "apps/web/src/store/useWizardStore.ts",
+      "line": 24,
+      "exported": true
+    },
+    {
+      "name": "getCurrentUserWithRole",
+      "kind": "function",
+      "file": "apps/web/src/lib/auth.ts",
+      "line": 6,
+      "exported": true
+    },
+    {
+      "name": "getUserRole",
+      "kind": "function",
+      "file": "apps/web/src/lib/auth.ts",
+      "line": 23,
+      "exported": true
+    },
+    {
+      "name": "hasPermission",
+      "kind": "function",
+      "file": "packages/shared/src/roles/index.ts",
+      "line": 37,
+      "exported": true
+    },
+    {
+      "name": "hasRoleLevel",
+      "kind": "function",
+      "file": "packages/shared/src/roles/index.ts",
+      "line": 43,
+      "exported": true
+    },
+    {
+      "name": "HealthCheckResponse",
+      "kind": "interface",
+      "file": "packages/shared/src/types/index.ts",
+      "line": 21,
+      "exported": true
+    },
+    {
+      "name": "HeroSection",
+      "kind": "function",
+      "file": "apps/web/src/components/landing/hero-section.tsx",
+      "line": 9,
+      "exported": true
+    },
+    {
+      "name": "isAllowedRole",
+      "kind": "function",
+      "file": "packages/shared/src/roles/index.ts",
+      "line": 48,
+      "exported": true
+    },
+    {
+      "name": "LegalJourneySection",
+      "kind": "function",
+      "file": "apps/web/src/components/landing/legal-journey-section.tsx",
+      "line": 37,
+      "exported": true
+    },
+    {
+      "name": "MaritalStatus",
+      "kind": "type",
+      "file": "apps/web/src/store/useWizardStore.ts",
+      "line": 4,
+      "exported": true
+    },
+    {
+      "name": "MonitoringStatus",
+      "kind": "function",
+      "file": "apps/web/src/components/dashboard/MonitoringStatus.tsx",
+      "line": 8,
+      "exported": true
+    },
+    {
+      "name": "NotificationDropdown",
+      "kind": "function",
+      "file": "apps/web/src/components/dashboard/NotificationDropdown.tsx",
+      "line": 53,
+      "exported": true
+    },
+    {
+      "name": "PersonalData",
+      "kind": "interface",
+      "file": "apps/web/src/store/useWizardStore.ts",
+      "line": 6,
+      "exported": true
+    },
+    {
+      "name": "PreviewSection",
+      "kind": "function",
+      "file": "apps/web/src/components/landing/preview-section.tsx",
+      "line": 6,
+      "exported": true
+    },
+    {
+      "name": "ProblemSection",
+      "kind": "function",
+      "file": "apps/web/src/components/landing/problem-section.tsx",
+      "line": 49,
+      "exported": true
+    },
+    {
+      "name": "RealEstateAsset",
+      "kind": "interface",
+      "file": "apps/web/src/store/useWizardStore.ts",
+      "line": 15,
+      "exported": true
+    },
+    {
+      "name": "requireAdmin",
+      "kind": "function",
+      "file": "apps/web/src/lib/auth.ts",
+      "line": 41,
+      "exported": true
+    },
+    {
+      "name": "requireLawyer",
+      "kind": "function",
+      "file": "apps/web/src/lib/auth.ts",
+      "line": 49,
+      "exported": true
+    },
+    {
+      "name": "requireRole",
+      "kind": "function",
+      "file": "apps/web/src/components/auth/RoleGate.tsx",
+      "line": 25,
+      "exported": true
+    },
+    {
+      "name": "Role",
+      "kind": "type",
+      "file": "packages/shared/src/roles/index.ts",
+      "line": 5,
+      "exported": true
+    },
+    {
+      "name": "RoleGate",
+      "kind": "function",
+      "file": "apps/web/src/components/auth/RoleGate.tsx",
+      "line": 13,
+      "exported": true
+    },
+    {
+      "name": "SavingsCalculator",
+      "kind": "function",
+      "file": "apps/web/src/components/landing/savings-calculator.tsx",
+      "line": 22,
+      "exported": true
+    },
+    {
+      "name": "scrape_with_vision",
+      "kind": "function",
+      "file": "execution/scrape_single_site.py",
+      "line": 6,
+      "exported": true
+    },
+    {
+      "name": "SecurityIncident",
+      "kind": "function",
+      "file": "apps/web/src/components/dashboard/SecurityIncident.tsx",
+      "line": 8,
+      "exported": true
+    },
+    {
+      "name": "Step1PersonalData",
+      "kind": "function",
+      "file": "apps/web/src/components/wizard/steps/Step1PersonalData.tsx",
+      "line": 21,
+      "exported": true
+    },
+    {
+      "name": "Step2RealEstate",
+      "kind": "function",
+      "file": "apps/web/src/components/wizard/steps/Step2RealEstate.tsx",
+      "line": 21,
+      "exported": true
+    },
+    {
+      "name": "Step3FinancialAssets",
+      "kind": "function",
+      "file": "apps/web/src/components/wizard/steps/Step3FinancialAssets.tsx",
+      "line": 19,
+      "exported": true
+    },
+    {
+      "name": "Step4DigitalAssets",
+      "kind": "function",
+      "file": "apps/web/src/components/wizard/steps/Step4DigitalAssets.tsx",
+      "line": 19,
+      "exported": true
+    },
+    {
+      "name": "Step5Beneficiaries",
+      "kind": "function",
+      "file": "apps/web/src/components/wizard/steps/Step5Beneficiaries.tsx",
+      "line": 20,
+      "exported": true
+    },
+    {
+      "name": "Step6Review",
+      "kind": "function",
+      "file": "apps/web/src/components/wizard/steps/Step6Review.tsx",
+      "line": 6,
+      "exported": true
+    },
+    {
+      "name": "Step7VideoScheduling",
+      "kind": "function",
+      "file": "apps/web/src/components/wizard/steps/Step7VideoScheduling.tsx",
+      "line": 17,
+      "exported": true
+    },
+    {
+      "name": "Step9DigitalSignature",
+      "kind": "function",
+      "file": "apps/web/src/components/wizard/steps/Step9DigitalSignature.tsx",
+      "line": 9,
+      "exported": true
+    },
+    {
+      "name": "TechFeaturesSection",
+      "kind": "function",
+      "file": "apps/web/src/components/landing/tech-features-section.tsx",
+      "line": 33,
+      "exported": true
+    },
+    {
+      "name": "TestimonialsSection",
+      "kind": "function",
+      "file": "apps/web/src/components/landing/testimonials-section.tsx",
+      "line": 42,
+      "exported": true
+    },
+    {
+      "name": "TrustBadges",
+      "kind": "function",
+      "file": "apps/web/src/components/landing/trust-badges.tsx",
+      "line": 44,
+      "exported": true
+    },
+    {
+      "name": "useHasRole",
+      "kind": "function",
+      "file": "apps/web/src/components/auth/RoleGate.tsx",
+      "line": 35,
+      "exported": true
+    },
+    {
+      "name": "User",
+      "kind": "interface",
+      "file": "packages/shared/src/types/index.ts",
+      "line": 2,
+      "exported": true
+    },
+    {
+      "name": "UserInput",
+      "kind": "type",
+      "file": "packages/shared/src/schemas/index.ts",
+      "line": 12,
+      "exported": true
+    },
+    {
+      "name": "WizardLayout",
+      "kind": "function",
+      "file": "apps/web/src/components/wizard/WizardLayout.tsx",
+      "line": 21,
+      "exported": true
+    }
+  ],
+  "dependencies": {
+    "mostImported": [
+      {
+        "file": "/Users/guga/Downloads/Projects/Testamento/apps/web/src/components/dashboard/NotificationDropdown.tsx",
+        "importedBy": 1
+      }
+    ]
+  },
+  "stats": {
+    "totalSymbols": 130,
+    "exportedSymbols": 50,
+    "analysisTimeMs": 34
+  }
+}

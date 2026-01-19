@@ -2,10 +2,11 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { ArrowLeft, User, Bell, Shield, CreditCard, Key, Activity, Phone, Mail, MessageCircle, Check, ChevronRight, Save } from 'lucide-react'
+import { ArrowLeft, User, Bell, Shield, CreditCard, Key, Activity, Phone, Mail, MessageCircle, Check, ChevronRight, Save, Terminal } from 'lucide-react'
+import { updateUserRole } from '@/actions/dev-tools'
 import { cn } from '@/lib/utils'
 
-type SettingsTab = 'profile' | 'notifications' | 'monitoring' | 'security' | 'billing' | 'access'
+type SettingsTab = 'profile' | 'notifications' | 'monitoring' | 'security' | 'billing' | 'access' | 'developer'
 
 export default function SettingsPage() {
     const [activeTab, setActiveTab] = useState<SettingsTab>('profile')
@@ -29,6 +30,7 @@ export default function SettingsPage() {
         { id: 'security', icon: Shield, label: 'Segurança' },
         { id: 'billing', icon: CreditCard, label: 'Plano' },
         { id: 'access', icon: Key, label: 'Acesso' },
+        { id: 'developer', icon: Terminal, label: 'Developer Zone' },
     ]
 
     const handleSave = () => {
@@ -279,6 +281,45 @@ export default function SettingsPage() {
                                             <span className="font-bold text-functional-error">Excluir minha conta</span>
                                             <ChevronRight className="w-4 h-4 text-functional-error" />
                                         </button>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Developer Tab */}
+                            {activeTab === 'developer' && (
+                                <div>
+                                    <h2 className="text-xl font-bold text-neutral-dark mb-xl">Developer Tools</h2>
+                                    <p className="text-sm text-neutral-medium mb-lg">
+                                        Use esta área para simular diferentes papéis de usuário e testar funcionalidades específicas.
+                                    </p>
+                                    <div className="space-y-md">
+                                        <div className="p-lg bg-neutral-900 rounded-2xl border border-neutral-800">
+                                            <h3 className="text-white font-bold mb-md flex items-center gap-sm">
+                                                <Terminal className="w-4 h-4 text-brand-primary" />
+                                                Switch Role (Role-Based Access Control)
+                                            </h3>
+                                            <div className="grid grid-cols-2 gap-md">
+                                                {[
+                                                    { role: 'CLIENT', label: 'Cliente (Padrão)' },
+                                                    { role: 'LAWYER', label: 'Advogado' },
+                                                    { role: 'PARTNER', label: 'Parceiro' },
+                                                    { role: 'ADMIN', label: 'Admin' }
+                                                ].map((roleOption) => (
+                                                    <button
+                                                        key={roleOption.role}
+                                                        onClick={async () => {
+                                                            await updateUserRole(roleOption.role as any)
+                                                            alert(`Role switched to ${roleOption.role}. Please refresh properly if middleware caches.`)
+                                                            window.location.reload()
+                                                        }}
+                                                        className="p-md rounded-xl bg-white/10 hover:bg-brand-primary/20 hover:border-brand-primary border border-white/5 text-white text-left transition-all"
+                                                    >
+                                                        <span className="text-xs font-mono opacity-50 block">{roleOption.role}</span>
+                                                        <span className="font-bold">{roleOption.label}</span>
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             )}

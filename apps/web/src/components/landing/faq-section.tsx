@@ -35,41 +35,45 @@ export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<string | null>(null)
 
   return (
-    <section className="py-3xl bg-background-pure" id="faq">
-      <div className="max-w-4xl mx-auto px-lg sm:px-xl lg:px-2xl">
+    <section className="py-3xl bg-background-section" id="faq">
+      <div className="max-w-4xl mx-auto px-lg sm:px-xl lg:px-2xl relative">
+        {/* Decorative glow */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-accent-purple/5 blur-[80px] rounded-full pointer-events-none" />
+
         <div className="text-center mb-xl">
-          <h2 className="text-[26px] leading-[34px] font-bold text-neutral-dark sm:text-[32px] sm:leading-[40px] tracking-tight">
-            Dúvidas Frequentes
+          <span className="text-xs font-black uppercase tracking-[0.2em] text-brand-primary mb-md block">Esclarecimentos Protocolares</span>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-neutral-dark tracking-tight mb-lg">
+            Dúvidas Frequentes.
           </h2>
-          <p className="mt-xs text-[17px] leading-[28px] text-neutral-medium max-w-2xl mx-auto">
-            Tudo o que você precisa saber sobre a segurança e legalidade do seu testamento digital.
+          <p className="text-lg text-neutral-medium max-w-2xl mx-auto leading-relaxed">
+            Tudo o que você precisa saber sobre a segurança forense e legalidade do seu testamento digital Testamento Fácil™.
           </p>
         </div>
 
-        <div className="space-y-md">
+        <div className="grid grid-cols-1 gap-md">
           {faqs.map((faq) => (
             <div
               key={faq.question}
-              className="border border-neutral-light rounded-card overflow-hidden hover:border-brand-primary/30 transition-colors"
+              className="bg-white/5 backdrop-blur-md border border-white/5 rounded-3xl overflow-hidden hover:border-brand-primary/20 transition-all duration-500 group"
             >
               <button
                 type="button"
-                onClick={() => setOpenIndex(openIndex === faq.question ? null : faq.question)} // Fixed logic to use question as key
-                className="w-full flex items-center justify-between p-lg text-left bg-background-pure focus:outline-none"
+                onClick={() => setOpenIndex(openIndex === faq.question ? null : faq.question)}
+                className="w-full flex items-center justify-between p-lg text-left focus:outline-none"
               >
-                <div className="flex items-center gap-sm">
-                  <div className="p-xs bg-brand-pale rounded-badge text-brand-primary">
+                <div className="flex items-center gap-lg">
+                  <div className="p-xs bg-white/5 rounded-2xl text-brand-primary border border-white/10 group-hover:bg-brand-primary group-hover:text-background-pure transition-all duration-500">
                     <faq.icon className="w-6 h-6" />
                   </div>
-                  <span className="font-semibold text-neutral-dark text-[17px]">
+                  <span className="font-bold text-white text-lg tracking-tight group-hover:translate-x-1 transition-transform">
                     {faq.question}
                   </span>
                 </div>
                 <motion.div
                   animate={{ rotate: openIndex === faq.question ? 180 : 0 }}
-                  transition={{ duration: 0.2 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <ChevronDown className="w-5 h-5 text-neutral-medium" />
+                  <ChevronDown className="w-5 h-5 text-white/20 group-hover:text-white" />
                 </motion.div>
               </button>
 
@@ -79,9 +83,9 @@ export function FAQSection() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
                   >
-                    <div className="px-lg pb-lg text-neutral-medium leading-relaxed pl-[4rem]">
+                    <div className="px-lg pb-lg text-white/60 leading-relaxed pl-[4.5rem] font-medium text-sm">
                       {faq.answer}
                     </div>
                   </motion.div>
@@ -91,14 +95,14 @@ export function FAQSection() {
           ))}
         </div>
 
-        <div className="mt-2xl bg-background-subtle rounded-card p-xl text-center border border-neutral-light/50">
-          <h3 className="text-[22px] leading-[30px] font-semibold text-neutral-dark mb-sm">
-            Ainda tem dúvidas?
+        <div className="mt-2xl glass-panel p-xl text-center border-brand-primary/10">
+          <h3 className="text-2xl font-black text-white mb-sm tracking-tight">
+            Ainda tem dúvidas sistêmicas?
           </h3>
-          <p className="text-neutral-medium mb-xl">
-            Fale com um advogado especialista agora mesmo, sem custo.
+          <p className="text-white/40 mb-xl font-medium">
+            Fale com um advogado especialista em soberania digital agora mesmo.
           </p>
-          <button type="button" className="btn-secondary mx-auto">
+          <button type="button" className="btn-primary h-14 px-xl font-black uppercase tracking-widest text-xs">
             Agendar Consultoria Gratuita
           </button>
         </div>

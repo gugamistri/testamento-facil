@@ -54,41 +54,41 @@ export default function DashboardPage() {
         <>
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-lg">
-            <div className="bg-background-pure rounded-card p-xl border border-neutral-light">
+            <div className="bg-background-primary rounded-card p-xl border border-border-primary shadow-sm">
               <div className="flex items-center justify-between mb-md">
                 <div className="w-12 h-12 bg-functional-success/10 rounded-xl flex items-center justify-center">
                   <CheckCircle2 className="w-6 h-6 text-functional-success" />
                 </div>
-                <span className="px-sm py-2xs bg-functional-success/10 text-functional-success rounded-full text-xs font-semibold">
+                <span className="px-sm py-2xs bg-functional-success/10 text-functional-success rounded-full text-xs font-bold border border-functional-success/20">
                   ATIVO
                 </span>
               </div>
-              <div className="text-2xl font-bold text-neutral-dark mb-xs">Monitorado</div>
-              <div className="text-sm text-neutral-medium">Última sincronização: hoje às 03:42</div>
+              <div className="text-2xl font-bold text-text-primary mb-xs">Monitorado</div>
+              <div className="text-sm text-text-secondary font-medium">Última sincronização: hoje às 03:42</div>
             </div>
 
-            <div className="bg-background-pure rounded-card p-xl border border-neutral-light">
+            <div className="bg-background-primary rounded-card p-xl border border-border-primary shadow-sm">
               <div className="flex items-center justify-between mb-md">
                 <div className="w-12 h-12 bg-brand-primary/10 rounded-xl flex items-center justify-center">
                   <Users className="w-6 h-6 text-brand-primary" />
                 </div>
                 <TrendingUp className="w-5 h-5 text-functional-success" />
               </div>
-              <div className="text-2xl font-bold text-neutral-dark mb-xs">4 Beneficiários</div>
-              <div className="text-sm text-neutral-medium">100% patrimônio distribuído</div>
+              <div className="text-2xl font-bold text-text-primary mb-xs">4 Beneficiários</div>
+              <div className="text-sm text-text-secondary font-medium">100% patrimônio distribuído</div>
             </div>
 
-            <div className="bg-background-pure rounded-card p-xl border border-neutral-light">
+            <div className="bg-background-primary rounded-card p-xl border border-border-primary shadow-sm">
               <div className="flex items-center justify-between mb-md">
                 <div className="w-12 h-12 bg-brand-gold/10 rounded-xl flex items-center justify-center">
                   <Calendar className="w-6 h-6 text-brand-gold" />
                 </div>
-                <span className="px-sm py-2xs bg-brand-pale text-brand-primary rounded-full text-xs font-semibold">
+                <span className="px-sm py-2xs bg-brand-primary/10 text-brand-primary rounded-full text-xs font-bold border border-brand-primary/20">
                   EM 34 DIAS
                 </span>
               </div>
-              <div className="text-2xl font-bold text-neutral-dark mb-xs">15 Fev 2026</div>
-              <div className="text-sm text-neutral-medium">Próxima validação Dead Man's Switch</div>
+              <div className="text-2xl font-bold text-text-primary mb-xs">15 Fev 2026</div>
+              <div className="text-sm text-text-secondary font-medium">Próxima validação Dead Man's Switch</div>
             </div>
           </div>
 
@@ -120,23 +120,23 @@ export default function DashboardPage() {
               </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
-              <div className="p-lg rounded-xl border border-neutral-light hover:border-brand-primary/50 transition-all cursor-pointer bg-background-subtle">
-                <span className="text-xs font-bold uppercase tracking-wider text-neutral-medium mb-sm block">
+              <div className="p-lg rounded-xl border border-border-primary hover:border-brand-primary/50 transition-all cursor-pointer bg-background-secondary hover:bg-background-tertiary">
+                <span className="text-xs font-bold uppercase tracking-wider text-text-secondary mb-sm block">
                   Jurídico
                 </span>
-                <h4 className="font-bold text-neutral-dark mb-xs">
+                <h4 className="font-bold text-text-primary mb-xs">
                   Herança Digital: O que muda em 2026?
                 </h4>
-                <p className="text-sm text-neutral-medium line-clamp-2">
+                <p className="text-sm text-text-secondary line-clamp-2">
                   Novas regulações sobre criptomoedas e contas sociais exigem atenção...
                 </p>
               </div>
-              <div className="p-lg rounded-xl border border-neutral-light hover:border-brand-primary/50 transition-all cursor-pointer bg-background-subtle">
+              <div className="p-lg rounded-xl border border-border-primary hover:border-brand-primary/50 transition-all cursor-pointer bg-background-secondary hover:bg-background-tertiary">
                 <span className="text-xs font-bold uppercase tracking-wider text-functional-success mb-sm block">
                   Sistema
                 </span>
-                <h4 className="font-bold text-neutral-dark mb-xs">Integração com Gov.br</h4>
-                <p className="text-sm text-neutral-medium line-clamp-2">
+                <h4 className="font-bold text-text-primary mb-xs">Integração com Gov.br</h4>
+                <p className="text-sm text-text-secondary line-clamp-2">
                   Em breve: login e validação biométrica usando sua conta Gov.br...
                 </p>
               </div>

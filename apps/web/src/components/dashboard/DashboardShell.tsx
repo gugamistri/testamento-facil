@@ -2,14 +2,9 @@
 
 import { UserButton, useUser } from '@clerk/nextjs'
 import {
-    LayoutDashboard,
-    FileText,
-    Users,
-    Calendar,
-    Settings,
     Menu,
-    CreditCard,
-    FolderOpen
+    Settings,
+    LifeBuoy
 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -17,15 +12,31 @@ import React, { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { NotificationDropdown } from './NotificationDropdown'
 import Image from 'next/image'
+import { CLIENT_NAV, LAWYER_NAV, PARTNER_NAV, ADMIN_NAV, NavConfigItem } from '@/config/dashboard-nav'
 
-export function DashboardShell({ children }: { children: React.ReactNode }) {
+interface DashboardShellProps {
+    children: React.ReactNode
+    role?: 'CLIENT' | 'LAWYER' | 'PARTNER' | 'ADMIN'
+}
+
+export function DashboardShell({ children, role = 'CLIENT' }: DashboardShellProps) {
     const { user } = useUser()
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
+    const navItems = role === 'LAWYER' ? LAWYER_NAV
+        : role === 'PARTNER' ? PARTNER_NAV
+            : role === 'ADMIN' ? ADMIN_NAV
+                : CLIENT_NAV
+
+    const planLabel = role === 'LAWYER' ? 'Profissional'
+        : role === 'PARTNER' ? 'Parceiro Oficial'
+            : role === 'ADMIN' ? 'Administrador'
+                : 'Plano Essencial'
+
     return (
-        <div className="min-h-screen bg-background-subtle">
+        <div className="min-h-screen bg-background-secondary">
             {/* Sidebar - Desktop */}
-            <aside className="hidden lg:flex flex-col w-72 h-screen bg-background border-r border-neutral-light/20 fixed left-0 top-0 p-xl">
+            <aside className="hidden lg:flex flex-col w-72 h-screen bg-background-primary border-r border-border-primary fixed left-0 top-0 p-xl">
                 <div className="flex items-center gap-sm mb-2xl px-md">
                     <Image
                         src="/images/logo_testamento-facil.png"
@@ -37,22 +48,32 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
                 </div>
 
                 <nav className="flex-1 space-y-sm overflow-y-auto pr-2">
-                    <NavItem icon={<LayoutDashboard className="w-5 h-5" />} label="Visão Geral" href="/dashboard" exact />
-                    <NavItem icon={<FileText className="w-5 h-5" />} label="Meus Testamentos" href="/dashboard/testaments" />
-                    <NavItem icon={<Users className="w-5 h-5" />} label="Beneficiários" href="/dashboard/beneficiaries" />
-                    <NavItem icon={<FolderOpen className="w-5 h-5" />} label="Documentos" href="/dashboard/documents" />
-                    <NavItem icon={<Calendar className="w-5 h-5" />} label="Consultas" href="/dashboard/consultations" />
-                    <NavItem icon={<CreditCard className="w-5 h-5" />} label="Pagamentos" href="/dashboard/billing" />
+                    {navItems.map((item) => (
+                        <NavItem
+                            key={item.href}
+                            icon={item.icon}
+                            label={item.label}
+                            href={item.href}
+                            exact={item.exact}
+                        />
+                    ))}
                 </nav>
 
-                <div className="pt-xl border-t border-neutral-light/20 space-y-sm">
-                    <NavItem icon={<Settings className="w-5 h-5" />} label="Configurações" href="/dashboard/settings" />
-                    <div className="p-md bg-background-subtle rounded-card flex items-center justify-between">
+                <div className="pt-xl border-t border-border-primary space-y-sm">
+                    {role === 'CLIENT' && (
+                        <NavItem icon={<Settings className="w-5 h-5" />} label="Configurações" href="/dashboard/settings" />
+                    )}
+                    <NavItem
+                        icon={<LifeBuoy className="w-5 h-5" />}
+                        label="Ajuda & Suporte"
+                        href={role === 'LAWYER' ? '/lawyer/support' : '/dashboard/support'}
+                    />
+                    <div className="p-md bg-background-secondary rounded-card flex items-center justify-between">
                         <div className="flex items-center gap-sm">
                             <UserButton afterSignOutUrl="/" />
                             <div className="flex flex-col overflow-hidden">
-                                <span className="text-sm font-bold text-neutral-dark truncate">{user?.firstName || 'Usuário'}</span>
-                                <span className="text-[10px] text-neutral-medium uppercase font-black tracking-widest">Plano Essencial</span>
+                                <span className="text-sm font-bold text-text-primary truncate">{user?.firstName || 'Usuário'}</span>
+                                <span className="text-[10px] text-text-tertiary uppercase font-black tracking-widest">{planLabel}</span>
                             </div>
                         </div>
                     </div>
@@ -62,7 +83,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
             {/* Main Content Area */}
             <main className="lg:ml-72 flex-1">
                 {/* Mobile Header */}
-                <header className="lg:hidden h-16 bg-background border-b border-neutral-light/20 px-lg flex items-center justify-between sticky top-0 z-40">
+                <header className="lg:hidden h-16 bg-background-primary border-b border-border-primary px-lg flex items-center justify-between sticky top-0 z-40">
                     <div className="flex items-center gap-sm">
                         <Image
                             src="/images/logo_testamento-facil.png"
@@ -73,37 +94,50 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
                         />
                     </div>
                     <button type="button" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-                        <Menu className="w-6 h-6 text-neutral-dark" />
+                        <Menu className="w-6 h-6 text-text-primary" />
                     </button>
                 </header>
 
                 {/* Mobile Sidebar Overlay */}
                 {isSidebarOpen && (
                     <div className="fixed inset-0 z-50 lg:hidden">
-                        <div className="absolute inset-0 bg-neutral-dark/50" onClick={() => setIsSidebarOpen(false)} />
-                        <aside className="absolute left-0 top-0 w-72 h-full bg-background p-xl flex flex-col">
+                        <div className="absolute inset-0 bg-neutral-900/50" onClick={() => setIsSidebarOpen(false)} />
+                        <aside className="absolute left-0 top-0 w-72 h-full bg-background-primary p-xl flex flex-col">
                             <div className="flex items-center justify-between mb-8">
-                                <span className="font-bold text-lg text-neutral-dark">Menu</span>
+                                <span className="font-bold text-lg text-text-primary">Menu</span>
                                 <button onClick={() => setIsSidebarOpen(false)}>
-                                    <Menu className="w-6 h-6" />
+                                    <Menu className="w-6 h-6 text-text-secondary" />
                                 </button>
                             </div>
                             <nav className="space-y-sm">
-                                <NavItem icon={<LayoutDashboard className="w-5 h-5" />} label="Visão Geral" href="/dashboard" exact onClick={() => setIsSidebarOpen(false)} />
-                                <NavItem icon={<FileText className="w-5 h-5" />} label="Meus Testamentos" href="/dashboard/testaments" onClick={() => setIsSidebarOpen(false)} />
-                                <NavItem icon={<Users className="w-5 h-5" />} label="Beneficiários" href="/dashboard/beneficiaries" onClick={() => setIsSidebarOpen(false)} />
-                                <NavItem icon={<CreditCard className="w-5 h-5" />} label="Pagamentos" href="/dashboard/billing" onClick={() => setIsSidebarOpen(false)} />
-                                <NavItem icon={<Settings className="w-5 h-5" />} label="Configurações" href="/dashboard/settings" onClick={() => setIsSidebarOpen(false)} />
+                                {navItems.map((item) => (
+                                    <NavItem
+                                        key={item.href}
+                                        icon={item.icon}
+                                        label={item.label}
+                                        href={item.href}
+                                        exact={item.exact}
+                                        onClick={() => setIsSidebarOpen(false)}
+                                    />
+                                ))}
+                                {role === 'CLIENT' && (
+                                    <NavItem
+                                        icon={<Settings className="w-5 h-5" />}
+                                        label="Configurações"
+                                        href="/dashboard/settings"
+                                        onClick={() => setIsSidebarOpen(false)}
+                                    />
+                                )}
                             </nav>
                         </aside>
                     </div>
                 )}
 
                 {/* Top Bar - Desktop */}
-                <header className="hidden lg:flex h-20 bg-background/80 backdrop-blur-md border-b border-neutral-light/20 px-2xl items-center justify-end sticky top-0 z-40">
+                <header className="hidden lg:flex h-20 bg-background-primary/80 backdrop-blur-md border-b border-border-primary px-2xl items-center justify-end sticky top-0 z-40">
                     <div className="flex items-center gap-xl">
                         <NotificationDropdown />
-                        <div className="h-6 w-px bg-neutral-light/30" />
+                        <div className="h-6 w-px bg-border-primary" />
                         <div className="flex items-center gap-sm">
                             <span className="text-xs font-semibold text-neutral-dark">Ajuda & Suporte</span>
                         </div>

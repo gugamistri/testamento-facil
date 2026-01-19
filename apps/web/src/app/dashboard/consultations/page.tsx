@@ -1,539 +1,228 @@
 'use client'
 
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Calendar, Clock, ChevronLeft, ChevronRight, User, Mail, Phone, Target, Briefcase, Home, Bitcoin, HelpCircle, Check, ArrowRight, Video, AlertCircle } from 'lucide-react'
-import Link from 'next/link'
-import { useState } from 'react'
+import { Search, Filter, Star, Check, Shield, Video, Calendar as CalendarIcon, ArrowRight, Gavel } from 'lucide-react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { cn } from '@/lib/utils'
 
-type ScheduleStep = 'SELECT_DATE' | 'SELECT_TIME' | 'FILL_FORM' | 'CONFIRM'
-
-interface TimeSlot {
-    time: string
-    available: boolean
-    urgency?: boolean
-}
-
-interface FormData {
-    name: string
-    email: string
-    phone: string
-    whatsapp: boolean
-    objective: string
-    otherObjective: string
-    patrimony: string
-    hasTestament: string
-    wantsMigration: string
-}
-
-const OBJECTIVES = [
-    { id: 'crypto', label: 'Proteger criptomoedas/ativos digitais', icon: Bitcoin },
-    { id: 'business', label: 'Planejar sucessão de empresa familiar', icon: Briefcase },
-    { id: 'inventory', label: 'Evitar inventário judicial demorado', icon: Home },
-    { id: 'other', label: 'Outro motivo', icon: HelpCircle },
-]
-
-const PATRIMONY_OPTIONS = [
-    { value: '<500k', label: 'Até R$ 500 mil' },
-    { value: '500k-2M', label: 'R$ 500 mil a R$ 2 milhões' },
-    { value: '2M-5M', label: 'R$ 2 a 5 milhões' },
-    { value: '>5M', label: 'Acima de R$ 5 milhões' },
-    { value: 'prefer-not', label: 'Prefiro não informar' },
+// Mock Data for Lawyers
+const MOCK_LAWYERS = [
+    {
+        id: 'law-001',
+        name: 'Dra. Ana Silva',
+        oab: 'OAB/SP 123.456',
+        specialties: ['Planejamento Sucessório', 'Holdings'],
+        price: 'R$ 450,00',
+        priceCents: 45000,
+        rating: 4.9,
+        reviews: 124,
+        image: '/images/avatars/lawyer-1.png', // Placeholder
+        bio: 'Especialista em proteção patrimonial e arquitetura sucessória para famílias empresárias. Mais de 15 anos de experiência.',
+        nextSlot: 'Amanhã, 14:00'
+    },
+    {
+        id: 'law-002',
+        name: 'Dr. Carlos Oliveira',
+        oab: 'OAB/RJ 98.765',
+        specialties: ['Inventário Digital', 'Testamentos'],
+        price: 'R$ 380,00',
+        priceCents: 38000,
+        rating: 4.8,
+        reviews: 89,
+        image: '/images/avatars/lawyer-2.png',
+        bio: 'Foco em agilidade e desburocratização. Realizo todo o processo de validação de testamento de forma 100% remota e segura.',
+        nextSlot: 'Hoje, 16:30'
+    },
+    {
+        id: 'law-003',
+        name: 'Dra. Mariana Santos',
+        oab: 'OAB/MG 45.678',
+        specialties: ['Direito de Família', 'Mediação'],
+        price: 'R$ 420,00',
+        priceCents: 42000,
+        rating: 5.0,
+        reviews: 42,
+        image: '/images/avatars/lawyer-3.png',
+        bio: 'Atendimento humanizado para momentos delicados. Especialista em mediação de conflitos familiares e sucessão harmônica.',
+        nextSlot: 'Quinta, 09:00'
+    }
 ]
 
 export default function ConsultationsPage() {
-    const [step, setStep] = useState<ScheduleStep>('SELECT_DATE')
-    const [selectedDate, setSelectedDate] = useState<Date | null>(null)
-    const [selectedTime, setSelectedTime] = useState<string | null>(null)
-    const [currentMonth, setCurrentMonth] = useState(new Date())
-    const [formData, setFormData] = useState<FormData>({
-        name: '',
-        email: '',
-        phone: '',
-        whatsapp: true,
-        objective: '',
-        otherObjective: '',
-        patrimony: '',
-        hasTestament: '',
-        wantsMigration: '',
+    const searchParams = useSearchParams()
+    const router = useRouter()
+    const isSuccess = searchParams.get('success') === 'true'
+
+    // State
+    const [selectedLawyer, setSelectedLawyer] = useState<typeof MOCK_LAWYERS[0] | null>(null)
+    const [searchTerm, setSearchTerm] = useState('')
+    const [selectedSpecialty, setSelectedSpecialty] = useState<string | null>(null)
+
+    // Filter Logic
+    const filteredLawyers = MOCK_LAWYERS.filter(lawyer => {
+        const matchesSearch = lawyer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            lawyer.bio.toLowerCase().includes(searchTerm.toLowerCase())
+        const matchesSpecialty = selectedSpecialty ? lawyer.specialties.includes(selectedSpecialty) : true
+        return matchesSearch && matchesSpecialty
     })
 
-    // Generate calendar days
-    const getDaysInMonth = (date: Date) => {
-        const year = date.getFullYear()
-        const month = date.getMonth()
-        const firstDay = new Date(year, month, 1)
-        const lastDay = new Date(year, month + 1, 0)
-        const days: (Date | null)[] = []
-
-        // Add empty slots for days before the first day of month
-        for (let i = 0; i < firstDay.getDay(); i++) {
-            days.push(null)
-        }
-
-        // Add all days of the month
-        for (let i = 1; i <= lastDay.getDate(); i++) {
-            days.push(new Date(year, month, i))
-        }
-
-        return days
-    }
-
-    const isDateAvailable = (date: Date) => {
-        const today = new Date()
-        today.setHours(0, 0, 0, 0)
-        const dayOfWeek = date.getDay()
-        return date >= today && dayOfWeek !== 0 && dayOfWeek !== 6 // Weekdays only
-    }
-
-    const getTimeSlotsForDate = (date: Date): TimeSlot[] => {
-        const slots: TimeSlot[] = []
-        const today = new Date()
-        const isToday = date.toDateString() === today.toDateString()
-
-        for (let hour = 9; hour <= 17; hour++) {
-            if (isToday && hour <= today.getHours()) continue
-            const available = Math.random() > 0.3 // Simulate availability
-            slots.push({
-                time: `${hour.toString().padStart(2, '0')}:00`,
-                available,
-                urgency: available && hour <= 11 && isToday,
+    // Checkout Logic
+    const handleBooking = async (lawyer: typeof MOCK_LAWYERS[0]) => {
+        try {
+            const response = await fetch('/api/checkout/create-session', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    priceId: 'price_dummy_id', // In production, map lawyer.priceCents to a Stripe Price ID
+                    lawyerId: lawyer.id
+                })
             })
+
+            const { url } = await response.json()
+            if (url) window.location.href = url
+        } catch (error) {
+            console.error('Booking Error:', error)
+            alert('Erro ao iniciar pagamento via Stripe. (Verifique console)')
         }
-        return slots
     }
 
-    const formatDate = (date: Date) => {
-        return date.toLocaleDateString('pt-BR', {
-            weekday: 'long',
-            day: 'numeric',
-            month: 'long',
-        })
-    }
+    // Success State (Post-Payment)
+    if (isSuccess) {
+        return (
+            <div className="max-w-3xl mx-auto space-y-xl py-lg">
+                <div className="bg-functional-success/10 border border-functional-success/20 p-lg rounded-card flex items-center gap-md">
+                    <div className="w-12 h-12 bg-functional-success rounded-full flex items-center justify-center shrink-0">
+                        <Check className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                        <h2 className="text-lg font-bold text-neutral-dark">Pagamento Confirmado!</h2>
+                        <p className="text-neutral-medium">Seu crédito para a sessão jurídica foi liberado. Agora, escolha o melhor horário.</p>
+                    </div>
+                </div>
 
-    const handleSubmit = () => {
-        // Simulate submission
-        setStep('CONFIRM')
-    }
+                {/* Placeholder for Calendar - In real app, this would be the BookingCalendar logic */}
+                <div className="bg-white border border-neutral-light/20 rounded-card p-2xl text-center space-y-lg shadow-sm">
+                    <div className="inline-block p-lg bg-brand-primary/10 rounded-full mb-md">
+                        <CalendarIcon className="w-10 h-10 text-brand-primary" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-neutral-dark">Agendar Horário</h3>
+                    <p className="text-neutral-medium max-w-md mx-auto">
+                        A agenda da <strong>Dra. Ana Silva</strong> (exemplo) está aberta. Selecione abaixo:
+                    </p>
 
-    const days = getDaysInMonth(currentMonth)
-    const timeSlots = selectedDate ? getTimeSlotsForDate(selectedDate) : []
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-md max-w-2xl mx-auto">
+                        {['09:00', '10:00', '14:00', '15:30'].map(time => (
+                            <button key={time} className="p-md rounded-xl border border-neutral-light/30 hover:border-brand-primary hover:bg-brand-primary/5 transition-all text-neutral-dark font-bold">
+                                {time}
+                            </button>
+                        ))}
+                    </div>
+
+                    <p className="text-xs text-neutral-light pt-lg">
+                        *Placeholder do Calendário Real (fase seguinte)*
+                    </p>
+                </div>
+            </div>
+        )
+    }
 
     return (
-        <div className="space-y-6">
-            <div className="flex items-center justify-between">
+        <div className="space-y-xl">
+            {/* Header */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-md">
                 <div>
-                    <h1 className="text-2xl font-bold text-neutral-dark">Agendar Consultoria</h1>
-                    <p className="text-neutral-medium">Escolha o melhor horário para falar com nossos especialistas</p>
+                    <h1 className="text-3xl font-black text-neutral-dark tracking-tight">Especialistas Jurídicos</h1>
+                    <p className="text-neutral-medium">Encontre um advogado certificado para validar seu testamento.</p>
+                </div>
+
+                {/* Search & Filter */}
+                <div className="flex gap-sm">
+                    <div className="relative">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-medium" />
+                        <input
+                            type="text"
+                            placeholder="Buscar por nome..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="h-10 pl-9 pr-4 rounded-lg border border-neutral-light/30 bg-white text-sm focus:border-brand-primary outline-none w-full md:w-64"
+                        />
+                    </div>
+                    <button className="h-10 w-10 flex items-center justify-center rounded-lg border border-neutral-light/30 bg-white text-neutral-medium hover:text-brand-primary transition-colors">
+                        <Filter className="w-4 h-4" />
+                    </button>
                 </div>
             </div>
 
-            <main className="max-w-4xl py-8">
-                {/* Progress */}
-                <div className="mb-8">
-                    <div className="flex items-center justify-between mb-4">
-                        <span className="text-xs font-black uppercase tracking-widest text-brand-primary">Consultoria Gratuita</span>
-                        <span className="text-xs text-neutral-medium">
-                            {step === 'SELECT_DATE' && 'Passo 1 de 3'}
-                            {step === 'SELECT_TIME' && 'Passo 1 de 3'}
-                            {step === 'FILL_FORM' && 'Passo 2 de 3'}
-                            {step === 'CONFIRM' && 'Concluído!'}
-                        </span>
-                    </div>
-                    <div className="h-1 bg-neutral-light/30 rounded-full overflow-hidden">
-                        <motion.div
-                            className="h-full bg-brand-primary"
-                            initial={{ width: '0%' }}
-                            animate={{
-                                width: step === 'SELECT_DATE' || step === 'SELECT_TIME' ? '33%' : step === 'FILL_FORM' ? '66%' : '100%'
-                            }}
-                        />
-                    </div>
-                </div>
-
-                <AnimatePresence mode="wait">
-                    {(step === 'SELECT_DATE' || step === 'SELECT_TIME') && (
-                        <motion.div
-                            key="calendar"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            className="grid grid-cols-1 lg:grid-cols-2 gap-8"
-                        >
-                            {/* Calendar */}
-                            <div className="bg-background rounded-[32px] border border-neutral-light/20 p-8">
-                                <div className="flex items-center justify-between mb-8">
-                                    <h2 className="text-xl font-bold text-neutral-dark">Escolha uma Data</h2>
-                                    <div className="flex items-center gap-2">
-                                        <button
-                                            type="button"
-                                            onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1))}
-                                            className="p-2 hover:bg-background-subtle rounded-xl transition-colors"
-                                        >
-                                            <ChevronLeft className="w-5 h-5 text-neutral-medium" />
-                                        </button>
-                                        <span className="font-semibold text-neutral-dark min-w-[140px] text-center">
-                                            {currentMonth.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })}
-                                        </span>
-                                        <button
-                                            type="button"
-                                            onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1))}
-                                            className="p-2 hover:bg-background-subtle rounded-xl transition-colors"
-                                        >
-                                            <ChevronRight className="w-5 h-5 text-neutral-medium" />
-                                        </button>
+            {/* Lawyer Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-lg">
+                {filteredLawyers.map(lawyer => (
+                    <motion.div
+                        key={lawyer.id}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="bg-white rounded-card border border-neutral-light/20 p-xl hover:border-brand-primary/30 hover:shadow-lg transition-all group group-hover:scale-[1.01]"
+                    >
+                        <div className="flex items-start justify-between mb-lg">
+                            <div className="flex gap-md">
+                                <div className="w-12 h-12 rounded-full bg-neutral-light/20 overflow-hidden relative">
+                                    {/* Placeholder Avatar */}
+                                    <div className="absolute inset-0 flex items-center justify-center bg-brand-primary/10 text-brand-primary font-bold">
+                                        {lawyer.name.charAt(4)}
                                     </div>
                                 </div>
-
-                                {/* Weekday headers */}
-                                <div className="grid grid-cols-7 gap-1 mb-2">
-                                    {['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'].map((day) => (
-                                        <div key={day} className="text-center text-xs font-bold text-neutral-medium uppercase py-2">
-                                            {day}
-                                        </div>
-                                    ))}
-                                </div>
-
-                                {/* Calendar grid */}
-                                <div className="grid grid-cols-7 gap-1">
-                                    {days.map((day, index) => {
-                                        if (!day) {
-                                            return <div key={`empty-${index}`} className="aspect-square" />
-                                        }
-                                        const available = isDateAvailable(day)
-                                        const isSelected = selectedDate?.toDateString() === day.toDateString()
-
-                                        return (
-                                            <button
-                                                key={day.toISOString()}
-                                                type="button"
-                                                disabled={!available}
-                                                onClick={() => {
-                                                    setSelectedDate(day)
-                                                    setSelectedTime(null)
-                                                    setStep('SELECT_TIME')
-                                                }}
-                                                className={cn(
-                                                    "aspect-square rounded-xl flex items-center justify-center text-sm font-semibold transition-all",
-                                                    available
-                                                        ? isSelected
-                                                            ? "bg-brand-primary text-white shadow-button"
-                                                            : "hover:bg-brand-pale text-neutral-dark"
-                                                        : "text-neutral-light cursor-not-allowed"
-                                                )}
-                                            >
-                                                {day.getDate()}
-                                            </button>
-                                        )
-                                    })}
+                                <div>
+                                    <h3 className="font-bold text-neutral-dark">{lawyer.name}</h3>
+                                    <p className="text-xs text-neutral-medium font-medium">{lawyer.oab}</p>
                                 </div>
                             </div>
-
-                            {/* Time slots */}
-                            <div className="bg-background rounded-[32px] border border-neutral-light/20 p-8">
-                                <h2 className="text-xl font-bold text-neutral-dark mb-8 flex items-center gap-2">
-                                    <Clock className="w-5 h-5 text-brand-primary" />
-                                    {selectedDate ? formatDate(selectedDate) : 'Selecione uma data'}
-                                </h2>
-
-                                {selectedDate ? (
-                                    <div className="space-y-2">
-                                        {timeSlots.length > 0 ? (
-                                            timeSlots.map((slot) => (
-                                                <button
-                                                    key={slot.time}
-                                                    type="button"
-                                                    disabled={!slot.available}
-                                                    onClick={() => {
-                                                        setSelectedTime(slot.time)
-                                                        setStep('FILL_FORM')
-                                                    }}
-                                                    className={cn(
-                                                        "w-full p-4 rounded-2xl flex items-center justify-between transition-all",
-                                                        slot.available
-                                                            ? selectedTime === slot.time
-                                                                ? "bg-brand-primary text-white"
-                                                                : "bg-background-subtle hover:bg-brand-pale text-neutral-dark border border-transparent hover:border-brand-primary"
-                                                            : "bg-neutral-light/10 text-neutral-light cursor-not-allowed"
-                                                    )}
-                                                >
-                                                    <span className="font-bold">{slot.time}</span>
-                                                    {slot.urgency && slot.available && (
-                                                        <span className="text-xs bg-brand-gold/20 text-brand-gold px-2 py-1 rounded-full font-bold flex items-center gap-1">
-                                                            <AlertCircle className="w-3 h-3" />
-                                                            Último horário!
-                                                        </span>
-                                                    )}
-                                                    {!slot.available && (
-                                                        <span className="text-xs text-neutral-light">Indisponível</span>
-                                                    )}
-                                                </button>
-                                            ))
-                                        ) : (
-                                            <div className="text-center py-8 text-neutral-medium">
-                                                <Calendar className="w-12 h-12 mx-auto mb-4 text-neutral-light" />
-                                                <p>Não há horários disponíveis para esta data.</p>
-                                                <p className="text-sm mt-2">Selecione outra data.</p>
-                                            </div>
-                                        )}
-                                    </div>
-                                ) : (
-                                    <div className="text-center py-8 text-neutral-medium">
-                                        <Calendar className="w-12 h-12 mx-auto mb-4 text-neutral-light" />
-                                        <p>Selecione uma data no calendário</p>
-                                        <p className="text-sm mt-2">para ver os horários disponíveis</p>
-                                    </div>
-                                )}
+                            <div className="flex items-center gap-1 bg-brand-gold/10 px-2 py-1 rounded-md">
+                                <Star className="w-3 h-3 text-brand-gold fill-brand-gold" />
+                                <span className="text-xs font-bold text-brand-gold">{lawyer.rating}</span>
+                                <span className="text-[10px] text-brand-gold/60">({lawyer.reviews})</span>
                             </div>
-                        </motion.div>
-                    )}
+                        </div>
 
-                    {step === 'FILL_FORM' && (
-                        <motion.div
-                            key="form"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            className="bg-background rounded-[32px] border border-neutral-light/20 p-8 sm:p-12"
-                        >
+                        <p className="text-sm text-neutral-medium mb-lg line-clamp-2 h-10">
+                            {lawyer.bio}
+                        </p>
+
+                        <div className="flex flex-wrap gap-xs mb-lg">
+                            {lawyer.specialties.map(tag => (
+                                <span key={tag} className="px-2 py-0.5 bg-background-subtle text-neutral-dark text-[10px] font-bold rounded-full border border-neutral-light/10">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+
+                        <div className="flex items-center gap-sm text-xs text-neutral-medium mb-xl bg-background-subtle p-sm rounded-lg">
+                            <CalendarIcon className="w-3 h-3" />
+                            Próximo horário: <span className="text-brand-primary font-bold">{lawyer.nextSlot}</span>
+                        </div>
+
+                        <div className="flex items-center justify-between pt-lg border-t border-neutral-light/10">
+                            <div>
+                                <p className="text-[10px] uppercase font-bold text-neutral-medium">Honorários</p>
+                                <p className="text-lg font-black text-neutral-dark">{lawyer.price}</p>
+                            </div>
                             <button
-                                type="button"
-                                onClick={() => setStep('SELECT_TIME')}
-                                className="flex items-center gap-1 text-sm text-neutral-medium hover:text-brand-primary mb-8"
+                                onClick={() => handleBooking(lawyer)}
+                                className="btn-primary py-2 px-md h-auto text-sm shadow-button group-hover:bg-brand-primary group-hover:text-white"
                             >
-                                <ChevronLeft className="w-4 h-4" />
-                                Voltar para horários
+                                Contratar
+                                <ArrowRight className="w-4 h-4" />
                             </button>
+                        </div>
+                    </motion.div>
+                ))}
+            </div>
 
-                            <div className="mb-8">
-                                <h2 className="text-2xl font-bold text-neutral-dark mb-2">Seus Dados</h2>
-                                <p className="text-neutral-medium">
-                                    Agendamento para <span className="font-bold text-brand-primary">{selectedDate && formatDate(selectedDate)}</span> às <span className="font-bold text-brand-primary">{selectedTime}</span>
-                                </p>
-                            </div>
-
-                            <div className="space-y-8">
-                                {/* Basic Info */}
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div>
-                                        <label className="block text-xs font-black uppercase tracking-widest text-neutral-medium mb-2">
-                                            Nome Completo *
-                                        </label>
-                                        <div className="relative">
-                                            <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-light" />
-                                            <input
-                                                type="text"
-                                                value={formData.name}
-                                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                                className="w-full h-14 pl-[52px] pr-4 bg-background-subtle border border-neutral-light/30 rounded-2xl text-neutral-dark placeholder:text-neutral-light focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                                                placeholder="Seu nome"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-black uppercase tracking-widest text-neutral-medium mb-2">
-                                            Email *
-                                        </label>
-                                        <div className="relative">
-                                            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-light" />
-                                            <input
-                                                type="email"
-                                                value={formData.email}
-                                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                                className="w-full h-14 pl-[52px] pr-4 bg-background-subtle border border-neutral-light/30 rounded-2xl text-neutral-dark placeholder:text-neutral-light focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                                                placeholder="seu@email.com"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <label className="block text-xs font-black uppercase tracking-widest text-neutral-medium mb-2">
-                                        Telefone / WhatsApp *
-                                    </label>
-                                    <div className="relative">
-                                        <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-light" />
-                                        <input
-                                            type="tel"
-                                            value={formData.phone}
-                                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                            className="w-full h-14 pl-[52px] pr-4 bg-background-subtle border border-neutral-light/30 rounded-2xl text-neutral-dark placeholder:text-neutral-light focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                                            placeholder="(11) 99999-9999"
-                                        />
-                                    </div>
-                                    <label className="flex items-center gap-2 mt-2 cursor-pointer">
-                                        <input
-                                            type="checkbox"
-                                            checked={formData.whatsapp}
-                                            onChange={(e) => setFormData({ ...formData, whatsapp: e.target.checked })}
-                                            className="w-5 h-5 rounded border-neutral-light text-brand-primary focus:ring-brand-primary"
-                                        />
-                                        <span className="text-sm text-neutral-medium">Confirmar via WhatsApp</span>
-                                    </label>
-                                </div>
-
-                                {/* Objective */}
-                                <div>
-                                    <label className="block text-xs font-black uppercase tracking-widest text-neutral-medium mb-4">
-                                        Qual seu principal objetivo?
-                                    </label>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                        {OBJECTIVES.map((obj) => {
-                                            const Icon = obj.icon
-                                            return (
-                                                <button
-                                                    key={obj.id}
-                                                    type="button"
-                                                    onClick={() => setFormData({ ...formData, objective: obj.id })}
-                                                    className={cn(
-                                                        "p-4 rounded-2xl text-left flex items-start gap-3 transition-all border",
-                                                        formData.objective === obj.id
-                                                            ? "bg-brand-pale border-brand-primary"
-                                                            : "bg-background-subtle border-transparent hover:border-neutral-light"
-                                                    )}
-                                                >
-                                                    <Icon className={cn("w-5 h-5 mt-0.5", formData.objective === obj.id ? "text-brand-primary" : "text-neutral-medium")} />
-                                                    <span className={cn("text-sm font-semibold", formData.objective === obj.id ? "text-brand-primary" : "text-neutral-dark")}>
-                                                        {obj.label}
-                                                    </span>
-                                                </button>
-                                            )
-                                        })}
-                                    </div>
-                                    {formData.objective === 'other' && (
-                                        <input
-                                            type="text"
-                                            value={formData.otherObjective}
-                                            onChange={(e) => setFormData({ ...formData, otherObjective: e.target.value })}
-                                            className="w-full h-14 px-4 bg-background-subtle border border-neutral-light/30 rounded-2xl text-neutral-dark placeholder:text-neutral-light focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all mt-2"
-                                            placeholder="Descreva seu objetivo..."
-                                        />
-                                    )}
-                                </div>
-
-                                {/* Patrimony */}
-                                <div>
-                                    <label className="block text-xs font-black uppercase tracking-widest text-neutral-medium mb-4">
-                                        Patrimônio estimado
-                                    </label>
-                                    <select
-                                        value={formData.patrimony}
-                                        onChange={(e) => setFormData({ ...formData, patrimony: e.target.value })}
-                                        className="w-full h-14 px-4 bg-background-subtle border border-neutral-light/30 rounded-2xl text-neutral-dark focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all appearance-none cursor-pointer"
-                                    >
-                                        <option value="">Selecione uma opção</option>
-                                        {PATRIMONY_OPTIONS.map((opt) => (
-                                            <option key={opt.value} value={opt.value}>{opt.label}</option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                                {/* Existing testament */}
-                                <div>
-                                    <label className="block text-xs font-black uppercase tracking-widest text-neutral-medium mb-4">
-                                        Já possui testamento em cartório?
-                                    </label>
-                                    <div className="flex gap-4">
-                                        {['Sim', 'Não'].map((opt) => (
-                                            <button
-                                                key={opt}
-                                                type="button"
-                                                onClick={() => setFormData({ ...formData, hasTestament: opt })}
-                                                className={cn(
-                                                    "flex-1 h-14 rounded-2xl font-semibold transition-all border",
-                                                    formData.hasTestament === opt
-                                                        ? "bg-brand-primary text-white border-brand-primary"
-                                                        : "bg-background-subtle text-neutral-dark border-neutral-light/30 hover:border-brand-primary"
-                                                )}
-                                            >
-                                                {opt}
-                                            </button>
-                                        ))}
-                                    </div>
-                                    {formData.hasTestament === 'Sim' && (
-                                        <div className="mt-4 p-4 bg-brand-pale rounded-2xl">
-                                            <p className="text-sm text-brand-primary font-semibold mb-2">Deseja migrar para o digital?</p>
-                                            <div className="flex gap-2">
-                                                {['Sim, gostaria', 'Apenas entender'].map((opt) => (
-                                                    <button
-                                                        key={opt}
-                                                        type="button"
-                                                        onClick={() => setFormData({ ...formData, wantsMigration: opt })}
-                                                        className={cn(
-                                                            "flex-1 py-1 px-2 rounded-xl text-sm font-semibold transition-all",
-                                                            formData.wantsMigration === opt
-                                                                ? "bg-brand-primary text-white"
-                                                                : "bg-white text-brand-primary hover:bg-brand-primary/10"
-                                                        )}
-                                                    >
-                                                        {opt}
-                                                    </button>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-
-                                <button
-                                    type="button"
-                                    onClick={handleSubmit}
-                                    disabled={!formData.name || !formData.email || !formData.phone}
-                                    className="btn-primary w-full !h-16 disabled:opacity-50 disabled:cursor-not-allowed"
-                                >
-                                    Confirmar Agendamento
-                                    <ArrowRight className="w-5 h-5" />
-                                </button>
-                            </div>
-                        </motion.div>
-                    )}
-
-                    {step === 'CONFIRM' && (
-                        <motion.div
-                            key="confirm"
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            className="bg-background rounded-[32px] border border-neutral-light/20 p-8 sm:p-12 text-center"
-                        >
-                            <div className="w-20 h-20 bg-functional-success rounded-full flex items-center justify-center mx-auto mb-8">
-                                <Check className="w-10 h-10 text-white" />
-                            </div>
-
-                            <h2 className="text-2xl font-bold text-neutral-dark mb-2">Consultoria Agendada!</h2>
-                            <p className="text-neutral-medium mb-8 max-w-md mx-auto">
-                                Você receberá um email de confirmação com o link da videochamada e instruções de preparação.
-                            </p>
-
-                            <div className="bg-background-subtle rounded-2xl p-8 mb-8 inline-block">
-                                <div className="flex items-center gap-4 text-left">
-                                    <div className="w-14 h-14 bg-brand-primary rounded-2xl flex items-center justify-center">
-                                        <Video className="w-7 h-7 text-white" />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs font-black uppercase tracking-widest text-neutral-medium mb-1">Sua consultoria</p>
-                                        <p className="text-lg font-bold text-neutral-dark">{selectedDate && formatDate(selectedDate)}</p>
-                                        <p className="text-brand-primary font-bold">{selectedTime} (Horário de Brasília)</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="bg-brand-pale rounded-2xl p-4 mb-8">
-                                <p className="text-sm font-bold text-brand-primary mb-2">📋 Prepare-se:</p>
-                                <ul className="text-sm text-neutral-dark space-y-1 text-left max-w-sm mx-auto">
-                                    <li>✓ Documento oficial com foto</li>
-                                    <li>✓ Lista aproximada de bens</li>
-                                    <li>✓ Suas dúvidas anotadas</li>
-                                </ul>
-                            </div>
-
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                <Link href="/dashboard" className="btn-primary">
-                                    Voltar ao Painel
-                                </Link>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </main>
+            {/* Empty State */}
+            {filteredLawyers.length === 0 && (
+                <div className="text-center py-2xl">
+                    <p className="text-neutral-medium">Nenhum especialista encontrado para sua busca.</p>
+                </div>
+            )}
         </div>
     )
 }

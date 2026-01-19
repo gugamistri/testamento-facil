@@ -14,20 +14,20 @@ interface SecurityLayerProps {
 
 function SecurityLayerCard({ icon, title, description, status, fragments }: SecurityLayerProps) {
     return (
-        <div className="bg-background rounded-[24px] p-xl border border-neutral-light/20 shadow-sm hover:shadow-md transition-all group overflow-hidden relative">
+        <div className="bg-background-primary rounded-[24px] p-xl border border-border-primary shadow-sm hover:shadow-md transition-all group overflow-hidden relative">
             <div className="flex gap-lg items-start relative z-10">
                 <div className={cn(
                     "w-14 h-14 rounded-badge flex items-center justify-center shrink-0 transition-transform group-hover:scale-110",
-                    status === 'active' ? "bg-functional-success/10 text-functional-success" : "bg-neutral-light/20 text-neutral-medium"
+                    status === 'active' ? "bg-functional-success/10 text-functional-success" : "bg-background-tertiary text-text-tertiary"
                 )}>
                     {icon}
                 </div>
                 <div className="flex-1">
                     <div className="flex items-center justify-between mb-xs">
-                        <h4 className="text-[17px] font-bold text-neutral-dark">{title}</h4>
+                        <h4 className="text-[17px] font-bold text-text-primary">{title}</h4>
                         {status === 'active' && <CheckCircle2 className="w-5 h-5 text-functional-success" />}
                     </div>
-                    <p className="text-[13px] text-neutral-medium leading-relaxed mb-md">
+                    <p className="text-[13px] text-text-secondary leading-relaxed mb-md">
                         {description}
                     </p>
 
@@ -38,11 +38,11 @@ function SecurityLayerCard({ icon, title, description, status, fragments }: Secu
                                     key={i}
                                     className={cn(
                                         "h-1.5 flex-1 rounded-full",
-                                        i < fragments ? "bg-functional-success" : "bg-neutral-light/30"
+                                        i < fragments ? "bg-functional-success" : "bg-border-primary"
                                     )}
                                 />
                             ))}
-                            <span className="text-[10px] font-black text-neutral-medium ml-2 uppercase tracking-tighter">
+                            <span className="text-[10px] font-black text-text-secondary ml-2 uppercase tracking-tighter">
                                 {fragments}/3 PARTES
                             </span>
                         </div>
@@ -51,7 +51,7 @@ function SecurityLayerCard({ icon, title, description, status, fragments }: Secu
             </div>
 
             {/* Decorative background element */}
-            <div className="absolute -bottom-6 -right-6 text-neutral-light/5 opacity-50 group-hover:text-brand-primary/5 transition-colors">
+            <div className="absolute -bottom-6 -right-6 text-background-tertiary opacity-50 group-hover:text-brand-primary/5 transition-colors">
                 {icon}
             </div>
         </div>
@@ -67,13 +67,13 @@ export function DigitalVault() {
                         <span className="px-md py-xs bg-brand-primary text-white text-[10px] font-black uppercase tracking-widest rounded-full">
                             Custódia Ativa
                         </span>
-                        <div className="flex items-center gap-xs px-md py-xs bg-functional-success/10 text-functional-success text-[10px] font-black uppercase tracking-widest rounded-full">
+                        <div className="flex items-center gap-xs px-md py-xs bg-functional-success/10 text-functional-success text-[10px] font-black uppercase tracking-widest rounded-full border border-functional-success/20">
                             <Shield className="w-3 h-3" />
                             100% Protegido
                         </div>
                     </div>
-                    <h2 className="text-[28px] font-bold text-neutral-dark">Seu Cofre Pessoal</h2>
-                    <p className="text-neutral-medium text-[15px]">Seu patrimônio está protegido por múltiplas camadas de segurança e validade legal garantida.</p>
+                    <h2 className="text-[28px] font-bold text-neutral-900">Seu Cofre Pessoal</h2>
+                    <p className="text-neutral-600 text-[15px]">Seu patrimônio está protegido por múltiplas camadas de segurança e validade legal garantida.</p>
                 </div>
                 <button type="button" className="text-sm font-bold text-brand-primary hover:underline flex items-center gap-xs">
                     Como funciona a segurança?
@@ -103,17 +103,17 @@ export function DigitalVault() {
                 />
             </div>
 
-            <div className="bg-neutral-dark rounded-[32px] p-2xl text-white relative overflow-hidden shadow-premium">
+            <div className="bg-neutral-900 rounded-[32px] p-2xl text-white relative overflow-hidden shadow-premium">
                 <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-primary/10 to-transparent pointer-events-none" />
                 <div className="relative z-10 flex flex-col md:flex-row gap-2xl items-center">
                     <div className="flex-1 space-y-lg">
                         <div className="flex items-center gap-sm">
-                            <div className="w-10 h-10 bg-background/10 rounded-xl flex items-center justify-center backdrop-blur-md border border-white/10">
+                            <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center backdrop-blur-md border border-white/10">
                                 <Lock className="w-5 h-5 text-brand-gold" />
                             </div>
-                            <h3 className="text-xl font-bold italic tracking-tight">Status da Proteção</h3>
+                            <h3 className="text-xl font-bold italic tracking-tight text-white">Status da Proteção</h3>
                         </div>
-                        <p className="text-white/60 text-sm leading-relaxed max-w-md">
+                        <p className="text-neutral-300 text-sm leading-relaxed max-w-md">
                             Seus arquivos estão protegidos com <strong>segurança de nível bancário</strong>.
                             Monitoramos os registros oficiais automaticamente para garantir que tudo funcione quando for necessário.
                         </p>

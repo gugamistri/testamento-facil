@@ -4,17 +4,77 @@
 
 @layer base {
   :root {
-    --background: #ffffff;
-    --foreground: #37474f;
+    /* Brand Colors - RGB values for opacity support */
+    --brand-primary: 245 158 11;
+    /* Amber 500 */
+    --brand-secondary: 201 160 84;
+    /* Heritage Gold */
+    --brand-accent: 139 92 246;
+    /* Purple 500 */
+
+    /* Functional Colors */
+    --state-success: 16 185 129;
+    --state-warning: 245 158 11;
+    --state-error: 239 68 68;
+    --state-info: 59 130 246;
+
+    /* Light Theme (Default for Dashboard/App) */
+    --bg-primary: 255 255 255;
+    /* White */
+    --bg-secondary: 248 250 252;
+    /* Slate 50 */
+    --bg-tertiary: 241 245 249;
+    /* Slate 100 */
+
+    --text-primary: 15 23 42;
+    /* Slate 900 */
+    --text-secondary: 71 85 105;
+    /* Slate 600 */
+    --text-tertiary: 148 163 184;
+    /* Slate 400 */
+    --text-inverse: 255 255 255;
+    /* White */
+
+    --border-primary: 226 232 240;
+    /* Slate 200 */
+    --border-secondary: 241 245 249;
+    /* Slate 100 */
+    --border-focused: 245 158 11;
+    /* Brand */
+
+    --radius-button: 10px;
+    --radius-card: 16px;
+    --radius-input: 10px;
   }
 
+  /* Dark Theme (For Landing Page & Dark Mode Users) */
   .dark {
-    --background: #0f1419;
-    --foreground: #e8eaed;
+    --bg-primary: 15 23 42;
+    /* Slate 900 */
+    --bg-secondary: 2 6 23;
+    /* Slate 950 */
+    --bg-tertiary: 30 41 59;
+    /* Slate 800 */
+
+    --text-primary: 248 250 252;
+    /* Slate 50 */
+    --text-secondary: 148 163 184;
+    /* Slate 400 */
+    --text-tertiary: 100 116 139;
+    /* Slate 500 */
+    --text-inverse: 15 23 42;
+    /* Slate 900 */
+
+    --border-primary: 51 65 85;
+    /* Slate 700 */
+    --border-secondary: 30 41 59;
+    /* Slate 800 */
+    --border-focused: 245 158 11;
+    /* Brand */
   }
 
   body {
-    @apply bg-background-pure text-neutral-dark font-sans transition-colors duration-200 antialiased;
+    @apply bg-background-primary text-text-primary font-sans antialiased transition-colors duration-200;
   }
 
   h1,
@@ -23,34 +83,40 @@
   h4,
   h5,
   h6 {
-    @apply font-sans font-bold tracking-tight text-neutral-dark;
-  }
-
-  /* Legal text display */
-  .legal-clause {
-    @apply font-serif text-[14px] leading-[24px] tracking-[0.05px] text-neutral-dark;
-  }
-
-  /* Technical/Blockchain text */
-  .tech-mono {
-    @apply font-mono text-[13px] leading-[20px] text-neutral-medium;
+    @apply font-sans font-bold tracking-tight text-text-primary;
   }
 }
 
 @layer components {
-  .btn-primary {
-    @apply h-[52px] px-xl py-lg rounded-button bg-brand-primary text-white font-semibold text-[16px] shadow-button hover:bg-brand-hover active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-xs;
-  }
 
-  .btn-premium {
-    @apply h-[52px] px-xl py-lg rounded-button bg-gold-gradient text-white font-semibold text-[16px] border border-brand-goldLight shadow-premium hover:brightness-110 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-xs;
+  /* Buttons */
+  .btn-primary {
+    @apply h-[52px] px-6 py-3 rounded-button bg-[rgb(var(--brand-primary))] text-white font-bold text-[16px] shadow-lg hover:brightness-110 active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 relative overflow-hidden;
   }
 
   .btn-secondary {
-    @apply h-[52px] px-[22px] py-lg rounded-button border-2 border-brand-primary text-brand-primary font-semibold text-[16px] bg-transparent hover:bg-brand-pale active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-xs;
+    @apply h-[52px] px-6 py-3 rounded-button border-2 border-[rgb(var(--brand-primary))] text-[rgb(var(--brand-primary))] font-bold text-[16px] bg-transparent hover:bg-[rgb(var(--brand-primary)/0.1)] hover:border-[rgb(var(--brand-primary))] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-sm;
   }
 
+  .btn-premium {
+    @apply h-[52px] px-6 py-3 rounded-button bg-[rgb(var(--brand-accent))] text-white font-bold text-[16px] shadow-lg hover:brightness-110 active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2;
+  }
+
+  /* Cards */
   .card-standard {
-    @apply bg-background-pure rounded-card p-xl shadow-card hover:shadow-elevation transition-all duration-300;
+    @apply bg-background-secondary/80 backdrop-blur-md border border-border-primary rounded-card p-6 shadow-sm hover:shadow-md transition-all duration-300;
+  }
+
+  .glass-panel {
+    @apply bg-background-primary/60 backdrop-blur-md border border-border-primary rounded-card p-6 shadow-sm;
+  }
+
+  /* Typography Utilities */
+  .text-label {
+    @apply text-xs font-bold uppercase tracking-widest text-text-tertiary;
+  }
+
+  .tech-mono {
+    @apply font-mono text-sm text-[rgb(var(--brand-primary))];
   }
 }

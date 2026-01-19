@@ -13,10 +13,17 @@ datasource db {
 
 // Role enum for access control
 enum Role {
-  CLIENT  // Usuário final (Testador) - preenche inventário, assina documentos
-  LAWYER  // Advogado - valida, redige e custodia chave
-  ADMIN   // Gestor da plataforma - métricas, suporte, aprovações
-  PARTNER // Parceiros - visualização de leads (opcional)
+  CLIENT  // Usuário final (Testador)
+  LAWYER  // Advogado
+  ADMIN   // Gestor da plataforma
+  PARTNER // Parceiros (OAB, Conselhos)
+}
+
+enum SessionStatus {
+  PENDING
+  SCHEDULED
+  COMPLETED
+  CANCELLED
 }
 
 // User model synced with Clerk
@@ -31,5 +38,113 @@ model User {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  // Stripe Integration
+  stripeCustomerId String? @map("stripe_customer_id")
+
+  // Profile Relations (One-to-One)
+  lawyerProfile   LawyerProfile?
+  partnerProfile  PartnerProfile?
+
+  // Marketplace Relations
+  clientSessions  LegalSession[] @relation("ClientSessions")
+  lawyerSessions  LegalSession[] @relation("LawyerSessions")
+
+  // Review Relations
+  reviewsGiven    Review[] @relation("ReviewsGiven")
+  reviewsReceived Review[] @relation("ReviewsReceived")
+
+  // Referral Relations (Track who referred this user)
+  referredByCode  String?         @map("referred_by_code")
+  referredBy      PartnerProfile? @relation("PartnerReferrals", fields: [referredByCode], references: [referralCode])
+
   @@map("users")
+}
+
+model LawyerProfile {
+  id            String   @id @default(uuid())
+  userId        String   @unique @map("user_id")
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  oabNumber     String   @unique @map("oab_number")
+  oabSection    String   @map("oab_section") // UF
+  specialties   String[]
+  bio           String?
+  hourlyRate    Int      @default(0) @map("hourly_rate") // In cents (R$)
+  
+  // Rating Cache
+  rating        Float    @default(0.0)
+  reviewCount   Int      @default(0) @map("review_count")
+  
+  isVerified    Boolean  @default(false) @map("is_verified")
+  availability  Json?    // Availability rules (days/hours)
+  
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("lawyer_profiles")
+}
+
+model PartnerProfile {
+  id            String   @id @default(uuid())
+  userId        String   @unique @map("user_id")
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  referralCode  String   @unique @map("referral_code")
+  organization  String?  // Organization Name (e.g. "OAB-SP")
+  
+  // Users referred by this partner
+  referrals     User[]   @relation("PartnerReferrals")
+  
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("partner_profiles")
+}
+
+model LegalSession {
+  id            String   @id @default(uuid())
+  
+  clientId      String   @map("client_id")
+  client        User     @relation("ClientSessions", fields: [clientId], references: [id])
+  
+  lawyerId      String   @map("lawyer_id")
+  lawyer        User     @relation("LawyerSessions", fields: [lawyerId], references: [id])
+  
+  status        SessionStatus @default(PENDING)
+  scheduledAt   DateTime      @map("scheduled_at")
+  duration      Int           @default(30) // minutes
+  
+  meetingUrl    String?       @map("meeting_url")
+  recordingUrl  String?       @map("recording_url")
+  
+  // Payment Info
+  stripePaymentId String?     @unique @map("stripe_payment_id")
+  price           Int         // Price at booking time
+  
+  review        Review?
+  
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("legal_sessions")
+}
+
+model Review {
+  id            String   @id @default(uuid())
+  
+  sessionId     String       @unique @map("session_id")
+  session       LegalSession @relation(fields: [sessionId], references: [id])
+  
+  authorId      String   @map("author_id")
+  author        User     @relation("ReviewsGiven", fields: [authorId], references: [id])
+  
+  targetId      String   @map("target_id")
+  target        User     @relation("ReviewsReceived", fields: [targetId], references: [id])
+  
+  rating        Int      // 1-5
+  comment       String?  @db.Text
+  
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@map("reviews")
 }
