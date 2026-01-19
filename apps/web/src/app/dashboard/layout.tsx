@@ -7,7 +7,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
     const role = (user?.publicMetadata as any)?.role
 
     return (
-        <DashboardShell role={role}>
+        <DashboardShell role={role} userRole={role}>
             {children}
         </DashboardShell>
     )

@@ -17,20 +17,25 @@ import { CLIENT_NAV, LAWYER_NAV, PARTNER_NAV, ADMIN_NAV, NavConfigItem } from '@
 interface DashboardShellProps {
     children: React.ReactNode
     role?: 'CLIENT' | 'LAWYER' | 'PARTNER' | 'ADMIN'
+    userRole?: 'CLIENT' | 'LAWYER' | 'PARTNER' | 'ADMIN'
 }
 
-export function DashboardShell({ children, role = 'CLIENT' }: DashboardShellProps) {
+export function DashboardShell({ children, role = 'CLIENT', userRole }: DashboardShellProps) {
     const { user } = useUser()
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
+    // navigation is determined by the specific dashboard route (the 'role' prop)
     const navItems = role === 'LAWYER' ? LAWYER_NAV
         : role === 'PARTNER' ? PARTNER_NAV
             : role === 'ADMIN' ? ADMIN_NAV
                 : CLIENT_NAV
 
-    const planLabel = role === 'LAWYER' ? 'Profissional'
-        : role === 'PARTNER' ? 'Parceiro Oficial'
-            : role === 'ADMIN' ? 'Administrador'
+    // if userRole is provided (passed from server), use it for the switcher context
+    const effectiveIdentity = userRole || role
+
+    const planLabel = effectiveIdentity === 'LAWYER' ? 'Profissional'
+        : effectiveIdentity === 'PARTNER' ? 'Parceiro Oficial'
+            : effectiveIdentity === 'ADMIN' ? 'Administrador'
                 : 'Plano Essencial'
 
     return (
@@ -48,12 +53,12 @@ export function DashboardShell({ children, role = 'CLIENT' }: DashboardShellProp
                 </div>
 
                 {/* ADMIN ROLE SWITCHER */}
-                {(role === 'ADMIN' || user?.primaryEmailAddress?.emailAddress === 'gmistrinelli@gmail.com') && (
+                {(effectiveIdentity === 'ADMIN' || user?.primaryEmailAddress?.emailAddress === 'gmistrinelli@gmail.com') && (
                     <div className="mb-lg px-2">
                         <label className="text-[10px] font-black uppercase tracking-widest text-neutral-medium block mb-2">
                             Modo de Visualização (Admin)
                         </label>
-                        <AdminRoleSwitcher currentRole={role} />
+                        <AdminRoleSwitcher currentRole={effectiveIdentity} />
                     </div>
                 )}
 

@@ -12,7 +12,7 @@ export default async function LawyerLayout({ children }: { children: React.React
     }
 
     return (
-        <DashboardShell role="LAWYER">
+        <DashboardShell role="LAWYER" userRole={role}>
             {children}
         </DashboardShell>
     )

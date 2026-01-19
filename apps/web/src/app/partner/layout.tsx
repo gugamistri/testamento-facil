@@ -12,7 +12,7 @@ export default async function PartnerLayout({ children }: { children: React.Reac
     }
 
     return (
-        <DashboardShell role="PARTNER">
+        <DashboardShell role="PARTNER" userRole={role}>
             {children}
         </DashboardShell>
     )
