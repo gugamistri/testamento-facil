@@ -38,10 +38,10 @@ export default function PartnerBankingPage() {
 
                         <div className="relative z-10 flex flex-col md:flex-row justify-between md:items-end gap-lg">
                             <div>
-                                <p className="text-white/60 text-sm font-medium uppercase tracking-wider mb-xs">Saldo Disponível</p>
-                                <h2 className="text-4xl font-black mb-lg">{formatter.format(bankingInfo.balance / 100)}</h2>
+                                <p className="text-white/70 text-sm font-bold uppercase tracking-widest mb-xs">Saldo Disponível</p>
+                                <h2 className="text-4xl font-black text-white mb-lg tracking-tight">{formatter.format(bankingInfo.balance / 100)}</h2>
 
-                                <div className="flex items-center gap-xs text-sm text-white/80 bg-white/10 px-md py-sm rounded-lg w-fit">
+                                <div className="flex items-center gap-xs text-sm text-white/90 bg-white/10 px-md py-sm rounded-lg w-fit backdrop-blur-sm border border-white/5">
                                     <AlertCircle className="w-4 h-4" />
                                     <span>Próximo repasse automático: <strong>{bankingInfo.nextPayout}</strong></span>
                                 </div>
@@ -50,86 +50,85 @@ export default function PartnerBankingPage() {
                                 Solicitar Antecipação
                             </button>
                         </div>
+
+                        {/* Banking Form */}
+                        <div className="bg-white rounded-card border border-neutral-light/20 p-xl">
+                            <div className="flex items-center justify-between mb-lg">
+                                <h3 className="font-bold text-neutral-dark flex items-center gap-2">
+                                    <Landmark className="w-5 h-5 text-brand-primary" />
+                                    Método de Recebimento (PIX)
+                                </h3>
+                                <span className="text-xs font-bold text-functional-success bg-functional-success/10 px-2 py-1 rounded-full flex items-center gap-1">
+                                    <CheckCircle className="w-3 h-3" /> Verificado
+                                </span>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-md mb-lg">
+                                <div className="space-y-xs">
+                                    <label className="text-xs font-bold uppercase text-neutral-medium">Chave PIX</label>
+                                    <div className="p-md bg-background-subtle rounded-md border border-neutral-light/20 font-mono text-neutral-dark">
+                                        {bankingInfo.pixKey}
+                                    </div>
+                                </div>
+                                <div className="space-y-xs">
+                                    <label className="text-xs font-bold uppercase text-neutral-medium">Titular</label>
+                                    <div className="p-md bg-background-subtle rounded-md border border-neutral-light/20 text-neutral-dark">
+                                        {bankingInfo.holderName}
+                                    </div>
+                                </div>
+                                <div className="space-y-xs">
+                                    <label className="text-xs font-bold uppercase text-neutral-medium">Tipo de Chave</label>
+                                    <div className="p-md bg-background-subtle rounded-md border border-neutral-light/20 text-neutral-dark">
+                                        {bankingInfo.pixType}
+                                    </div>
+                                </div>
+                                <div className="space-y-xs">
+                                    <label className="text-xs font-bold uppercase text-neutral-medium">Instituição</label>
+                                    <div className="p-md bg-background-subtle rounded-md border border-neutral-light/20 text-neutral-dark">
+                                        {bankingInfo.bankName}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="border-t border-neutral-light/10 pt-lg flex justify-end">
+                                <button className="text-sm font-bold text-brand-primary hover:text-brand-hover transition-colors">
+                                    Editar Dados Bancários
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
-                    {/* Banking Form */}
-                    <div className="bg-white rounded-card border border-neutral-light/20 p-xl">
-                        <div className="flex items-center justify-between mb-lg">
-                            <h3 className="font-bold text-neutral-dark flex items-center gap-2">
-                                <Landmark className="w-5 h-5 text-brand-primary" />
-                                Método de Recebimento (PIX)
-                            </h3>
-                            <span className="text-xs font-bold text-functional-success bg-functional-success/10 px-2 py-1 rounded-full flex items-center gap-1">
-                                <CheckCircle className="w-3 h-3" /> Verificado
-                            </span>
+                    {/* Right Column: History */}
+                    <div className="bg-white rounded-card border border-neutral-light/20 p-xl h-fit">
+                        <h3 className="font-bold text-neutral-dark flex items-center gap-2 mb-lg">
+                            <History className="w-5 h-5 text-neutral-medium" />
+                            Histórico de Repasses
+                        </h3>
+
+                        <div className="space-y-md">
+                            {payoutHistory.map(pay => (
+                                <div key={pay.id} className="flex items-center justify-between p-md rounded-lg border border-neutral-light/10 hover:border-brand-primary/20 transition-all bg-background-subtle/30">
+                                    <div>
+                                        <p className="font-bold text-neutral-dark">{formatter.format(pay.amount / 100)}</p>
+                                        <p className="text-xs text-neutral-medium">{pay.date}</p>
+                                    </div>
+                                    <div className="text-right">
+                                        <span className="block text-[10px] font-black uppercase tracking-widest text-functional-success bg-functional-success/10 px-2 py-0.5 rounded-full mb-1">
+                                            {pay.status}
+                                        </span>
+                                        <button className="text-xs text-brand-primary hover:underline">
+                                            Comprovante
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-md mb-lg">
-                            <div className="space-y-xs">
-                                <label className="text-xs font-bold uppercase text-neutral-medium">Chave PIX</label>
-                                <div className="p-md bg-background-subtle rounded-md border border-neutral-light/20 font-mono text-neutral-dark">
-                                    {bankingInfo.pixKey}
-                                </div>
-                            </div>
-                            <div className="space-y-xs">
-                                <label className="text-xs font-bold uppercase text-neutral-medium">Titular</label>
-                                <div className="p-md bg-background-subtle rounded-md border border-neutral-light/20 text-neutral-dark">
-                                    {bankingInfo.holderName}
-                                </div>
-                            </div>
-                            <div className="space-y-xs">
-                                <label className="text-xs font-bold uppercase text-neutral-medium">Tipo de Chave</label>
-                                <div className="p-md bg-background-subtle rounded-md border border-neutral-light/20 text-neutral-dark">
-                                    {bankingInfo.pixType}
-                                </div>
-                            </div>
-                            <div className="space-y-xs">
-                                <label className="text-xs font-bold uppercase text-neutral-medium">Instituição</label>
-                                <div className="p-md bg-background-subtle rounded-md border border-neutral-light/20 text-neutral-dark">
-                                    {bankingInfo.bankName}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="border-t border-neutral-light/10 pt-lg flex justify-end">
-                            <button className="text-sm font-bold text-brand-primary hover:text-brand-hover transition-colors">
-                                Editar Dados Bancários
-                            </button>
-                        </div>
+                        <button className="w-full mt-lg py-sm text-xs font-bold text-neutral-medium hover:text-brand-primary flex items-center justify-center gap-1 transition-colors">
+                            Ver todo o histórico <ArrowRight className="w-3 h-3" />
+                        </button>
                     </div>
-                </div>
-
-                {/* Right Column: History */}
-                <div className="bg-white rounded-card border border-neutral-light/20 p-xl h-fit">
-                    <h3 className="font-bold text-neutral-dark flex items-center gap-2 mb-lg">
-                        <History className="w-5 h-5 text-neutral-medium" />
-                        Histórico de Repasses
-                    </h3>
-
-                    <div className="space-y-md">
-                        {payoutHistory.map(pay => (
-                            <div key={pay.id} className="flex items-center justify-between p-md rounded-lg border border-neutral-light/10 hover:border-brand-primary/20 transition-all bg-background-subtle/30">
-                                <div>
-                                    <p className="font-bold text-neutral-dark">{formatter.format(pay.amount / 100)}</p>
-                                    <p className="text-xs text-neutral-medium">{pay.date}</p>
-                                </div>
-                                <div className="text-right">
-                                    <span className="block text-[10px] font-black uppercase tracking-widest text-functional-success bg-functional-success/10 px-2 py-0.5 rounded-full mb-1">
-                                        {pay.status}
-                                    </span>
-                                    <button className="text-xs text-brand-primary hover:underline">
-                                        Comprovante
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <button className="w-full mt-lg py-sm text-xs font-bold text-neutral-medium hover:text-brand-primary flex items-center justify-center gap-1 transition-colors">
-                        Ver todo o histórico <ArrowRight className="w-3 h-3" />
-                    </button>
                 </div>
             </div>
-        </div>
-    )
+            )
 }
