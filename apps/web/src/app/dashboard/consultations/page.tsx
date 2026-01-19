@@ -49,7 +49,8 @@ const MOCK_LAWYERS = [
     }
 ]
 
-export default function ConsultationsPage() {
+// Main Content Component
+function ConsultationsContent() {
     const searchParams = useSearchParams()
     const router = useRouter()
     const isSuccess = searchParams.get('success') === 'true'
@@ -224,5 +225,13 @@ export default function ConsultationsPage() {
                 </div>
             )}
         </div>
+    )
+}
+
+export default function ConsultationsPage() {
+    return (
+        <React.Suspense fallback={<div className="p-8 text-center text-neutral-medium">Carregando especialistas...</div>}>
+            <ConsultationsContent />
+        </React.Suspense>
     )
 }
