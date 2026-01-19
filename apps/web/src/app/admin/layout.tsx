@@ -9,14 +9,14 @@ import { LayoutDashboard, Users, FileText, Activity, Settings, Shield, ChevronRi
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   // Check if user has ADMIN role
-  const { sessionClaims } = await auth()
-  const userRole = (sessionClaims?.metadata?.role as Role) || DEFAULT_ROLE
+  const user = await currentUser()
+  const userRole = (user?.publicMetadata as any)?.role || DEFAULT_ROLE
 
   if (!isAllowedRole(userRole, ['ADMIN'])) {
     redirect('/dashboard')
   }
 
-  const user = await currentUser()
+
 
   return (
     <div className="min-h-screen bg-background-dark flex">

@@ -10,25 +10,7 @@ export default clerkMiddleware(async (auth, req) => {
   // Protect all dashboard-like routes
   if (isClientRoute(req) || isLawyerRoute(req) || isPartnerRoute(req) || isAdminRoute(req)) {
     await auth.protect()
-
-    const { sessionClaims } = await auth()
-    const role = (sessionClaims?.metadata as any)?.role || 'CLIENT'
-
-    // Admin super-access
-    if (role === 'ADMIN') return
-
-    // Role-based Gates
-    if (isLawyerRoute(req) && role !== 'LAWYER') {
-      return NextResponse.redirect(new URL('/dashboard', req.url)) // Default backlog to Client Dash
-    }
-
-    if (isPartnerRoute(req) && role !== 'PARTNER') {
-      return NextResponse.redirect(new URL('/dashboard', req.url))
-    }
-
-    if (isAdminRoute(req) && role !== 'ADMIN') {
-      return NextResponse.redirect(new URL('/dashboard', req.url))
-    }
+    // RBAC is now handled in per-route Layouts to ensure fresh metadata access and avoid JWT caching issues.
   }
 })
 
