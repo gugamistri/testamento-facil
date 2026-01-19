@@ -1,16 +1,16 @@
-import { getPartnerProfile, createPartnerProfileShim } from '@/actions/partner'
 import InviteCard from './InviteCard'
 
-export default async function PartnerDashboardPage() {
-    let profile = await getPartnerProfile()
+export default function PartnerDashboardPage() {
+    // Mocked data for now, similar to Lawyer dashboard, until DB is fully connected
+    const profile = { referralCode: 'PARTNER-DEMO-123' } // await getPartnerProfile()
 
-    // Auto-create for demo if missing
-    if (!profile) {
+    // Auto-create logic disabled for now to allow viewing the page without DB
+    /* if (!profile) {
         profile = await createPartnerProfileShim()
-    }
+    } */
 
     const referralCode = profile?.referralCode || 'PENDING'
-    const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/?ref=${referralCode}`
+    const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/?ref=${referralCode}`
 
     return (
         <div className="space-y-xl">
