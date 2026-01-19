@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useSession } from '@clerk/nextjs'
 import Link from 'next/link'
 import { ArrowLeft, User, Bell, Shield, CreditCard, Key, Activity, Phone, Mail, MessageCircle, Check, ChevronRight, Save, Terminal } from 'lucide-react'
 import { updateUserRole } from '@/actions/dev-tools'
@@ -9,6 +10,7 @@ import { cn } from '@/lib/utils'
 type SettingsTab = 'profile' | 'notifications' | 'monitoring' | 'security' | 'billing' | 'access' | 'developer'
 
 export default function SettingsPage() {
+    const { session } = useSession()
     const [activeTab, setActiveTab] = useState<SettingsTab>('profile')
     const [saved, setSaved] = useState(false)
 
@@ -291,6 +293,8 @@ export default function SettingsPage() {
                                     <h2 className="text-xl font-bold text-neutral-dark mb-xl">Developer Tools</h2>
                                     <p className="text-sm text-neutral-medium mb-lg">
                                         Use esta área para simular diferentes papéis de usuário e testar funcionalidades específicas.
+                                        <br />
+                                        <span className="text-xs text-functional-warning font-bold">Nota: Pode levar alguns segundos para a sessão atualizar.</span>
                                     </p>
                                     <div className="space-y-md">
                                         <div className="p-lg bg-neutral-900 rounded-2xl border border-neutral-800">
@@ -308,9 +312,28 @@ export default function SettingsPage() {
                                                     <button
                                                         key={roleOption.role}
                                                         onClick={async () => {
-                                                            await updateUserRole(roleOption.role as any)
-                                                            alert(`Role switched to ${roleOption.role}. Please refresh properly if middleware caches.`)
-                                                            window.location.reload()
+                                                            try {
+                                                                const newRole = roleOption.role
+                                                                document.body.style.cursor = 'wait'
+
+                                                                // 1. Update on Server
+                                                                await updateUserRole(newRole as any)
+
+                                                                // 2. Force Session Refresh to get new Token with updated claims
+                                                                if (session) {
+                                                                    await session.touch() // Updates last active, can trigger token refresh
+                                                                    await session.reload() // Reloads session data
+                                                                }
+
+                                                                // 3. Feedback & Real Reload
+                                                                alert(`Role switched to ${newRole}. The page will now reload.`)
+                                                                window.location.href = newRole === 'LAWYER' ? '/lawyer' : newRole === 'PARTNER' ? '/partner' : '/dashboard'
+                                                            } catch (err) {
+                                                                console.error(err)
+                                                                alert('Error switching role. check console.')
+                                                            } finally {
+                                                                document.body.style.cursor = 'default'
+                                                            }
                                                         }}
                                                         className="p-md rounded-xl bg-white/10 hover:bg-brand-primary/20 hover:border-brand-primary border border-white/5 text-white text-left transition-all"
                                                     >
