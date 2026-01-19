@@ -13,12 +13,14 @@ import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@cl
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, Menu, X, Shield, Lock, Radio, Check } from 'lucide-react'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 
 
 import { useSearchParams } from 'next/navigation'
 
-export default function Home() {
+
+// Logic for handling the main landing page content
+function HomeContent() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const searchParams = useSearchParams()
@@ -424,5 +426,13 @@ export default function Home() {
         </div>
       </footer>
     </main>
+  )
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={null}>
+      <HomeContent />
+    </Suspense>
   )
 }
