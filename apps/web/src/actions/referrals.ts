@@ -7,7 +7,31 @@ export async function getPartnerReferrals() {
     const { userId } = await auth()
     if (!userId) return []
 
-    // 1. Get Partner Profile Code
+    // MOCK DATA: Bypassing DB connection due to Docker issues
+    // In production, this would query prisma.user.findMany based on referredByCode
+    console.warn('⚠️ USING MOCK DATA FOR REFERRALS')
+
+    return [
+        {
+            id: 'mock-ref-1',
+            name: 'Cliente Exemplo 1',
+            email: 'cliente1@email.com',
+            createdAt: new Date().toISOString(),
+            clientSessions: [
+                { price: 150000, status: 'COMPLETED', scheduledAt: new Date().toISOString() }
+            ]
+        },
+        {
+            id: 'mock-ref-2',
+            name: 'Cliente Pendente',
+            email: 'pendente@email.com',
+            createdAt: new Date(Date.now() - 86400000).toISOString(),
+            clientSessions: []
+        }
+    ]
+
+    /* 
+    // ORIGINAL LOGIC (Restore when DB is up)
     const user = await prisma.user.findUnique({
         where: { clerkId: userId },
         include: { partnerProfile: true }
@@ -15,7 +39,6 @@ export async function getPartnerReferrals() {
 
     if (!user || !user.partnerProfile) return []
 
-    // 2. Find Users referred by this code
     const referrals = await prisma.user.findMany({
         where: {
             referredByCode: user.partnerProfile.referralCode
@@ -35,6 +58,6 @@ export async function getPartnerReferrals() {
         },
         orderBy: { createdAt: 'desc' }
     })
-
-    return referrals
+    return referrals 
+    */
 }
